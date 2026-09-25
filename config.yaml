@@ -1,0 +1,115 @@
+# İş Radarı - ayarlar
+# Değiştirdikten sonra bir sonraki günlük çalışmada geçerli olur.
+# Kuralları/profili değiştirip mevcut ilanları yeniden sınıflandırmak için: python -m radar rebuild
+
+profile:
+  cv_file: cv/cv.md
+  education:
+    - "Lisans: Makine Mühendisliği, İstanbul Üniversitesi-Cerrahpaşa (2021-2026, mezun)"
+    - "Yüksek lisans: Makine Mühendisliği (tezli), İstanbul Üniversitesi-Cerrahpaşa (2026-devam ediyor)"
+  # Profilinde olan beceriler (radar/match.py > SKILLS içindeki anahtarlar). İlanlarda bunlar "✓ var" görünür,
+  # listede olmayan araçlar "profilinde görünmüyor" olarak gösterilir. Yeni bir şey öğrendiğinde ekle.
+  skills: [solidworks, ansys, fea, statik, modal, topoloji, cad, teknik_resim, tolerans, autocad, fusion, nx,
+           matlab, excel, eklemeli, dfm, rca, cnc, uretim, prototip, ingilizce]
+  languages: [tr, en]
+  # Claude'un (API varsa) değerlendirmede ve ön yazıda kullandığı tercihler
+  preferences: |
+    - Makine Mühendisliği lisans mezunuyum (Temmuz 2026). Eylül 2026'dan beri tezli yüksek lisans yapıyorum.
+    - İş ararken yüksek lisansla SINIRLI değilim: lisans mezunu olarak başvurabileceğim ilanlar tam
+      önceliklidir. "Bachelor's degree", "lisans veya yüksek lisans", "yeni mezun" ilanları uygundur.
+      Yüksek lisansım bir avantajdır, şart değildir.
+    - Deneyim: yeni mezun / 0-2 yıl / junior / entry-level / graduate programları uygundur. 1-3 yıl isteyen
+      ilanlar teknik örtüşme güçlüyse stretch'tir. 5+ yıl, senior, lead, yönetici pozisyonları düşük uygunluktur.
+    - Staj ve öğrenci pozisyonları (working student, uzun dönem staj) da değerlendirilebilir.
+    - Staj, Formula Student, TEKNOFEST, bitirme ve tasarım projelerim gerçek uygulamalı deneyimdir.
+    - Güçlü olduğum alanlar: SolidWorks ile tasarım ve teknik resim, ANSYS Mechanical ile statik/modal FEA,
+      topoloji optimizasyonu, eklemeli imalat (FDM), üretim süreçleri (talaşlı imalat), kök neden analizi.
+    - Sektör sınırım yok: otomotiv, havacılık, savunma, makine/ekipman, beyaz eşya, enerji, robotik,
+      mühendislik danışmanlığı, Ar-Ge, eklemeli imalat ve diğerleri.
+    - Lokasyon önceliği: İstanbul > diğer sanayi şehirleri > Türkiye > uzaktan > yurt dışı. Lokasyon
+      uygunluğu değiştirmez.
+    - Diller: Türkçe (ana dil), İngilizce (B2). Almanca / Fransızca bilmiyorum.
+
+search:
+  # LinkedIn herkese açık ilan araması (giriş gerektirmez). hours: son kaç saatin ilanları.
+  linkedin:
+    enabled: true
+    hours: 24
+    delay_seconds: 6          # istekler arası bekleme (engellenmemek için)
+    max_pages: 1              # varsayılan sayfa sayısı (sayfa başı ~10 ilan); sorgu bazında "pages" ile değişir
+    queries:
+      # ---- Türkiye: geniş başlıklar
+      - { keywords: "makine mühendisi", location: "Turkey", pages: 3 }
+      - { keywords: "mechanical engineer", location: "Turkey", pages: 2 }
+      - { keywords: "tasarım mühendisi", location: "Turkey", pages: 2 }
+      - { keywords: "mechanical design engineer", location: "Turkey" }
+      - { keywords: "Ar-Ge mühendisi", location: "Turkey", pages: 2 }
+      - { keywords: "R&D engineer", location: "Turkey" }
+      - { keywords: "ürün geliştirme mühendisi", location: "Turkey" }
+      - { keywords: "product development engineer", location: "Turkey" }
+      # ---- Türkiye: analiz / simülasyon
+      - { keywords: "analiz mühendisi", location: "Turkey" }
+      - { keywords: "FEA", location: "Turkey" }
+      - { keywords: "CAE engineer", location: "Turkey" }
+      - { keywords: "simulation engineer", location: "Turkey" }
+      # ---- Türkiye: üretim / test / otomotiv / eklemeli
+      - { keywords: "üretim mühendisi", location: "Turkey" }
+      - { keywords: "manufacturing engineer", location: "Turkey" }
+      - { keywords: "proses mühendisi", location: "Turkey" }
+      - { keywords: "test mühendisi", location: "Turkey" }
+      - { keywords: "validation engineer", location: "Turkey" }
+      - { keywords: "otomotiv mühendis", location: "Turkey" }
+      - { keywords: "additive manufacturing", location: "Turkey" }
+      # ---- Türkiye: yeni mezun / junior / staj / araştırma
+      - { keywords: "yeni mezun mühendis", location: "Turkey", pages: 2 }
+      - { keywords: "junior engineer", location: "Istanbul" }
+      - { keywords: "stajyer mühendis", location: "Turkey" }
+      - { keywords: "bursiyer", location: "Turkey" }
+      - { keywords: "araştırma görevlisi makine", location: "Turkey" }
+      # ---- Yurt dışı (deneyim filtresi: 1=staj, 2=giriş, 3=associate)
+      - { keywords: "mechanical design engineer", location: "European Union", experience: "1,2,3" }
+      - { keywords: "FEA engineer", location: "European Union", experience: "1,2,3" }
+      - { keywords: "CAE engineer", location: "European Union", experience: "1,2,3" }
+      - { keywords: "structural analysis engineer", location: "European Union", experience: "1,2,3" }
+      - { keywords: "additive manufacturing engineer", location: "European Union", experience: "1,2,3" }
+      - { keywords: "graduate mechanical engineer", location: "European Union" }
+      - { keywords: "junior mechanical engineer", location: "European Union" }
+      - { keywords: "R&D mechanical engineer", location: "European Union", experience: "1,2,3" }
+      - { keywords: "PhD additive manufacturing", location: "European Union" }
+      - { keywords: "PhD finite element", location: "European Union" }
+
+  euraxess:
+    enabled: true
+    pages: 12                 # en yeni ilanlardan kaç sayfa taranacak (sayfa başı ~10)
+
+  greenhouse:
+    enabled: true
+    # Greenhouse kullanan şirketlerin pano adları (boards.greenhouse.io/<ad>)
+    boards: [formlabs, markforged, carbon]
+    # Sadece bu konumları eşleyen ilanlar alınır
+    location_regex: "(Turkey|Türkiye|Istanbul|Germany|Netherlands|Belgium|France|Italy|Spain|Austria|Switzerland|Sweden|Denmark|Finland|Norway|Poland|Czech|Hungary|Portugal|Ireland|United Kingdom|UK|Europe|EMEA|Remote)"
+
+match:
+  # Açıklaması eksik LinkedIn ilanlarından en umut vericilerin tam metni çekilir (eğitim/deneyim şartı için)
+  enrich_limit: 100
+
+scoring:
+  # Claude API (isteğe bağlı). ANTHROPIC_API_KEY yoksa kural tabanlı eşleştirme kullanılır.
+  model: claude-opus-5
+  effort: low
+  batch_size: 8
+  max_llm_jobs: 40            # Claude'un günde yeniden değerlendireceği en fazla ilan (maliyet sınırı)
+  letters_per_day: 3          # "Doğrudan uygun" ilanlar için sabah yazılan ön yazı sayısı
+  letter_effort: medium
+  # Maliyet tahmini için fiyatlar ($ / 1M token)
+  price_input: 5.0
+  price_output: 25.0
+
+notify:
+  telegram: true
+  top_direct: 6               # mesajda gösterilecek "Doğrudan uygun" ilan sayısı
+  top_fit: 4                  # "Uygun"
+  top_stretch: 2              # "Stretch"
+
+site:
+  keep_days: 30               # sitede kaç günlük ilan tutulacak (düşük uygunluk: 7 gün)

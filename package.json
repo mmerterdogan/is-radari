@@ -1,0 +1,16 @@
+{
+  "name": "is-radari",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev site --kv RADAR_KV --binding RADAR_TOKEN=yerel-test",
+    "test": "node --test tests/js/*.test.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.138.0"
+  }
+}

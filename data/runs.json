@@ -1,0 +1,26 @@
+[
+ {
+  "date": "2026-09-24",
+  "fetched": 423,
+  "new": 415,
+  "relevant": 201,
+  "dropped": 214,
+  "enriched": 100,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 8,
+   "uygun": 89,
+   "stretch": 10,
+   "dusuk": 94
+  },
+  "sources": {
+   "linkedin": 251,
+   "euraxess": 120,
+   "greenhouse": 52
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "seconds": 1069
+ }
+]
