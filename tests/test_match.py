@@ -297,3 +297,25 @@ def test_research_title_that_asks_for_mechanical_engineers_keeps_weight():
                         "a continuous internship period of at least 11 months, three days per week at our plant.",
                         **{"Seniority level": "Internship"}))
     assert j.category in ("dogrudan", "uygun") and j.is_internship
+
+
+@pytest.mark.parametrize("text, level", [
+    ("Degree qualified in Mechanical Engineering or building services engineering.", "lisans"),
+    ("Degree, HND or equivalent qualification in mechanical engineering.", "lisans"),
+    ("You should be educated to degree level or equivalent in engineering.", "lisans"),
+    ("Makine mühendisliği bölümünden mezun, imalat süreçleri konusunda bilgili.", "lisans"),
+    ("Graduates of relevant engineering faculties at universities.", "lisans"),
+])
+def test_more_education_patterns(text, level):
+    assert match.parse_education(J(desc=text))["level"] == level
+
+
+@pytest.mark.parametrize("text, fit", [
+    ("About you: 1+ years of customer service in a technical environment.", "yakin"),
+    ("Expérience : idéalement 1 an minimum dans la conception.", "yakin"),
+    ("Salary is set for candidates with no prior experience.", "iyi"),
+    ("Significant experience in a mechanical design engineering role.", "zor"),
+    ("Erste Erfahrungen mit FEM-Simulation.", "iyi"),
+])
+def test_more_experience_patterns(text, fit):
+    assert match.parse_experience(J("Design Engineer", text))["fit"] == fit

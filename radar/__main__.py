@@ -51,7 +51,24 @@ def load_config() -> dict:
     return yaml.safe_load((ROOT / "config.yaml").read_text(encoding="utf-8"))
 
 
-def export_site(store: Store, out: Path, keep_days: int, stats: dict) -> None:
+def skill_gaps(jobs, days: int = 30, learning: dict | None = None) -> list[dict]:
+    """Which missing tools the promising ads of the last `days` ask for most (the user's learning roadmap)."""
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    pool = [j for j in jobs if j.category in ("dogrudan", "uygun", "stretch") and j.first_seen >= cutoff]
+    label_key = {lbl: key for key, (lbl, _) in match.SKILLS.items()}
+    counts: dict[str, int] = {}
+    for j in pool:
+        for g in set(j.gaps):
+            counts[g] = counts.get(g, 0) + 1
+    rows = []
+    for label, n in sorted(counts.items(), key=lambda kv: -kv[1])[:12]:
+        key = label_key.get(label, "")
+        rows.append({"label": label, "key": key, "count": n, "share": round(n / len(pool), 3) if pool else 0,
+                     "resources": (learning or {}).get(key, [])})
+    return rows
+
+
+def export_site(store: Store, out: Path, keep_days: int, stats: dict, cfg: dict | None = None) -> None:
     low_cutoff = (datetime.now(timezone.utc) - timedelta(days=LOW_KEEP_DAYS)).isoformat()
     jobs = []
     for j in store.jobs.values():
@@ -64,7 +81,9 @@ def export_site(store: Store, out: Path, keep_days: int, stats: dict) -> None:
         d["description"] = (j.description or "")[: DESC_LEN.get(j.category, 300)]
         jobs.append(d)
     jobs.sort(key=lambda d: (d["first_seen"][:10], -match.CATEGORY_ORDER.get(d["category"], 9), d["score"] or 0), reverse=True)
-    payload = {"generated_at": now_iso(), "last_run": stats, "runs": store.runs[-14:], "jobs": jobs}
+    insights = {"skill_gaps": skill_gaps(store.jobs.values(), learning=(cfg or {}).get("learning", {})),
+                "profile_skills": sorted((cfg or {}).get("profile", {}).get("skills", []))}
+    payload = {"generated_at": now_iso(), "last_run": stats, "runs": store.runs[-14:], "insights": insights, "jobs": jobs}
     out.mkdir(parents=True, exist_ok=True)
     (out / "data.json").write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
@@ -261,7 +280,7 @@ def run(args) -> int:
     store.runs.append(stats)
     if not args.dry:
         store.save()
-        export_site(store, ROOT / "site", int(cfg["site"]["keep_days"]), stats)
+        export_site(store, ROOT / "site", int(cfg["site"]["keep_days"]), stats, cfg)
         export_profile(cfg)
         update_query_stats(ROOT / "data" / "query_stats.json", new_jobs, kept)
         # transparency: what the relevance gate removed in this run (to tune the rules)
@@ -299,7 +318,7 @@ def rebuild(args) -> int:
     stats = dict(store.runs[-1]) if store.runs else {"date": datetime.now(timezone.utc).date().isoformat()}
     stats["by_category"] = _by_category(store.jobs.values())
     store.save()
-    export_site(store, ROOT / "site", int(cfg["site"]["keep_days"]), stats)
+    export_site(store, ROOT / "site", int(cfg["site"]["keep_days"]), stats, cfg)
     export_profile(cfg)
     log.info("rebuilt %d jobs (%d dropped): %s", len(store.jobs), dropped, stats["by_category"])
     return 0
@@ -334,7 +353,7 @@ def main(argv=None) -> int:
         stats = dict(store.runs[-1]) if store.runs else {}
         recheck_open(store, Fetcher(delay=float(cfg["search"]["linkedin"].get("delay_seconds", 6)), retries=2), cfg, stats)
         store.save()
-        export_site(store, ROOT / "site", int(cfg["site"]["keep_days"]), stats)
+        export_site(store, ROOT / "site", int(cfg["site"]["keep_days"]), stats, cfg)
         log.info("rechecked %s ads, %s closed", stats.get("rechecked"), stats.get("closed_found"))
         return 0
     return run(args)

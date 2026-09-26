@@ -107,6 +107,49 @@ search:
     # Sadece bu konumları eşleyen ilanlar alınır
     location_regex: "(Turkey|Türkiye|Istanbul|Germany|Netherlands|Belgium|France|Italy|Spain|Austria|Switzerland|Sweden|Denmark|Finland|Norway|Poland|Czech|Hungary|Portugal|Ireland|United Kingdom|UK|Europe|EMEA|Remote)"
 
+# Beceri yol haritası: sitede "sık istenen ama profilinde görünmeyen" araçların yanında gösterilen kaynaklar.
+# Anahtarlar radar/match.py > SKILLS ile aynı. Bir aracı öğrenince profile.skills listesine ekle.
+learning:
+  cfd:
+    - { label: "Ansys Innovation Courses - Fluid Dynamics (ücretsiz)", url: "https://innovationspace.ansys.com/courses/" }
+  catia:
+    - { label: "YouTube: CATIA V5 Part Design eğitimleri", url: "https://www.youtube.com/results?search_query=CATIA+V5+part+design+tutorial" }
+  creo:
+    - { label: "YouTube: PTC Creo temel eğitim", url: "https://www.youtube.com/results?search_query=PTC+Creo+beginner+tutorial" }
+  plm:
+    - { label: "Coursera: PLM / Teamcenter kursları", url: "https://www.coursera.org/search?query=product%20lifecycle%20management" }
+  fmea:
+    - { label: "Coursera: FMEA ve kalite araçları", url: "https://www.coursera.org/search?query=FMEA" }
+  lean:
+    - { label: "Coursera: Lean / Yalın üretim", url: "https://www.coursera.org/search?query=lean%20manufacturing" }
+  sixsigma:
+    - { label: "Coursera: Six Sigma Yellow/Green Belt", url: "https://www.coursera.org/search?query=six%20sigma" }
+  python:
+    - { label: "Resmi Python eğitimi", url: "https://docs.python.org/3/tutorial/" }
+    - { label: "PyMAPDL: ANSYS'i Python ile otomatikleştir", url: "https://mapdl.docs.pyansys.com/" }
+  abaqus:
+    - { label: "YouTube: Abaqus başlangıç eğitimleri", url: "https://www.youtube.com/results?search_query=Abaqus+tutorial+beginner" }
+  nastran:
+    - { label: "YouTube: Nastran/Patran eğitimleri", url: "https://www.youtube.com/results?search_query=MSC+Nastran+Patran+tutorial" }
+  hypermesh:
+    - { label: "Altair Learning Center (ücretsiz)", url: "https://learn.altair.com/" }
+  lsdyna:
+    - { label: "YouTube: LS-DYNA başlangıç", url: "https://www.youtube.com/results?search_query=LS-DYNA+tutorial" }
+  sap:
+    - { label: "SAP Learning (ücretsiz başlangıç)", url: "https://learning.sap.com/" }
+  apqp:
+    - { label: "Coursera: otomotiv kalite (APQP/PPAP)", url: "https://www.coursera.org/search?query=APQP" }
+  enjeksiyon:
+    - { label: "YouTube: plastik enjeksiyon kalıp tasarımı", url: "https://www.youtube.com/results?search_query=injection+mold+design+tutorial" }
+  sac:
+    - { label: "YouTube: SolidWorks Sheet Metal", url: "https://www.youtube.com/results?search_query=SolidWorks+sheet+metal+tutorial" }
+  kaynak:
+    - { label: "YouTube: kaynak teknolojisi temelleri", url: "https://www.youtube.com/results?search_query=welding+engineering+basics" }
+  hidrolik:
+    - { label: "YouTube: hidrolik ve pnömatik sistemler", url: "https://www.youtube.com/results?search_query=hydraulics+pneumatics+basics" }
+  plc:
+    - { label: "YouTube: Siemens TIA Portal PLC", url: "https://www.youtube.com/results?search_query=TIA+Portal+PLC+tutorial" }
+
 match:
   # Açıklaması eksik LinkedIn ilanlarından en umut vericilerin tam metni çekilir (eğitim/deneyim şartı için)
   enrich_limit: 250

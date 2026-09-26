@@ -1487,7 +1487,7 @@
    "Örtüşen: Kök neden analizi, Üretim süreçleri",
    "Profilinde görünmüyor: Six Sigma, Yalın üretim / Kaizen"
   ],
-  "score": 21,
+  "score": 5,
   "scored_by": "kural",
   "education": {
    "level": "lisans",
@@ -1497,9 +1497,9 @@
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "orta",
+   "label": "Deneyimli",
+   "fit": "zor"
   },
   "work_mode": "ofiste",
   "requirements": [
@@ -1638,12 +1638,12 @@
    "Örtüşen: Excel / Office, Kök neden analizi",
    "Profilinde görünmüyor: FMEA"
   ],
-  "score": 39,
+  "score": 41,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "ilgili",
+   "label": "Lisans · İlgili müh. bölümleri"
   },
   "experience": {
    "min": 2,
@@ -2303,9 +2303,9 @@
   "score": 41,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "label": "Lisans"
   },
   "experience": {
    "min": null,
@@ -2385,12 +2385,12 @@
    "Örtüşen: AutoCAD",
    "Profilinde görünmüyor: Inventor"
   ],
-  "score": 0,
+  "score": 3,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": 5,
@@ -2544,12 +2544,12 @@
    "Örtüşen: AutoCAD",
    "Profilinde görünmüyor: Inventor"
   ],
-  "score": 40,
+  "score": 45,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -2992,15 +2992,16 @@
   "category": "stretch",
   "category_reasons": [
    "Orta seviye (LinkedIn) deneyim isteniyor - staj ve projelerinle stretch",
+   "Lisans mezunu kabul ediliyor",
    "Örtüşen: AutoCAD",
    "Makine mühendisliği doğrudan isteniyor"
   ],
   "score": 53,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -4830,9 +4831,9 @@
   "score": 47,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -5022,9 +5023,9 @@
   "score": 24,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "ilgili",
-   "label": "Belirtilmemiş · İlgili müh. bölümleri"
+   "label": "Lisans · İlgili müh. bölümleri"
   },
   "experience": {
    "min": null,
@@ -5088,14 +5089,16 @@
   "category": "dogrudan",
   "category_reasons": [
    "Örtüşen: CAD / 3D modelleme, Teknik resim, Talaşlı imalat / CNC, Üretim süreçleri",
-   "Deneyim: Staj / öğrenci - yeni mezun olarak uygun"
+   "Lisans mezunu kabul ediliyor",
+   "Deneyim: Staj / öğrenci - yeni mezun olarak uygun",
+   "Makine mühendisliği doğrudan isteniyor"
   ],
-  "score": 89,
+  "score": 95,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -5171,9 +5174,9 @@
   "score": 22,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -5331,14 +5334,16 @@
   "category": "dogrudan",
   "category_reasons": [
    "Örtüşen: SolidWorks, Modal/titreşim analizi, CAD / 3D modelleme, Teknik resim",
-   "Deneyim şartı belirtilmemiş"
+   "Lisans mezunu kabul ediliyor",
+   "Deneyim şartı belirtilmemiş",
+   "Makine mühendisliği doğrudan isteniyor"
   ],
-  "score": 87,
+  "score": 93,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -5608,12 +5613,12 @@
   "category_reasons": [
    "Dil şartı: Felemenkçe"
   ],
-  "score": 34,
+  "score": 23,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "yl_zorunlu",
    "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "label": "YL şartı"
   },
   "experience": {
    "min": null,
@@ -6338,25 +6343,23 @@
    "checked_at": "2026-09-26T16:46:57+00:00"
   },
   "first_seen": "2026-09-26T16:36:59+00:00",
-  "category": "uygun",
+  "category": "dusuk",
   "category_reasons": [
-   "Örtüşen: FEA/FEM, Üretim süreçleri",
-   "Deneyim şartı belirtilmemiş",
-   "Makine mühendisliği doğrudan isteniyor"
+   "Örtüşen: FEA/FEM, Üretim süreçleri"
   ],
-  "score": 64,
+  "score": 48,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "orta",
+   "label": "Deneyimli",
+   "fit": "zor"
   },
   "work_mode": "uzaktan",
   "requirements": [
@@ -6411,6 +6414,7 @@
   "category": "dogrudan",
   "category_reasons": [
    "Örtüşen: FEA/FEM, Statik/yapısal analiz, Excel / Office",
+   "Lisans mezunu kabul ediliyor",
    "Deneyim şartı belirtilmemiş",
    "Makine mühendisliği doğrudan isteniyor",
    "Profilinde görünmüyor: Nastran/Patran"
@@ -6418,9 +6422,9 @@
   "score": 80,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -6720,9 +6724,9 @@
   "score": 29,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "ilgili",
-   "label": "Belirtilmemiş · İlgili müh. bölümleri"
+   "label": "Lisans · İlgili müh. bölümleri"
   },
   "experience": {
    "min": null,
@@ -6923,12 +6927,12 @@
    "Örtüşen: CAD / 3D modelleme, Eklemeli imalat / 3D baskı, Siemens NX",
    "Profilinde görünmüyor: SAP / ERP"
   ],
-  "score": 33,
+  "score": 38,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -7139,12 +7143,12 @@
   "category_reasons": [
    "Dil şartı: Fransızca"
   ],
-  "score": 28,
+  "score": 41,
   "scored_by": "kural",
   "education": {
-   "level": "yl_zorunlu",
+   "level": "lisans_veya_yl",
    "field": "makine",
-   "label": "YL şartı · Makine Müh."
+   "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -7527,18 +7531,18 @@
    "Örtüşen: SolidWorks",
    "Profilinde görünmüyor: CATIA"
   ],
-  "score": 42,
+  "score": 49,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans_veya_yl",
+   "field": "makine",
+   "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
-   "min": null,
+   "min": 1,
    "max": null,
    "level": "orta_kidemli",
-   "label": "Orta seviye (LinkedIn)",
+   "label": "1+ yıl",
    "fit": "yakin"
   },
   "work_mode": "belirtilmemis",
@@ -7600,19 +7604,19 @@
    "Dil şartı: Fransızca",
    "Profilinde görünmüyor: CATIA"
   ],
-  "score": 47,
+  "score": 41,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans_veya_yl",
+   "field": "makine",
+   "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
-   "min": null,
+   "min": 1,
    "max": null,
    "level": "yeni_mezun",
-   "label": "Yeni mezun / junior",
-   "fit": "iyi"
+   "label": "1+ yıl",
+   "fit": "yakin"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -7665,6 +7669,7 @@
   "category": "uygun",
   "category_reasons": [
    "Örtüşen: CAD / 3D modelleme, Prototip ve test",
+   "Lisans mezunu kabul ediliyor",
    "Deneyim şartı belirtilmemiş",
    "Makine mühendisliği doğrudan isteniyor",
    "Profilinde görünmüyor: Plastik enjeksiyon / kalıp"
@@ -7672,9 +7677,9 @@
   "score": 67,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -7997,10 +8002,11 @@
   "category": "dusuk",
   "category_reasons": [
    "Dil şartı: Fransızca",
+   "5+ yıl - kıdemli / uzun deneyim isteyen pozisyon",
    "Örtüşen: FEA/FEM, Topoloji optimizasyonu, Tolerans / GD&T",
    "Profilinde görünmüyor: Nastran/Patran, HyperMesh/HyperWorks, LS-DYNA / crash"
   ],
-  "score": 47,
+  "score": 5,
   "scored_by": "kural",
   "education": {
    "level": "yl_zorunlu",
@@ -8008,11 +8014,11 @@
    "label": "YL şartı · Makine Müh."
   },
   "experience": {
-   "min": null,
+   "min": 5,
    "max": null,
    "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "label": "5+ yıl",
+   "fit": "uzak"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -9481,15 +9487,16 @@
   "category": "dogrudan",
   "category_reasons": [
    "Örtüşen: SolidWorks, Teknik resim, AutoCAD, Talaşlı imalat / CNC",
+   "Lisans mezunu kabul ediliyor",
    "Deneyim: Yeni mezun / junior - yeni mezun olarak uygun",
    "Makine mühendisliği doğrudan isteniyor"
   ],
   "score": 89,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -12862,19 +12869,19 @@
    "Örtüşen: SolidWorks, FEA/FEM, Siemens NX, Prototip ve test",
    "Profilinde görünmüyor: CATIA, Creo / Pro-E"
   ],
-  "score": 52,
+  "score": 75,
   "scored_by": "kural",
   "education": {
-   "level": "yl_zorunlu",
+   "level": "lisans_veya_yl",
    "field": "makine",
-   "label": "YL şartı · Makine Müh."
+   "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "Yeni mezun / junior",
+   "fit": "iyi"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -13113,12 +13120,12 @@
    "Örtüşen: CAD / 3D modelleme",
    "Profilinde görünmüyor: Inventor"
   ],
-  "score": 37,
+  "score": 42,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -13499,12 +13506,12 @@
    "Örtüşen: ANSYS, FEA/FEM, Statik/yapısal analiz, Topoloji optimizasyonu",
    "Profilinde görünmüyor: Abaqus, CFD"
   ],
-  "score": 67,
+  "score": 73,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -13597,12 +13604,12 @@
    "Örtüşen: FEA/FEM, Excel / Office",
    "Profilinde görünmüyor: Nastran/Patran"
   ],
-  "score": 40,
+  "score": 58,
   "scored_by": "kural",
   "education": {
-   "level": "yl_zorunlu",
-   "field": "belirtilmemis",
-   "label": "YL şartı"
+   "level": "lisans_veya_yl",
+   "field": "makine",
+   "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -13751,10 +13758,11 @@
   "category": "dusuk",
   "category_reasons": [
    "Dil şartı: Fransızca",
+   "5+ yıl - kıdemli / uzun deneyim isteyen pozisyon",
    "Örtüşen: ANSYS, FEA/FEM",
    "Profilinde görünmüyor: LS-DYNA / crash, Python"
   ],
-  "score": 47,
+  "score": 5,
   "scored_by": "kural",
   "education": {
    "level": "yl_zorunlu",
@@ -13762,11 +13770,11 @@
    "label": "YL şartı · Makine Müh."
   },
   "experience": {
-   "min": null,
+   "min": 5,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "5+ yıl",
+   "fit": "uzak"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -13991,10 +13999,11 @@
   "category": "dusuk",
   "category_reasons": [
    "Dil şartı: Fransızca",
+   "5+ yıl - kıdemli / uzun deneyim isteyen pozisyon",
    "Örtüşen: FEA/FEM",
    "Profilinde görünmüyor: Nastran/Patran, Python"
   ],
-  "score": 17,
+  "score": 0,
   "scored_by": "kural",
   "education": {
    "level": "yl_zorunlu",
@@ -14002,11 +14011,11 @@
    "label": "YL şartı · Makine Müh."
   },
   "experience": {
-   "min": null,
+   "min": 5,
    "max": null,
    "level": "associate",
-   "label": "Başlangıç-orta (LinkedIn: Associate)",
-   "fit": "yakin"
+   "label": "5+ yıl",
+   "fit": "uzak"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -14657,12 +14666,12 @@
    "Örtüşen: Kök neden analizi, Talaşlı imalat / CNC",
    "Profilinde görünmüyor: FMEA, APQP/PPAP"
   ],
-  "score": 20,
+  "score": 27,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans_veya_yl",
+   "field": "makine",
+   "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -14917,15 +14926,16 @@
   "category": "uygun",
   "category_reasons": [
    "Alan: Makine mühendisliği",
+   "Lisans mezunu kabul ediliyor",
    "Deneyim: Yeni mezun / junior - yeni mezun olarak uygun",
    "Makine mühendisliği doğrudan isteniyor"
   ],
   "score": 63,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -15508,15 +15518,16 @@
   "category": "stretch",
   "category_reasons": [
    "2-5 yıl deneyim isteniyor - staj ve projelerinle stretch",
+   "Lisans mezunu kabul ediliyor",
    "Örtüşen: SolidWorks, CAD / 3D modelleme",
    "Makine mühendisliği doğrudan isteniyor"
   ],
   "score": 73,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": 2,
@@ -15576,19 +15587,19 @@
    "Dil şartı: Fransızca",
    "Örtüşen: FEA/FEM, Modal/titreşim analizi"
   ],
-  "score": 43,
+  "score": 66,
   "scored_by": "kural",
   "education": {
-   "level": "yl_zorunlu",
+   "level": "lisans_veya_yl",
    "field": "makine",
-   "label": "YL şartı · Makine Müh."
+   "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "Yeni mezun / junior",
+   "fit": "iyi"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -15736,12 +15747,12 @@
   "category_reasons": [
    "Dil şartı: Fransızca"
   ],
-  "score": 17,
+  "score": 29,
   "scored_by": "kural",
   "education": {
-   "level": "yl_zorunlu",
+   "level": "lisans_veya_yl",
    "field": "makine",
-   "label": "YL şartı · Makine Müh."
+   "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -22976,15 +22987,16 @@
   "category": "uygun",
   "category_reasons": [
    "Örtüşen: SolidWorks, Teknik resim, AutoCAD, Excel / Office",
+   "Lisans mezunu kabul ediliyor",
    "Deneyim: Yeni mezun / junior - yeni mezun olarak uygun",
    "Makine mühendisliği doğrudan isteniyor"
   ],
   "score": 80,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "makine",
-   "label": "Belirtilmemiş · Makine Müh."
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -23425,12 +23437,12 @@
    "Örtüşen: SolidWorks, Prototip ve test",
    "Profilinde görünmüyor: Inventor"
   ],
-  "score": 48,
+  "score": 54,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -23501,7 +23513,7 @@
    "Dil şartı: Fransızca",
    "Örtüşen: SolidWorks, FEA/FEM, Prototip ve test"
   ],
-  "score": 52,
+  "score": 39,
   "scored_by": "kural",
   "education": {
    "level": "yl_zorunlu",
@@ -23509,11 +23521,11 @@
    "label": "YL şartı · Makine Müh."
   },
   "experience": {
-   "min": null,
+   "min": 3,
    "max": null,
    "level": "orta_kidemli",
-   "label": "Orta seviye (LinkedIn)",
-   "fit": "yakin"
+   "label": "3+ yıl",
+   "fit": "zor"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -23640,12 +23652,12 @@
    "Dil şartı: Fransızca",
    "Örtüşen: SolidWorks, FEA/FEM, Prototip ve test"
   ],
-  "score": 60,
+  "score": 65,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -23793,10 +23805,11 @@
   "category": "dusuk",
   "category_reasons": [
    "Dil şartı: Fransızca",
+   "5+ yıl - kıdemli / uzun deneyim isteyen pozisyon",
    "Örtüşen: SolidWorks, Prototip ve test",
    "Profilinde görünmüyor: Creo / Pro-E"
   ],
-  "score": 40,
+  "score": 1,
   "scored_by": "kural",
   "education": {
    "level": "yl_zorunlu",
@@ -23804,11 +23817,11 @@
    "label": "YL şartı · Makine Müh."
   },
   "experience": {
-   "min": null,
+   "min": 5,
    "max": null,
    "level": "orta_kidemli",
-   "label": "Orta seviye (LinkedIn)",
-   "fit": "yakin"
+   "label": "5+ yıl",
+   "fit": "uzak"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -23934,12 +23947,12 @@
    "Dil şartı: Fransızca",
    "Profilinde görünmüyor: Creo / Pro-E"
   ],
-  "score": 34,
+  "score": 28,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "yl_zorunlu",
+   "field": "makine",
+   "label": "YL şartı · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -23997,12 +24010,12 @@
    "Dil şartı: Felemenkçe",
    "Örtüşen: FEA/FEM, CAD / 3D modelleme, Prototip ve test"
   ],
-  "score": 71,
+  "score": 76,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -24160,12 +24173,12 @@
    "Örtüşen: ANSYS, FEA/FEM",
    "Profilinde görünmüyor: Abaqus"
   ],
-  "score": 53,
+  "score": 58,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": 2,
@@ -24488,12 +24501,12 @@
    "Örtüşen: ANSYS, FEA/FEM, Topoloji optimizasyonu",
    "Profilinde görünmüyor: Abaqus"
   ],
-  "score": 64,
+  "score": 69,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -25344,19 +25357,19 @@
    "Örtüşen: ANSYS, FEA/FEM",
    "Profilinde görünmüyor: Abaqus, Nastran/Patran"
   ],
-  "score": 42,
+  "score": 58,
   "scored_by": "kural",
   "education": {
    "level": "yl_zorunlu",
-   "field": "belirtilmemis",
-   "label": "YL şartı"
+   "field": "makine",
+   "label": "YL şartı · Makine Müh."
   },
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "Yeni mezun / junior",
+   "fit": "iyi"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -25580,12 +25593,12 @@
    "Örtüşen: FEA/FEM",
    "Profilinde görünmüyor: Nastran/Patran, HyperMesh/HyperWorks"
   ],
-  "score": 34,
+  "score": 52,
   "scored_by": "kural",
   "education": {
-   "level": "yl_zorunlu",
-   "field": "belirtilmemis",
-   "label": "YL şartı"
+   "level": "lisans_veya_yl",
+   "field": "makine",
+   "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -25654,12 +25667,12 @@
    "Örtüşen: SolidWorks, ANSYS, FEA/FEM, Modal/titreşim analizi",
    "Profilinde görünmüyor: CATIA, Creo / Pro-E, Abaqus, Nastran/Patran"
   ],
-  "score": 49,
+  "score": 53,
   "scored_by": "kural",
   "education": {
    "level": "yl_zorunlu",
-   "field": "ilgili",
-   "label": "YL şartı · İlgili müh. bölümleri"
+   "field": "makine",
+   "label": "YL şartı · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -26115,12 +26128,12 @@
    "Dil şartı: Fransızca",
    "Örtüşen: SolidWorks, Eklemeli imalat / 3D baskı"
   ],
-  "score": 69,
+  "score": 61,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "yl_zorunlu",
+   "field": "ilgili",
+   "label": "YL şartı · İlgili müh. bölümleri"
   },
   "experience": {
    "min": null,
@@ -26489,15 +26502,12 @@
    "checked_at": "2026-09-26T16:59:31+00:00"
   },
   "first_seen": "2026-09-24T15:06:02+00:00",
-  "category": "uygun",
+  "category": "dusuk",
   "category_reasons": [
    "Örtüşen: Eklemeli imalat / 3D baskı, Üretim süreçleri",
-   "Lisans mezunu kabul ediliyor",
-   "Deneyim şartı belirtilmemiş",
-   "İlgili mühendislik bölümleri kabul ediliyor",
    "Profilinde görünmüyor: Kaynak teknolojisi"
   ],
-  "score": 49,
+  "score": 34,
   "scored_by": "kural",
   "education": {
    "level": "lisans",
@@ -26507,9 +26517,9 @@
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "orta",
+   "label": "Deneyimli",
+   "fit": "zor"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -26807,19 +26817,19 @@
   "category_reasons": [
    "Dil şartı: Almanca"
   ],
-  "score": 34,
+  "score": 57,
   "scored_by": "kural",
   "education": {
-   "level": "yl_zorunlu",
+   "level": "lisans_veya_yl",
    "field": "ilgili",
-   "label": "YL şartı · İlgili müh. bölümleri"
+   "label": "Lisans veya YL · İlgili müh. bölümleri"
   },
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "Yeni mezun / junior",
+   "fit": "iyi"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -27030,12 +27040,12 @@
   "category_reasons": [
    "Dil şartı: Felemenkçe"
   ],
-  "score": 42,
+  "score": 47,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -27420,9 +27430,9 @@
   "score": 37,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
+   "level": "lisans",
    "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "label": "Lisans"
   },
   "experience": {
    "min": null,
@@ -27482,12 +27492,12 @@
    "Örtüşen: SolidWorks, FEA/FEM, CAD / 3D modelleme, AutoCAD",
    "Profilinde görünmüyor: Inventor"
   ],
-  "score": 67,
+  "score": 73,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -27571,12 +27581,12 @@
    "Örtüşen: SolidWorks, Siemens NX",
    "Profilinde görünmüyor: Creo / Pro-E, Inventor"
   ],
-  "score": 47,
+  "score": 53,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -27653,12 +27663,12 @@
    "Örtüşen: Siemens NX, Excel / Office",
    "Profilinde görünmüyor: PLM/PDM (Teamcenter, Windchill), SAP / ERP"
   ],
-  "score": 51,
+  "score": 56,
   "scored_by": "kural",
   "education": {
-   "level": "belirtilmemis",
-   "field": "belirtilmemis",
-   "label": "Belirtilmemiş"
+   "level": "lisans",
+   "field": "makine",
+   "label": "Lisans · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -28192,8 +28202,8 @@
   "scored_by": "kural",
   "education": {
    "level": "yl_zorunlu",
-   "field": "belirtilmemis",
-   "label": "YL şartı"
+   "field": "makine",
+   "label": "YL şartı · Makine Müh."
   },
   "experience": {
    "min": null,
@@ -28740,19 +28750,19 @@
   "category_reasons": [
    "Dil şartı: Almanca"
   ],
-  "score": 34,
+  "score": 57,
   "scored_by": "kural",
   "education": {
-   "level": "yl_zorunlu",
+   "level": "lisans_veya_yl",
    "field": "ilgili",
-   "label": "YL şartı · İlgili müh. bölümleri"
+   "label": "Lisans veya YL · İlgili müh. bölümleri"
   },
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "Yeni mezun / junior",
+   "fit": "iyi"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -29824,13 +29834,11 @@
   "description": "About Formlabs: Do you want to change how the world creates? At Formlabs, we’re building the tools that make it possible for anyone to bring their ideas to life, from cutting-edge products to life-saving medical devices. Our 3D printing technology powers innovation at more than 50,000 industry leaders worldwide, including Apple, Google, Tesla, New Balance, and NASA. Together, we’re helping everyone design, prototype, and manufacture faster than ever before. We’re a team of hands-on builders, engineers, and innovators reinventing how the world makes physical things. If you’re ready to shape the future of fabrication, come build it with us. Your Impact: To serve as the primary gateway for our customers, providing unparalleled support and education. We are committed to being the first point of contact, offering expertise and assistance that goes beyond problem-solving. Our goal is to empower users by delivering clear, reliable guidance and fostering a culture of continuous learning. As ambassadors of Formlabs, we strive to create a positive and impactful customer experience, ensuring that every interaction leaves our users more informed, confident, and satisfied with their Formlabs products. What You’ll Do: Accept and work on customer cases through multiple channels, including email and phone conversations with our customers Respond within the published Service Level Agreements, and promise to our customers Log all contacts in cases and provide technical support, diagnosis, and customer education opportunities in an effort to keep them printing and machines working, towards issue resolutions Dispatch replacement parts, hardware, and software, along with instructions and guidance per business guidelines Work with Services peers and Formlabs teams to be the voice of the customer on software and hardware-related feedback Learn our products, and print for yourself and for our customers About You: 1+ years of customer service (contact center, field services), education (early ed teachers) or hardware support experience High School degree or equivalent Strong written and verbal empathetic communication skill Bonus Skills: Technical retail experience (i.e., Apple Genius bar, Geek squad) Experience in Dental (hygienist, lab technician, etc) Experience in Additive Manufacturing STEM degree Fluency in Spanish or French Our Benefits & Perks: Robust equity program to build future wealth through RSUs Comprehensive healthcare coverage (Medical, Dental, Vision) 401K matching and access to financial advisors Generous paid Parental Leave (up to 16 weeks) Tenure-based paid Sabbatical Leave (up to 6 weeks) Flexible Out of Office Plan – Take time when you need it Ample on-site parking & pre-tax commuter benefits Healthy on-site lunches, snacks, beverages, & treats Regular sponsored professional development opportunities Many opt-in culture events across our diverse community And of course… unlimited 3D prints We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of race, religion, color, national origin, gender, sexual orientation, age, marital status, veteran status, or disability status. Even if you don't check every box, but see yourself contributing, please apply. Help us build an inclusive community that will change the face of 3D printing.",
   "extra": {},
   "first_seen": "2026-09-24T15:06:02+00:00",
-  "category": "uygun",
+  "category": "dusuk",
   "category_reasons": [
-   "Örtüşen: Eklemeli imalat / 3D baskı, Prototip ve test",
-   "Deneyim şartı belirtilmemiş",
-   "İlgili mühendislik bölümleri kabul ediliyor"
+   "Örtüşen: Eklemeli imalat / 3D baskı, Prototip ve test"
   ],
-  "score": 53,
+  "score": 49,
   "scored_by": "kural",
   "education": {
    "level": "belirtilmemis",
@@ -29838,11 +29846,11 @@
    "label": "Belirtilmemiş · İlgili müh. bölümleri"
   },
   "experience": {
-   "min": null,
+   "min": 1,
    "max": null,
    "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "label": "1+ yıl",
+   "fit": "yakin"
   },
   "work_mode": "ofiste",
   "requirements": [
@@ -30381,7 +30389,7 @@
   "first_seen": "2026-09-24T15:06:02+00:00",
   "category": "dusuk",
   "category_reasons": [
-   "Kıdemli seviye - kıdemli / uzun deneyim isteyen pozisyon",
+   "3+ yıl - kıdemli / uzun deneyim isteyen pozisyon",
    "Pozisyon alanı profille zayıf örtüşüyor",
    "Örtüşen: Eklemeli imalat / 3D baskı",
    "Profilinde görünmüyor: CFD"
@@ -30394,10 +30402,10 @@
    "label": "Belirtilmemiş"
   },
   "experience": {
-   "min": null,
+   "min": 3,
    "max": null,
    "level": "kidemli",
-   "label": "Kıdemli seviye",
+   "label": "3+ yıl",
    "fit": "uzak"
   },
   "work_mode": "belirtilmemis",
@@ -30500,13 +30508,11 @@
   "description": "About Formlabs: Do you want to change how the world creates? At Formlabs, we’re building the tools that make it possible for anyone to bring their ideas to life, from cutting-edge products to life-saving medical devices. Our 3D printing technology powers innovation at more than 50,000 industry leaders worldwide, including Apple, Google, Tesla, New Balance, and NASA. Together, we’re helping everyone design, prototype, and manufacture faster than ever before. We’re a team of hands-on builders, engineers, and innovators reinventing how the world makes physical things. If you’re ready to shape the future of fabrication, come build it with us. Your Impact: To serve as the primary gateway for our customers, providing unparalleled support and education. We are committed to being the first point of contact, offering expertise and assistance that goes beyond problem-solving. Our goal is to empower users by delivering clear, reliable guidance and fostering a culture of continuous learning. As ambassadors of Formlabs, we strive to create a positive and impactful customer experience, ensuring that every interaction leaves our users more informed, confident, and satisfied with their Formlabs products. What You’ll Do: Accept and work on customer cases through multiple channels, including email and phone conversations with our customers Respond within the published Service Level Agreements, and promise to our customers Log all contacts in cases and provide technical support, diagnosis, and customer education opportunities in an effort to keep them printing and machines working, towards issue resolutions Dispatch replacement parts, hardware, and software, along with instructions and guidance per business guidelines Work with Services peers and Formlabs teams to be the voice of the customer on software and hardware-related feedback Learn our products, and print for yourself and for our customers About You: 1+ years of customer service (contact center, field services), education (early ed teachers) or hardware support experience High School degree or equivalent Strong written and verbal empathetic communication skill Bonus Skills: Technical retail experience (i.e., Apple Genius bar, Geek squad) Experience in Dental (hygienist, lab technician, etc) Experience in Additive Manufacturing STEM degree Fluency in Spanish or French Our Benefits & Perks: Robust equity program to build future wealth through RSUs Comprehensive healthcare coverage (Medical, Dental, Vision) 401K matching and access to financial advisors Generous paid Parental Leave (up to 16 weeks) Tenure-based paid Sabbatical Leave (up to 6 weeks) Flexible Out of Office Plan – Take time when you need it Ample on-site parking & pre-tax commuter benefits Healthy on-site lunches, snacks, beverages, & treats Regular sponsored professional development opportunities Many opt-in culture events across our diverse community And of course… unlimited 3D prints We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of race, religion, color, national origin, gender, sexual orientation, age, marital status, veteran status, or disability status. Even if you don't check every box, but see yourself contributing, please apply. Help us build an inclusive community that will change the face of 3D printing.",
   "extra": {},
   "first_seen": "2026-09-24T15:06:02+00:00",
-  "category": "uygun",
+  "category": "dusuk",
   "category_reasons": [
-   "Örtüşen: Eklemeli imalat / 3D baskı, Prototip ve test",
-   "Deneyim şartı belirtilmemiş",
-   "İlgili mühendislik bölümleri kabul ediliyor"
+   "Örtüşen: Eklemeli imalat / 3D baskı, Prototip ve test"
   ],
-  "score": 55,
+  "score": 52,
   "scored_by": "kural",
   "education": {
    "level": "belirtilmemis",
@@ -30514,11 +30520,11 @@
    "label": "Belirtilmemiş · İlgili müh. bölümleri"
   },
   "experience": {
-   "min": null,
+   "min": 1,
    "max": null,
    "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "label": "1+ yıl",
+   "fit": "yakin"
   },
   "work_mode": "ofiste",
   "requirements": [
@@ -30816,7 +30822,7 @@
    "Pozisyon alanı profille zayıf örtüşüyor",
    "Örtüşen: Eklemeli imalat / 3D baskı"
   ],
-  "score": 44,
+  "score": 55,
   "scored_by": "kural",
   "education": {
    "level": "lisans_veya_yl",
@@ -30826,9 +30832,9 @@
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "Yeni mezun / junior",
+   "fit": "iyi"
   },
   "work_mode": "ofiste",
   "requirements": [
@@ -30871,7 +30877,7 @@
    "Pozisyon alanı profille zayıf örtüşüyor",
    "Örtüşen: Eklemeli imalat / 3D baskı"
   ],
-  "score": 44,
+  "score": 55,
   "scored_by": "kural",
   "education": {
    "level": "lisans_veya_yl",
@@ -30881,9 +30887,9 @@
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "Yeni mezun / junior",
+   "fit": "iyi"
   },
   "work_mode": "ofiste",
   "requirements": [
@@ -30926,7 +30932,7 @@
    "Pozisyon alanı profille zayıf örtüşüyor",
    "Örtüşen: Eklemeli imalat / 3D baskı"
   ],
-  "score": 44,
+  "score": 55,
   "scored_by": "kural",
   "education": {
    "level": "lisans_veya_yl",
@@ -30936,9 +30942,9 @@
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "Yeni mezun / junior",
+   "fit": "iyi"
   },
   "work_mode": "ofiste",
   "requirements": [
@@ -30981,7 +30987,7 @@
    "Pozisyon alanı profille zayıf örtüşüyor",
    "Örtüşen: Eklemeli imalat / 3D baskı"
   ],
-  "score": 44,
+  "score": 55,
   "scored_by": "kural",
   "education": {
    "level": "lisans_veya_yl",
@@ -30991,9 +30997,9 @@
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "yeni_mezun",
+   "label": "Yeni mezun / junior",
+   "fit": "iyi"
   },
   "work_mode": "ofiste",
   "requirements": [
@@ -31031,13 +31037,11 @@
   "description": "About Formlabs: Do you want to change how the world creates? At Formlabs, we’re building the tools that make it possible for anyone to bring their ideas to life, from cutting-edge products to life-saving medical devices. Our 3D printing technology powers innovation at more than 50,000 industry leaders worldwide, including Apple, Google, Tesla, New Balance, and NASA. Together, we’re helping everyone design, prototype, and manufacture faster than ever before. We’re a team of hands-on builders, engineers, and innovators reinventing how the world makes physical things. If you’re ready to shape the future of fabrication, come build it with us. Your Impact: To serve as the primary gateway for our customers, providing unparalleled support and education. We are committed to being the first point of contact, offering expertise and assistance that goes beyond problem-solving. Our goal is to empower users by delivering clear, reliable guidance and fostering a culture of continuous learning. As ambassadors of Formlabs, we strive to create a positive and impactful customer experience, ensuring that every interaction leaves our users more informed, confident, and satisfied with their Formlabs products. What You’ll Do: Accept and work on customer cases through multiple channels, including email and phone conversations with our customers Respond within the published Service Level Agreements, and promise to our customers Log all contacts in cases and provide technical support, diagnosis, and customer education opportunities in an effort to keep them printing and machines working, towards issue resolutions Dispatch replacement parts, hardware, and software, along with instructions and guidance per business guidelines Work with Services peers and Formlabs teams to be the voice of the customer on software and hardware-related feedback Learn our products, and print for yourself and for our customers About You: 1+ years of customer service (contact center, field services), education (early ed teachers) or hardware support experience High School degree or equivalent Strong written and verbal empathetic communication skill Bonus Skills: Technical retail experience (i.e., Apple Genius bar, Geek squad) Experience in Dental (hygienist, lab technician, etc) Experience in Additive Manufacturing STEM degree Fluency in Spanish or French Our Benefits & Perks: Robust equity program to build future wealth through RSUs Comprehensive healthcare coverage (Medical, Dental, Vision) 401K matching and access to financial advisors Generous paid Parental Leave (up to 16 weeks) Tenure-based paid Sabbatical Leave (up to 6 weeks) Flexible Out of Office Plan – Take time when you need it Ample on-site parking & pre-tax commuter benefits Healthy on-site lunches, snacks, beverages, & treats Regular sponsored professional development opportunities Many opt-in culture events across our diverse community And of course… unlimited 3D prints We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of race, religion, color, national origin, gender, sexual orientation, age, marital status, veteran status, or disability status. Even if you don't check every box, but see yourself contributing, please apply. Help us build an inclusive community that will change the face of 3D printing.",
   "extra": {},
   "first_seen": "2026-09-24T15:06:02+00:00",
-  "category": "uygun",
+  "category": "dusuk",
   "category_reasons": [
-   "Örtüşen: Eklemeli imalat / 3D baskı, Prototip ve test",
-   "Deneyim şartı belirtilmemiş",
-   "İlgili mühendislik bölümleri kabul ediliyor"
+   "Örtüşen: Eklemeli imalat / 3D baskı, Prototip ve test"
   ],
-  "score": 53,
+  "score": 49,
   "scored_by": "kural",
   "education": {
    "level": "belirtilmemis",
@@ -31045,11 +31049,11 @@
    "label": "Belirtilmemiş · İlgili müh. bölümleri"
   },
   "experience": {
-   "min": null,
+   "min": 1,
    "max": null,
    "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "label": "1+ yıl",
+   "fit": "yakin"
   },
   "work_mode": "ofiste",
   "requirements": [
@@ -31212,13 +31216,11 @@
   "description": "About Formlabs: Do you want to change how the world creates? At Formlabs, we’re building the tools that make it possible for anyone to bring their ideas to life, from cutting-edge products to life-saving medical devices. Our 3D printing technology powers innovation at more than 50,000 industry leaders worldwide, including Apple, Google, Tesla, New Balance, and NASA. Together, we’re helping everyone design, prototype, and manufacture faster than ever before. We’re a team of hands-on builders, engineers, and innovators reinventing how the world makes physical things. If you’re ready to shape the future of fabrication, come build it with us. Your Impact: To serve as the primary gateway for our customers, providing unparalleled support and education. We are committed to being the first point of contact, offering expertise and assistance that goes beyond problem-solving. Our goal is to empower users by delivering clear, reliable guidance and fostering a culture of continuous learning. As ambassadors of Formlabs, we strive to create a positive and impactful customer experience, ensuring that every interaction leaves our users more informed, confident, and satisfied with their Formlabs products. What You’ll Do: Accept and work on customer cases through multiple channels, including email and phone conversations with our customers Respond within the published Service Level Agreements, and promise to our customers Log all contacts in cases and provide technical support, diagnosis, and customer education opportunities in an effort to keep them printing and machines working, towards issue resolutions Dispatch replacement parts, hardware, and software, along with instructions and guidance per business guidelines Work with Services peers and Formlabs teams to be the voice of the customer on software and hardware-related feedback Learn our products, and print for yourself and for our customers About You: 1+ years of customer service (contact center, field services), education (early ed teachers) or hardware support experience High School degree or equivalent Strong written and verbal empathetic communication skill Bonus Skills: Technical retail experience (i.e., Apple Genius bar, Geek squad) Experience in Dental (hygienist, lab technician, etc) Experience in Additive Manufacturing STEM degree Fluency in Spanish or French Our Benefits & Perks: Robust equity program to build future wealth through RSUs Comprehensive healthcare coverage (Medical, Dental, Vision) 401K matching and access to financial advisors Generous paid Parental Leave (up to 16 weeks) Tenure-based paid Sabbatical Leave (up to 6 weeks) Flexible Out of Office Plan – Take time when you need it Ample on-site parking & pre-tax commuter benefits Healthy on-site lunches, snacks, beverages, & treats Regular sponsored professional development opportunities Many opt-in culture events across our diverse community And of course… unlimited 3D prints We are an equal opportunity employer and value diversity at our company. We do not discriminate on the basis of race, religion, color, national origin, gender, sexual orientation, age, marital status, veteran status, or disability status. Even if you don't check every box, but see yourself contributing, please apply. Help us build an inclusive community that will change the face of 3D printing.",
   "extra": {},
   "first_seen": "2026-09-24T15:06:02+00:00",
-  "category": "uygun",
+  "category": "dusuk",
   "category_reasons": [
-   "Örtüşen: Eklemeli imalat / 3D baskı, Prototip ve test",
-   "Deneyim şartı belirtilmemiş",
-   "İlgili mühendislik bölümleri kabul ediliyor"
+   "Örtüşen: Eklemeli imalat / 3D baskı, Prototip ve test"
   ],
-  "score": 53,
+  "score": 49,
   "scored_by": "kural",
   "education": {
    "level": "belirtilmemis",
@@ -31226,11 +31228,11 @@
    "label": "Belirtilmemiş · İlgili müh. bölümleri"
   },
   "experience": {
-   "min": null,
+   "min": 1,
    "max": null,
    "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "label": "1+ yıl",
+   "fit": "yakin"
   },
   "work_mode": "ofiste",
   "requirements": [

@@ -47,8 +47,12 @@ Lokasyon kategoriyi değiştirmez, sadece gösterilir ve sıralamada kullanılı
 | Filtreler | Uygunluk, lokasyon, deneyim şartı, eğitim şartı, çalışma şekli, alan (CAE, tasarım, Ar-Ge, eklemeli, üretim, test, otomotiv…), ilan tarihi, staj. Seçim yapılmayan grup "hepsi" demektir. Filtreler cihazda hatırlanır; "Filtreleri sıfırla" varsayılana döner. |
 | Sıralama | Uygunluğa göre / En yeni / Lokasyon önceliği |
 | Başvuru takibi | Karttaki açılır menü: Kaydedildi → Başvuruldu → Mülakat → Teklif / Olumsuz. "Başvuruldu" dediğin ilan **Başvurularım**'a taşınır. |
-| Takip hatırlatması | Başvurunun üzerinden 10 gün geçince **Takip zamanı** olarak işaretlenir. "Takip ettim" butonu hatırlatmayı 10 gün öteler. |
-| Not | Görüşülen kişi, maaş, mülakat tarihi… Aramaya da dahil. |
+| Takip hatırlatması | Başvurudan 6 iş günü sonra **Takip zamanı** olarak işaretlenir. "Takip ettim" butonu hatırlatmayı 6 iş günü öteler. |
+| Takip mesajı | "Başvuruldu" durumundaki ilanda **Takip mesajı yaz**: kısa, kibar bir takip e-postası istemi (claude.ai). Kaydedilen metin kartta saklanır. |
+| Mülakat hazırlığı | "Mülakat" durumunda **Mülakat hazırlığı**: ilana ve CV'ne göre olası teknik/davranışsal sorular, STAR örnekleri, soracağın sorular. |
+| Not ve iletişim kişisi | "Not" altında iletişim kişisi (ad, unvan) ve serbest not. İkisi de aramaya dahil. |
+| Bağlantı kur | Her kartta LinkedIn'de o şirketteki İÜC mezunlarını, mühendisleri ve İK'yı arayan hazır linkler. Yönlendirmeli başvuru için. |
+| Beceri yol haritası | Sayfanın altında: son 30 günde uygun ilanların en çok istediği, profilinde görünmeyen araçlar (yüzdeyle) ve ücretsiz öğrenme kaynakları. Kaynaklar `config.yaml > learning`'de. |
 | Ön yazı | **Ön yazı oluştur**: CV'n, ilan ve uygunluk analiziyle hazır bir istem kopyalar ve claude.ai'yi açar; cevabı siteye yapıştırıp kaydedersin. API ekliysen sabah hazırlanan ön yazılar da "Ön yazı" butonunda görünür. |
 | Başka sitelerden ilan | **+ İlan ekle**: Kariyer.net, şirket sitesi, e-posta… Elle eklenen ilanlar otomatik sınıflandırılmaz; deneyim, eğitim, lokasyon ve çalışma şeklini formda seçebilirsin. |
 | İstemediğin ilan | "İlgilenmiyorum": listeden gizlenir |

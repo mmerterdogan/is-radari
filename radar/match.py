@@ -216,7 +216,10 @@ ENTRY = (r"new grad|newly graduated|recent(ly)? grad|fresh grad|graduate (engine
          r"entry[- ]level|\bjunior\b|\bjr\b|"
          r"trainee|yeni mezun|deneyimsiz|tecrubesiz|deneyim (sarti )?(aranmamaktadir|aranmaz|gerekmemektedir|sart degil)|"
          r"genc muhendis|management trainee|\bmt program|berufseinsteiger|absolvent|einsteiger|debutant|jeune diplome|"
-         r"recien titulado|neolaureat|early career|0 ?- ?[12] (years?|yil)")
+         r"recien titulado|neolaureat|early career|0 ?- ?[12] (years?|yil)|no prior experience|no experience (is )?required|"
+         r"without (prior )?experience|erste (berufs)?erfahrung|premiere experience|recently graduated")
+# Body phrases that point to an experienced hire when no year count is given
+MID_TEXT = r"significant experience|extensive experience|substantial experience|solid years of experience|proven track record"
 INTERN = (r"\bintern\b|internship|stajyer|\bstaj\b|praktikum|praktikant|\bstage\b|stagiaire|becario|tirocin|"
           r"working student|werkstudent|student assistant|ogrenci (asistan|calisan)|part[- ]time student|master thesis|masterarbeit|tez ogrencisi")
 MID_TITLE = r"deneyimli|experienced|experimente|\bmid\b|intermediate|erfahren"
@@ -232,10 +235,15 @@ def _year_mentions(text: str) -> list[tuple[int, int | None]]:
         rf"(?P<a>\d{{1,2}})\s*{YEARS}\s*(?:ve uzeri|ve daha fazla|and above|or more|plus)",
         rf"(?P<a>\d{{1,2}})\s*{YEARS}\s*(?:of\s+)?(?:\w+\s+){{0,3}}?{EXP_WORD}",
     ]
-    for p in pats:
+    # Self-evident requirement phrasings: no experience word needed nearby
+    explicit = [
+        rf"(?P<a>\d{{1,2}})\s*\+?\s*{YEARS}\s*(?:minimum|min\b|en az)",                 # "1 an minimum", "2 yıl en az"
+        rf"(?P<a>\d{{1,2}})\s*\+\s*{YEARS}\s+(?:of|in)\b",                              # "1+ years of customer service"
+    ]
+    for p in pats + explicit:
         for m in re.finditer(p, text):
             window = text[max(0, m.start() - 80): m.end() + 80]
-            if not re.search(EXP_WORD, window):
+            if p not in explicit and not re.search(EXP_WORD, window):
                 continue
             a = int(m.group("a"))
             b = int(m.group("b")) if "b" in m.groupdict() and m.group("b") else None
@@ -267,6 +275,8 @@ def parse_experience(job: Job) -> dict:
         level = "kidemli"
     elif _any(ENTRY, text):
         level = "yeni_mezun"
+    elif _any(MID_TEXT, text):
+        level = "orta"
     else:
         level = "belirtilmemis"
 
@@ -307,10 +317,14 @@ def parse_experience(job: Job) -> dict:
 BSC = (r"bachelor|\bb\.? ?sc\b|\bbs\b(?! office)|\bb\.s\.|\bb\.? ?eng\b|undergraduate|university degree|college degree|"
        r"degree in (mechanical|engineering)|engineering degree|\blisans (mezun|derece|diploma|ogrenim|egitim)|lisans ve|"
        r"universitelerin|fakultesi|fakultelerin|bolumlerinden|bolumu mezun|muhendisligi mezun|4 yillik|dort yillik|"
-       r"\bon lisans|bachelier|\blicence\b|grado en|laurea triennale|hochschulstudium|studium der|abgeschlossenes studium")
+       r"\bon lisans|bachelier|\blicence\b|grado en|laurea triennale|hochschulstudium|studium der|abgeschlossenes studium|"
+       r"degree qualified|degree level|degree,? hnd|\bhnd\b|a degree in|degree in (a |an )?(technical|relevant|related)|"
+       r"bolumunden mezun|bolumlerinden mezun|fakultelerinden|graduates? of (relevant )?engineering|studium (im bereich|maschinenbau|der)|"
+       r"ecole d'ingenieur|diplome d'ingenieur|ingenieursopleiding|\bhbo\b")
 MASTER_NOISE = r"master (data|plan|schedule|file|record|production schedule|card)|scrum master|web ?master|mastercard|master of ceremonies|toolmaster|masterclass"
 MSC = (r"master'?s|\bmaster (degree|of|in)|\bm\.? ?sc\b|\bms\b(?! office| word| excel| project| teams| dynamics| sql)|\bm\.s\.|"
-       r"\bm\.? ?eng\b|graduate degree|yuksek lisans|diplom-ingenieur|dipl\.-ing|laurea magistrale|maitrise|\bmaster\b")
+       r"\bm\.? ?eng\b|graduate degree|yuksek lisans|diplom-ingenieur|dipl\.-ing|laurea magistrale|maitrise|\bmaster\b|"
+       r"bac ?\+ ?5|masterdiploma")
 PHD = r"\bphd\b|ph\.d|doctorate|doctoral degree|doktora (derece|mezun|diploma)|\bdoctorat|dottorato|promotion\b"
 MSC_REQUIRED = (r"(master'?s?|\bmsc\b|m\.sc|yuksek lisans)[^.;\n]{0,70}(required|mandatory|\bmust\b|is a must|zorunlu|sarttir|gereklidir|"
                 r"mezunu olmak|derecesine sahip)|(must|required to) (have|hold) a (master|msc)|requires? a (master|msc)|"

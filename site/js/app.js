@@ -6,7 +6,7 @@ import { EMPTY, mergeState } from "./merge.js";
 
 const LS_STATE = "radar-state-v2";
 const LS_FILTERS = "radar-filters-v2";   // v2: new "belirsiz" category and "closed" filter
-const FOLLOWUP_DAYS = 10;
+const FOLLOWUP_BDAYS = 6;   // follow up ~6 business days after applying
 
 const STAGES = [
   ["", "Durum seç…"],
@@ -42,6 +42,12 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 const nowIso = () => new Date().toISOString();
 const today = () => new Date().toISOString().slice(0, 10);
 const addDays = (d, n) => new Date(new Date(d).getTime() + n * 864e5).toISOString().slice(0, 10);
+function addBusinessDays(d, n) {
+  const x = new Date(d + "T12:00:00");
+  while (n > 0) { x.setDate(x.getDate() + 1); if (x.getDay() % 6 !== 0) n--; }
+  return x.toISOString().slice(0, 10);
+}
+const nextFollowup = () => addBusinessDays(today(), FOLLOWUP_BDAYS);
 const fmtDate = (d) => (d ? new Date(d).toLocaleDateString("tr-TR", { day: "numeric", month: "short" }) : "");
 const daysAgo = (d) => (d ? Math.floor((Date.now() - new Date(d.length === 10 ? d + "T12:00:00" : d).getTime()) / 864e5) : null);
 
@@ -104,7 +110,7 @@ function passesFilters(j) {
   if (F.closed === "hide" && j.closed && !stageOf(j)) return false;   // tracked ads stay visible
   const q = $("#q").value.trim().toLocaleLowerCase("tr");
   if (q) {
-    const hay = [j.title, j.company, j.location, j.description, entry(j.id).notes, ...(j.matches || []), ...(j.gaps || []),
+    const hay = [j.title, j.company, j.location, j.description, entry(j.id).notes, entry(j.id).contact, ...(j.matches || []), ...(j.gaps || []),
       ...(j.sectors || [])].join(" ").toLocaleLowerCase("tr");
     if (!hay.includes(q)) return false;
   }
@@ -119,6 +125,7 @@ function inView(j) {
 }
 
 // ------------------------------------------------------------------ rendering
+const linkedinPeople = (q) => `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(q)}`;
 function freshness(j) {
   const d = daysAgo(jobDate(j));
   if (d === null) return "";
@@ -167,16 +174,24 @@ function card(j) {
     ${reasons.length > 3 ? `<button class="btn link" data-act="more">${showAll ? "Daha az" : `+${reasons.length - 3} gerekçe`}</button>` : ""}
     ${reqs ? `<div class="reqs" aria-label="Ana gereksinimler">${reqs}</div>` : ""}
     ${j.sectors?.length ? `<div class="sectors">Sektör: ${j.sectors.map(esc).join(", ")}</div>` : ""}
-    ${e.notes && !noteOpen ? `<div class="note-view">${esc(e.notes)}</div>` : ""}
+    ${(e.notes || e.contact) && !noteOpen ? `<div class="note-view">${e.contact ? `👤 ${esc(e.contact)}${e.notes ? "\n" : ""}` : ""}${esc(e.notes || "")}</div>` : ""}
     <div class="actions">
       <select data-act="stage" aria-label="Başvuru durumu">${opts}</select>
       ${j.url ? `<a class="btn primary" href="${esc(j.url)}" target="_blank" rel="noopener">İlana git</a>` : ""}
       <button class="btn" data-act="letter">${letter ? "Ön yazı" : "Ön yazı oluştur"}</button>
       <button class="btn" data-act="note">${noteOpen ? "Notu kapat" : e.notes ? "Notu düzenle" : "Not"}</button>
+      ${st === "basvuruldu" ? `<button class="btn" data-act="followup-msg">${e.followup_msg ? "Takip mesajı" : "Takip mesajı yaz"}</button>` : ""}
       ${followDue(j) ? `<button class="btn" data-act="followed">Takip ettim</button>` : ""}
+      ${["mulakat", "teklif"].includes(st) ? `<button class="btn" data-act="interview">${e.interview_prep ? "Mülakat notları" : "Mülakat hazırlığı"}</button>` : ""}
       ${j.source === "manual" ? `<button class="btn" data-act="delete">Sil</button>` : ""}
     </div>
-    ${noteOpen ? `<div class="note"><textarea data-act="notes" placeholder="Görüşme tarihi, iletişim kişisi, maaş, izlenim…">${esc(e.notes || "")}</textarea></div>` : ""}
+    ${noteOpen ? `<div class="note">
+      <input data-act="contact" placeholder="İletişim kişisi (ad, unvan, LinkedIn)" value="${esc(e.contact || "")}">
+      <textarea data-act="notes" placeholder="Görüşme tarihi, maaş, izlenim…">${esc(e.notes || "")}</textarea></div>` : ""}
+    ${j.company ? `<div class="netlinks">Bağlantı kur:
+      <a href="${linkedinPeople(`${j.company} İstanbul Üniversitesi-Cerrahpaşa`)}" target="_blank" rel="noopener">İÜC mezunları</a> ·
+      <a href="${linkedinPeople(`${j.company} mechanical engineer`)}" target="_blank" rel="noopener">şirketteki mühendisler</a> ·
+      <a href="${linkedinPeople(`${j.company} recruiter`)}" target="_blank" rel="noopener">İK / işe alım</a></div>` : ""}
   </article>`;
 }
 
@@ -326,19 +341,18 @@ function parsePasted(text) {
   return { subject, cover_letter: body, cv_highlights };
 }
 
-function claudeDialog(j, info) {
-  openDialog(`<h2>Ön yazı - Claude aboneliğinle</h2>
+// Generic "copy prompt -> claude.ai -> paste the answer back" dialog (the user's own subscription, no API).
+function promptDialog({ title, j, intro, prompt, placeholder, onSave }) {
+  openDialog(`<h2>${esc(title)}</h2>
     <div class="meta">${esc(j.title)} · ${esc(j.company)}</div>
-    <p class="hint">Ön yazıyı kendi Claude hesabınla yazdırıyoruz (ek ücret yok).</p>
+    <p class="hint">${esc(intro)} Kendi Claude hesabınla yazdırıyoruz (ek ücret yok).</p>
     <h3>1. İstemi kopyala, Claude'a yapıştır</h3>
-    <p class="hint">CV'n, tercihlerin, ilan metni ve uygunluk analizi hazır bir istemde birleşti. Butona basınca kopyalanır ve claude.ai açılır, orada yapıştırıp gönder.</p>
     <div class="actions"><button class="btn primary" data-claude-copy>İstemi kopyala ve Claude'u aç</button></div>
     <h3>2. Claude'un cevabını buraya yapıştır</h3>
     <form class="form" id="paste-form">
-      <textarea name="answer" rows="8" placeholder="KONU: …&#10;ÖN YAZI:&#10;…" required></textarea>
+      <textarea name="answer" rows="8" placeholder="${esc(placeholder || "")}" required></textarea>
       <div class="actions"><button class="btn primary" type="submit">Kaydet</button><button class="btn" type="button" data-close>Kapat</button></div>
     </form>`);
-  const prompt = claudePrompt(j, info);
   $("[data-claude-copy]").addEventListener("click", async () => {
     try { await navigator.clipboard.writeText(prompt); toast("İstem kopyalandı ✓ - Claude'da yapıştır"); }
     catch { toast("Kopyalanamadı - tarayıcı izin vermedi"); }
@@ -346,10 +360,74 @@ function claudeDialog(j, info) {
   });
   $("#paste-form").addEventListener("submit", (ev) => {
     ev.preventDefault();
-    const L = parsePasted(new FormData(ev.target).get("answer"));
-    saveEntry(j.id, { letter: L });
-    render();
-    showLetter(j, letterOf(j));
+    onSave(new FormData(ev.target).get("answer").replace(/\r/g, "").trim());
+  });
+}
+
+function showText(j, title, text, kind) {
+  openDialog(`<h2>${esc(title)}</h2><div class="meta">${esc(j.title)} · ${esc(j.company)}</div>
+    <pre id="t-body">${esc(text)}</pre>
+    <div class="actions"><button class="btn primary" data-copy="t-body">Kopyala</button>
+      <button class="btn" data-redo="${esc(kind)}" data-job="${esc(j.id)}">Yeniden yaz</button>
+      <button class="btn" data-close>Kapat</button></div>`);
+}
+
+function jobBlock(j) {
+  return `<job>\nTitle: ${j.title}\nCompany: ${j.company}\nLocation: ${j.location || ""}\nURL: ${j.url || ""}\nDescription:\n${j.description || "(ilan metni yok)"}\n</job>`;
+}
+
+function claudeDialog(j, info) {
+  promptDialog({
+    title: "Ön yazı", j, placeholder: "KONU: …\nÖN YAZI:\n…",
+    intro: "CV'n, tercihlerin, ilan metni ve uygunluk analizi hazır bir istemde birleşti.",
+    prompt: claudePrompt(j, info),
+    onSave: (text) => { saveEntry(j.id, { letter: parsePasted(text) }); render(); showLetter(j, letterOf(j)); },
+  });
+}
+
+function followupPrompt(j, info) {
+  const e = entry(j.id);
+  return [
+    "Write a short, polite follow-up email for a job application I already sent. Language: the language of the job ad (Turkish ad -> Turkish).",
+    "Max 120 words. Mention the role and when I applied, restate my interest in one sentence, and add ONE concrete, relevant item",
+    "from my CV that fits the role (only facts from the CV). No pressure, no generic filler. Give a subject line first.",
+    `I applied on: ${e.applied_at || "(unknown)"}. Contact person (if any): ${e.contact || "-"}.`,
+    "", info.profile, "", jobBlock(j),
+    "", "Format:", "KONU: <subject>", "<email body>",
+  ].join("\n");
+}
+
+function interviewPrompt(j, info) {
+  return [
+    "Help me prepare for a job interview for the role below. Answer in Turkish (technical terms may stay in English).",
+    "1) 10 likely technical questions for this role (FEA, design, manufacturing - whatever the ad needs) with short model answers",
+    "   built ONLY from my CV experience; mark questions where my CV has a gap and suggest how to answer honestly.",
+    "2) 5 behavioural questions with STAR-format answers drawn from my internships, Formula Student, TEKNOFEST and projects.",
+    "3) 5 smart questions I can ask the interviewer about this company/role.",
+    "4) A 60-second 'tell me about yourself' tailored to this role.",
+    "", info.profile, "", jobBlock(j),
+  ].join("\n");
+}
+
+async function openPromptTool(kind, j, redo = false) {
+  let info;
+  try { info = await profileInfo(); } catch (e) { toast(`Profil yüklenemedi: ${e.message}`); return; }
+  const e = entry(j.id);
+  if (kind === "followup") {
+    if (e.followup_msg && !redo) return showText(j, "Takip mesajı", e.followup_msg, "followup");
+    return promptDialog({
+      title: "Takip mesajı", j, placeholder: "KONU: …\n…",
+      intro: "Başvurudan ~1 hafta sonra iletişim kişisine ya da İK'ya gönderilecek kısa ve kibar bir takip e-postası.",
+      prompt: followupPrompt(j, info),
+      onSave: (text) => { saveEntry(j.id, { followup_msg: text }); render(); showText(j, "Takip mesajı", text, "followup"); },
+    });
+  }
+  if (e.interview_prep && !redo) return showText(j, "Mülakat notları", e.interview_prep, "interview");
+  return promptDialog({
+    title: "Mülakat hazırlığı", j, placeholder: "Claude'un hazırladığı soru-cevaplar…",
+    intro: "İlana ve CV'ne göre olası teknik ve davranışsal sorular, STAR örnekleri ve soracağın sorular.",
+    prompt: interviewPrompt(j, info),
+    onSave: (text) => { saveEntry(j.id, { interview_prep: text }); render(); showText(j, "Mülakat notları", text, "interview"); },
   });
 }
 
@@ -390,7 +468,7 @@ function openAdd() {
       description: f.description.trim(), exp: f.exp, edu: f.edu, loc_tier: Number(f.loc_tier), work_mode: f.work_mode,
       added: nowIso(), updated: nowIso() };
     const patch = { stage: f.stage };
-    if (f.stage === "basvuruldu") Object.assign(patch, { applied_at: today(), followup_at: addDays(today(), FOLLOWUP_DAYS) });
+    if (f.stage === "basvuruldu") Object.assign(patch, { applied_at: today(), followup_at: nextFollowup() });
     saveEntry(id, patch);
     dlg().close();
     view = "apps";
@@ -454,22 +532,29 @@ document.addEventListener("click", async (ev) => {
     }
     return;
   }
+  if (t.dataset?.redo) {
+    const j = allJobs().find((x) => x.id === t.dataset.job);
+    dlg().close();
+    return openPromptTool(t.dataset.redo, j, true);
+  }
   if (t.dataset?.regen) {
     const j = allJobs().find((x) => x.id === t.dataset.regen);
     dlg().close();
     return generateLetter(j);
   }
   const act = t.dataset?.act;
-  if (!act || act === "stage" || act === "notes") return;
+  if (!act || act === "stage" || act === "notes" || act === "contact") return;
   const id = t.closest("[data-id]").dataset.id;
   const j = allJobs().find((x) => x.id === id);
   if (act === "letter") {
     const L = letterOf(j);
     return L ? showLetter(j, L) : generateLetter(j);
   }
+  if (act === "followup-msg") return openPromptTool("followup", j);
+  if (act === "interview") return openPromptTool("interview", j);
   if (act === "more") { expanded.has(id) ? expanded.delete(id) : expanded.add(id); render(); return; }
   if (act === "note") { openNotes.has(id) ? openNotes.delete(id) : openNotes.add(id); render(); return; }
-  if (act === "followed") { saveEntry(id, { followup_at: addDays(today(), FOLLOWUP_DAYS) }); render(); toast(`${FOLLOWUP_DAYS} gün sonra tekrar hatırlatılacak`); return; }
+  if (act === "followed") { saveEntry(id, { followup_at: nextFollowup() }); render(); toast(`${FOLLOWUP_BDAYS} iş günü sonra tekrar hatırlatılacak`); return; }
   if (act === "delete") {
     S.manual[id] = { id, deleted: true, updated: nowIso() };
     saveEntry(id, { stage: "", deleted: true });
@@ -485,11 +570,11 @@ document.addEventListener("change", async (ev) => {
     const e = entry(id);
     const patch = { stage: t.value };
     if (["basvuruldu", "mulakat"].includes(t.value) && !e.applied_at) {
-      Object.assign(patch, { applied_at: today(), followup_at: addDays(today(), FOLLOWUP_DAYS) });
+      Object.assign(patch, { applied_at: today(), followup_at: nextFollowup() });
     }
     saveEntry(id, patch);
     render();
-    if (t.value === "basvuruldu") toast(`Başvurularım'a taşındı - ${FOLLOWUP_DAYS} gün sonra takip hatırlatması`);
+    if (t.value === "basvuruldu") toast(`Başvurularım'a taşındı - ${FOLLOWUP_BDAYS} iş günü sonra takip hatırlatması`);
     if (t.value === "gizli") toast("Gizlendi - Başvurularım'dan değil, bu listeden kaldırıldı");
   } else if (t.hasAttribute?.("data-import") && t.files[0]) {
     try {
@@ -506,13 +591,28 @@ let noteTimer = null;
 document.addEventListener("input", (ev) => {
   const t = ev.target;
   if (t.id === "q") return render();
-  if (t.dataset?.act === "notes") {
+  if (t.dataset?.act === "notes" || t.dataset?.act === "contact") {
     const id = t.closest("[data-id]").dataset.id;
+    const field = t.dataset.act;
     clearTimeout(noteTimer);
-    noteTimer = setTimeout(() => saveEntry(id, { notes: t.value }), 600);
+    noteTimer = setTimeout(() => saveEntry(id, { [field]: t.value }), 600);
   }
 });
 $("#sort").addEventListener("change", render);
+
+function renderSkills() {
+  const rows = DATA.insights?.skill_gaps || [];
+  const el = $("#skills");
+  if (!rows.length) { el.innerHTML = `<p class="hint">Henüz yeterli veri yok.</p>`; return; }
+  el.innerHTML = `<p class="hint">Son 30 günde Doğrudan uygun / Uygun / Stretch ilanlarda en sık istenen, profilinde görünmeyen araçlar.
+    Birini öğrendiğinde <code>config.yaml</code> → <code>profile.skills</code> listesine ekle; ilanlardaki ✗ işaretleri ✓'ye döner.</p>
+    <div class="skills">${rows.map((r) => `
+      <div class="skill-row">
+        <div class="skill-head"><b>${esc(r.label)}</b><span>${r.count} ilan · %${Math.round(r.share * 100)}</span></div>
+        <div class="skill-bar"><span style="width:${Math.max(4, Math.round(r.share * 100))}%"></span></div>
+        ${(r.resources || []).length ? `<div class="skill-res">${r.resources.map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label)}</a>`).join(" · ")}</div>` : ""}
+      </div>`).join("")}</div>`;
+}
 
 // ------------------------------------------------------------------ boot
 async function boot() {
@@ -534,6 +634,7 @@ async function boot() {
     const c = r.by_category || {};
     return `<tr><td>${esc(r.date)}</td><td>${r.fetched ?? "-"}</td><td>${r.new ?? "-"}</td><td>${r.relevant ?? r.candidates ?? "-"}</td><td>${c.dogrudan ?? "-"}</td><td>${c.uygun ?? "-"}</td><td>${c.stretch ?? "-"}</td><td>${c.dusuk ?? "-"}</td><td>${r.scored ?? 0}</td><td>$${(r.cost_usd || 0).toFixed(2)}</td><td>${esc((r.failed_sources || []).join(", ") || "-")}</td></tr>`;
   }).join("");
+  renderSkills();
   render();
 }
 boot();

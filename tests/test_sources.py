@@ -125,3 +125,16 @@ def test_query_stats_accumulate(tmp_path):
     d = json.loads(path.read_text(encoding="utf-8"))
     assert d["makine mühendisi @ Turkey"] == {"total": 3, "good": 2, "yield": 0.67}
     assert d["FEA @ Turkey"]["good"] == 0
+
+
+def test_skill_gaps_roadmap():
+    from radar.models import now_iso
+
+    def job(i, cat, gaps):
+        j = Job(source="linkedin", native_id=str(i), title="T", company="C", location="", url="u")
+        j.category, j.gaps, j.first_seen = cat, gaps, now_iso()
+        return j
+    jobs = [job(1, "uygun", ["CATIA", "FMEA"]), job(2, "stretch", ["CATIA"]), job(3, "dusuk", ["CATIA", "SAP / ERP"])]
+    rows = pipeline.skill_gaps(jobs, learning={"catia": [{"label": "x", "url": "https://x"}]})
+    assert rows[0] == {"label": "CATIA", "key": "catia", "count": 2, "share": 1.0, "resources": [{"label": "x", "url": "https://x"}]}
+    assert [r["label"] for r in rows] == ["CATIA", "FMEA"]   # low-fit ads do not count
