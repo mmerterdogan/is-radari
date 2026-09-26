@@ -84,7 +84,9 @@ def test_old_jobs_json_still_loads(tmp_path):
 
 # ---------------------------------------------------------------- notification
 def test_message_groups_by_category_and_escapes():
-    a = match.analyze(job("FEA <Engineer>", desc="Bachelor's in Mechanical Engineering, 0-2 years. ANSYS, SolidWorks, FEA.", nid="1"))
+    a = match.analyze(job("FEA <Engineer>", desc="Bachelor's in Mechanical Engineering, 0-2 years. ANSYS, SolidWorks, FEA. "
+                          "You will run structural simulations for new products, prepare reports and work with design "
+                          "engineers on weight optimisation and design reviews.", nid="1"))
     b = match.analyze(job("Senior Stress Engineer", desc="10+ years of experience.", nid="2"))
     msg = notify.build_message([a, b], {"date": "2026-09-24", "fetched": 50, "relevant": 2}, "https://site", {})
     assert "FEA &lt;Engineer&gt;" in msg and "https://site" in msg

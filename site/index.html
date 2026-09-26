@@ -27,6 +27,7 @@
     <button class="stat cat-dogrudan" data-cat-only="dogrudan"><b id="st-dogrudan">–</b><span>Doğrudan uygun</span></button>
     <button class="stat cat-uygun" data-cat-only="uygun"><b id="st-uygun">–</b><span>Uygun</span></button>
     <button class="stat cat-stretch" data-cat-only="stretch"><b id="st-stretch">–</b><span>Stretch</span></button>
+    <button class="stat cat-belirsiz" data-cat-only="belirsiz" title="İlan metni okunamadı, şartlar bilinmiyor"><b id="st-belirsiz">–</b><span>Değerlendirilemedi</span></button>
     <button class="stat cat-dusuk" data-cat-only="dusuk"><b id="st-dusuk">–</b><span>Düşük uygunluk</span></button>
     <button class="stat" data-go="apps"><b id="st-active">–</b><span>Aktif başvuru</span></button>
     <button class="stat" data-go="followup"><b id="st-follow">–</b><span>Takip zamanı</span></button>
@@ -54,6 +55,7 @@
         <button class="chip c-dogrudan" data-v="dogrudan">Doğrudan uygun</button>
         <button class="chip c-uygun" data-v="uygun">Uygun</button>
         <button class="chip c-stretch" data-v="stretch">Stretch</button>
+        <button class="chip c-belirsiz" data-v="belirsiz" title="İlan metni okunamadı">Değerlendirilemedi</button>
         <button class="chip c-dusuk" data-v="dusuk">Düşük uygunluk</button>
       </div></div>
       <div class="fgroup"><div class="flabel">Lokasyon</div><div class="chips" data-group="loc">
@@ -104,6 +106,10 @@
         <button class="chip" data-v="hide">Gizle</button>
         <button class="chip" data-v="only">Sadece staj</button>
       </div></div>
+      <div class="fgroup"><div class="flabel">Kapanmış ilanlar</div><div class="chips" data-group="closed" data-single>
+        <button class="chip" data-v="hide">Gizle</button>
+        <button class="chip" data-v="show">Göster</button>
+      </div></div>
     </div>
     <div class="actions"><button class="btn" id="freset">Filtreleri sıfırla</button>
       <span class="hint">Seçim yapılmayan grup = hepsi. Filtreler bu cihazda hatırlanır.</span></div>
@@ -119,6 +125,7 @@
         <p><b>Doğrudan uygun:</b> deneyim şartı yeni mezuna uygun (ya da yok), lisans kabul ediliyor, pozisyon alanı ve istenen araçlar profilinle açıkça örtüşüyor.</p>
         <p><b>Uygun:</b> deneyim ve eğitim şartı uygun, alan makine mühendisliğiyle kesişiyor; bazı eksikler olabilir.</p>
         <p><b>Stretch:</b> 1-4 yıl deneyim isteniyor ama teknik örtüşme güçlü, ya da YL derecesi / doktora pozisyonu gibi profilinin biraz üstünde şartlar var.</p>
+        <p><b>Değerlendirilemedi:</b> ilanın metni okunamadı (LinkedIn bazen engelliyor); şartlar bilinmediği için kategoriye konmadı. Gerekçede başlığa göre tahmin yazar; sonraki taramalarda metin gelirse otomatik sınıflanır.</p>
         <p><b>Düşük uygunluk:</b> 5+ yıl / kıdemli, doktora derecesi, farklı bölüm ya da bilmediğin bir dil şartı gibi temel bir uyumsuzluk var.</p>
         <p>Eğitim seviyesi hiçbir zaman ilanı gizlemez: "Bachelor's degree" isteyen ilanlar senin için tam uygundur, YL'n ek avantajdır. Lokasyon kategoriyi değiştirmez, sadece gösterilir ve sıralamada kullanılır.</p>
       </div>

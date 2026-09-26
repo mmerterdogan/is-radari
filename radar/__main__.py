@@ -6,6 +6,7 @@
     python -m radar run --only linkedin # a single source (debugging)
     python -m radar rebuild             # re-classify stored jobs with the current rules, re-export the site
     python -m radar profile             # regenerate site/profile.json from cv/cv.md + config.yaml
+    python -m radar recheck             # only look for closed ads among older promising ones
 """
 from __future__ import annotations
 
@@ -59,6 +60,7 @@ def export_site(store: Store, out: Path, keep_days: int, stats: dict) -> None:
         d = j.to_dict()
         d.pop("extra", None)
         d["employment"] = j.extra.get("Employment type", "")
+        d["applicants"] = j.extra.get("applicants", "")
         d["description"] = (j.description or "")[: DESC_LEN.get(j.category, 300)]
         jobs.append(d)
     jobs.sort(key=lambda d: (d["first_seen"][:10], -match.CATEGORY_ORDER.get(d["category"], 9), d["score"] or 0), reverse=True)
@@ -98,6 +100,56 @@ def refine_with_claude(jobs: list[Job], cfg: dict, stats: dict, args) -> None:
     stats["letters"] = sum(1 for j in best if j.letter)
     stats["cost_usd"] = round(scorer.cost_usd(), 4)
     stats["tokens"] = scorer.usage
+
+
+RATE_LIMIT_STOP = 3  # consecutive 429 answers from LinkedIn -> stop fetching details for today
+
+
+def enrich_queue(jobs: list[Job], fetcher: Fetcher, stats: dict) -> int:
+    """Fetch LinkedIn detail pages in order until done or rate limited. Returns how many got text."""
+    got = 0
+    for j in jobs:
+        if fetcher.rate_limited_streak >= RATE_LIMIT_STOP:
+            if not stats.get("enrich_blocked"):
+                log.warning("LinkedIn keeps answering 429 - stopping detail fetches for today")
+            stats["enrich_blocked"] = True
+            break
+        linkedin.enrich(j, fetcher)
+        j.extra["checked_at"] = now_iso()
+        got += len(j.description) >= match.SHORT_TEXT
+    return got
+
+
+def recheck_open(store: Store, fetcher: Fetcher, cfg: dict, stats: dict) -> None:
+    """Re-open the detail page of promising older ads to spot closed ones (and refresh applicant counts)."""
+    mcfg = cfg.get("match", {})
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=int(mcfg.get("recheck_after_days", 5)))).isoformat()
+    todo = sorted((j for j in store.jobs.values()
+                   if j.source == "linkedin" and not j.closed and j.first_seen < cutoff
+                   and j.category in ("dogrudan", "uygun", "stretch")),
+                  key=lambda j: j.extra.get("checked_at", ""))[: int(mcfg.get("recheck_limit", 40))]
+    before = sum(j.closed for j in todo)
+    enrich_queue(todo, fetcher, stats)
+    stats["rechecked"] = len(todo)
+    stats["closed_found"] = sum(j.closed for j in todo) - before
+
+
+def update_query_stats(path: Path, new_jobs: list[Job], kept: list[Job]) -> None:
+    """Cumulative per-query yield: how many new ads a LinkedIn query brought and how many were a fit."""
+    data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    good = {j.id for j in kept if j.category in ("dogrudan", "uygun", "stretch")}
+    for j in new_jobs:
+        q = j.extra.get("query")
+        if not q:
+            continue
+        key = f"{q} @ {j.extra.get('query_location', '')}"
+        row = data.setdefault(key, {"total": 0, "good": 0})
+        row["total"] += 1
+        row["good"] += j.id in good
+    for row in data.values():
+        row["yield"] = round(row["good"] / row["total"], 2) if row["total"] else 0
+    path.write_text(json.dumps(dict(sorted(data.items(), key=lambda kv: -kv[1]["total"])), ensure_ascii=False, indent=1),
+                    encoding="utf-8")
 
 
 def run(args) -> int:
@@ -154,15 +206,30 @@ def run(args) -> int:
     stats["dropped"] = len(new_jobs) - len(relevant)
     log.info("%d fetched, %d new, %d relevant (%d pending full text)", len(fresh), len(new_jobs), len(relevant), len(pending))
 
-    # 4. fetch full text for LinkedIn ads: pending decisions first, then the most promising titles ---
+    # 4. fetch full text for LinkedIn ads: pending decisions first, then the most promising titles,
+    #    then ads from the last days whose text is still missing (backfill) ---------------------
     mcfg = cfg.get("match", {})
-    li_fetcher = Fetcher(delay=float(cfg["search"]["linkedin"].get("delay_seconds", 6)))
-    to_enrich = sorted((j for j in relevant if j.source == "linkedin" and len(j.description) < match.SHORT_TEXT),
-                       key=lambda j: match.quick_rank(j) + (25 if j.id in pending else 0),
-                       reverse=True)[: int(mcfg.get("enrich_limit", 100))]
-    for j in to_enrich:
-        linkedin.enrich(j, li_fetcher)
-    stats["enriched"] = sum(1 for j in to_enrich if len(j.description) >= match.SHORT_TEXT)
+    li_fetcher = Fetcher(delay=float(cfg["search"]["linkedin"].get("delay_seconds", 6)), retries=2)
+    limit = int(mcfg.get("enrich_limit", 250))
+    queue = sorted((j for j in relevant if j.source == "linkedin" and len(j.description) < match.SHORT_TEXT),
+                   key=lambda j: match.quick_rank(j) + (25 if j.id in pending else 0), reverse=True)[:limit]
+    back_cutoff = (datetime.now(timezone.utc) - timedelta(days=int(mcfg.get("backfill_days", 7)))).isoformat()
+    backfill = sorted((j for j in store.jobs.values()
+                       if j.source == "linkedin" and len(j.description) < match.SHORT_TEXT
+                       and j.first_seen >= back_cutoff and not j.closed),
+                      key=match.quick_rank, reverse=True)[: max(0, limit - len(queue))]
+    if args.only and args.only != "linkedin":   # single-source debug run: leave LinkedIn alone
+        queue, backfill = [], []
+    stats["enriched"] = enrich_queue(queue, li_fetcher, stats)
+    stats["backfilled"] = enrich_queue(backfill, li_fetcher, stats)
+    for j in backfill:  # re-classify stored ads that now have their text
+        if len(j.description) >= match.SHORT_TEXT:
+            keep, _ = match.relevance(j, profile)
+            if keep:
+                match.analyze(j, profile)
+            else:
+                store.dedupe.update((j.dedupe_key, j.id))
+                del store.jobs[j.id]
 
     # 5. re-check the gate with the full text, then rule-based matching for every relevant job ------
     #    (pending jobs whose text could not be fetched are kept and marked "title only")
@@ -184,9 +251,11 @@ def run(args) -> int:
     refine_with_claude(kept, cfg, stats, args)
     stats["by_category"] = _by_category(kept)
 
-    # 7. persist -------------------------------------------------------------------------
+    # 7. persist (+ closed-ad check on older promising ads) -----------------------------------
     for j in kept:
         store.add(j)
+    if not args.only or args.only == "linkedin":
+        recheck_open(store, li_fetcher, cfg, stats)
     store.prune(int(cfg["site"]["keep_days"]))
     stats["seconds"] = round(time.time() - started)
     store.runs.append(stats)
@@ -194,6 +263,7 @@ def run(args) -> int:
         store.save()
         export_site(store, ROOT / "site", int(cfg["site"]["keep_days"]), stats)
         export_profile(cfg)
+        update_query_stats(ROOT / "data" / "query_stats.json", new_jobs, kept)
         # transparency: what the relevance gate removed in this run (to tune the rules)
         (ROOT / "data" / "dropped_last.json").write_text(
             json.dumps(sorted(dropped_log, key=lambda d: d["reason"])[:400], ensure_ascii=False, indent=1), encoding="utf-8")
@@ -213,6 +283,8 @@ def rebuild(args) -> int:
     store = Store(ROOT / "data")
     dropped = 0
     for key, j in list(store.jobs.items()):
+        if j.source == "linkedin":
+            linkedin.normalize_criteria(j.extra)
         keep, why = match.relevance(j, profile, allow_pending=True)
         if not keep or (why == "pending" and not match.keep_without_text(j)):
             store.dedupe.update((j.dedupe_key, key))
@@ -245,6 +317,7 @@ def main(argv=None) -> int:
     b = sub.add_parser("rebuild", help="re-classify stored jobs with the current rules")
     b.add_argument("--force", action="store_true", help="also overwrite Claude assessments with the rules")
     sub.add_parser("profile", help="regenerate site/profile.json from cv/cv.md + config.yaml")
+    sub.add_parser("recheck", help="only check older promising LinkedIn ads for 'no longer accepting applications'")
     args = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S")
     if hasattr(sys.stdout, "reconfigure"):
@@ -255,6 +328,15 @@ def main(argv=None) -> int:
         return 0
     if args.cmd == "rebuild":
         return rebuild(args)
+    if args.cmd == "recheck":
+        cfg = load_config()
+        store = Store(ROOT / "data")
+        stats = dict(store.runs[-1]) if store.runs else {}
+        recheck_open(store, Fetcher(delay=float(cfg["search"]["linkedin"].get("delay_seconds", 6)), retries=2), cfg, stats)
+        store.save()
+        export_site(store, ROOT / "site", int(cfg["site"]["keep_days"]), stats)
+        log.info("rechecked %s ads, %s closed", stats.get("rechecked"), stats.get("closed_found"))
+        return 0
     return run(args)
 
 

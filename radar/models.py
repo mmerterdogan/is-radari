@@ -47,6 +47,7 @@ class Job:
     loc_tier: int = 5
     loc_label: str = ""
     is_internship: bool = False
+    closed: bool = False                # "no longer accepting applications"
     letter: dict | None = None          # {"subject", "cover_letter", "cv_highlights"}
 
     @property

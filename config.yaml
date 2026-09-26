@@ -38,12 +38,15 @@ search:
     delay_seconds: 6          # istekler arası bekleme (engellenmemek için)
     max_pages: 1              # varsayılan sayfa sayısı (sayfa başı ~10 ilan); sorgu bazında "pages" ile değişir
     queries:
+      # Sorgu verimi her taramada data/query_stats.json'a yazılır (toplam / ilgili ilan). Verimsizleri buradan ayıkla.
       # ---- Türkiye: geniş başlıklar
-      - { keywords: "makine mühendisi", location: "Turkey", pages: 3 }
+      - { keywords: "makine mühendisi", location: "Turkey", pages: 4 }
       - { keywords: "mechanical engineer", location: "Turkey", pages: 2 }
       - { keywords: "tasarım mühendisi", location: "Turkey", pages: 2 }
+      - { keywords: "tasarım mühendisi SolidWorks", location: "Turkey" }
       - { keywords: "mechanical design engineer", location: "Turkey" }
       - { keywords: "Ar-Ge mühendisi", location: "Turkey", pages: 2 }
+      - { keywords: "Ar-Ge mühendisi yeni mezun", location: "Turkey" }
       - { keywords: "R&D engineer", location: "Turkey" }
       - { keywords: "ürün geliştirme mühendisi", location: "Turkey" }
       - { keywords: "product development engineer", location: "Turkey" }
@@ -54,6 +57,7 @@ search:
       - { keywords: "simulation engineer", location: "Turkey" }
       # ---- Türkiye: üretim / test / otomotiv / eklemeli
       - { keywords: "üretim mühendisi", location: "Turkey" }
+      - { keywords: "üretim mühendisi yeni mezun", location: "Turkey" }
       - { keywords: "manufacturing engineer", location: "Turkey" }
       - { keywords: "proses mühendisi", location: "Turkey" }
       - { keywords: "test mühendisi", location: "Turkey" }
@@ -61,19 +65,26 @@ search:
       - { keywords: "otomotiv mühendis", location: "Turkey" }
       - { keywords: "additive manufacturing", location: "Turkey" }
       # ---- Türkiye: yeni mezun / junior / staj / araştırma
-      - { keywords: "yeni mezun mühendis", location: "Turkey", pages: 2 }
+      - { keywords: "yeni mezun mühendis", location: "Turkey", pages: 3 }
+      - { keywords: "mühendis adayı", location: "Turkey" }
+      - { keywords: "Smart Start", location: "Turkey" }
       - { keywords: "junior engineer", location: "Istanbul" }
       - { keywords: "stajyer mühendis", location: "Turkey" }
       - { keywords: "bursiyer", location: "Turkey" }
       - { keywords: "araştırma görevlisi makine", location: "Turkey" }
-      # ---- Yurt dışı (deneyim filtresi: 1=staj, 2=giriş, 3=associate)
-      - { keywords: "mechanical design engineer", location: "European Union", experience: "1,2,3" }
-      - { keywords: "FEA engineer", location: "European Union", experience: "1,2,3" }
-      - { keywords: "CAE engineer", location: "European Union", experience: "1,2,3" }
-      - { keywords: "structural analysis engineer", location: "European Union", experience: "1,2,3" }
+      # ---- Yurt dışı: İngilizce ilan veren ülkeler (deneyim filtresi: 1=staj, 2=giriş, 3=associate)
+      #      (AB genelindeki tasarım/FEA aramaları çoğunlukla Fransızca/Almanca ilan getiriyordu)
+      - { keywords: "mechanical design engineer", location: "Netherlands", experience: "1,2,3" }
+      - { keywords: "mechanical design engineer", location: "Ireland", experience: "1,2,3" }
+      - { keywords: "mechanical design engineer", location: "Denmark", experience: "1,2,3" }
+      - { keywords: "mechanical design engineer", location: "Sweden", experience: "1,2,3" }
+      - { keywords: "mechanical design engineer", location: "United Kingdom", experience: "1,2,3" }
+      - { keywords: "FEA engineer", location: "Netherlands", experience: "1,2,3" }
+      - { keywords: "FEA engineer", location: "United Kingdom", experience: "1,2,3" }
+      - { keywords: "FEA engineer", location: "Ireland", experience: "1,2,3" }
+      # ---- Yurt dışı: AB geneli, verimli olanlar
       - { keywords: "additive manufacturing engineer", location: "European Union", experience: "1,2,3" }
-      - { keywords: "graduate mechanical engineer", location: "European Union" }
-      - { keywords: "junior mechanical engineer", location: "European Union" }
+      - { keywords: "graduate mechanical engineer", location: "European Union", pages: 2 }
       - { keywords: "R&D mechanical engineer", location: "European Union", experience: "1,2,3" }
       - { keywords: "PhD additive manufacturing", location: "European Union" }
       - { keywords: "PhD finite element", location: "European Union" }
@@ -81,6 +92,13 @@ search:
   euraxess:
     enabled: true
     pages: 12                 # en yeni ilanlardan kaç sayfa taranacak (sayfa başı ~10)
+
+  smartrecruiters:
+    enabled: true
+    # SmartRecruiters kullanan şirketler (careers.smartrecruiters.com/<id>). country: ülke kodu (boşsa tüm dünya)
+    companies:
+      - { id: BoschGroup, country: tr }
+    detail_limit: 80          # tam metni çekilecek en fazla ilan
 
   greenhouse:
     enabled: true
@@ -91,7 +109,10 @@ search:
 
 match:
   # Açıklaması eksik LinkedIn ilanlarından en umut vericilerin tam metni çekilir (eğitim/deneyim şartı için)
-  enrich_limit: 100
+  enrich_limit: 250
+  backfill_days: 7            # önceki günlerden metni hâlâ eksik olan ilanlar da bu kadar gün geriye kadar tekrar denenir
+  recheck_limit: 40           # her gün kapanıp kapanmadığı kontrol edilen eski ilan sayısı
+  recheck_after_days: 5
 
 scoring:
   # Claude API (isteğe bağlı). ANTHROPIC_API_KEY yoksa kural tabanlı eşleştirme kullanılır.

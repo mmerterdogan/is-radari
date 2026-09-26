@@ -18,8 +18,9 @@ from dataclasses import dataclass, field
 
 from .models import Job, _norm
 
-CATEGORY_LABEL = {"dogrudan": "Doğrudan uygun", "uygun": "Uygun", "stretch": "Potansiyel / Stretch", "dusuk": "Düşük uygunluk"}
-CATEGORY_ORDER = {"dogrudan": 0, "uygun": 1, "stretch": 2, "dusuk": 3}
+CATEGORY_LABEL = {"dogrudan": "Doğrudan uygun", "uygun": "Uygun", "stretch": "Potansiyel / Stretch",
+                  "belirsiz": "Değerlendirilemedi", "dusuk": "Düşük uygunluk"}
+CATEGORY_ORDER = {"dogrudan": 0, "uygun": 1, "stretch": 2, "belirsiz": 3, "dusuk": 4}
 
 
 def _lite(s: str) -> str:
@@ -596,8 +597,9 @@ def analyze(job: Job, profile: Profile | None = None) -> Job:
     prim = primary_family(fams)
     fam_w = FAMILY_WEIGHT.get(prim, 0)
     role_label = FAMILY_LABEL[prim]
-    if ("doktora" in fams or prim == "arge") and not _mech_domain(job, strict=True):
-        fam_w = 8  # research outside the mechanical domain
+    edu = parse_education(job, fams)
+    if ("doktora" in fams or prim == "arge") and edu["field"] != "makine" and not _mech_domain(job, strict=True):
+        fam_w = 8  # research outside the mechanical domain (unless the ad asks for mechanical engineers)
     if "teknisyen" in fams:        # technician roles are below an engineering degree
         fam_w, role_label = min(fam_w, 8), FAMILY_LABEL["teknisyen"]
     elif "satis" in fams or "destek" in fams:   # technical sales / support: possible, not a core engineering role
@@ -606,7 +608,6 @@ def analyze(job: Job, profile: Profile | None = None) -> Job:
     title_only = len(job.description) < SHORT_TEXT
 
     exp = parse_experience(job)
-    edu = parse_education(job, fams)
     mode = parse_work_mode(job)
     tier = location_tier(job, mode)
 
@@ -686,8 +687,12 @@ def analyze(job: Job, profile: Profile | None = None) -> Job:
         reasons = [skill_reason or f"Alan: {FAMILY_LABEL[prim]}", edu_reason, exp_reason, field_reason]
     if missing:
         reasons.append("Profilinde görünmüyor: " + ", ".join(SKILLS[s][0] for s in missing[:4]))
-    if title_only:
-        reasons.insert(1, "İlan metni alınamadı - sadece başlığa göre değerlendirildi, ilana göz at")
+    if title_only and cat != "dusuk":
+        # without the ad text the requirements are unknown: don't pretend it is a fit
+        reasons = ["İlan metni alınamadı - şartlar bilinmiyor, ilana göz at",
+                   f"Başlığa göre alan: {role_label}",
+                   f"Başlığa göre tahmin: {CATEGORY_LABEL[cat]}"]
+        cat = "belirsiz"
     job.category_reasons = [r for r in reasons if r][:5]
 
     job.category = cat

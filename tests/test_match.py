@@ -16,7 +16,9 @@ def J(title="Mechanical Engineer", desc="", location="İstanbul, Türkiye", comp
                description=desc, extra=extra)
 
 
-FEA_BODY = " Responsibilities: FEA with ANSYS, SolidWorks design, static and modal analysis, prototype testing."
+FEA_BODY = (" Responsibilities: FEA with ANSYS, SolidWorks design, static and modal analysis, prototype testing."
+            " You will work closely with the design and production teams on new product programmes, prepare"
+            " engineering reports and support suppliers during industrialisation.")
 
 
 # ---------------------------------------------------------------- education (the user's examples)
@@ -114,7 +116,8 @@ def test_technician_and_sales_are_capped():
 
 
 def test_generic_mechanical_title_with_strong_overlap_is_direct():
-    j = match.analyze(J("Mechanical Engineer (m/f/d)", "Junior level. Bachelor's or Master's in Mechanical Engineering. SolidWorks, modal analysis, technical drawings, CAD."))
+    j = match.analyze(J("Mechanical Engineer (m/f/d)", "Junior level. Bachelor's or Master's in Mechanical Engineering. SolidWorks, modal analysis, technical drawings, CAD."
+                        " You join a small team building structures for spacecraft and support testing and documentation."))
     assert j.category == "dogrudan"
 
 
@@ -241,7 +244,13 @@ def test_support_roles_are_capped():
 
 def test_title_only_jobs_are_marked():
     j = match.analyze(J("Makine Mühendisi", ""))
-    assert any("sadece başlığa göre" in r for r in j.category_reasons)
+    assert j.category == "belirsiz"
+    assert any("şartlar bilinmiyor" in r for r in j.category_reasons)
+    assert any("tahmin" in r for r in j.category_reasons)
+
+
+def test_title_only_senior_stays_low():
+    assert match.analyze(J("Senior Mechanical Engineer", "")).category == "dusuk"
 
 
 def test_location_does_not_change_category():
@@ -273,9 +282,18 @@ def test_german_ad_is_low_with_language_gap():
 # ---------------------------------------------------------------- card fields
 def test_card_fields_are_filled():
     j = match.analyze(J("Mechanical Design Engineer", "Hybrid. Bachelor's degree in Mechanical Engineering. 0-2 years. "
-                        "SolidWorks, ANSYS, CATIA, GD&T, automotive supplier." , location="Bursa, Türkiye"))
+                        "SolidWorks, ANSYS, CATIA, GD&T, automotive supplier. You will design brackets and housings, run FEA, "
+                        "prepare drawings and support prototype builds with the test team.", location="Bursa, Türkiye"))
     assert j.work_mode == "hibrit" and j.loc_label == "Sanayi şehri"
     assert {"label": "CATIA", "have": False} in j.requirements
     assert "SolidWorks" in j.matches and "CATIA" in j.gaps
     assert "Otomotiv" in j.sectors and j.category_reasons
     assert j.category == "dogrudan"
+
+
+def test_research_title_that_asks_for_mechanical_engineers_keeps_weight():
+    j = match.analyze(J("R&D Smart Start", "Actively participating in R&D projects and conducting engineering calculations. "
+                        "Currently a 3rd-year or Master's student in the Mechanical Engineering department. Available for "
+                        "a continuous internship period of at least 11 months, three days per week at our plant.",
+                        **{"Seniority level": "Internship"}))
+    assert j.category in ("dogrudan", "uygun") and j.is_internship

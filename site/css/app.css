@@ -2,14 +2,14 @@
   --bg: #f6f7f5; --surface: #fff; --ink: #1a1d1f; --muted: #5f666d; --line: #e3e5e1;
   --accent: #0f766e; --accent-ink: #fff; --accent-soft: #e6f3f1; --good: #15803d; --mid: #b45309;
   --low: #6b7280; --bad: #b91c1c; --chip: #eef0ec; --shadow: 0 1px 2px rgba(0,0,0,.05);
-  --c-dogrudan: #15803d; --c-uygun: #1d4ed8; --c-stretch: #b45309; --c-dusuk: #6b7280;
+  --c-dogrudan: #15803d; --c-uygun: #1d4ed8; --c-stretch: #b45309; --c-dusuk: #6b7280; --c-belirsiz: #7c6f9f;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #111315; --surface: #1a1d20; --ink: #e8eaec; --muted: #9aa1a8; --line: #2b2f33;
     --accent: #2dd4bf; --accent-ink: #06201d; --accent-soft: #10302d; --good: #4ade80; --mid: #fbbf24;
     --low: #9ca3af; --bad: #f87171; --chip: #23272b; --shadow: none;
-    --c-dogrudan: #4ade80; --c-uygun: #93c5fd; --c-stretch: #fbbf24; --c-dusuk: #9ca3af; color-scheme: dark; }
+    --c-dogrudan: #4ade80; --c-uygun: #93c5fd; --c-stretch: #fbbf24; --c-dusuk: #9ca3af; --c-belirsiz: #b8aee0; color-scheme: dark; }
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -24,8 +24,7 @@ h1 .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accen
 .sync { font-size: .76rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; white-space: nowrap; }
 .sync.ok { color: var(--good); border-color: color-mix(in srgb, var(--good) 40%, transparent); }
 .sync.err { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
-.stats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin: 16px 0; }
-@media (max-width: 860px) { .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.stats { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; margin: 16px 0; }
 .stat { font: inherit; text-align: left; cursor: pointer; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow); }
 .stat:hover { border-color: var(--accent); }
 .stat b { display: block; font-size: 1.35rem; font-variant-numeric: tabular-nums; }
@@ -143,3 +142,13 @@ footer summary { cursor: pointer; }
 .howto p { margin: 6px 0; max-width: 80ch; }
 .btn.link { border: 0; background: none; color: var(--accent); padding: 2px 0; font-size: .8rem; }
 .facts span.loc { white-space: normal; overflow-wrap: anywhere; min-width: 0; }
+
+/* ---- "belirsiz" category + closed ads */
+.cat-belirsiz b { color: var(--c-belirsiz); }
+.badge.belirsiz { color: var(--c-belirsiz); border-style: dashed; }
+.card2.belirsiz { border-left-color: var(--c-belirsiz); border-left-style: dashed; }
+.chip.c-belirsiz[aria-pressed=true] { border-color: var(--c-belirsiz); color: var(--c-belirsiz); background: color-mix(in srgb, var(--c-belirsiz) 12%, transparent); }
+.card2.is-closed .title { text-decoration: line-through; color: var(--muted); }
+.tag.closed { background: color-mix(in srgb, var(--bad) 14%, transparent); color: var(--bad); font-weight: 600; }
+@media (max-width: 1000px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

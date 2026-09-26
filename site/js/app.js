@@ -5,7 +5,7 @@
 import { EMPTY, mergeState } from "./merge.js";
 
 const LS_STATE = "radar-state-v2";
-const LS_FILTERS = "radar-filters-v1";
+const LS_FILTERS = "radar-filters-v2";   // v2: new "belirsiz" category and "closed" filter
 const FOLLOWUP_DAYS = 10;
 
 const STAGES = [
@@ -19,9 +19,9 @@ const STAGES = [
 ];
 const STAGE_LABEL = Object.fromEntries(STAGES);
 const PIPELINE = ["mulakat", "basvuruldu", "kaydedildi", "teklif", "red"];
-const CAT = { dogrudan: "Doğrudan uygun", uygun: "Uygun", stretch: "Stretch", dusuk: "Düşük uygunluk" };
-const CAT_ORDER = { dogrudan: 0, uygun: 1, stretch: 2, dusuk: 3 };
-const SRC = { linkedin: "LinkedIn", euraxess: "EURAXESS", greenhouse: "Şirket sitesi", manual: "Elle eklendi" };
+const CAT = { dogrudan: "Doğrudan uygun", uygun: "Uygun", stretch: "Stretch", belirsiz: "Değerlendirilemedi", dusuk: "Düşük uygunluk" };
+const CAT_ORDER = { dogrudan: 0, uygun: 1, stretch: 2, belirsiz: 3, dusuk: 4 };
+const SRC = { linkedin: "LinkedIn", euraxess: "EURAXESS", greenhouse: "Şirket sitesi", smartrecruiters: "Şirket sitesi", manual: "Elle eklendi" };
 const MODE = { uzaktan: "Uzaktan", hibrit: "Hibrit", ofiste: "Ofiste", belirtilmemis: "Çalışma şekli belirtilmemiş" };
 const LOC = { 1: "İstanbul", 2: "Sanayi şehri", 3: "Türkiye", 4: "Uzaktan", 5: "Yurt dışı" };
 // filter groups -> role families produced by radar/match.py
@@ -34,8 +34,8 @@ const EDU_GROUP = {
   lisans: ["lisans", "lisans_veya_yl", "yl_tercih", "yl_ogrencisi"], yl: ["yl_zorunlu"],
   doktora: ["doktora_zorunlu"], belirtilmemis: ["belirtilmemis"],
 };
-const DEFAULT_FILTERS = () => ({ cats: ["dogrudan", "uygun", "stretch"], loc: [], exp: [], edu: [], mode: [], fam: [],
-  date: "all", intern: "show" });
+const DEFAULT_FILTERS = () => ({ cats: ["dogrudan", "uygun", "stretch", "belirsiz"], loc: [], exp: [], edu: [], mode: [], fam: [],
+  date: "all", intern: "show", closed: "hide" });
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -101,6 +101,7 @@ function passesFilters(j) {
   }
   if (F.intern === "hide" && j.is_internship) return false;
   if (F.intern === "only" && !j.is_internship) return false;
+  if (F.closed === "hide" && j.closed && !stageOf(j)) return false;   // tracked ads stay visible
   const q = $("#q").value.trim().toLocaleLowerCase("tr");
   if (q) {
     const hay = [j.title, j.company, j.location, j.description, entry(j.id).notes, ...(j.matches || []), ...(j.gaps || []),
@@ -137,6 +138,7 @@ function card(j) {
     followDue(j) ? `<span class="tag due">Takip zamanı</span>` : "",
     isNew ? `<span class="tag new">Yeni</span>` : "",
     j.is_internship ? `<span class="tag">Staj / öğrenci</span>` : "",
+    j.closed ? `<span class="tag closed" title="İlan artık başvuru kabul etmiyor">Kapandı</span>` : "",
     j.scored_by === "claude" ? `<span class="tag" title="Claude ile değerlendirildi">Claude</span>` : "",
   ].join("");
   const loc = `${esc(j.loc_label || "")}${j.location ? ` <b>${esc(j.location)}</b>` : ""}`;
@@ -146,6 +148,7 @@ function card(j) {
     `<span title="Deneyim şartı">⏱ ${esc(j.experience?.label || "Belirtilmemiş")}</span>`,
     `<span title="Eğitim şartı">🎓 ${esc(j.education?.label || "Belirtilmemiş")}</span>`,
     freshness(j) ? `<span title="İlan tarihi">🗓 ${esc(freshness(j))}</span>` : "",
+    j.applicants ? `<span title="LinkedIn'deki başvuru sayısı">👥 ${esc(j.applicants)} başvuru</span>` : "",
     j.role_label ? `<span title="Pozisyon alanı">🧭 ${esc(j.role_label)}</span>` : "",
     `<span>${esc(SRC[j.source] || j.source)}</span>`,
   ].filter(Boolean).join("");
@@ -155,7 +158,7 @@ function card(j) {
   const reqs = (j.requirements || []).map((r) => `<span class="req ${r.have ? "have" : "miss"}" title="${r.have ? "Profilinde var" : "Profilinde görünmüyor"}">${r.have ? "✓" : "✗"} ${esc(r.label)}</span>`).join("");
   const opts = STAGES.map(([v, l]) => `<option value="${v}" ${v === st ? "selected" : ""}>${l}</option>`).join("");
   const noteOpen = openNotes.has(j.id);
-  return `<article class="card2 ${esc(j.category || "manual")} ${st === "gizli" ? "hidden-job" : ""}" data-id="${esc(j.id)}">
+  return `<article class="card2 ${esc(j.category || "manual")} ${st === "gizli" ? "hidden-job" : ""} ${j.closed ? "is-closed" : ""}" data-id="${esc(j.id)}">
     <div class="card-top">${badge}<div class="tags" style="margin:0">${tags}</div></div>
     ${j.url ? `<a class="title" href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.title)}</a>` : `<span class="title">${esc(j.title)}</span>`}
     <div class="company">${esc(j.company)}</div>
@@ -207,7 +210,7 @@ function renderFilters() {
   const label = (g, v) => document.querySelector(`.chips[data-group="${g}"] .chip[data-v="${v}"]`)?.textContent || v;
   const parts = [];
   const def = DEFAULT_FILTERS();
-  parts.push(F.cats.length === 4 || !F.cats.length ? "tüm kategoriler" : F.cats.map((v) => label("cats", v)).join(", "));
+  parts.push(F.cats.length === Object.keys(CAT).length || !F.cats.length ? "tüm kategoriler" : F.cats.map((v) => label("cats", v)).join(", "));
   for (const g of ["loc", "exp", "edu", "mode", "fam"]) if (F[g].length) parts.push(F[g].map((v) => label(g, v)).join(", "));
   if (F.date !== def.date) parts.push(label("date", F.date));
   if (F.intern !== def.intern) parts.push(`staj: ${label("intern", F.intern).toLocaleLowerCase("tr")}`);

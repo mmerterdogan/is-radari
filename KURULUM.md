@@ -26,6 +26,7 @@ Sistem şu soruya cevap arar: *"Lisans diplomam, devam eden YL'm, teknik beceril
 | 🟢 **Doğrudan uygun** | Deneyim şartı yeni mezuna uygun (ya da yok), lisans kabul ediliyor, pozisyon alanı ve istenen araçlar profilinle açıkça örtüşüyor |
 | 🔵 **Uygun** | Deneyim ve eğitim şartı uygun, alan makine mühendisliğiyle kesişiyor; bazı eksikler olabilir |
 | 🟡 **Stretch** | 1-4 yıl deneyim isteniyor ama teknik örtüşme güçlü; ya da YL derecesi / doktora pozisyonu gibi biraz üstte şartlar var |
+| ❔ **Değerlendirilemedi** | İlanın metni okunamadı (LinkedIn bazen engelliyor), şartlar bilinmiyor. Gerekçede başlığa göre tahmin yazar; sonraki taramalarda metin gelirse otomatik sınıflanır. |
 | ⚪ **Düşük uygunluk** | 5+ yıl / kıdemli, doktora derecesi, farklı bölüm veya bilmediğin bir dil gibi temel bir uyumsuzluk var. Varsayılan olarak gizli; filtreden açılır. |
 
 Her ilan kartında şunlar görünür:
@@ -42,7 +43,7 @@ Lokasyon kategoriyi değiştirmez, sadece gösterilir ve sıralamada kullanılı
 
 | Ne | Nasıl |
 |---|---|
-| İlanlar | Varsayılan: Doğrudan uygun + Uygun + Stretch, uygunluğa göre sıralı. Üstteki kategori kartlarına tıklayınca sadece o kategori görünür (tekrar tıklayınca geri döner). |
+| İlanlar | Varsayılan: Doğrudan uygun + Uygun + Stretch + Değerlendirilemedi, uygunluğa göre sıralı. Üstteki kategori kartlarına tıklayınca sadece o kategori görünür (tekrar tıklayınca geri döner). |
 | Filtreler | Uygunluk, lokasyon, deneyim şartı, eğitim şartı, çalışma şekli, alan (CAE, tasarım, Ar-Ge, eklemeli, üretim, test, otomotiv…), ilan tarihi, staj. Seçim yapılmayan grup "hepsi" demektir. Filtreler cihazda hatırlanır; "Filtreleri sıfırla" varsayılana döner. |
 | Sıralama | Uygunluğa göre / En yeni / Lokasyon önceliği |
 | Başvuru takibi | Karttaki açılır menü: Kaydedildi → Başvuruldu → Mülakat → Teklif / Olumsuz. "Başvuruldu" dediğin ilan **Başvurularım**'a taşınır. |
@@ -65,6 +66,8 @@ Lokasyon kategoriyi değiştirmez, sadece gösterilir ve sıralamada kullanılı
 
 Kuralları veya profili değiştirdikten sonra mevcut ilanları yeniden sınıflandırmak için: `python -m radar rebuild`.
 
+**Hangi arama işe yarıyor:** `data/query_stats.json` her LinkedIn sorgusunun getirdiği yeni ilan sayısını ve bunların kaçının uygun çıktığını biriktirir. Verimi düşük sorguları `config.yaml`'dan çıkarabilirsin.
+
 **Neyin elendiğini görmek için:** her taramada, alakasız bulunup elenen ilanlar sebepleriyle birlikte `data/dropped_last.json` dosyasına yazılır ("mühendislik dışı pozisyon", "başka mühendislik disiplini", "makine mühendisliği alanıyla bağlantı bulunamadı"…). Yanlışlıkla elenen bir ilan tipi görürsen haber ver, kural güncellenir.
 
 CV'n değişince `cv/cv.md` dosyasını da güncelle. Bir sonraki taramada Claude ve ön yazılar yeni CV'yi kullanır.
@@ -83,6 +86,9 @@ API'siz toplam maliyet: **$0**. API ile aylık ~$10-20. Gerçek sabah harcaması
 - **LinkedIn:** Giriş yapmadan, herkese açık ilan araması. Hesabın hiç kullanılmıyor, yani kapanma riski yok. LinkedIn otomatik erişimi hoş karşılamıyor ve bazen 429 (çok fazla istek) döndürüyor; o gün atlanır, site ve Telegram uyarı gösterir. İstemezsen `search.linkedin.enabled: false` yap.
 - **EURAXESS:** Avrupa Komisyonu'nun araştırma, doktora ve postdoc portalı.
 - **Greenhouse:** Şirketlerin resmi, herkese açık kariyer API'si.
+- **SmartRecruiters:** Şirketlerin resmi, herkese açık kariyer API'si (şimdilik Bosch Türkiye; `config.yaml > search.smartrecruiters.companies`'e yeni şirket eklenebilir).
+- **Kapanmış ilanlar:** 5 günden eski umut verici ilanlar her gün yeniden kontrol edilir; "artık başvuru kabul etmiyor" olanlar üstü çizili görünür ve varsayılan olarak gizlenir (takibe aldıkların gizlenmez). Kartlarda LinkedIn başvuru sayısı da görünür.
+- **Hata alarmı:** Tarama ya da site yayını başarısız olursa Telegram'a uyarı gelir.
 - **Kariyer.net, Indeed, AcademicPositions, FindAPhD:** Bot koruması olduğu için taranmıyor. Oralardan bulduğun ilanları "+ İlan ekle" ile ekle.
 - **Ön yazılar** CV'ndeki bilgilere dayanır ama göndermeden önce mutlaka oku.
 

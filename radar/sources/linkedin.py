@@ -8,6 +8,7 @@ Disable it in config.yaml (search.linkedin.enabled: false) if you prefer.
 from __future__ import annotations
 
 import logging
+import re
 from urllib.parse import quote
 
 from bs4 import BeautifulSoup
@@ -48,12 +49,49 @@ def parse_search(html: str) -> list[Job]:
     return jobs
 
 
+# LinkedIn answers in the request language; criteria are stored with the canonical English labels.
+CRITERIA_KEYS = {"Kıdem düzeyi": "Seniority level", "İstihdam türü": "Employment type",
+                 "Görev tanımı": "Job function", "Sektörler": "Industries"}
+CRITERIA_VALUES = {
+    "Stajyer": "Internship", "Başlangıç Seviye": "Entry level", "Uzman": "Associate",
+    "Orta-Üst Düzey Yönetici": "Mid-Senior level", "Direktör": "Director", "Üst Düzey Yönetici": "Executive",
+    "Geçerli Değil": "Not Applicable", "Tam Zamanlı": "Full-time", "Yarı Zamanlı": "Part-time",
+    "Sözleşmeli": "Contract", "Geçici": "Temporary", "Gönüllü": "Volunteer", "Diğer": "Other",
+}
+
+
+def normalize_criteria(extra: dict) -> dict:
+    """Translate Turkish criteria labels/values to the English ones the matcher expects (in place)."""
+    for tr, en in CRITERIA_KEYS.items():
+        if tr in extra:
+            v = extra.pop(tr)
+            extra[en] = CRITERIA_VALUES.get(v, v) if en in ("Seniority level", "Employment type") else v
+    return extra
+
+
+def _applicants(text: str) -> str:
+    """'172 başvuru' / '137 applicants' -> '172'; 'Be among the first 25' / 'İlk 25 başvurandan' -> '<25'."""
+    m = re.search(r"(\d[\d.,]*)", text)
+    if not m:
+        return ""
+    n = m.group(1).replace(".", "").replace(",", "")
+    if re.search(r"first|ilk", text, re.I):
+        return f"<{n}"
+    return f"{n}+" if re.search(r"over|more than|fazla|üzeri", text, re.I) else n
+
+
 def parse_detail(html: str) -> tuple[str, dict]:
     soup = BeautifulSoup(html, "html.parser")
     desc = _text(soup.select_one(".show-more-less-html__markup") or soup.select_one(".description__text"))
     crit = {}
     for h, v in zip(soup.select(".description__job-criteria-subheader"), soup.select(".description__job-criteria-text")):
         crit[_text(h)] = _text(v)
+    normalize_criteria(crit)
+    if soup.select_one(".closed-job"):
+        crit["closed"] = True
+    applicants = _applicants(_text(soup.select_one(".num-applicants__caption")))
+    if applicants:
+        crit["applicants"] = applicants
     return desc, crit
 
 
@@ -82,11 +120,12 @@ def fetch(cfg: dict, fetcher: Fetcher) -> list[Job]:
 
 
 def enrich(job: Job, fetcher: Fetcher) -> None:
-    """Fetch the full description + seniority / employment type."""
+    """Fetch the full description, seniority / employment type, applicant count and closed flag."""
     r = fetcher.get(DETAIL.format(id=job.native_id))
     if r is None:
         return
     desc, crit = parse_detail(r.text)
     if desc:
         job.description = desc[:6000]
+    job.closed = bool(crit.pop("closed", False))
     job.extra.update(crit)

@@ -12,7 +12,7 @@ from .models import Job
 
 log = logging.getLogger("radar")
 
-ICON = {"dogrudan": "🟢", "uygun": "🔵", "stretch": "🟡", "dusuk": "⚪"}
+ICON = {"dogrudan": "🟢", "uygun": "🔵", "stretch": "🟡", "belirsiz": "❔", "dusuk": "⚪"}
 
 
 def _line(j: Job) -> list[str]:

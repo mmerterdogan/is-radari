@@ -46,5 +46,29 @@
   "failed_sources": [],
   "cost_usd": 0.0,
   "seconds": 1062
+ },
+ {
+  "date": "2026-09-26",
+  "fetched": 44,
+  "new": 43,
+  "relevant": 19,
+  "dropped": 24,
+  "enriched": 0,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 1,
+   "uygun": 8,
+   "stretch": 2,
+   "belirsiz": 0,
+   "dusuk": 8
+  },
+  "sources": {
+   "smartrecruiters": 44
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "backfilled": 0,
+  "seconds": 113
  }
 ]

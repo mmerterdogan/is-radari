@@ -32,3 +32,13 @@ jobs:
           path: site
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Hata bildirimi (Telegram)
+        if: failure()
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          [ -n "$TELEGRAM_TOKEN" ] || exit 0
+          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"             --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}"             --data-urlencode "text=⚠️ İş Radarı: ${{ github.workflow }} başarısız oldu. Ayrıntı: ${RUN_URL}"

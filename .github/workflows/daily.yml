@@ -22,7 +22,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -55,7 +55,18 @@ jobs:
           git diff --cached --quiet || git commit -m "tarama $(date -u +%F)"
           git push
 
+      - name: Hata bildirimi (Telegram)
+        if: failure()
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          [ -n "$TELEGRAM_TOKEN" ] || exit 0
+          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"             --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}"             --data-urlencode "text=⚠️ İş Radarı: ${{ github.workflow }} başarısız oldu. Ayrıntı: ${RUN_URL}"
+
   # Siteyi (site/ klasörü) taramanın hemen ardından yayınla
   deploy:
     needs: scan
     uses: ./.github/workflows/deploy.yml
+    secrets: inherit
