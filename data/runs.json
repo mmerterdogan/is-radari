@@ -22,5 +22,29 @@
   "failed_sources": [],
   "cost_usd": 0.0,
   "seconds": 1069
+ },
+ {
+  "date": "2026-09-26",
+  "fetched": 279,
+  "new": 212,
+  "relevant": 105,
+  "dropped": 107,
+  "enriched": 98,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 9,
+   "uygun": 27,
+   "stretch": 14,
+   "dusuk": 55
+  },
+  "sources": {
+   "linkedin": 168,
+   "euraxess": 60,
+   "greenhouse": 51
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "seconds": 1062
  }
 ]
