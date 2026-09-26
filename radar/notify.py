@@ -45,6 +45,8 @@ def build_message(jobs: list[Job], stats: dict, site_url: str, ncfg: dict | None
              f"{stats.get('fetched', 0)} ilan tarandı, {stats.get('relevant', len(jobs))} ilgili: {counts}"]
     if not stats.get("scored"):
         lines.append("<i>Kural tabanlı eşleştirme (Claude API yok)</i>")
+    for h in stats.get("health") or []:
+        lines.append("⚠️ " + h)
     if stats.get("failed_sources"):
         lines.append("⚠️ Sonuç vermeyen kaynak: " + ", ".join(stats["failed_sources"]))
     shown = False

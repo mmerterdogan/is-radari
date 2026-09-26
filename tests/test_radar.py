@@ -166,3 +166,26 @@ def test_claude_refusal_keeps_rule_result(monkeypatch):
     cat = jobs[0].category
     s.score(jobs)
     assert jobs[0].scored_by == "kural" and jobs[0].category == cat
+
+
+def test_haiku_call_has_no_effort_and_opus_keeps_it(monkeypatch):
+    s = make_scorer(monkeypatch)
+    s.model = "claude-haiku-4-5"
+    s.score(ruled(1))
+    assert "output_config" not in s.client.messages.calls[0]
+    s.model = "claude-opus-5-5"
+    s.score(ruled(1))
+    assert s.client.messages.calls[1]["output_config"] == {"effort": "low"}
+
+
+def test_claude_candidates_are_the_unsure_jobs():
+    from radar import __main__ as pipeline
+    sure = match.analyze(job("Design Engineer", desc="Bachelor's in Mechanical Engineering. 0-2 years of experience. "
+                             "SolidWorks and ANSYS design work on vehicle components, drawings and tolerances. " * 3, nid="a"))
+    title_only = match.analyze(job("Mechanical Engineer", desc="", nid="b"))
+    no_req = match.analyze(job("Design Engineer", desc="SolidWorks design of machine parts, drawings and tolerance "
+                               "analysis for production. " * 4, nid="c"))
+    assert sure.category != "belirsiz" and title_only.category == "belirsiz"
+    got = pipeline.claude_candidates([sure, no_req, title_only], 5)
+    assert got[0] is title_only and no_req in got and sure not in got
+    assert len(pipeline.claude_candidates([sure, no_req, title_only], 1)) == 1

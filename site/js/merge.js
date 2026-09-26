@@ -1,9 +1,10 @@
 // Tracker state shared by all devices.
 // state = { entries: { [jobId]: {stage, notes, applied_at, followup_at, letter, updated, deleted?} },
-//           manual:  { [id]: {id, title, company, location, url, description, added, updated, deleted?} } }
+//           manual:  { [id]: {id, title, company, location, url, description, added, updated, deleted?} },
+//           companies: { [normalized name]: {name, hidden, updated} } }   (hidden companies; optional in old backups)
 // Merge rule: per item, the newer `updated` timestamp wins (tombstones use deleted: true).
 
-export const EMPTY = () => ({ entries: {}, manual: {} });
+export const EMPTY = () => ({ entries: {}, manual: {}, companies: {} });
 
 function mergeMap(a = {}, b = {}) {
   const out = { ...a };
@@ -17,7 +18,8 @@ function mergeMap(a = {}, b = {}) {
 export function mergeState(a, b) {
   a = a || EMPTY();
   b = b || EMPTY();
-  return { entries: mergeMap(a.entries, b.entries), manual: mergeMap(a.manual, b.manual) };
+  return { entries: mergeMap(a.entries, b.entries), manual: mergeMap(a.manual, b.manual),
+    companies: mergeMap(a.companies, b.companies) };
 }
 
 // Basic shape/size validation for anything written by a client.

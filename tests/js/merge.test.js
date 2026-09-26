@@ -23,3 +23,11 @@ test("validation", () => {
   assert.ok(!validState({ entries: {} }));
   assert.ok(!validState("x"));
 });
+
+test("hidden companies merge and old backups without them still work", () => {
+  const a = { entries: {}, manual: {}, companies: { acme: { name: "ACME", hidden: true, updated: "2026-09-02T00:00:00Z" } } };
+  const old = { entries: {}, manual: {} };
+  assert.equal(mergeState(old, a).companies.acme.hidden, true);
+  const undo = { entries: {}, manual: {}, companies: { acme: { name: "ACME", hidden: false, updated: "2026-09-03T00:00:00Z" } } };
+  assert.equal(mergeState(a, undo).companies.acme.hidden, false);
+});

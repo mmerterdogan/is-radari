@@ -336,3 +336,19 @@ def test_cv_missing_splits_compound_acronyms():
     got = match.cv_missing_keywords(j, cv)
     assert "CFD" in got and "SLA" in got
     assert not {"FEA", "FDM", "FEA/CFD", "YO1", "CV34"} & set(got)
+
+
+def test_block_lists_drop_jobs():
+    p = match.Profile.from_config(None, {"block_companies": ["Outlier AI"], "block_title_words": ["Satış"]})
+    assert match.relevance(J("Mechanical Engineer", company="OUTLIER AI Inc."), p) == (False, "Kara liste: şirket")
+    assert match.relevance(J("Satış Mühendisi"), p) == (False, "Kara liste: başlık kelimesi")
+    assert match.relevance(J("Mechanical Design Engineer", company="Outliers Ltd"), p)[0]   # whole words only
+
+
+def test_boost_companies_become_priority_targets():
+    from radar import __main__ as pipeline
+    cfg = {"companies": [{"name": "Bosch", "match": r"\bbosch\b"}], "filters": {"boost_companies": ["Kordsa"]}}
+    jobs = [J(company="KORDSA Teknik Tekstil"), J(company="Bosch Türkiye"), J(company="Other")]
+    pipeline.tag_companies(jobs, cfg)
+    assert [j.target for j in jobs] == ["Kordsa", "Bosch", ""]
+    assert {c["name"] for c in pipeline.company_rules(cfg) if c.get("priority")} == {"Kordsa"}

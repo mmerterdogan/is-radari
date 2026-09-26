@@ -99,15 +99,25 @@ class Profile:
         "solidworks", "ansys", "fea", "statik", "modal", "topoloji", "cad", "teknik_resim", "tolerans", "autocad",
         "fusion", "nx", "matlab", "excel", "eklemeli", "dfm", "rca", "cnc", "uretim", "prototip", "ingilizce"})
     languages: set[str] = field(default_factory=lambda: set(PROFILE_LANGS))
+    block_companies: list[str] = field(default_factory=list)     # config.yaml > filters (normalized)
+    block_title_words: list[str] = field(default_factory=list)
 
     @classmethod
-    def from_config(cls, cfg: dict | None) -> "Profile":
+    def from_config(cls, cfg: dict | None, filters: dict | None = None) -> "Profile":
         p = cls()
         if cfg and cfg.get("skills"):
             p.skills = {s for s in cfg["skills"] if s in SKILLS}
         if cfg and cfg.get("languages"):
             p.languages = set(cfg["languages"])
+        f = filters or {}
+        p.block_companies = [_norm(c) for c in f.get("block_companies") or [] if _norm(c)]
+        p.block_title_words = [_norm(w) for w in f.get("block_title_words") or [] if _norm(w)]
         return p
+
+
+def _has_phrase(text: str, phrase: str) -> bool:
+    """Whole-word match on _norm()-ed strings."""
+    return f" {phrase} " in f" {text} "
 
 
 # ============================================================================ role families
@@ -141,7 +151,7 @@ FAMILY_LABEL["diger"] = "Diğer"
 EXCLUDE_TITLE = (r"\bbank|banka|\bfinans|finance|accountant|accounting|muhasebe|auditor|denetci|marketing|pazarlama|"
                  r"\bhr\b|human resources|insan kaynak|recruit|talent acquisition|nurse|hemsire|\bdoktor\b|physician|pharmac|eczaci|"
                  r"biolog|oncolog|clinical|\bmodel\b|fashion|\bmoda\b|driver|sofor|cashier|kasiyer|waiter|garson|\bcook\b|asci|"
-                 r"teacher|ogretmen|lawyer|avukat|\blegal\b|translator|tercuman|customer service|musteri hizmet|call center|"
+                 r"teacher|ogretmen|lawyer|avukat|\blegal\b|hukuk|translator|tercuman|customer service|musteri hizmet|call center|"
                  r"cagri merkezi|\bturing\b|annotat|ai trainer|freelance expert|\bchef\b|receptionist|resepsiyon|security guard|guvenlik gorevlisi|"
                  r"sales (manager|representative|executive|specialist|associate)|satis (temsilci|uzmani|muduru|danisman)|store|magaza")
 # Other engineering disciplines: kept only if the ad accepts mechanical engineers
@@ -592,6 +602,11 @@ def relevance(job: Job, profile: Profile | None = None, allow_pending: bool = Fa
     """
     profile = profile or Profile()
     title = _norm(job.title)
+    company = _norm(job.company)
+    if any(_has_phrase(company, c) for c in profile.block_companies):
+        return False, "Kara liste: şirket"
+    if any(_has_phrase(title, w) for w in profile.block_title_words):
+        return False, "Kara liste: başlık kelimesi"
     if _any(GIG, _lite(f"{job.company} {job.title} {job.description[:1500]}")):
         return False, "Yapay zekâ eğitim / freelance platformu"
     if _any(EXCLUDE_TITLE, title) and not _any(MECH_TITLE, title):

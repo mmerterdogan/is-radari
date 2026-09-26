@@ -1,0 +1,76 @@
+{
+ "list": {
+  "searchIlan": [
+   {
+    "guid": "79f7e5c7-8baf-44a5-b056-57e332c66743",
+    "kurumAdi": "TÜRKİYE BELEDİYELER BİRLİĞİ",
+    "birimAdi": "İNSAN KAYNAKLARI VE EĞİTİM MÜDÜRLÜĞÜ",
+    "ilanBaslik": "TÜRKİYE BELEDİYELER BİRLİĞİ - Makine Mühendisi Alımı",
+    "ilanTipi": 1,
+    "ilanTuru": "B Grubu Memur",
+    "sonDurumu": "Aktif",
+    "basTarih": "2026-09-21T09:00:00",
+    "bitTarih": "2026-09-30T18:01:00",
+    "onay": 1,
+    "onayAciklama": "",
+    "onayDate": "2026-09-18T18:06:50.727",
+    "logo_Path": "76f199a6-c7ac-4cee-99c5-66c8ef371390.png",
+    "basvuruLinki": "",
+    "closestIlanStartDate": "2026-09-28T01:00:00"
+   },
+   {
+    "guid": "27cf966f-b2b9-4671-a21a-731cb060436a",
+    "kurumAdi": "BOLU ABANT İZZET BAYSAL ÜNİVERSİTESİ REKTÖRLÜĞÜ",
+    "birimAdi": "PERSONEL DAİRE BAŞKANLIĞI",
+    "ilanBaslik": "BOLU ABANT İZZET BAYSAL ÜNİVERSİTESİ REKTÖRLÜĞÜ - SÖZLEŞMELİ PERSONEL ALIMI İLANI (29 KİŞİ)",
+    "ilanTipi": 1,
+    "ilanTuru": "Sözleşmeli Personel İlanları",
+    "sonDurumu": "Aktif",
+    "basTarih": "2026-09-15T09:00:00",
+    "bitTarih": "2026-09-29T13:00:00",
+    "onay": 1,
+    "onayAciklama": "",
+    "onayDate": "2026-09-23T16:20:27.447",
+    "logo_Path": "1f15c3b7-4229-49ae-abe5-ceaa01ef91b4.png",
+    "basvuruLinki": "",
+    "closestIlanStartDate": "2026-09-28T01:00:00"
+   }
+  ]
+ },
+ "alt": [
+  {
+   "ilanBaslik": "Makine Mühendisi",
+   "ilanMetni": "[justify][size=14pt]Lisans düzeyinde eğitim veren fakültelerin makine mühendisliği bölümünden mezun olmak.\n[/size][/justify]",
+   "unvan": "MÜHENDİS",
+   "hizmetSinifi": null,
+   "kadroDerecesi": null,
+   "kontenjanList": [
+    {
+     "il": "ANKARA / ÇANKAYA",
+     "kontenjan": 1
+    }
+   ],
+   "degerlemeAsamaList": [
+    {
+     "asamaAdi": "KPSS",
+     "sinavsizAsama": 0,
+     "degerlemeAsamalariGuid": "fedf141e-ef05-473e-86aa-eff1512ae78c",
+     "puansizAsama": 0,
+     "turu": "Genel",
+     "agirlik": 50.0
+    },
+    {
+     "asamaAdi": "Sözlü Sınav",
+     "sinavsizAsama": 0,
+     "degerlemeAsamalariGuid": "a86e9c8f-d488-40c6-b1d9-7fb152287218",
+     "puansizAsama": 0,
+     "turu": "Genel",
+     "agirlik": 50.0
+    }
+   ]
+  }
+ ],
+ "detail": {
+  "ilanMetni": "[justify][size=14pt][b]TÜRKİYE BELEDİYELER BİRLİĞİ BAŞKANLIĞINA İLK DEFA ATANMAK ÜZERE MEMUR ALIM İLANI[/b]\n\nAnkara ili Türkiye Belediyeler Birliği bünyesinde, 657 sayılı Devlet Memurları Kanununa tabi olarak istihdam edilmek üzere; Mahalli İdarelere İlk Defa Atanacaklara Dair Sınav ve Atama Yönetmeliği hükümlerine göre aşağıda unvanı, sınıfı, derecesi, adedi, nitelikleri, KPSS puan türü, KPSS taban puanı ve diğer şartları taşımak kaydıyla belirtilen boş kadroya açıktan atama yoluyla memur alınacaktır.                  \n\n\n[url=https://kariyerkapisi.gov.tr/Ups/Evraklar/TBBTablo17092026.pdf][u][b]TABLO[/b][/u][/url]\n\n\n\n[b]BAŞVURU GENEL VE ÖZEL ŞARTLARI[/b]\nBirliğimizin yukarıda belirtilen boş memur kadrosu için yapılacak başvurularda aranan genel ve özel şartlar aşağıdadır. \n\n[b]1. BAŞVURU GENEL ŞARTLARI: [/b]\nİlan edilen memur kadrosuna atanmak için başvuracak adayların, 657 sayılı Devlet Memurları Kanununun 40 ıncı ve 48 inci maddesinin (A) fıkrasında belirtilen aşağıdaki genel şartlara sahip olmaları gerekmektedir;\na)    Türk vatandaşı olmak,\nb)    Kamu haklarından mahrum bulunmamak,\nc)    Türk Ceza Kanununun 53 üncü maddesinde belirtilen süreler geçmiş olsa bile; kasten işlenen bir suçtan dolayı bir yıl veya daha fazla süreyle hapis cezasına ya da affa uğramış olsa bile devletin güvenliğine karşı suçlar, Anayasal düzene ve bu düzenin işleyişine karşı suçlar, zimmet, irtikâp, rüşvet, hırsızlık, dolandırıcılık, sahtecilik, güveni kötüye kullanma, hileli iflas, ihaleye fesat karıştırma, edimin ifasına fesat karıştırma, suçtan kaynaklanan malvarlığı değerlerini aklama veya kaçakçılık suçlarından mahkûm olmamak,\nd)    Erkek adaylar için askerlik durumu itibariyle; askerlikle ilgisi bulunmamak veya askerlik çağına gelmemiş bulunmak ya da askerlik çağına gelmiş ise muvazzaf askerlik hizmetini yapmış yahut ertelenmiş veya yedek sınıfa geçirilmiş olmak,\ne)    Görevini devamlı yapmasına engel olabilecek akıl hastalığı bulunmamak,\nf)    İlan edilen kadrolar için aranan diğer başvuru şartlarını taşımak, \n\n[b]2. BAŞVURU ÖZEL ŞARTLARI:[/b]\na)    İlan edilen unvan için mezun olunan okul itibari ile öğrenim şartlarını taşımak ve bu öğrenimle ilgili olarak 2024 yılı Kamu Personeli Seçme Sınavına (KPSS (B) grubu) girmiş olmak ve alım yapılacak unvanın karşısında belirtilen puan türünden yukarıdaki tabloda belirtilen asgari KPSS puanını almış olmak,\n\n[b]3. BAŞVURU ESNASINDA ADAYLARDAN İSTENİLEN BELGELER:[/b] \nSınava girmek isteyen adaylar, Birliğimizin www.tbb.gov.tr adresi veya Kariyer Kapısı Platformu üzerinden temin edecekleri [url=https://kariyerkapisi.gov.tr/Ups/Evraklar/TBBBasvuruFormu17092026.pdf][b][u]başvuru formunu[/u][/b][/url] doldurup imzalayarak aşağıdaki belgeleri ekleyeceklerdir;\n\na)    Kimlik bilgileri (e-Devlet Kapısı’ndan otomatik olarak aktarılacaktır.)\nb)    Diploma veya mezuniyet belgesi (e-Devlet Kapısı’ndan otomatik aktarılacaktır, aktarılmaması durumunda noter onaylı mezuniyet belgesi veya e-Devlet Kapısı’ndan alınacak barkotlu mezuniyet "
+ }
+}

@@ -171,5 +171,53 @@
   "cost_usd": 0.0,
   "backfilled": 0,
   "seconds": 59
+ },
+ {
+  "date": "2026-09-26",
+  "fetched": 3,
+  "new": 3,
+  "relevant": 3,
+  "dropped": 0,
+  "enriched": 0,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 0,
+   "uygun": 3,
+   "stretch": 0,
+   "belirsiz": 0,
+   "dusuk": 0
+  },
+  "sources": {
+   "kariyerkapisi": 3
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "backfilled": 0,
+  "seconds": 60
+ },
+ {
+  "date": "2026-09-26",
+  "fetched": 26,
+  "new": 26,
+  "relevant": 7,
+  "dropped": 19,
+  "enriched": 0,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 0,
+   "uygun": 7,
+   "stretch": 0,
+   "belirsiz": 0,
+   "dusuk": 0
+  },
+  "sources": {
+   "youthall": 26
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "backfilled": 0,
+  "seconds": 70
  }
 ]

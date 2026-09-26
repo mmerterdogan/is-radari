@@ -21,7 +21,7 @@ const STAGE_LABEL = Object.fromEntries(STAGES);
 const PIPELINE = ["mulakat", "basvuruldu", "kaydedildi", "teklif", "red"];
 const CAT = { dogrudan: "Doğrudan uygun", uygun: "Uygun", stretch: "Stretch", belirsiz: "Değerlendirilemedi", dusuk: "Düşük uygunluk" };
 const CAT_ORDER = { dogrudan: 0, uygun: 1, stretch: 2, belirsiz: 3, dusuk: 4 };
-const SRC = { linkedin: "LinkedIn", euraxess: "EURAXESS", manual: "Elle eklendi" };   // everything else: company career site
+const SRC = { linkedin: "LinkedIn", euraxess: "EURAXESS", youthall: "Youthall", kariyerkapisi: "Kariyer Kapısı", manual: "Elle eklendi" };   // everything else: company career site
 const MODE = { uzaktan: "Uzaktan", hibrit: "Hibrit", ofiste: "Ofiste", belirtilmemis: "Çalışma şekli belirtilmemiş" };
 const LOC = { 1: "İstanbul", 2: "Sanayi şehri", 3: "Türkiye", 4: "Uzaktan", 5: "Yurt dışı" };
 // filter groups -> role families produced by radar/match.py
@@ -128,8 +128,12 @@ function passesSearch(j) {
   return true;
 }
 
+const companyKey = (c) => String(c || "").toLocaleLowerCase("tr").replace(/\s+/g, " ").trim();
+const hiddenCompany = (j) => Boolean(S.companies?.[companyKey(j.company)]?.hidden);
+
 function inView(j) {
   const st = stageOf(j);
+  if (view === "jobs" && !st && hiddenCompany(j)) return false;
   if (view === "apps") return PIPELINE.includes(st);
   if (view === "followup") return followDue(j);
   return st !== "gizli" && !PIPELINE.slice(0, 2).includes(st) && j.source !== "manual";
@@ -168,6 +172,7 @@ function card(j) {
     `<span title="Eğitim şartı">🎓 ${esc(j.education?.label || "Belirtilmemiş")}</span>`,
     freshness(j) ? `<span title="İlan tarihi">🗓 ${esc(freshness(j))}</span>` : "",
     j.applicants ? `<span title="LinkedIn'deki başvuru sayısı">👥 ${esc(j.applicants)} başvuru</span>` : "",
+    j.deadline && !j.closed ? `<span title="Son başvuru tarihi" class="${j.deadline <= addDays(today(), 3) ? "soon" : ""}">⏳ son başvuru ${esc(fmtDate(j.deadline))}</span>` : "",
     j.role_label ? `<span title="Pozisyon alanı">🧭 ${esc(j.role_label)}</span>` : "",
     `<span>${esc(SRC[j.source] || "Şirket sitesi")}</span>`,
   ].filter(Boolean).join("");
@@ -206,7 +211,8 @@ function card(j) {
     ${j.company ? `<div class="netlinks">Bağlantı kur:
       <a href="${linkedinPeople(`${j.company} İstanbul Üniversitesi-Cerrahpaşa`)}" target="_blank" rel="noopener">İÜC mezunları</a> ·
       <a href="${linkedinPeople(`${j.company} mechanical engineer`)}" target="_blank" rel="noopener">şirketteki mühendisler</a> ·
-      <a href="${linkedinPeople(`${j.company} recruiter`)}" target="_blank" rel="noopener">İK / işe alım</a></div>` : ""}
+      <a href="${linkedinPeople(`${j.company} recruiter`)}" target="_blank" rel="noopener">İK / işe alım</a>
+      ${j.source !== "manual" && !st ? `<button class="linkbtn" data-hide-company="${esc(j.company)}" title="Bu şirketin ilanlarını listede gösterme">🚫 bu şirketi gizle</button>` : ""}</div>` : ""}
   </article>`;
 }
 
@@ -394,11 +400,44 @@ function statsView(pool) {
     <div class="card2 stat-card"><h3>Başvuru hunisi</h3>
       ${funnel.map(([l, n]) => `<div class="funnel-row"><span>${l}</span><div class="skill-bar"><span style="width:${Math.max(2, (100 * n) / max)}%"></span></div><b>${n}</b></div>`).join("")}
     </div>
+    ${trendCard()}
     ${table("Uygunluk kategorisine göre", groupBy((j) => j.category || "manual", (k) => CAT[k] || "Elle eklenen"))}
     ${table("Kaynağa göre", groupBy((j) => j.source, (k) => SRC[k] || (k === "manual" ? "Elle eklenen" : "Şirket sitesi")))}
     ${table("Lokasyona göre", groupBy((j) => j.loc_tier, (k) => LOC[k] || "-"))}
     <p class="hint">Oranlar "Başvuruldu" ve sonrası aşamalardan hesaplanır; aşama geçmişi bu özellik eklendikten sonra kaydedilmeye başladı.</p>
   </div>`;
+}
+
+// weekly new relevant ads (stacked by category) + where the good ads are
+function trendCard() {
+  const ins = DATA.insights || {};
+  const weeks = ins.weekly || [];
+  if (!weeks.length) return "";
+  const cats = ["dogrudan", "uygun", "stretch"];
+  const max = Math.max(1, ...weeks.map((w) => cats.reduce((s, c) => s + (w[c] || 0), 0)));
+  const bw = 100 / weeks.length;
+  const width = Math.min(bw * 0.64, 14);
+  const bars = weeks.map((w, i) => {
+    let y = 100;
+    return cats.map((c) => {
+      const h = (96 * (w[c] || 0)) / max;
+      y -= h;
+      return h ? `<rect x="${i * bw + (bw - width) / 2}" y="${y}" width="${width}" height="${h}" fill="var(--c-${c})"><title>${CAT[c]}: ${w[c]}</title></rect>` : "";
+    }).join("");
+  }).join("");
+  const labels = weeks.map((w) => `<span><b>${cats.reduce((s, c) => s + (w[c] || 0), 0)}</b><br>${esc(fmtDate(w.week))}</span>`).join("");
+  const legend = cats.map((c) => `<span><i style="background:var(--c-${c})"></i>${CAT[c]}</span>`).join("");
+  const list = (rows) => rows.length ? rows.map(([k, n]) => {
+    const m = Math.max(...rows.map((r) => r[1]));
+    return `<div class="funnel-row"><span title="${esc(k)}">${esc(k)}</span><div class="skill-bar"><span style="width:${(100 * n) / m}%"></span></div><b>${n}</b></div>`;
+  }).join("") : `<p class="hint">Veri yok.</p>`;
+  return `<div class="card2 stat-card trend"><h3>Haftalık yeni ilan (Doğrudan + Uygun + Stretch)</h3>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="bars" role="img" aria-label="Haftalık ilan grafiği">${bars}</svg>
+      <div class="bar-labels" style="grid-template-columns:repeat(${weeks.length},1fr)">${labels}</div>
+      <div class="legend">${legend}</div>
+      <p class="hint">Hafta başlangıcına göre; her tarama o gün bulduğu yeni ilanları ekler.</p></div>
+    <div class="card2 stat-card"><h3>En çok uygun ilan açan şirketler</h3>${list(ins.top_companies || [])}</div>
+    <div class="card2 stat-card"><h3>Şehirler</h3>${list(ins.top_cities || [])}</div>`;
 }
 
 // ------------------------------------------------------------------ calendar (.ics)
@@ -665,6 +704,65 @@ function openAdd() {
   });
 }
 
+const REASONS = { lokasyon: "Lokasyon", alan: "Alan / pozisyon uymuyor", seviye: "Seviye (çok kıdemli ya da çok basit)",
+  sirket: "Şirket", dil: "Dil şartı", diger: "Diğer" };
+
+function askRejectReason(id) {
+  const j = allJobs().find((x) => x.id === id);
+  if (!j) return;
+  openDialog(`<h2>Neden ilgilenmiyorsun?</h2>
+    <div class="meta">${esc(j.title)} · ${esc(j.company)}</div>
+    <p class="hint">İlan listeden kaldırıldı. Sebebi seçersen eşleştirme kurallarını iyileştirmek için birikir (isteğe bağlı).</p>
+    <div class="chips">${Object.entries(REASONS).map(([k, l]) => `<button class="chip" data-reason="${k}" data-rid="${esc(id)}">${esc(l)}</button>`).join("")}</div>
+    <div class="actions">
+      ${j.company ? `<button class="btn" data-hide-company="${esc(j.company)}">🚫 ${esc(j.company)} ilanlarının hepsini gizle</button>` : ""}
+      <button class="btn" data-close>Geç</button></div>`);
+}
+
+function hideCompany(name, hidden = true) {
+  S.companies = S.companies || {};
+  S.companies[companyKey(name)] = { name, hidden, updated: nowIso() };
+  ls.set(LS_STATE, S);
+  render();
+}
+
+function feedbackReport() {
+  const since = addDays(today(), -30);
+  const rows = Object.entries(S.entries).filter(([, e]) => e.stage === "gizli" && e.reject_reason && (e.updated || "") >= since);
+  const byId = Object.fromEntries(allJobs().map((j) => [j.id, j]));
+  const counts = {};
+  for (const [, e] of rows) counts[e.reject_reason] = (counts[e.reject_reason] || 0) + 1;
+  const samples = rows.slice(-25).map(([id, e]) => {
+    const j = byId[id];
+    return j ? `- ${j.title} | ${j.company} | ${j.location || "-"} | ${CAT[j.category] || "-"} | sebep: ${REASONS[e.reject_reason] || e.reject_reason}` : "";
+  }).filter(Boolean);
+  const hidden = Object.values(S.companies || {}).filter((c) => c.hidden).map((c) => c.name);
+  return { rows, counts, text: [
+    "Son 30 günün \"İlgilenmiyorum\" geri bildirimi (siteden otomatik oluşturuldu).", "",
+    "Sebepler: " + (Object.entries(counts).map(([k, n]) => `${REASONS[k] || k}: ${n}`).join(", ") || "-"), "",
+    "Örnek ilanlar:", ...samples, "",
+    `Gizlenen şirketler: ${hidden.join(", ") || "-"}`].join("\n") };
+}
+
+function settingsCompanies() {
+  const hidden = Object.values(S.companies || {}).filter((c) => c.hidden);
+  if (!hidden.length) return "";
+  const yaml = `  block_companies: [${hidden.map((c) => JSON.stringify(c.name)).join(", ")}]`;
+  return `<h3>Gizlenen şirketler</h3>
+    <div class="chips">${hidden.map((c) => `<button class="chip" data-unhide="${esc(c.name)}" title="Geri al">${esc(c.name)} ✕</button>`).join("")}</div>
+    <p class="hint">Sadece bu tarayıcıda gizli. Taramada hiç alınmasınlar istersen bu satırı <code>config.yaml</code> → <code>filters</code> altına yapıştır:</p>
+    <pre id="yaml-block">${esc(yaml)}</pre><button class="btn" data-copy="yaml-block">Kopyala</button>`;
+}
+
+function settingsFeedback() {
+  const fb = feedbackReport();
+  if (!fb.rows.length) return `<h3>Geri bildirim</h3><p class="hint">Bir ilanı "İlgilenmiyorum" yapıp sebep seçtikçe burada birikir.</p>`;
+  return `<h3>Geri bildirim</h3>
+    <p class="hint">Son 30 günde ${fb.rows.length} ilanı sebep belirterek eledin: ${esc(Object.entries(fb.counts).map(([k, n]) => `${REASONS[k] || k} ${n}`).join(", "))}.
+    Gönderince GitHub'da <b>herkese açık</b> bir issue taslağı açılır (içinde sadece ilan başlıkları, şirketler ve sebepler var); oradan kurallar güncellenir.</p>
+    <div class="actions"><button class="btn" data-feedback>GitHub'da geri bildirim aç ↗</button></div>`;
+}
+
 function openSettings() {
   openDialog(`<h2>Ayarlar</h2>
     <p class="hint">Başvuru durumların, notların ve elle eklediğin ilanlar bu tarayıcıda saklanır. Telefonla bilgisayar arasında aktarmak için bir cihazda yedeği indir, diğerinde yükle (ikisi birleştirilir, hiçbir şey silinmez).</p>
@@ -676,6 +774,8 @@ function openSettings() {
       <label class="btn">Yedek yükle<input type="file" accept="application/json" data-import hidden></label>
     </div>
     <p class="hint">Takipte ${Object.keys(S.entries).length} kayıt, elle eklenmiş ${Object.values(S.manual).filter((m) => !m.deleted).length} ilan var.</p>
+    ${settingsCompanies()}
+    ${settingsFeedback()}
     <div class="actions"><button class="btn" data-close>Kapat</button></div>`);
 }
 
@@ -691,7 +791,7 @@ document.addEventListener("click", async (ev) => {
     window.scrollTo({ top: $(".bar").offsetTop, behavior: "smooth" });
     return;
   }
-  if (t.matches?.(".chip")) {
+  if (t.matches?.(".chip") && t.closest(".chips")?.dataset.group) {   // filter chips (not dialog chips)
     const box = t.closest(".chips");
     const g = box.dataset.group;
     const v = t.dataset.v;
@@ -731,6 +831,24 @@ document.addEventListener("click", async (ev) => {
     return;
   }
   if (t.dataset?.open) { openCardDialog(t.dataset.open); return; }
+  if (t.dataset?.reason) {
+    saveEntry(t.dataset.rid, { reject_reason: t.dataset.reason });
+    dlg().close();
+    toast("Kaydedildi - teşekkürler");
+    return;
+  }
+  if (t.dataset?.hideCompany) {
+    hideCompany(t.dataset.hideCompany);
+    if (dlg().open) dlg().close();
+    toast(`${t.dataset.hideCompany} gizlendi - Ayarlar'dan geri alabilirsin`);
+    return;
+  }
+  if (t.dataset?.unhide) { hideCompany(t.dataset.unhide, false); openSettings(); return; }
+  if (t.hasAttribute?.("data-feedback")) {
+    const url = `https://github.com/mmerterdogan/is-radari/issues/new?title=${encodeURIComponent("Geri bildirim " + today())}&body=${encodeURIComponent(feedbackReport().text.slice(0, 6000))}`;
+    window.open(url, "_blank", "noopener");
+    return;
+  }
   if (t.dataset?.tailor) {
     const j = allJobs().find((x) => x.id === t.dataset.tailor);
     dlg().close();
@@ -794,7 +912,7 @@ document.addEventListener("change", async (ev) => {
     saveEntry(id, patch);
     render();
     if (t.value === "basvuruldu") toast(`Başvurularım'a taşındı - ${FOLLOWUP_BDAYS} iş günü sonra takip hatırlatması`);
-    if (t.value === "gizli") toast("Gizlendi - Başvurularım'dan değil, bu listeden kaldırıldı");
+    if (t.value === "gizli") askRejectReason(id);
   } else if (t.hasAttribute?.("data-goal")) {
     ls.set("radar-goal", Math.max(1, Number(t.value) || 5));
     render();
@@ -863,6 +981,7 @@ async function boot() {
   }
   const warn = [];
   if (last.failed_sources?.length) warn.push(`Son taramada sonuç vermeyen kaynak: ${last.failed_sources.join(", ")}`);
+  for (const h of last.health || []) warn.push(h);
   if (warn.length) { $("#warn").textContent = warn.join(" · "); $("#warn").hidden = false; }
   $("#runs tbody").innerHTML = (DATA.runs || []).slice().reverse().map((r) => {
     const c = r.by_category || {};

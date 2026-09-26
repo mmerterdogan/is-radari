@@ -180,3 +180,53 @@ def test_lever_and_ashby_location_filter():
     ashby = json.loads((FIX / "ashby.json").read_text(encoding="utf-8"))
     got = ats.parse_ashby(ashby, "1x", "1X", r".")
     assert got and got[0].description
+
+
+# ---------------------------------------------------------------- Youthall / Kariyer Kapısı
+from radar.sources import boards  # noqa: E402
+
+
+def test_youthall_list_and_detail():
+    jobs = boards.parse_youthall_list((FIX / "youthall_list.html").read_text(encoding="utf-8"))
+    assert len(jobs) == 6 and len({j.id for j in jobs}) == 6
+    tei = jobs[0]
+    assert tei.id == "youthall:tei_11" and tei.company == "TEI - TUSAŞ Motor Sanayii"
+    assert tei.location == "Eskişehir, Türkiye" and tei.extra["deadline"] == "2026-10-14"
+    assert all("+" not in j.location for j in jobs)
+    boards.parse_youthall_detail((FIX / "youthall_detail.html").read_text(encoding="utf-8"), tei)
+    assert tei.posted == "2026-09-23" and tei.extra["Employment type"] == "Part-time"
+    assert "Ar-Ge" in tei.description and "<" not in tei.description
+
+
+def test_kariyerkapisi_keeps_only_mechanical_positions():
+    f = json.loads((FIX / "kariyerkapisi.json").read_text(encoding="utf-8"))
+    tbb, other = f["list"]["searchIlan"]
+    jobs = boards.parse_kariyerkapisi(tbb, f["alt"], boards.bbcode_text(f["detail"]["ilanMetni"]))
+    assert len(jobs) == 1
+    j = jobs[0]
+    assert j.title == "Makine Mühendisi" and j.company == "Türkiye Belediyeler Birliği" and j.location == "Ankara, Türkiye"
+    assert j.extra["deadline"] == "2026-09-30" and j.url.endswith(tbb["guid"])
+    assert "makine mühendisliği bölümünden mezun" in j.description and "KPSS" in j.description and "[b]" not in j.description
+    assert boards.parse_kariyerkapisi(other, [{"ilanBaslik": "Hemşire", "ilanMetni": "Hemşirelik lisans"}]) == []
+
+
+def test_tr_title():
+    assert boards.tr_title("DOĞU MARMARA KALKINMA AJANSI (MARKA)") == "Doğu Marmara Kalkınma Ajansı (MARKA)"
+    assert boards.tr_title("İSTANBUL ÜNİVERSİTESİ") == "İstanbul Üniversitesi"
+
+
+def test_source_health_flags_broken_parsers():
+    prev = [{"sources": {"hrpeak": 0, "baykar": 40}}, {"sources": {"baykar": 38}}]
+    got = pipeline.source_health({"hrpeak": 0, "baykar": 30, "youthall": 10, "linkedin": 50, "kariyerkapisi": 0},
+                                 {"baykar": 2, "youthall": 10, "linkedin": 50}, prev)
+    assert len(got) == 2 and got[0].startswith("hrpeak") and got[1].startswith("youthall")
+    assert pipeline.source_health({"baykar": 0}, {}, prev) == []          # first empty day: no alarm yet
+
+
+def test_weekly_trend_and_cities():
+    runs = [{"date": "2026-09-21", "by_category": {"uygun": 2}}, {"date": "2026-09-26", "by_category": {"uygun": 3, "dogrudan": 1}},
+            {"date": "2026-09-28", "by_category": {"stretch": 4}}, {"date": "bad"}]
+    got = pipeline.weekly_trend(runs)
+    assert [w["week"] for w in got] == ["2026-09-21", "2026-09-28"]
+    assert got[0]["uygun"] == 5 and got[0]["dogrudan"] == 1 and got[0]["runs"] == 2 and got[1]["stretch"] == 4
+    assert pipeline._city("Greater Istanbul") == "Istanbul" and pipeline._city("Bursa, Nilüfer, Turkey") == "Bursa"

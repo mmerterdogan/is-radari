@@ -1,5 +1,5 @@
 """Job sources: name -> fetch(cfg, fetcher) -> list[Job]. The name is also the config key under `search:`."""
-from . import ats, euraxess, greenhouse, linkedin, portals, smartrecruiters
+from . import ats, boards, euraxess, greenhouse, linkedin, portals, smartrecruiters
 
 SOURCES = {
     "linkedin": linkedin.fetch,
@@ -11,4 +11,6 @@ SOURCES = {
     "ashby": ats.fetch_ashby,
     "hrpeak": portals.fetch_hrpeak,
     "baykar": portals.fetch_baykar,
+    "youthall": boards.fetch_youthall,
+    "kariyerkapisi": boards.fetch_kariyerkapisi,
 }

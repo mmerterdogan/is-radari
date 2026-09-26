@@ -121,6 +121,17 @@ search:
     enabled: true
     detail_limit: 60
 
+  # Youthall: yeni mezun / staj / uzun dönem staj ilanları (HTML + JSON-LD)
+  youthall:
+    enabled: true
+    pages: 8
+    detail_limit: 100
+
+  # Kariyer Kapısı (kamu): sadece makine mühendisliğini kapsayan pozisyonlar alınır (çoğu KPSS ister)
+  kariyerkapisi:
+    enabled: true
+    limit: 80
+
   # Lever / Ashby modülleri hazır; şu an Türkiye/Avrupa'da uygun ilanı olan şirket bulunamadı
   # (Velo3D ve 1X'te sadece ABD'de satış rolleri vardı). Şirket ekleyince enabled: true yap.
   lever:
@@ -139,6 +150,13 @@ search:
     boards: [formlabs, markforged, carbon]
     # Sadece bu konumları eşleyen ilanlar alınır
     location_regex: "(Turkey|Türkiye|Istanbul|Germany|Netherlands|Belgium|France|Italy|Spain|Austria|Switzerland|Sweden|Denmark|Finland|Norway|Poland|Czech|Hungary|Portugal|Ireland|United Kingdom|UK|Europe|EMEA|Remote)"
+
+# Kara / beyaz liste (şirket adında ya da başlıkta tam kelime eşleşmesi; büyük/küçük harf ve Türkçe harf fark etmez).
+# Sitede "Bu şirketi gizle" dediğin şirketleri Ayarlar'daki hazır satırla buraya taşıyabilirsin.
+filters:
+  block_companies: []        # ör. ["Outlier", "DataAnnotation"]
+  block_title_words: []      # ör. ["satış", "sales"]
+  boost_companies: []        # hedef listende olmayan ama öne çıkmasını istediğin şirketler
 
 # Hedef şirketler: sitede "Hedef şirketler" panelinde açık ilan sayısı ve kariyer linkiyle görünür;
 # priority: true olanların ilanları kendi kategorisi içinde üste çıkar (kategori değişmez).
@@ -215,15 +233,15 @@ match:
 
 scoring:
   # Claude API (isteğe bağlı). ANTHROPIC_API_KEY yoksa kural tabanlı eşleştirme kullanılır.
-  model: claude-opus-5
-  effort: low
+  # Sadece kuralların emin olamadığı ilanlara bakar: metni okunamayanlar ("Değerlendirilemedi") ve
+  # deneyim / eğitim şartı bulunamayanlar. Haiku ucuz ve bu iş için yeterli (günde ~$0.05-0.10).
+  model: claude-haiku-4-5
   batch_size: 8
   max_llm_jobs: 40            # Claude'un günde yeniden değerlendireceği en fazla ilan (maliyet sınırı)
-  letters_per_day: 3          # "Doğrudan uygun" ilanlar için sabah yazılan ön yazı sayısı
-  letter_effort: medium
-  # Maliyet tahmini için fiyatlar ($ / 1M token)
-  price_input: 5.0
-  price_output: 25.0
+  letters_per_day: 0          # sabah otomatik ön yazı (0 = kapalı; ön yazıları sitedeki claude.ai istemiyle yazıyorsun)
+  # Maliyet tahmini için fiyatlar ($ / 1M token) - Haiku 4.5
+  price_input: 1.0
+  price_output: 5.0
 
 notify:
   telegram: true

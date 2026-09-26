@@ -105,7 +105,7 @@ class Scorer:
     def __init__(self, cfg: dict, cv_text: str, preferences: str):
         self.cfg = cfg
         self.client = anthropic.Anthropic()
-        self.model = cfg.get("model", "claude-opus-5")
+        self.model = cfg.get("model", "claude-haiku-4-5")
         profile = profile_block(cv_text, preferences)
         # Stable prefix (instructions + CV) so repeated calls can reuse the prompt cache
         self.scoring_system = [{"type": "text", "text": f"{SCORING_INSTRUCTIONS}\n\n{profile}",
@@ -129,14 +129,17 @@ class Scorer:
 
     def _parse(self, system, content: str, schema, effort: str):
         """One structured-output call. Returns the parsed object or None (logged)."""
+        extra = {}
+        if effort and "haiku" not in self.model:      # Haiku does not take the effort parameter
+            extra["output_config"] = {"effort": effort}
         try:
             resp = self.client.messages.parse(
                 model=self.model,
                 max_tokens=16000,
                 system=system,
-                output_config={"effort": effort},
                 messages=[{"role": "user", "content": content}],
                 output_format=schema,
+                **extra,
             )
         except anthropic.AuthenticationError:
             log.error("Claude API: invalid ANTHROPIC_API_KEY")
