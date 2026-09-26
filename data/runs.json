@@ -70,5 +70,34 @@
   "cost_usd": 0.0,
   "backfilled": 0,
   "seconds": 113
+ },
+ {
+  "date": "2026-09-26",
+  "fetched": 480,
+  "new": 215,
+  "relevant": 108,
+  "dropped": 107,
+  "enriched": 114,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 7,
+   "uygun": 17,
+   "stretch": 19,
+   "belirsiz": 0,
+   "dusuk": 65
+  },
+  "sources": {
+   "linkedin": 265,
+   "euraxess": 120,
+   "greenhouse": 51,
+   "smartrecruiters": 44
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "backfilled": 84,
+  "rechecked": 0,
+  "closed_found": 0,
+  "seconds": 2029
  }
 ]
