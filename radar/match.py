@@ -129,7 +129,8 @@ FAMILIES = [
     ("genel", "Genel mühendislik", 12, r"engineer|muhendis|ingenieur|ingeniero|ingegnere|ingenjor|engineering specialist|graduate|trainee|junior|working student|werkstudent|intern\b|internship|stajyer|\bstaj\b|praktikant|praktikum"),
     ("destek", "Teknik destek / servis", 12, r"technical support|product support|customer support|support (engineer|specialist)|field service|service engineer|servis muhendis|teknik destek|destek muhendis"),
     ("bakim", "Bakım / tesis", 10, r"maintenance|\bbakim|facility|tesis|reliability|instandhaltung"),
-    ("teknisyen", "Teknisyen", 6, r"technician|tekniker|teknisyen|techniker"),
+    ("teknisyen", "Teknisyen / operatör", 6, r"technician|tekniker|teknisyen|techniker|operator|operatoru|\bmechanic\b|"
+                                              r"\busta\b|ustasi|montajci|kaynakci|welder|machinist"),
     ("satis", "Teknik satış", 5, r"sales|satis|business development|key account"),
 ]
 FAMILY_WEIGHT = {k: w for k, _, w, _ in FAMILIES}
@@ -150,7 +151,8 @@ OTHER_DISCIPLINE = (r"electrical|elektrik|electronic|elektronik|embedded|gomulu|
                     r"data (scientist|engineer|analyst)|machine learning|\bai\b|\bml\b|network|cyber|firmware|power electronics|"
                     r"environmental|cevre|\bfood|\bgida|textile|tekstil|mining|maden|geolog|petroleum|architect|mimar|interior|harita|survey|"
                     r"chemistry|chemist\b|biochem|biotech|pharma|python|visuali[sz]|cloud|algoritma|algorithm|signal processing|"
-                    r"sinyal isleme|image processing|goruntu isleme|\bfpga\b|siber|orbit|yorunge")
+                    r"sinyal isleme|image processing|goruntu isleme|\bfpga\b|siber|orbit|yorunge|yapay zeka|"
+                    r"artificial intelligence|\brf\b|aviyonik|avionics")
 MECH_TITLE = r"mechanical|makine|makina|mekanik|mechanik|maschinenbau|mecanique|\bfea\b|simulat|structural|additive|eklemeli|mechatron|mekatronik"
 
 # Research / PhD / generic titles must show a mechanical-engineering domain somewhere in the ad
@@ -536,6 +538,42 @@ def sectors(job: Job) -> list[str]:
 def extract_skills(job: Job) -> list[str]:
     text = _lite(f"{job.title}\n{job.description}")
     return [k for k, (_, rx) in SKILLS.items() if _any(rx, text)]
+
+
+# ============================================================================ CV keyword check
+ACRONYM = re.compile(r"(?<![A-Za-zÇĞİÖŞÜçğıöşü])([A-Z][A-Z0-9&/+\-]{1,7})(?![A-Za-zÇĞİÖŞÜçğıöşü])")
+ACRONYM_STOP = {"EU", "UK", "USA", "US", "HR", "CV", "IT", "OK", "CEO", "CTO", "LLC", "GMBH", "AG", "SA", "AS", "LTD", "INC",
+                "TR", "EN", "DE", "FR", "EMEA", "APAC", "PHD", "MSC", "BSC", "MS", "BS", "MBA", "KVKK", "GDPR", "WE", "YOU",
+                "OUR", "THE", "AND", "OR", "FOR", "TO", "IN", "A", "I", "ARGE", "AR", "GE", "R&D", "B2B", "B2C", "SSS", "ETC",
+                "TBD", "FAQ", "PDF", "URL", "WWW", "COM", "ID", "NO", "IS", "ON", "AT", "BY", "OF", "AN", "BE", "VE", "ILE",
+                "HND", "HNC", "NASA", "START", "DNA", "CET", "CEST", "GENEL", "ARANAN", "NELER", "ROL", "OZET", "DETAY", "BIZ", "SEN", "SIZ", "DAHA", "TAM", "YARI"}
+
+
+def cv_missing_keywords(job: Job, cv_text: str, profile_skills: set[str] | None = None, limit: int = 12) -> list[str]:
+    """Tools, methods and acronyms the ad asks for that do not appear anywhere in the CV text.
+    Skills listed in the profile count as present even if the CV words them differently."""
+    cv = _lite(cv_text)
+    have = profile_skills or set()
+    company = _norm(job.company)
+    out: list[str] = []
+    for key in extract_skills(job):
+        label = SKILLS[key][0]
+        if key not in have and not _any(SKILLS[key][1], cv) and label not in out and key != "ingilizce":
+            out.append(label)
+    counts: dict[str, int] = {}
+    for m in ACRONYM.finditer(job.description or ""):
+        for a in m.group(1).split("/"):             # "FEA/CFD" -> FEA, CFD
+            a = a.strip("-&+")
+            plain = a.isalpha() and len(a) > 5      # ALL-CAPS ordinary words / headings, not acronyms
+            if len(a) < 3 or plain or a.upper() in ACRONYM_STOP or a.isdigit() or re.fullmatch(r"V\d+", a) \
+                    or re.fullmatch(r"[A-Z]{1,2}\d{1,2}[A-Z]?", a) or _norm(a) in company.split():   # UK postcodes
+                continue
+            counts[a] = counts.get(a, 0) + 1
+    for a, _ in sorted(counts.items(), key=lambda kv: -kv[1]):
+        in_cv = re.search(rf"(?<![a-z0-9]){re.escape(_lite(a))}(?![a-z0-9])", cv)
+        if not in_cv and a not in out and not any(_lite(a) in _lite(o) for o in out):
+            out.append(a)
+    return out[:limit]
 
 
 # ============================================================================ relevance gate

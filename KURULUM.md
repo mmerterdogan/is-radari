@@ -46,13 +46,17 @@ Lokasyon kategoriyi değiştirmez, sadece gösterilir ve sıralamada kullanılı
 | İlanlar | Varsayılan: Doğrudan uygun + Uygun + Stretch + Değerlendirilemedi, uygunluğa göre sıralı. Üstteki kategori kartlarına tıklayınca sadece o kategori görünür (tekrar tıklayınca geri döner). |
 | Filtreler | Uygunluk, lokasyon, deneyim şartı, eğitim şartı, çalışma şekli, alan (CAE, tasarım, Ar-Ge, eklemeli, üretim, test, otomotiv…), ilan tarihi, staj. Seçim yapılmayan grup "hepsi" demektir. Filtreler cihazda hatırlanır; "Filtreleri sıfırla" varsayılana döner. |
 | Sıralama | Uygunluğa göre / En yeni / Lokasyon önceliği |
-| Başvuru takibi | Karttaki açılır menü: Kaydedildi → Başvuruldu → Mülakat → Teklif / Olumsuz. "Başvuruldu" dediğin ilan **Başvurularım**'a taşınır. |
+| Başvuru takibi | Karttaki açılır menü: Kaydedildi → Başvuruldu → Mülakat → Teklif / Olumsuz. Takibe aldığın ilanlar **Başvurularım** panosunda sütunlar halinde durur; kartı sütunlar arasında sürükleyerek (telefonda karttaki menüyle) aşamasını değiştirirsin, başlığa tıklayınca ilanın tamamı açılır. Panoda filtreler uygulanmaz, sadece arama kutusu çalışır. |
+| Analiz | **Analiz** sekmesi: başvuru hunisi (kaydedilen → başvurulan → yanıt → mülakat → teklif), kategori / kaynak / lokasyona göre yanıt oranı, ortanca yanıt süresi ve haftalık başvuru hedefi (⚙ Ayarlar'dan değişir, varsayılan 5). |
+| Takvim | "Mülakat" durumundaki kartta 📅 ile mülakat zamanını gir, **Takvime ekle** ile `.ics` dosyası iner (Google / Outlook / telefon takvimi açar, 1 saat önce hatırlatır). "Başvuruldu" kartındaki 🗓 butonu takip tarihini takvime ekler. |
 | Takip hatırlatması | Başvurudan 6 iş günü sonra **Takip zamanı** olarak işaretlenir. "Takip ettim" butonu hatırlatmayı 6 iş günü öteler. |
 | Takip mesajı | "Başvuruldu" durumundaki ilanda **Takip mesajı yaz**: kısa, kibar bir takip e-postası istemi (claude.ai). Kaydedilen metin kartta saklanır. |
 | Mülakat hazırlığı | "Mülakat" durumunda **Mülakat hazırlığı**: ilana ve CV'ne göre olası teknik/davranışsal sorular, STAR örnekleri, soracağın sorular. |
 | Not ve iletişim kişisi | "Not" altında iletişim kişisi (ad, unvan) ve serbest not. İkisi de aramaya dahil. |
 | Bağlantı kur | Her kartta LinkedIn'de o şirketteki İÜC mezunlarını, mühendisleri ve İK'yı arayan hazır linkler. Yönlendirmeli başvuru için. |
 | Beceri yol haritası | Sayfanın altında: son 30 günde uygun ilanların en çok istediği, profilinde görünmeyen araçlar (yüzdeyle) ve ücretsiz öğrenme kaynakları. Kaynaklar `config.yaml > learning`'de. |
+| CV uyum kontrolü | Ön yazı ekranında ilanda geçen ama CV'nde geçmeyen anahtar kelimeler (ATS filtreleri birebir kelime arar). **CV'yi bu ilana uyarla**: hangi maddeyi nasıl yeniden ifade edeceğine dair istem; olmayan beceriyi uydurmaz, açıkça söyler. |
+| Hedef şirketler | ⭐ etiketli ilanlar hedef listendeki şirketlerden; öncelikli olanlar kategorisinin içinde üste çıkar. Filtrelerde "⭐ Sadece hedef şirketler" var. Sayfa altındaki panel her şirketin sitedeki ilan sayısını ve kariyer sayfasını gösterir. |
 | Ön yazı | **Ön yazı oluştur**: CV'n, ilan ve uygunluk analiziyle hazır bir istem kopyalar ve claude.ai'yi açar; cevabı siteye yapıştırıp kaydedersin. API ekliysen sabah hazırlanan ön yazılar da "Ön yazı" butonunda görünür. |
 | Başka sitelerden ilan | **+ İlan ekle**: Kariyer.net, şirket sitesi, e-posta… Elle eklenen ilanlar otomatik sınıflandırılmaz; deneyim, eğitim, lokasyon ve çalışma şeklini formda seçebilirsin. |
 | İstemediğin ilan | "İlgilenmiyorum": listeden gizlenir |
@@ -64,6 +68,8 @@ Lokasyon kategoriyi değiştirmez, sadece gösterilir ve sıralamada kullanılı
 - `profile.preferences`: tercihlerin. Claude (API varsa) değerlendirme ve ön yazıda bunu okur.
 - `search.linkedin.queries`: arama kelimeleri, konumlar, sayfa sayısı (`pages`) ve deneyim filtresi (`experience`).
 - `search.greenhouse.boards`: takip ettiğin şirketlerin Greenhouse kariyer panoları.
+- `search.workday.tenants`, `search.hrpeak.portals`, `search.baykar`: şirketlerin kendi kariyer siteleri (aşağıda).
+- `companies`: hedef şirket listesi (`name`, şirket adını yakalayan `match` regex'i, `careers_url`, `priority`). Taranmayan şirketler de burada durur; paneldeki linkten haftada bir bakarsın.
 - `match.enrich_limit`: günde tam metni çekilecek LinkedIn ilanı sayısı. Eğitim ve deneyim şartını okuyabilmek için gerekiyor; artırırsan tarama uzar.
 - `scoring.max_llm_jobs` / `letters_per_day`: Claude'un günlük değerlendireceği ilan ve yazacağı ön yazı sayısı.
 - `notify.top_direct` / `top_fit` / `top_stretch`: Telegram mesajında kategori başına gösterilecek ilan sayısı.
@@ -91,6 +97,9 @@ API'siz toplam maliyet: **$0**. API ile aylık ~$10-20. Gerçek sabah harcaması
 - **EURAXESS:** Avrupa Komisyonu'nun araştırma, doktora ve postdoc portalı.
 - **Greenhouse:** Şirketlerin resmi, herkese açık kariyer API'si.
 - **SmartRecruiters:** Şirketlerin resmi, herkese açık kariyer API'si (şimdilik Bosch Türkiye; `config.yaml > search.smartrecruiters.companies`'e yeni şirket eklenebilir).
+- **Workday:** Hitachi Energy, GE Aerospace, BorgWarner, Baker Hughes'un resmi kariyer sitelerinden Türkiye ilanları.
+- **HRPeak / Baykar:** ROKETSAN, TEI ve Baykar kariyer portalları (sayfanın HTML'i okunur; site tasarımı değişirse kaynak boş döner ve Telegram uyarısı gelir).
+- **Lever / Ashby:** Kod hazır ama kapalı (izlenen şirketlerde Türkiye ilanı yok); `config.yaml`'da açılabilir.
 - **Kapanmış ilanlar:** 5 günden eski umut verici ilanlar her gün yeniden kontrol edilir; "artık başvuru kabul etmiyor" olanlar üstü çizili görünür ve varsayılan olarak gizlenir (takibe aldıkların gizlenmez). Kartlarda LinkedIn başvuru sayısı da görünür.
 - **Hata alarmı:** Tarama ya da site yayını başarısız olursa Telegram'a uyarı gelir.
 - **Kariyer.net, Indeed, AcademicPositions, FindAPhD:** Bot koruması olduğu için taranmıyor. Oralardan bulduğun ilanları "+ İlan ekle" ile ekle.

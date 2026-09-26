@@ -111,7 +111,7 @@ def test_research_outside_mechanics_is_dropped():
 def test_technician_and_sales_are_capped():
     t = match.analyze(J("Mekanik Teknikeri", "Teknik resim, üretim süreçleri, yeni mezun."))
     s = match.analyze(J("Sales Engineer (3D Printing Solution)", "Sell additive manufacturing systems. Bachelor's in engineering."))
-    assert t.category == "dusuk" and t.role_label == "Teknisyen"
+    assert t.category == "dusuk" and t.role_label == "Teknisyen / operatör"
     assert s.category != "dogrudan" and s.role_label == "Teknik satış"
 
 
@@ -319,3 +319,20 @@ def test_more_education_patterns(text, level):
 ])
 def test_more_experience_patterns(text, fit):
     assert match.parse_experience(J("Design Engineer", text))["fit"] == fit
+
+
+def test_cv_missing_keywords():
+    cv = "SolidWorks and ANSYS Mechanical, static and modal FEA, technical drawing and tolerancing, FDM printing."
+    j = J("Mechanical Design Engineer", "Design with CATIA V5 and SolidWorks. PFMEA, APQP and GD&T knowledge. "
+          "GENEL NİTELİKLER: ANSYS experience. Contact ACME HR.", company="ACME")
+    got = match.cv_missing_keywords(j, cv, {"solidworks", "ansys", "fea", "tolerans"})
+    assert "CATIA" in got and "PFMEA" in got and "GD&T" in got
+    assert not {"SolidWorks", "ANSYS", "GENEL", "V5", "ACME", "HR", "TEL", "KLER"} & set(got)
+
+
+def test_cv_missing_splits_compound_acronyms():
+    cv = "Static FEA with ANSYS; parts printed with FDM."
+    j = J("Design Engineer", "Experience with FEA/CFD and FDM/SLA printing is a plus. Office in YO1 7HH, CV34 area.")
+    got = match.cv_missing_keywords(j, cv)
+    assert "CFD" in got and "SLA" in got
+    assert not {"FEA", "FDM", "FEA/CFD", "YO1", "CV34"} & set(got)

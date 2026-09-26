@@ -138,3 +138,45 @@ def test_skill_gaps_roadmap():
     rows = pipeline.skill_gaps(jobs, learning={"catia": [{"label": "x", "url": "https://x"}]})
     assert rows[0] == {"label": "CATIA", "key": "catia", "count": 2, "share": 1.0, "resources": [{"label": "x", "url": "https://x"}]}
     assert [r["label"] for r in rows] == ["CATIA", "FMEA"]   # low-fit ads do not count
+
+
+# ---------------------------------------------------------------- Sprint 3 sources
+from radar.sources import ats, portals  # noqa: E402
+
+
+def test_hrpeak_list_and_detail():
+    jobs = portals.parse_hrpeak_list((FIX / "hrpeak_list.html").read_text(encoding="utf-8"), "https://kariyer.roketsan.com.tr", "ROKETSAN")
+    assert len(jobs) >= 15 and all(j.url.endswith(".job") for j in jobs)
+    p = next(j for j in jobs if j.title == "Proses Mühendisi (Mekanik)")
+    assert p.location == "Ankara, Türkiye" and p.posted == "2026-09-25" and p.company == "ROKETSAN"
+    desc = portals.parse_hrpeak_detail((FIX / "hrpeak_detail.html").read_text(encoding="utf-8"), p.title)
+    assert desc.startswith("Çalışma Yeri") and "Makine Mühendisliği" in desc
+    p.description = desc
+    j = match.analyze(p)
+    assert j.education["field"] == "makine" and j.work_mode == "ofiste" and j.loc_tier == 2
+
+
+def test_baykar_list_and_detail():
+    jobs = portals.parse_baykar_list((FIX / "baykar_list.html").read_text(encoding="utf-8"))
+    assert len(jobs) >= 20 and len({j.id for j in jobs}) == len(jobs)
+    title, body = portals.parse_baykar_detail((FIX / "baykar_detail.html").read_text(encoding="utf-8"))
+    assert title and len(body) > 200
+
+
+def test_workday_list_and_detail():
+    t = {"tenant": "hitachi", "wd": "wd1", "site": "hitachi", "company": "Hitachi Energy"}
+    jobs = ats.parse_workday_list(json.loads((FIX / "workday_list.json").read_text(encoding="utf-8")), t)
+    assert jobs and jobs[0].url.startswith("https://hitachi.wd1.myworkdayjobs.com/hitachi/job/")
+    assert jobs[0].native_id.startswith("hitachi-")
+    desc, posted, loc = ats.parse_workday_detail(json.loads((FIX / "workday_detail.json").read_text(encoding="utf-8")))
+    assert len(desc) > 100 and posted[:2] == "20" and loc
+
+
+def test_lever_and_ashby_location_filter():
+    lever = json.loads((FIX / "lever.json").read_text(encoding="utf-8"))
+    assert ats.parse_lever(lever, "velo3d", "Velo3D", r"Turkey") == []
+    everywhere = ats.parse_lever(lever, "velo3d", "Velo3D", r".")
+    assert everywhere and everywhere[0].url and everywhere[0].posted[:2] == "20"
+    ashby = json.loads((FIX / "ashby.json").read_text(encoding="utf-8"))
+    got = ats.parse_ashby(ashby, "1x", "1X", r".")
+    assert got and got[0].description

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import logging
 import os
 import sys
@@ -24,7 +25,7 @@ import yaml
 
 from . import match, notify
 from .http import Fetcher
-from .models import Job, now_iso
+from .models import Job, _norm, now_iso
 from .sources import SOURCES, linkedin
 from .store import Store
 
@@ -51,6 +52,25 @@ def load_config() -> dict:
     return yaml.safe_load((ROOT / "config.yaml").read_text(encoding="utf-8"))
 
 
+def tag_companies(jobs, cfg: dict) -> None:
+    """Mark ads from the user's target companies (priority ones are sorted higher on the site)."""
+    comps = [(c, re.compile(c["match"])) for c in cfg.get("companies", []) if c.get("match")]
+    for j in jobs:
+        name = _norm(j.company)
+        hit = next((c for c, rx in comps if rx.search(name)), None)
+        j.target = hit["name"] if hit else ""
+
+
+def companies_panel(jobs, cfg: dict) -> list[dict]:
+    rows = []
+    for c in cfg.get("companies", []):
+        mine = [j for j in jobs if j.target == c["name"] and not j.closed]
+        good = [j for j in mine if j.category in ("dogrudan", "uygun", "stretch")]
+        rows.append({"name": c["name"], "careers_url": c.get("careers_url", ""), "priority": bool(c.get("priority")),
+                     "open": len(mine), "fit": len(good)})
+    return sorted(rows, key=lambda r: (-r["fit"], -r["open"], r["name"]))
+
+
 def skill_gaps(jobs, days: int = 30, learning: dict | None = None) -> list[dict]:
     """Which missing tools the promising ads of the last `days` ask for most (the user's learning roadmap)."""
     cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
@@ -70,6 +90,10 @@ def skill_gaps(jobs, days: int = 30, learning: dict | None = None) -> list[dict]
 
 def export_site(store: Store, out: Path, keep_days: int, stats: dict, cfg: dict | None = None) -> None:
     low_cutoff = (datetime.now(timezone.utc) - timedelta(days=LOW_KEEP_DAYS)).isoformat()
+    priority = {c["name"] for c in (cfg or {}).get("companies", []) if c.get("priority")}
+    cv_file = (cfg or {}).get("profile", {}).get("cv_file")
+    cv_text = (ROOT / cv_file).read_text(encoding="utf-8") if cv_file and (ROOT / cv_file).exists() else ""
+    profile = match.Profile.from_config((cfg or {}).get("profile"))
     jobs = []
     for j in store.jobs.values():
         if j.category == "dusuk" and j.first_seen < low_cutoff:
@@ -78,10 +102,14 @@ def export_site(store: Store, out: Path, keep_days: int, stats: dict, cfg: dict 
         d.pop("extra", None)
         d["employment"] = j.extra.get("Employment type", "")
         d["applicants"] = j.extra.get("applicants", "")
+        d["target_priority"] = j.target in priority
+        if cv_text and j.category in ("dogrudan", "uygun", "stretch", "belirsiz"):
+            d["cv_missing"] = match.cv_missing_keywords(j, cv_text, profile.skills)
         d["description"] = (j.description or "")[: DESC_LEN.get(j.category, 300)]
         jobs.append(d)
     jobs.sort(key=lambda d: (d["first_seen"][:10], -match.CATEGORY_ORDER.get(d["category"], 9), d["score"] or 0), reverse=True)
     insights = {"skill_gaps": skill_gaps(store.jobs.values(), learning=(cfg or {}).get("learning", {})),
+                "companies": companies_panel(store.jobs.values(), cfg or {}),
                 "profile_skills": sorted((cfg or {}).get("profile", {}).get("skills", []))}
     payload = {"generated_at": now_iso(), "last_run": stats, "runs": store.runs[-14:], "insights": insights, "jobs": jobs}
     out.mkdir(parents=True, exist_ok=True)
@@ -184,13 +212,13 @@ def run(args) -> int:
     fresh: list[Job] = []
     if args.hours:  # e.g. first run: look back further than the daily 24 hours
         cfg["search"]["linkedin"]["hours"] = args.hours
-    for name, module in SOURCES.items():
+    for name, fetch_source in SOURCES.items():
         scfg = cfg["search"].get(name, {})
         if not scfg.get("enabled", False) or (args.only and name != args.only):
             continue
         fetcher = Fetcher(delay=float(scfg.get("delay_seconds", 2)))
         try:
-            found = module.fetch(scfg, fetcher)
+            found = fetch_source(scfg, fetcher)
         except Exception as exc:  # one broken source must not stop the others
             log.exception("source %s failed: %s", name, exc)
             found = []
@@ -266,6 +294,8 @@ def run(args) -> int:
         kept.append(match.analyze(j, profile))
     stats["relevant"] = len(kept)
 
+    tag_companies(kept, cfg)
+
     # 6. optional Claude refinement + cover letters ---------------------------------------
     refine_with_claude(kept, cfg, stats, args)
     stats["by_category"] = _by_category(kept)
@@ -315,6 +345,7 @@ def rebuild(args) -> int:
         if not claude or args.force:
             match.analyze(j, profile)
         j.letter = letter
+    tag_companies(store.jobs.values(), cfg)
     stats = dict(store.runs[-1]) if store.runs else {"date": datetime.now(timezone.utc).date().isoformat()}
     stats["by_category"] = _by_category(store.jobs.values())
     store.save()

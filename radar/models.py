@@ -48,6 +48,7 @@ class Job:
     loc_label: str = ""
     is_internship: bool = False
     closed: bool = False                # "no longer accepting applications"
+    target: str = ""                    # name of the matching target company from config.yaml > companies
     letter: dict | None = None          # {"subject", "cover_letter", "cv_highlights"}
 
     @property

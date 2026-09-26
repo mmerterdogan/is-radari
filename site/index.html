@@ -38,6 +38,7 @@
       <div class="seg" role="group" aria-label="Görünüm">
         <button data-view="jobs" aria-pressed="true">İlanlar</button>
         <button data-view="apps" aria-pressed="false">Başvurularım</button>
+        <button data-view="stats" aria-pressed="false">Analiz</button>
       </div>
       <input type="search" id="q" placeholder="Ara: şirket, pozisyon, şehir, beceri…" aria-label="Ara">
       <select id="sort" aria-label="Sırala">
@@ -106,6 +107,10 @@
         <button class="chip" data-v="hide">Gizle</button>
         <button class="chip" data-v="only">Sadece staj</button>
       </div></div>
+      <div class="fgroup"><div class="flabel">Şirket</div><div class="chips" data-group="target" data-single>
+        <button class="chip" data-v="all">Hepsi</button>
+        <button class="chip" data-v="only">⭐ Sadece hedef şirketler</button>
+      </div></div>
       <div class="fgroup"><div class="flabel">Kapanmış ilanlar</div><div class="chips" data-group="closed" data-single>
         <button class="chip" data-v="hide">Gizle</button>
         <button class="chip" data-v="show">Göster</button>
@@ -119,6 +124,10 @@
   <main id="list"></main>
 
   <footer>
+    <details id="companies-panel">
+      <summary>⭐ Hedef şirketler <span class="hint">- açık ilan sayısı ve kariyer sayfaları</span></summary>
+      <div id="companies"></div>
+    </details>
     <details id="skills-panel">
       <summary>🧭 Beceri yol haritası <span class="hint">- uygun ilanların istediği ama profilinde görünmeyen araçlar</span></summary>
       <div id="skills"></div>

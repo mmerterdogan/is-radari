@@ -99,5 +99,77 @@
   "rechecked": 0,
   "closed_found": 0,
   "seconds": 2029
+ },
+ {
+  "date": "2026-09-26",
+  "fetched": 27,
+  "new": 26,
+  "relevant": 15,
+  "dropped": 11,
+  "enriched": 0,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 1,
+   "uygun": 5,
+   "stretch": 2,
+   "belirsiz": 0,
+   "dusuk": 7
+  },
+  "sources": {
+   "hrpeak": 27
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "backfilled": 0,
+  "seconds": 80
+ },
+ {
+  "date": "2026-09-26",
+  "fetched": 50,
+  "new": 50,
+  "relevant": 29,
+  "dropped": 21,
+  "enriched": 0,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 3,
+   "uygun": 7,
+   "stretch": 2,
+   "belirsiz": 0,
+   "dusuk": 17
+  },
+  "sources": {
+   "baykar": 50
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "backfilled": 0,
+  "seconds": 123
+ },
+ {
+  "date": "2026-09-26",
+  "fetched": 17,
+  "new": 17,
+  "relevant": 10,
+  "dropped": 7,
+  "enriched": 0,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 0,
+   "uygun": 2,
+   "stretch": 0,
+   "belirsiz": 0,
+   "dusuk": 8
+  },
+  "sources": {
+   "workday": 17
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "backfilled": 0,
+  "seconds": 59
  }
 ]

@@ -168,3 +168,36 @@ footer summary { cursor: pointer; }
 .skill-res a { color: var(--accent); }
 footer details + details { margin-top: 10px; }
 code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .85em; background: var(--chip); padding: 1px 4px; border-radius: 4px; }
+
+/* ---- Sprint 3: target companies */
+.tag.target { background: color-mix(in srgb, var(--c-stretch) 16%, transparent); color: var(--c-stretch); font-weight: 600; }
+.runs.comp td a { color: var(--accent); }
+
+/* ---- Sprint 3: kanban, analytics, calendar */
+.board { display: grid; grid-template-columns: repeat(5, minmax(200px, 1fr)); gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.col { background: var(--chip); border-radius: 12px; padding: 8px; min-height: 160px; }
+.col.drop { outline: 2px dashed var(--accent); }
+.col h3 { margin: 2px 4px 8px; font-size: .85rem; display: flex; justify-content: space-between; }
+.col h3 span { color: var(--muted); font-weight: 400; }
+.col-body { display: grid; gap: 8px; }
+.col-empty { color: var(--muted); font-size: .8rem; text-align: center; padding: 18px 0; border: 1px dashed var(--line); border-radius: 8px; }
+.mini { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 9px; padding: 8px 10px; cursor: grab; }
+.mini.dogrudan { border-left-color: var(--c-dogrudan); } .mini.uygun { border-left-color: var(--c-uygun); }
+.mini.stretch { border-left-color: var(--c-stretch); } .mini.dusuk { border-left-color: var(--c-dusuk); }
+.mini-title { all: unset; cursor: pointer; font-weight: 600; font-size: .9rem; color: var(--ink); overflow-wrap: anywhere; }
+.mini-title:hover { color: var(--accent); }
+.mini .tags { margin-top: 4px; }
+.mini select { width: 100%; margin-top: 6px; font-size: .78rem; padding: 3px 6px; }
+@media (max-width: 700px) { .board { grid-template-columns: repeat(5, minmax(230px, 80vw)); } }
+.stats-view { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 700px) { .stats-view { grid-template-columns: minmax(0, 1fr); } }
+.stat-card h3 { margin: 0 0 8px; font-size: .95rem; }
+.stats-view > p { grid-column: 1 / -1; }
+.goal { font-size: 1rem; margin-bottom: 6px; } .goal b { font-size: 1.6rem; color: var(--accent); }
+.funnel-row { display: grid; grid-template-columns: 110px minmax(0, 1fr) 36px; gap: 8px; align-items: center; font-size: .86rem; margin: 5px 0; }
+.funnel-row b { text-align: right; font-variant-numeric: tabular-nums; }
+.inline-date { display: inline-flex; align-items: center; gap: 4px; font-size: .83rem; }
+.inline-date input { padding: 4px 6px; font-size: .8rem; }
+.cvcheck { border: 1px dashed var(--line); border-radius: 8px; padding: 8px 12px; margin: 10px 0; }
+.cvcheck h3 { margin-top: 0; }
+#dlg-body .card2 { box-shadow: none; }

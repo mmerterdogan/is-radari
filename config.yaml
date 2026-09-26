@@ -100,12 +100,68 @@ search:
       - { id: BoschGroup, country: tr }
     detail_limit: 80          # tam metni çekilecek en fazla ilan
 
+  # ---- Şirket kariyer siteleri (resmi, herkese açık sistemler; LinkedIn'e bağımlı değil)
+  workday:
+    enabled: true
+    detail_limit: 80
+    tenants:
+      - { tenant: hitachi, wd: wd1, site: hitachi, company: "Hitachi Energy", search: ["Turkey", "Türkiye"] }
+      - { tenant: geaerospace, wd: wd5, site: GE_ExternalSite, company: "GE Aerospace", search: ["Türkiye", "Istanbul"] }
+      - { tenant: borgwarner, wd: wd5, site: BorgWarner_Careers, company: "BorgWarner", search: ["Türkiye"] }
+      - { tenant: bakerhughes, wd: wd5, site: BakerHughes, company: "Baker Hughes", search: ["Türkiye"] }
+
+  hrpeak:
+    enabled: true
+    detail_limit: 80
+    portals:
+      - { company: "ROKETSAN", base: "https://kariyer.roketsan.com.tr", pages: 5 }
+      - { company: "TEI", base: "https://tei.hrpeak.com", pages: 3 }
+
+  baykar:
+    enabled: true
+    detail_limit: 60
+
+  # Lever / Ashby modülleri hazır; şu an Türkiye/Avrupa'da uygun ilanı olan şirket bulunamadı
+  # (Velo3D ve 1X'te sadece ABD'de satış rolleri vardı). Şirket ekleyince enabled: true yap.
+  lever:
+    enabled: false
+    companies:
+      - { slug: velo3d, company: "Velo3D" }          # metal eklemeli imalat
+
+  ashby:
+    enabled: false
+    companies:
+      - { slug: 1x, company: "1X Technologies" }     # insansı robotik
+
   greenhouse:
     enabled: true
     # Greenhouse kullanan şirketlerin pano adları (boards.greenhouse.io/<ad>)
     boards: [formlabs, markforged, carbon]
     # Sadece bu konumları eşleyen ilanlar alınır
     location_regex: "(Turkey|Türkiye|Istanbul|Germany|Netherlands|Belgium|France|Italy|Spain|Austria|Switzerland|Sweden|Denmark|Finland|Norway|Poland|Czech|Hungary|Portugal|Ireland|United Kingdom|UK|Europe|EMEA|Remote)"
+
+# Hedef şirketler: sitede "Hedef şirketler" panelinde açık ilan sayısı ve kariyer linkiyle görünür;
+# priority: true olanların ilanları kendi kategorisi içinde üste çıkar (kategori değişmez).
+# match: ilan şirket adında aranacak düzenli ifade (küçük harf, Türkçe harfler sadeleştirilmiş).
+companies:
+  - { name: "ASELSAN", match: "aselsan", careers_url: "https://www.aselsan.com/tr/kariyer", priority: true }
+  - { name: "ROKETSAN", match: "roketsan", careers_url: "https://kariyer.roketsan.com.tr/jobs", priority: true }
+  - { name: "TUSAŞ", match: "tusas|turk havacilik", careers_url: "https://kariyer.tusas.com/", priority: true }
+  - { name: "TEI", match: "\\btei\\b|tusas motor", careers_url: "https://tei.hrpeak.com/jobs", priority: true }
+  - { name: "Baykar", match: "baykar", careers_url: "https://kariyer.baykartech.com/tr/", priority: true }
+  - { name: "Ford Otosan", match: "ford otosan|ford", careers_url: "https://www.fordotosan.com.tr/", priority: true }
+  - { name: "TOFAŞ", match: "tofas", careers_url: "https://www.tofas.com.tr/", priority: true }
+  - { name: "Mercedes-Benz Türk", match: "mercedes", careers_url: "https://www.mercedes-benz.com.tr/", priority: true }
+  - { name: "Bosch", match: "bosch", careers_url: "https://careers.smartrecruiters.com/BoschGroup", priority: true }
+  - { name: "Arçelik", match: "arcelik|beko", careers_url: "https://www.arcelikglobal.com/", priority: true }
+  - { name: "BSH", match: "\\bbsh\\b", careers_url: "https://www.bsh-group.com/tr/tr/kariyer/bshye-hos-geldi", priority: false }
+  - { name: "Siemens", match: "siemens", careers_url: "https://jobs.siemens.com/careers", priority: false }
+  - { name: "Otokar", match: "otokar", careers_url: "https://www.otokar.com.tr/", priority: false }
+  - { name: "BMC", match: "\\bbmc\\b", careers_url: "https://www.bmc.com.tr/", priority: false }
+  - { name: "FNSS", match: "fnss", careers_url: "https://www.fnss.com.tr/", priority: false }
+  - { name: "Kale Pratt & Whitney", match: "kale pratt|pratt", careers_url: "https://www.kalepw.com/", priority: false }
+  - { name: "Hitachi Energy", match: "hitachi", careers_url: "https://hitachi.wd1.myworkdayjobs.com/hitachi", priority: false }
+  - { name: "GE Aerospace", match: "ge aerospace|\\bgeae\\b", careers_url: "https://geaerospace.wd5.myworkdayjobs.com/GE_ExternalSite", priority: false }
 
 # Beceri yol haritası: sitede "sık istenen ama profilinde görünmeyen" araçların yanında gösterilen kaynaklar.
 # Anahtarlar radar/match.py > SKILLS ile aynı. Bir aracı öğrenince profile.skills listesine ekle.
