@@ -12,6 +12,8 @@ on:
 
 permissions:
   contents: write            # data/ ve site/data.json'u geri commit etmek için
+  pages: write               # siteyi GitHub Pages'e yayınlamak için
+  id-token: write
 
 concurrency:
   group: radar
@@ -42,13 +44,18 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          SITE_URL: ${{ vars.SITE_URL }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://mmerterdogan.github.io/is-radari/' }}
         run: python -m radar run --hours "${{ github.event.inputs.hours || 24 }}"
 
       - name: Sonuçları kaydet
         run: |
           git config user.name "is-radari-bot"
           git config user.email "is-radari-bot@users.noreply.github.com"
-          git add data site/data.json lib/profile.js
+          git add data site/data.json site/profile.json
           git diff --cached --quiet || git commit -m "tarama $(date -u +%F)"
           git push
+
+  # Siteyi (site/ klasörü) taramanın hemen ardından yayınla
+  deploy:
+    needs: scan
+    uses: ./.github/workflows/deploy.yml

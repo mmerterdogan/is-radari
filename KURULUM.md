@@ -1,62 +1,21 @@
 # İş Radarı - Kurulum ve kullanım
 
 **Ne yapar:**
-- Her sabah 08:00'de ilanları tarar ve CV'ne göre puanlar.
-- En iyi eşleşmeler için ön yazı hazırlar ve Telegram'a özet atar.
-- Site üzerinden başvurularını takip edersin: aşamalar, notlar, takip hatırlatması, başka sitelerden elle ilan ekleme, istediğin ilana tek tıkla ön yazı.
-- Telefon ve bilgisayar aynı veriyi görür.
-- Bilgisayarın kapalı olsa da çalışır.
+- Her sabah 08:00'de ilanları tarar ve CV'ne göre sınıflandırır.
+- Telegram'a özet atar.
+- Siteyi günceller: **https://mmerterdogan.github.io/is-radari/**
+- Site üzerinden başvurularını takip edersin: aşamalar, notlar, takip hatırlatması, başka sitelerden elle ilan ekleme, istediğin ilana ön yazı.
+- Her şey GitHub'da çalışır, bilgisayarın kapalı olsa da. Ücretsiz.
 
-Kurulum yaklaşık 30 dakika sürer. Adımları sırayla izle.
+## Kurulum (bir kerelik)
 
-## 1. GitHub'a yükle (özel repo)
+1. **Repo açık (public) olmalı.** GitHub'ın ücretsiz planında site sadece açık repodan yayınlanır. Repo → **Settings → General → Danger Zone → Change visibility → Public**. Repoda telefon ya da e-posta yok. CV'nin içeriği (eğitim, staj, projeler) ve taranan ilanlar herkese görünür olur. Başvuru durumların ve notların repoda değil, tarayıcında durur.
+2. **Siteyi aç.** Repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. **Telegram:** Repo → **Settings → Secrets and variables → Actions** → `TELEGRAM_TOKEN` ve `TELEGRAM_CHAT_ID` secret'ları. Değerler bülten botundaki gibi.
+4. **İlk yayın:** Repo → **Actions → Siteyi yayınla → Run workflow**. 1-2 dakika sonra site adresi açılır.
+5. **İlk tarama (isteğe bağlı):** **Actions → Günlük tarama → Run workflow**. "Kaç saat geriye" kutusuna 168 yazarsan son 7 günün ilanlarıyla başlarsın. Bittiğinde siteyi de kendisi yayınlar.
 
-1. github.com'da **Private** yeni bir repo aç (ör. `is-radari`). Repo özel olmalı, çünkü içinde CV'n var.
-2. Bu klasörde:
-   ```powershell
-   git init
-   git add .
-   git commit -m "İş Radarı"
-   git branch -M main
-   git remote add origin https://github.com/<kullanıcı-adın>/is-radari.git
-   git push -u origin main
-   ```
-
-## 2. GitHub gizli anahtarları (günlük tarama için)
-
-Repo → **Settings → Secrets and variables → Actions**
-
-| Tür | Ad | Değer |
-|---|---|---|
-| Secret (isteğe bağlı) | `ANTHROPIC_API_KEY` | console.anthropic.com → API Keys. Kredi yüklemek gerekir. Eklemezsen aşağıya bak. |
-| Secret | `TELEGRAM_TOKEN` | Bülten botunla aynı: `C:\Users\muham\.claude\bulten\.env` |
-| Secret | `TELEGRAM_CHAT_ID` | Aynı dosyadan |
-| Variable | `SITE_URL` | 3. adımdan sonra sitenin adresi (ör. `https://is-radari.pages.dev`) |
-
-**`ANTHROPIC_API_KEY` isteğe bağlı.** Eklemezsen her şey çalışır. Farkları şunlar: puanlar anahtar kelimeye dayalı olur, ön yazıyı ise site senin Claude aboneliğinle yazdırır. Buton CV'n ve ilanla hazır bir istemi kopyalar ve claude.ai'yi açar; sen yapıştırırsın, gelen cevabı siteye geri yapıştırırsın. Ek ücret yok.
-
-## 3. Siteyi yayınla (Cloudflare Pages, ücretsiz)
-
-1. **Site şifresi üret.** Başvuru takibini ve ön yazı butonunu korur:
-   ```powershell
-   python -c "import secrets; print(secrets.token_urlsafe(24))"
-   ```
-2. dash.cloudflare.com → **Storage & Databases → KV → Create** → adı `is-radari`.
-3. **Workers & Pages → Create → Pages → Connect to Git** → repoyu seç.
-   - Build command: `npm install --omit=dev`
-   - Build output directory: `site`
-4. Deploy tamamlanınca projenin **Settings** sayfasına git:
-   - **Variables and Secrets:** `RADAR_TOKEN` (1. adımdaki şifre) ekle, **Secret** olarak. API kullanacaksan `ANTHROPIC_API_KEY`'i de ekle (isteğe bağlı).
-   - **Bindings → KV namespace:** Variable name `RADAR_KV`, namespace `is-radari`.
-   - **Runtime → Compatibility date:** bugünün tarihi.
-   - Değişikliklerin geçerli olması için **Deployments → Retry deployment** yap.
-5. Sitenin adresini (`https://<proje-adı>.pages.dev`) 2. adımdaki `SITE_URL` değişkenine yaz.
-6. **Sayfayı kilitle (önerilir).** data.json'da adın ve ilanların var. Cloudflare **Zero Trust → Access → Applications → Add an application → Self-hosted** yolunu izle: domain `<proje-adı>.pages.dev`, policy "Allow" + kendi e-postan. Bundan sonra siteye sadece e-postana gelen kodla girersin.
-7. Siteyi aç → ⚙ Ayarlar → şifreyi gir → "☁ senkron" yazmalı. Aynısını telefonda da yap.
-
-## 4. İlk çalıştırma
-
-Repo → **Actions → Günlük tarama → Run workflow**. İlk çalıştırmada "kaç saat geriye" kutusuna **168** yaz; böylece son 7 günün ilanlarıyla dolu bir havuzla başlarsın. 15-25 dakika sürer. Bittiğinde Telegram'a mesaj gelir, site birkaç dakika içinde güncellenir. Sonrasında her gün 08:00'de kendiliğinden çalışır.
+**Claude API (isteğe bağlı):** `ANTHROPIC_API_KEY` secret'ını eklersen sabah taramasında Claude en umut verici 40 ilanı ayrıca değerlendirir ve 3 ön yazı yazar (ayda ~$10-20). Eklemezsen kural tabanlı eşleştirme kullanılır. Sitedeki ön yazı butonu her durumda senin Claude aboneliğinle çalışır.
 
 ## İlanlar nasıl eşleştiriliyor?
 
@@ -89,10 +48,10 @@ Lokasyon kategoriyi değiştirmez, sadece gösterilir ve sıralamada kullanılı
 | Başvuru takibi | Karttaki açılır menü: Kaydedildi → Başvuruldu → Mülakat → Teklif / Olumsuz. "Başvuruldu" dediğin ilan **Başvurularım**'a taşınır. |
 | Takip hatırlatması | Başvurunun üzerinden 10 gün geçince **Takip zamanı** olarak işaretlenir. "Takip ettim" butonu hatırlatmayı 10 gün öteler. |
 | Not | Görüşülen kişi, maaş, mülakat tarihi… Aramaya da dahil. |
-| Ön yazı | **API varsa:** sabah hazır gelenler "Ön yazı" butonunda, diğer ilanlarda **Ön yazı oluştur** (~30 sn). **API yoksa:** "Ön yazı oluştur" CV'n, ilan ve uygunluk analiziyle hazır bir istem kopyalar ve claude.ai'yi açar; cevabı siteye yapıştırıp kaydedersin. |
+| Ön yazı | **Ön yazı oluştur**: CV'n, ilan ve uygunluk analiziyle hazır bir istem kopyalar ve claude.ai'yi açar; cevabı siteye yapıştırıp kaydedersin. API ekliysen sabah hazırlanan ön yazılar da "Ön yazı" butonunda görünür. |
 | Başka sitelerden ilan | **+ İlan ekle**: Kariyer.net, şirket sitesi, e-posta… Elle eklenen ilanlar otomatik sınıflandırılmaz; deneyim, eğitim, lokasyon ve çalışma şeklini formda seçebilirsin. |
 | İstemediğin ilan | "İlgilenmiyorum": listeden gizlenir |
-| Yedek | ⚙ Ayarlar → Yedeği indir / yükle |
+| Telefon ↔ bilgisayar | Takip verisi her tarayıcıda ayrı saklanır. Aktarmak için bir cihazda ⚙ Ayarlar → **Yedeği indir**, diğerinde **Yedek yükle** (ikisi birleştirilir). |
 
 ## Ayarlar (`config.yaml`)
 
@@ -114,10 +73,8 @@ CV'n değişince `cv/cv.md` dosyasını da güncelle. Bir sonraki taramada Claud
 
 | Kalem | Tahmini |
 |---|---|
-| GitHub Actions (özel repo) | Ücretsiz (günde ~20 dk, aylık 2000 dk kota) |
-| Cloudflare Pages + KV + Access | Ücretsiz |
+| GitHub Actions + GitHub Pages (açık repo) | Ücretsiz |
 | Claude API (isteğe bağlı): sabah taraması (`claude-opus-5`, ≤ 40 ilan + 3 ön yazı) | Günde ~$0.3-0.5 |
-| Claude API (isteğe bağlı): sitede istenen ön yazı | Yazı başına ~$0.03-0.05 |
 
 API'siz toplam maliyet: **$0**. API ile aylık ~$10-20. Gerçek sabah harcaması sitenin altındaki "Tarama geçmişi"nde görünür. Daha ucuz istersen `config.yaml` → `scoring.model` değerini `claude-sonnet-5` yap (yaklaşık %60 daha ucuz), sonra `price_input: 2`, `price_output: 10` gir. Puanlama kalitesi biraz düşebilir.
 
@@ -132,8 +89,8 @@ API'siz toplam maliyet: **$0**. API ile aylık ~$10-20. Gerçek sabah harcaması
 ## Yerel geliştirme (isteğe bağlı)
 
 ```powershell
-pip install -r requirements.txt; npm install
+pip install -r requirements.txt
 python -m radar run --no-notify          # tarama (ANTHROPIC_API_KEY .env'de ise Claude ile)
-npm run dev                              # site + API: http://127.0.0.1:8788 (şifre: yerel-test)
+npm run dev                              # site: http://127.0.0.1:8788
 python -m pytest tests -q; npm test      # testler
 ```

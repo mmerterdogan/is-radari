@@ -1,11 +1,10 @@
 // İş Radarı - job list with fit categories + application tracker.
 // Scanned jobs come from data.json (written by the daily GitHub Action, classified by radar/match.py).
-// Your tracker (stages, notes, manual jobs, letters) lives in `S`: saved in this browser and,
-// when the password is set, synced through /api/state.
+// Your tracker (stages, notes, manual jobs, letters) lives in `S`, saved in this browser only
+// (move it between devices with the backup export / import in Settings).
 import { EMPTY, mergeState } from "./merge.js";
 
 const LS_STATE = "radar-state-v2";
-const LS_TOKEN = "radar-token";
 const LS_FILTERS = "radar-filters-v1";
 const FOLLOWUP_DAYS = 10;
 
@@ -59,42 +58,9 @@ let lastDay = "";
 let openNotes = new Set();
 let expanded = new Set();
 
-// ------------------------------------------------------------------ sync
-const token = () => ls.get(LS_TOKEN, "");
-let syncTimer = null;
-
-function setSync(kind, text) {
-  const el = $("#sync");
-  el.className = `sync ${kind}`;
-  el.textContent = text;
-}
-
-async function api(path, opts = {}) {
-  const res = await fetch(path, { ...opts, headers: { "content-type": "application/json", "x-radar-token": token(), ...(opts.headers || {}) } });
-  const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw Object.assign(new Error(body.error || `HTTP ${res.status}`), { status: res.status });
-  return body;
-}
-
-async function syncNow() {
-  if (!token()) { setSync("", "yalnız bu cihaz"); return; }
-  setSync("", "senkronize ediliyor…");
-  try {
-    const server = await api("/api/state", { method: "PUT", body: JSON.stringify(S) });
-    S = mergeState(S, server);
-    ls.set(LS_STATE, S);
-    setSync("ok", "☁ senkron");
-    render();
-  } catch (e) {
-    setSync("err", e.status === 401 ? "şifre hatalı" : "senkron yok");
-  }
-}
-const scheduleSync = () => { clearTimeout(syncTimer); syncTimer = setTimeout(syncNow, 800); };
-
 function saveEntry(id, patch) {
   S.entries[id] = { ...(S.entries[id] || {}), ...patch, updated: nowIso() };
   ls.set(LS_STATE, S);
-  scheduleSync();
 }
 
 // ------------------------------------------------------------------ data helpers
@@ -317,7 +283,11 @@ function showLetter(j, L) {
 
 let PROFILE_INFO = null;
 async function profileInfo() {
-  if (!PROFILE_INFO) PROFILE_INFO = await api("/api/profile");
+  if (!PROFILE_INFO) {
+    const res = await fetch("profile.json", { cache: "no-store" });
+    if (!res.ok) throw new Error(`profile.json: HTTP ${res.status}`);
+    PROFILE_INFO = await res.json();
+  }
   return PROFILE_INFO;
 }
 
@@ -356,7 +326,7 @@ function parsePasted(text) {
 function claudeDialog(j, info) {
   openDialog(`<h2>Ön yazı - Claude aboneliğinle</h2>
     <div class="meta">${esc(j.title)} · ${esc(j.company)}</div>
-    <p class="hint">Sunucuda API anahtarı yok, bu yüzden ön yazıyı kendi Claude hesabınla yazdırıyoruz (ek ücret yok).</p>
+    <p class="hint">Ön yazıyı kendi Claude hesabınla yazdırıyoruz (ek ücret yok).</p>
     <h3>1. İstemi kopyala, Claude'a yapıştır</h3>
     <p class="hint">CV'n, tercihlerin, ilan metni ve uygunluk analizi hazır bir istemde birleşti. Butona basınca kopyalanır ve claude.ai açılır, orada yapıştırıp gönder.</p>
     <div class="actions"><button class="btn primary" data-claude-copy>İstemi kopyala ve Claude'u aç</button></div>
@@ -380,32 +350,11 @@ function claudeDialog(j, info) {
   });
 }
 
-async function generateLetter(j, force = false, btn = null) {
-  if (!token()) {
-    openDialog(`<h2>Ön yazı için şifre gerekli</h2>
-      <p>Ön yazı için CV'ne erişmek gerekiyor; CV'n şifreyle korunuyor. Ayarlar'dan site şifresini (RADAR_TOKEN) gir.</p>
-      <div class="actions"><button class="btn primary" data-open-settings>Ayarları aç</button><button class="btn" data-close>Kapat</button></div>`);
-    return;
-  }
-  let info;
+async function generateLetter(j) {
   try {
-    info = await profileInfo();
+    claudeDialog(j, await profileInfo());   // letters are written with the user's own claude.ai subscription
   } catch (e) {
-    toast(e.status === 401 ? "Şifre hatalı - Ayarlar'ı kontrol et" : `Sunucuya ulaşılamadı: ${e.message}`);
-    return;
-  }
-  if (!info.letter_api) return claudeDialog(j, info);   // no API key: use the claude.ai subscription
-  if (btn) { btn.disabled = true; btn.textContent = "Yazılıyor… (~30 sn)"; }
-  try {
-    const job = { id: j.id, title: j.title, company: j.company, location: j.location, url: j.url, description: j.description || "" };
-    const L = await api("/api/letter", { method: "POST", body: JSON.stringify({ job, force }) });
-    saveEntry(j.id, { letter: { subject: L.subject, cover_letter: L.cover_letter, cv_highlights: L.cv_highlights } });
-    showLetter(j, letterOf(j));
-    render();
-  } catch (e) {
-    toast(e.status === 401 ? "Şifre hatalı - Ayarlar'ı kontrol et" : `Ön yazı yazılamadı: ${e.message}`);
-  } finally {
-    if (btn) { btn.disabled = false; btn.textContent = "Ön yazı oluştur"; }
+    toast(`Profil yüklenemedi: ${e.message}`);
   }
 }
 
@@ -448,15 +397,8 @@ function openAdd() {
 }
 
 function openSettings() {
-  const t = token();
   openDialog(`<h2>Ayarlar</h2>
-    <form class="form" id="set-form">
-      <label>Site şifresi (RADAR_TOKEN)
-        <input name="token" type="password" autocomplete="current-password" value="${esc(t)}" placeholder="Cloudflare'de tanımladığın şifre">
-      </label>
-      <p class="hint">Şifre girilince başvuru takibin telefon ve bilgisayar arasında senkronize olur, istediğin ilana ön yazı oluşturabilirsin. Şifre sadece bu tarayıcıda saklanır.</p>
-      <div class="actions"><button class="btn primary" type="submit">Kaydet ve bağlan</button></div>
-    </form>
+    <p class="hint">Başvuru durumların, notların ve elle eklediğin ilanlar bu tarayıcıda saklanır. Telefonla bilgisayar arasında aktarmak için bir cihazda yedeği indir, diğerinde yükle (ikisi birleştirilir, hiçbir şey silinmez).</p>
     <h3>Yedek</h3>
     <div class="actions">
       <button class="btn" data-export>Yedeği indir (.json)</button>
@@ -464,12 +406,6 @@ function openSettings() {
     </div>
     <p class="hint">Takipte ${Object.keys(S.entries).length} kayıt, elle eklenmiş ${Object.values(S.manual).filter((m) => !m.deleted).length} ilan var.</p>
     <div class="actions"><button class="btn" data-close>Kapat</button></div>`);
-  $("#set-form").addEventListener("submit", async (ev) => {
-    ev.preventDefault();
-    ls.set(LS_TOKEN, new FormData(ev.target).get("token").trim());
-    await syncNow();
-    toast($("#sync").classList.contains("ok") ? "Bağlandı ✓" : "Bağlanamadı - şifreyi kontrol et");
-  });
 }
 
 // ------------------------------------------------------------------ events
@@ -518,7 +454,7 @@ document.addEventListener("click", async (ev) => {
   if (t.dataset?.regen) {
     const j = allJobs().find((x) => x.id === t.dataset.regen);
     dlg().close();
-    return generateLetter(j, true);
+    return generateLetter(j);
   }
   const act = t.dataset?.act;
   if (!act || act === "stage" || act === "notes") return;
@@ -526,7 +462,7 @@ document.addEventListener("click", async (ev) => {
   const j = allJobs().find((x) => x.id === id);
   if (act === "letter") {
     const L = letterOf(j);
-    return L ? showLetter(j, L) : generateLetter(j, false, t);
+    return L ? showLetter(j, L) : generateLetter(j);
   }
   if (act === "more") { expanded.has(id) ? expanded.delete(id) : expanded.add(id); render(); return; }
   if (act === "note") { openNotes.has(id) ? openNotes.delete(id) : openNotes.add(id); render(); return; }
@@ -557,7 +493,6 @@ document.addEventListener("change", async (ev) => {
       const imported = JSON.parse(await t.files[0].text());
       S = mergeState(S, imported);
       ls.set(LS_STATE, S);
-      scheduleSync();
       render();
       toast("Yedek yüklendi");
     } catch { toast("Dosya okunamadı"); }
@@ -591,20 +526,11 @@ async function boot() {
   }
   const warn = [];
   if (last.failed_sources?.length) warn.push(`Son taramada sonuç vermeyen kaynak: ${last.failed_sources.join(", ")}`);
-  if (jobs.length && !jobs.some((j) => j.scored_by === "claude")) warn.push("Kural tabanlı eşleştirme kullanılıyor (Claude API tanımlı değil) - kategori ve gerekçeler ilan metnindeki kalıplardan çıkarıldı.");
   if (warn.length) { $("#warn").textContent = warn.join(" · "); $("#warn").hidden = false; }
   $("#runs tbody").innerHTML = (DATA.runs || []).slice().reverse().map((r) => {
     const c = r.by_category || {};
     return `<tr><td>${esc(r.date)}</td><td>${r.fetched ?? "-"}</td><td>${r.new ?? "-"}</td><td>${r.relevant ?? r.candidates ?? "-"}</td><td>${c.dogrudan ?? "-"}</td><td>${c.uygun ?? "-"}</td><td>${c.stretch ?? "-"}</td><td>${c.dusuk ?? "-"}</td><td>${r.scored ?? 0}</td><td>$${(r.cost_usd || 0).toFixed(2)}</td><td>${esc((r.failed_sources || []).join(", ") || "-")}</td></tr>`;
   }).join("");
   render();
-  if (token()) {
-    try {
-      S = mergeState(S, await api("/api/state"));
-      ls.set(LS_STATE, S);
-      setSync("ok", "☁ senkron");
-      render();
-    } catch (e) { setSync("err", e.status === 401 ? "şifre hatalı" : "senkron yok"); }
-  } else setSync("", "yalnız bu cihaz");
 }
 boot();
