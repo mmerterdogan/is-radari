@@ -359,5 +359,40 @@
   "rechecked": 40,
   "closed_found": 6,
   "seconds": 2791
+ },
+ {
+  "date": "2026-10-01",
+  "fetched": 480,
+  "new": 235,
+  "relevant": 148,
+  "dropped": 87,
+  "enriched": 161,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 8,
+   "uygun": 23,
+   "stretch": 28,
+   "belirsiz": 0,
+   "dusuk": 89
+  },
+  "sources": {
+   "linkedin": 246,
+   "euraxess": 20,
+   "greenhouse": 52,
+   "smartrecruiters": 47,
+   "workday": 18,
+   "hrpeak": 28,
+   "baykar": 51,
+   "youthall": 18,
+   "kariyerkapisi": 0
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "health": [],
+  "backfilled": 0,
+  "rechecked": 40,
+  "closed_found": 6,
+  "seconds": 2721
  }
 ]
