@@ -92,6 +92,11 @@ def parse_detail(html: str) -> tuple[str, dict]:
     applicants = _applicants(_text(soup.select_one(".num-applicants__caption")))
     if applicants:
         crit["applicants"] = applicants
+    # Easy Apply ("Kolay Başvuru") vs. redirect to the company's own site (the URL itself is login-only)
+    if "apply-link-simple_onsite" in html:
+        crit["apply"] = "easy"
+    elif "offsite-apply-icon" in html or "apply-link-offsite" in html:
+        crit["apply"] = "offsite"
     return desc, crit
 
 

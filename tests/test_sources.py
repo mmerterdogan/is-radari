@@ -230,3 +230,9 @@ def test_weekly_trend_and_cities():
     assert [w["week"] for w in got] == ["2026-09-21", "2026-09-28"]
     assert got[0]["uygun"] == 5 and got[0]["dogrudan"] == 1 and got[0]["runs"] == 2 and got[1]["stretch"] == 4
     assert pipeline._city("Greater Istanbul") == "Istanbul" and pipeline._city("Bursa, Nilüfer, Turkey") == "Bursa"
+
+
+def test_linkedin_apply_type():
+    _, easy = linkedin.parse_detail((FIX / "linkedin_easyapply.html").read_text(encoding="utf-8"))
+    _, off = linkedin.parse_detail((FIX / "linkedin_offsite.html").read_text(encoding="utf-8"))
+    assert easy["apply"] == "easy" and off["apply"] == "offsite"

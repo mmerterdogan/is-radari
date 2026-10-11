@@ -91420,15 +91420,14 @@
   "category": "stretch",
   "category_reasons": [
    "2+ yıl deneyim isteniyor - staj ve projelerinle stretch",
-   "Lisans mezunu kabul ediliyor",
    "Örtüşen: Excel / Office, Kök neden analizi"
   ],
   "score": 53,
   "scored_by": "kural",
   "education": {
-   "level": "lisans",
+   "level": "belirtilmemis",
    "field": "belirtilmemis",
-   "label": "Lisans"
+   "label": "Belirtilmemiş"
   },
   "experience": {
    "min": 2,
@@ -93002,12 +93001,12 @@
    "checked_at": "2026-10-08T12:29:49+00:00"
   },
   "first_seen": "2026-10-01T11:42:40+00:00",
-  "category": "uygun",
+  "category": "stretch",
   "category_reasons": [
-   "Örtüşen: Kök neden analizi",
-   "Deneyim şartı belirtilmemiş"
+   "Orta seviye (LinkedIn) deneyim isteniyor - staj ve projelerinle stretch",
+   "Örtüşen: Kök neden analizi"
   ],
-  "score": 59,
+  "score": 56,
   "scored_by": "kural",
   "education": {
    "level": "belirtilmemis",
@@ -93017,9 +93016,9 @@
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "orta_kidemli",
+   "label": "Orta seviye (LinkedIn)",
+   "fit": "yakin"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -123823,15 +123822,13 @@
    "checked_at": "2026-10-04T11:31:13+00:00"
   },
   "first_seen": "2026-09-28T11:48:02+00:00",
-  "category": "stretch",
+  "category": "dusuk",
   "category_reasons": [
-   "2+ yıl deneyim isteniyor - staj ve projelerinle stretch",
-   "Lisans veya YL kabul ediliyor - YL'n artı",
+   "5+ yıl - kıdemli / uzun deneyim isteyen pozisyon",
    "Örtüşen: Excel / Office, Üretim süreçleri",
-   "İlgili mühendislik bölümleri kabul ediliyor",
    "Profilinde görünmüyor: SAP / ERP, Yalın üretim / Kaizen"
   ],
-  "score": 48,
+  "score": 9,
   "scored_by": "kural",
   "education": {
    "level": "lisans_veya_yl",
@@ -123839,11 +123836,11 @@
    "label": "Lisans veya YL · İlgili müh. bölümleri"
   },
   "experience": {
-   "min": 2,
+   "min": 5,
    "max": null,
    "level": "associate",
-   "label": "2+ yıl",
-   "fit": "yakin"
+   "label": "5+ yıl",
+   "fit": "uzak"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -134905,9 +134902,9 @@
   "role_family": "tasarim",
   "role_label": "Tasarım",
   "sectors": [
-   "Havacılık",
    "Savunma",
-   "Üretim"
+   "Üretim",
+   "Robotik / otomasyon"
   ],
   "loc_tier": 5,
   "loc_label": "Yurt dışı",
@@ -149637,13 +149634,13 @@
    "checked_at": "2026-10-11T11:48:12+00:00"
   },
   "first_seen": "2026-09-26T16:36:59+00:00",
-  "category": "uygun",
+  "category": "stretch",
   "category_reasons": [
+   "Başlangıç-orta (LinkedIn: Associate) deneyim isteniyor - staj ve projelerinle stretch",
    "Örtüşen: FEA/FEM",
-   "Deneyim şartı belirtilmemiş",
    "Profilinde görünmüyor: Abaqus"
   ],
-  "score": 63,
+  "score": 60,
   "scored_by": "kural",
   "education": {
    "level": "belirtilmemis",
@@ -149653,9 +149650,9 @@
   "experience": {
    "min": null,
    "max": null,
-   "level": "belirtilmemis",
-   "label": "Belirtilmemiş",
-   "fit": "belirtilmemis"
+   "level": "associate",
+   "label": "Başlangıç-orta (LinkedIn: Associate)",
+   "fit": "yakin"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -171352,14 +171349,12 @@
    "checked_at": "2026-10-03T10:55:09+00:00"
   },
   "first_seen": "2026-09-24T15:06:02+00:00",
-  "category": "stretch",
+  "category": "dusuk",
   "category_reasons": [
-   "Orta seviye (LinkedIn) deneyim isteniyor - staj ve projelerinle stretch",
-   "Lisans veya YL kabul ediliyor - YL'n artı",
-   "Örtüşen: SolidWorks, Modal/titreşim analizi, CAD / 3D modelleme, Teknik resim",
-   "Makine mühendisliği doğrudan isteniyor"
+   "5+ yıl - kıdemli / uzun deneyim isteyen pozisyon",
+   "Örtüşen: SolidWorks, Modal/titreşim analizi, CAD / 3D modelleme, Teknik resim"
   ],
-  "score": 83,
+  "score": 44,
   "scored_by": "kural",
   "education": {
    "level": "lisans_veya_yl",
@@ -171367,11 +171362,11 @@
    "label": "Lisans veya YL · Makine Müh."
   },
   "experience": {
-   "min": null,
+   "min": 5,
    "max": null,
    "level": "orta_kidemli",
-   "label": "Orta seviye (LinkedIn)",
-   "fit": "yakin"
+   "label": "5+ yıl",
+   "fit": "uzak"
   },
   "work_mode": "belirtilmemis",
   "requirements": [
@@ -171413,8 +171408,7 @@
   "role_label": "Makine mühendisliği",
   "sectors": [
    "Havacılık",
-   "Üretim",
-   "Ar-Ge / akademi"
+   "Üretim"
   ],
   "loc_tier": 5,
   "loc_label": "Yurt dışı",

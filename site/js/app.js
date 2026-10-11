@@ -172,6 +172,8 @@ function card(j) {
     `<span title="Eğitim şartı">🎓 ${esc(j.education?.label || "Belirtilmemiş")}</span>`,
     freshness(j) ? `<span title="İlan tarihi">🗓 ${esc(freshness(j))}</span>` : "",
     j.applicants ? `<span title="LinkedIn'deki başvuru sayısı">👥 ${esc(j.applicants)} başvuru</span>` : "",
+    j.apply === "easy" ? `<span title="LinkedIn Kolay Başvuru">⚡ Kolay Başvuru</span>` : "",
+    j.apply === "offsite" ? `<span title="LinkedIn şirketin kendi başvuru sayfasına yönlendiriyor">↗ Şirket sitesinden başvuru</span>` : "",
     j.deadline && !j.closed ? `<span title="Son başvuru tarihi" class="${j.deadline <= addDays(today(), 3) ? "soon" : ""}">⏳ son başvuru ${esc(fmtDate(j.deadline))}</span>` : "",
     j.role_label ? `<span title="Pozisyon alanı">🧭 ${esc(j.role_label)}</span>` : "",
     `<span>${esc(SRC[j.source] || "Şirket sitesi")}</span>`,
@@ -195,6 +197,7 @@ function card(j) {
     <div class="actions">
       <select data-act="stage" aria-label="Başvuru durumu">${opts}</select>
       ${j.url ? `<a class="btn primary" href="${esc(j.url)}" target="_blank" rel="noopener">İlana git</a>` : ""}
+      ${canAutofill(j) && ["", "kaydedildi"].includes(st) ? `<button class="btn" data-act="fill" title="Başvuru formunu Claude eklentisine doldurt">🤖 Otomatik doldur</button>` : ""}
       <button class="btn" data-act="letter">${letter ? "Ön yazı" : "Ön yazı oluştur"}</button>
       <button class="btn" data-act="note">${noteOpen ? "Notu kapat" : e.notes ? "Notu düzenle" : "Not"}</button>
       ${st === "basvuruldu" ? `<button class="btn" data-act="followup-msg">${e.followup_msg ? "Takip mesajı" : "Takip mesajı yaz"}</button>` : ""}
@@ -576,6 +579,99 @@ function showText(j, title, text, kind) {
       <button class="btn" data-close>Kapat</button></div>`);
 }
 
+// ------------------------------------------------------------------ autofill (Claude in Chrome)
+// Personal details live only in this browser (the repo is public) and are not part of the backup file.
+const LS_APPLICANT = "radar-applicant";
+const APPLICANT_FIELDS = [
+  ["name", "Ad Soyad", "text", ""],
+  ["email", "E-posta", "email", ""],
+  ["phone", "Telefon", "tel", "+90 5xx xxx xx xx"],
+  ["city", "Şehir / adres", "text", "İstanbul, Türkiye"],
+  ["birth", "Doğum tarihi (soran formlar için)", "text", "gg.aa.yyyy"],
+  ["linkedin", "LinkedIn profil adresi", "url", "https://www.linkedin.com/in/…"],
+  ["portfolio", "GitHub / portfolyo (varsa)", "url", ""],
+  ["military", "Askerlik durumu", "text", "Tamamlandı / Tecilli (tarih) / Muaf"],
+  ["license", "Ehliyet", "text", "B sınıfı / yok"],
+  ["start", "Ne zaman başlayabilirsin?", "text", "Hemen / 2 hafta içinde"],
+  ["salary_tr", "Maaş beklentisi (Türkiye)", "text", "Net aylık … TL ya da \"görüşmeye açığım\""],
+  ["salary_abroad", "Maaş beklentisi (yurt dışı)", "text", "Brüt yıllık … EUR"],
+  ["permit", "Çalışma izni / vize", "text", "T.C. vatandaşı; AB için çalışma izni gerekir"],
+  ["relocate", "Taşınma / seyahat", "text", "Taşınmaya açığım; seyahat engelim yok"],
+  ["extra", "Diğer form bilgileri", "textarea", "Dil seviyeleri, referans, cinsiyet/medeni hal (soran formlar için)…"],
+];
+const applicant = () => ls.get(LS_APPLICANT, {});
+const canAutofill = (j) => Boolean(j.url) && j.apply !== "easy" && !j.closed;
+
+function fillPrompt(j, info, A, letter) {
+  const personal = APPLICANT_FIELDS.filter(([k]) => A[k]).map(([k, l]) => `- ${l}: ${A[k]}`).join("\n");
+  const via = j.apply === "offsite" || j.source === "linkedin"
+    ? "Bu sekme bir LinkedIn ilanı. \"Başvur / Apply\" butonuna bas ve şirketin başvuru sayfasına geç (yeni sekmede açılırsa oradan devam et). \"Kolay Başvuru / Easy Apply\" formu açılırsa hiçbir şey doldurma, dur ve bana söyle - onu ben yapacağım."
+    : "Bu sekme şirketin kariyer sayfasındaki ilan. \"Başvur / Apply\" butonuna basıp başvuru formuna geç.";
+  return [
+    "Bu sekmedeki iş ilanına benim adıma başvuru formunu doldur. Kurallar:",
+    `1. ${via}`,
+    "2. Formu GÖNDERME. Son \"Gönder / Submit / Başvuruyu tamamla\" adımına gelince dur; neyi nasıl doldurduğunu kısa bir liste halinde özetle, boş kalan ya da emin olmadığın alanları ayrıca yaz.",
+    "3. Giriş yapma, hesap oluşturma, şifre yazma, CAPTCHA, e-posta doğrulama ve KVKK / açık rıza / şartlar kutuları: bunlara gelince dur ve bana söyle; ben yapınca devam edersin.",
+    "4. CV / özgeçmiş dosyası yükleme alanını boş bırak ve sonunda hatırlat (dosyayı ben yükleyeceğim). Bilgileri aşağıdan elle doldur.",
+    "5. Sadece aşağıdaki bilgileri kullan. Listede olmayan bir bilgiyi (not ortalaması, eski maaş, referans vb.) uydurma; boş bırak ve bana sor.",
+    "6. Açık uçlu sorulara (neden bu şirket, kendinden bahset, motivasyon, ilgili deneyim) CV'ye ve varsa ön yazıya dayanarak, formun dilinde, kısa ve somut cevap yaz. İlanda geçen anahtar kelimeleri doğal şekilde kullan ama CV'de olmayan beceriyi varmış gibi yazma.",
+    "7. Açılır listelerde en doğru seçeneği seç (eğitim: Lisans - Makine Mühendisliği, mezun; yüksek lisans devam ediyor). Deneyim yılı sorulursa stajları ayrıca belirt, toplam tam zamanlı deneyimi 0 yaz.",
+    "",
+    "## Kişisel bilgiler",
+    personal || "(girilmemiş - bu alanlar gelince bana sor)",
+    "",
+    "## CV ve tercihler",
+    info.profile,
+    "",
+    "## İlan",
+    `${j.title} - ${j.company} - ${j.location || ""}`,
+    `Link: ${j.url}`,
+    j.cv_missing?.length ? `İlanın anahtar kelimelerinden CV'mde doğrudan geçmeyenler (varsa ilgili deneyimimle eşleştir, yoksa uydurma): ${j.cv_missing.join(", ")}` : "",
+    "",
+    letter ? `## Bu ilan için ön yazım (\"ön yazı / cover letter / motivasyon\" alanına bunu yapıştır)\nKonu: ${letter.subject || ""}\n${letter.cover_letter}` : "## Ön yazı\nHazır ön yazı yok. Form zorunlu tutuyorsa CV'ye dayanarak 120-180 kelimelik kısa bir ön yazı yaz, gerekmiyorsa boş bırak.",
+  ].filter((x) => x !== "").join("\n");
+}
+
+async function openFill(j) {
+  let info;
+  try { info = await profileInfo(); } catch (e) { toast(`Profil yüklenemedi: ${e.message}`); return; }
+  const A = applicant();
+  const missing = ["name", "email", "phone"].filter((k) => !A[k]);
+  const letter = letterOf(j);
+  const prompt = fillPrompt(j, info, A, letter);
+  const via = j.apply === "offsite" ? "LinkedIn şirketin kendi sitesine yönlendiriyor: Claude önce \"Başvur\"a basıp oraya geçecek (LinkedIn'de oturumun açık olmalı)."
+    : j.source === "linkedin" ? "Başvuru türü henüz bilinmiyor: Kolay Başvuru çıkarsa Claude durur, onu sen yaparsın."
+    : "Şirketin kendi başvuru sayfası.";
+  openDialog(`<h2>🤖 Otomatik doldur</h2>
+    <div class="meta">${esc(j.title)} · ${esc(j.company)}</div>
+    <ul class="checks">
+      <li class="${missing.length ? "bad" : "ok"}">${missing.length ? `Başvuru bilgilerin eksik (${missing.map((k) => APPLICANT_FIELDS.find((f) => f[0] === k)[1]).join(", ")}). <button class="linkbtn" data-open-settings>Ayarlar'da gir</button>` : "Başvuru bilgilerin hazır"}</li>
+      <li class="${letter ? "ok" : "warn"}">${letter ? "Bu ilanın ön yazısı istemde" : `Ön yazı yok; form isterse Claude CV'den kısa bir tane yazar. <button class="linkbtn" data-fill-letter="${esc(j.id)}">Önce ön yazı oluştur</button>`}</li>
+      <li class="ok">${esc(via)}</li>
+    </ul>
+    <h3>1. Kopyala ve ilanı aç</h3>
+    <div class="actions"><button class="btn primary" data-fill-go="${esc(j.id)}">İstemi kopyala ve ilanı aç</button></div>
+    <h3>2. Claude eklentisine yapıştır</h3>
+    <p class="hint">Açılan sekmede Chrome'un sağ üstündeki Claude eklentisini aç, istemi yapıştır, gönder. Claude formu doldurur ve <b>göndermeden önce durur</b>; giriş, KVKK onayı ve CV dosyası yüklemesini sana bırakır.</p>
+    <h3>3. Kontrol et, gönder</h3>
+    <div class="actions"><button class="btn" data-fill-done="${esc(j.id)}">📨 Gönderdim - Başvuruldu yap</button><button class="btn" data-close>Kapat</button></div>
+    <details><summary class="hint">İstemi göster</summary><pre id="fill-prompt">${esc(prompt)}</pre></details>`);
+  $("[data-fill-go]").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(prompt); toast("İstem kopyalandı ✓ - Claude eklentisine yapıştır"); }
+    catch { toast("Kopyalanamadı - aşağıdaki \"İstemi göster\"den elle kopyala"); }
+    window.open(j.url, "_blank", "noopener");
+  });
+}
+
+function settingsApplicant() {
+  const A = applicant();
+  return `<h3>Başvuru bilgilerim <span class="hint">(otomatik doldurma için)</span></h3>
+    <p class="hint">Sadece bu tarayıcıda saklanır; repoya ve yedek dosyasına girmez. Boş bıraktığın alanları Claude form sırasında sana sorar.</p>
+    <div class="applicant">${APPLICANT_FIELDS.map(([k, l, type, ph]) => type === "textarea"
+      ? `<label class="form wide">${esc(l)}<textarea rows="3" data-applicant="${k}" placeholder="${esc(ph)}">${esc(A[k] || "")}</textarea></label>`
+      : `<label class="form">${esc(l)}<input type="${type}" data-applicant="${k}" value="${esc(A[k] || "")}" placeholder="${esc(ph)}"></label>`).join("")}</div>`;
+}
+
 function jobBlock(j) {
   return `<job>\nTitle: ${j.title}\nCompany: ${j.company}\nLocation: ${j.location || ""}\nURL: ${j.url || ""}\nDescription:\n${j.description || "(ilan metni yok)"}\n</job>`;
 }
@@ -766,6 +862,7 @@ function settingsFeedback() {
 function openSettings() {
   openDialog(`<h2>Ayarlar</h2>
     <p class="hint">Başvuru durumların, notların ve elle eklediğin ilanlar bu tarayıcıda saklanır. Telefonla bilgisayar arasında aktarmak için bir cihazda yedeği indir, diğerinde yükle (ikisi birleştirilir, hiçbir şey silinmez).</p>
+    ${settingsApplicant()}
     <h3>Haftalık hedef</h3>
     <label class="form">Haftada kaç başvuru?<input type="number" min="1" max="50" value="${Number(ls.get("radar-goal", 5)) || 5}" data-goal></label>
     <h3>Yedek</h3>
@@ -831,6 +928,19 @@ document.addEventListener("click", async (ev) => {
     return;
   }
   if (t.dataset?.open) { openCardDialog(t.dataset.open); return; }
+  if (t.dataset?.fillLetter) {
+    const j = allJobs().find((x) => x.id === t.dataset.fillLetter);
+    dlg().close();
+    return generateLetter(j);
+  }
+  if (t.dataset?.fillDone) {
+    const id = t.dataset.fillDone;
+    saveEntry(id, { stage: "basvuruldu", ...(entry(id).applied_at ? {} : { applied_at: today(), followup_at: nextFollowup() }) });
+    dlg().close();
+    render();
+    toast(`Başvurularım'a taşındı - ${FOLLOWUP_BDAYS} iş günü sonra takip hatırlatması`);
+    return;
+  }
   if (t.dataset?.reason) {
     saveEntry(t.dataset.rid, { reject_reason: t.dataset.reason });
     dlg().close();
@@ -873,6 +983,7 @@ document.addEventListener("click", async (ev) => {
     return L ? showLetter(j, L) : generateLetter(j);
   }
   if (act === "followup-msg") return openPromptTool("followup", j);
+  if (act === "fill") return openFill(j);
   if (act === "ics-interview" || act === "ics-followup") {
     const e = entry(id);
     const interview = act === "ics-interview";
@@ -931,6 +1042,10 @@ let noteTimer = null;
 document.addEventListener("input", (ev) => {
   const t = ev.target;
   if (t.id === "q") return render();
+  if (t.dataset?.applicant) {
+    ls.set(LS_APPLICANT, { ...applicant(), [t.dataset.applicant]: t.value.trim() });
+    return;
+  }
   if (t.dataset?.act === "notes" || t.dataset?.act === "contact") {
     const id = t.closest("[data-id]").dataset.id;
     const field = t.dataset.act;

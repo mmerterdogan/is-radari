@@ -173,6 +173,8 @@ def export_site(store: Store, out: Path, keep_days: int, stats: dict, cfg: dict 
         if d["deadline"] and d["deadline"] < today:
             d["closed"] = True             # application deadline passed
         d["applicants"] = j.extra.get("applicants", "")
+        # how to apply: "easy" (LinkedIn Easy Apply), "offsite" (LinkedIn -> company site), "site" (company site)
+        d["apply"] = j.extra.get("apply", "") if j.source == "linkedin" else ("" if j.source == "manual" else "site")
         d["target_priority"] = j.target in priority
         if cv_text and j.category in ("dogrudan", "uygun", "stretch", "belirsiz"):
             d["cv_missing"] = match.cv_missing_keywords(j, cv_text, profile.skills)

@@ -211,3 +211,15 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .85em; 
 .funnel-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .linkbtn { all: unset; cursor: pointer; color: var(--muted); margin-left: 8px; font-size: inherit; }
 .linkbtn:hover { color: var(--c-dusuk, #c0392b); text-decoration: underline; }
+
+/* ---- autofill */
+.checks { list-style: none; padding: 0; margin: 8px 0; display: grid; gap: 4px; font-size: .9rem; }
+.checks li::before { margin-right: 6px; }
+.checks li.ok::before { content: "✓"; color: var(--c-dogrudan); }
+.checks li.warn::before { content: "!"; color: var(--c-stretch); font-weight: 700; }
+.checks li.bad::before { content: "✕"; color: #c0392b; }
+.checks .linkbtn { color: var(--accent); margin-left: 4px; text-decoration: underline; }
+.applicant { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; }
+.applicant .wide { grid-column: 1 / -1; }
+@media (max-width: 600px) { .applicant { grid-template-columns: minmax(0, 1fr); } }
+#fill-prompt { max-height: 260px; overflow: auto; font-size: .78rem; }
