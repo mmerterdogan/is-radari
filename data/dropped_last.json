@@ -1,933 +1,674 @@
 [
  {
-  "title": "inşaat mühendisi",
-  "company": "TEZ Mühendislik LTD. ŞTİ.",
-  "location": "Samsun",
-  "url": "https://www.linkedin.com/jobs/view/4006603101",
+  "title": "Interior Trim Design Engineer",
+  "company": "TEMSA",
+  "location": "Adana, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/%C4%B1nterior-trim-design-engineer-at-temsa-4475685956",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "Elazığ/EGEP Projesi İnşaat Mühendisi",
-  "company": "Emre Ray",
-  "location": "Elazığ, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/elaz%C4%B1%C4%9F-egep-projesi-in%C5%9Faat-m%C3%BChendisi-at-emre-ray-4475640733",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "AI / Machine Learning Engineer",
-  "company": "Creative Solution",
+  "title": "Senior Power Electronics Hardware Design Engineer",
+  "company": "FEV Türkiye",
   "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/a%C4%B1-machine-learning-engineer-at-creative-solution-4475631532",
+  "url": "https://tr.linkedin.com/jobs/view/senior-power-electronics-hardware-design-engineer-at-fev-t%C3%BCrkiye-4478399886",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "Lead AI Engineer with Java 17",
-  "company": "EPAM Systems",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/lead-a%C4%B1-engineer-with-java-17-at-epam-systems-4477234881",
+  "title": "RF Haberleşme Sistemleri Mühendisi",
+  "company": "Anadolu Robotik",
+  "location": "Gölcük",
+  "url": "https://tr.linkedin.com/jobs/view/rf-haberle%C5%9Fme-sistemleri-m%C3%BChendisi-at-anadolu-robotik-4475680737",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "Senior AI Solution Engineer",
-  "company": "EPAM Systems",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/senior-a%C4%B1-solution-engineer-at-epam-systems-4477245460",
+  "title": "Araştırma ve Geliştirme Kimyageri",
+  "company": "Tekno Yapı Kimyasalları",
+  "location": "Dilovası",
+  "url": "https://tr.linkedin.com/jobs/view/ara%C5%9Ft%C4%B1rma-ve-geli%C5%9Ftirme-kimyageri-at-tekno-construction-chemicals-4476013284",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "Senior Software Engineer (AI Infrastructure)",
-  "company": "Alignerr",
+  "title": "Emniyet Kritik Gömülü Yazılım Tasarım Mühendisi",
+  "company": "Aselsan",
+  "location": "Ankara, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/emniyet-kritik-g%C3%B6m%C3%BCl%C3%BC-yaz%C4%B1l%C4%B1m-tasar%C4%B1m-m%C3%BChendisi-at-aselsan-4476001675",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Embedded Software Engineer",
+  "company": "Earsis Technologies Ltd. Şti.",
+  "location": "Ankara, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/embedded-software-engineer-at-earsis-technologies-ltd-%C5%9Fti-4475679723",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Senior Embedded Software Engineer",
+  "company": "Gini Talent",
   "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/senior-software-engineer-a%C4%B1-%C4%B1nfrastructure-at-alignerr-4474574004",
+  "url": "https://tr.linkedin.com/jobs/view/senior-embedded-software-engineer-at-gini-talent-4478347438",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "Senior AI/LLM Data Scientist in Agentic AI",
-  "company": "ING Hubs Türkiye",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/senior-a%C4%B1-llm-data-scientist-in-agentic-a%C4%B1-at-%C4%B1ng-hubs-t%C3%BCrkiye-4437257224",
+  "title": "Kıdemli Yazılım Mühendisi",
+  "company": "Gizli",
+  "location": "Ankara, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/k%C4%B1demli-yaz%C4%B1l%C4%B1m-m%C3%BChendisi-at-gizli-4476016068",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
   "title": "Artificial Intelligence Engineer",
-  "company": "HiredBuddy",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/artificial-%C4%B1ntelligence-engineer-at-hiredbuddy-4477255120",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Yapay Zeka Proje ve Satış Sorumlusu (Part-Time)",
-  "company": "BoardMeAI",
-  "location": "İstanbul",
-  "url": "https://tr.linkedin.com/jobs/view/yapay-zeka-proje-ve-sat%C4%B1%C5%9F-sorumlusu-part-time-at-boardmea%C4%B1-4475661153",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Network and Cyber-Security Administrator",
-  "company": "Siemens",
-  "location": "Ankara",
-  "url": "https://tr.linkedin.com/jobs/view/network-and-cyber-security-administrator-at-siemens-4433238790",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Elektrik Ustası",
-  "company": "OSTİM OSB İstihdam Ofisi",
-  "location": "Pursaklar",
-  "url": "https://tr.linkedin.com/jobs/view/elektrik-ustas%C4%B1-at-ostim-osb-istihdam-ofisi-4478083628",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Elektrik Teknisyeni",
-  "company": "OSTİM OSB İstihdam Ofisi",
-  "location": "Ankara, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/elektrik-teknisyeni-at-ostim-osb-istihdam-ofisi-4478054423",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Project Engineer - Water Networks",
-  "company": "Stantec",
-  "location": "Castlebar, County Mayo, İrlanda",
-  "url": "https://ie.linkedin.com/jobs/view/project-engineer-water-networks-at-stantec-4403625670",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Electrical Engineer",
-  "company": "Vertiv",
-  "location": "Burnfoot, County Donegal, İrlanda",
-  "url": "https://ie.linkedin.com/jobs/view/electrical-engineer-at-vertiv-4432453307",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Projekttekniker til Pharmaindustrien",
-  "company": "Siemens",
-  "location": "Ballerup, Danimarka Başkent Bölgesi, Danimarka",
-  "url": "https://dk.linkedin.com/jobs/view/projekttekniker-til-pharmaindustrien-at-siemens-4449769315",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Associate Director - Civil Engineering (Transmission & Distribution)",
-  "company": "Jacobs",
-  "location": "Cork, Cork Kontluğu, İrlanda",
-  "url": "https://ie.linkedin.com/jobs/view/associate-director-civil-engineering-transmission-distribution-at-jacobs-4441200740",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Polymer / Materials Chemist",
-  "company": "Addible",
-  "location": "Allenwood, Kildare Kontluğu, İrlanda",
-  "url": "https://ie.linkedin.com/jobs/view/polymer-materials-chemist-at-addible-4475608999",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Finding the environmental causes of childhood and early-onset cancer (CUE-CAN)",
-  "company": "Utrecht University via AcademicTransfer",
-  "location": "Utrecht, Netherlands",
-  "url": "https://euraxess.ec.europa.eu/jobs/472055",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Assistant/Associate Professor In High-Frequency InP Electronics",
-  "company": "AcademicTransfer",
-  "location": "Eindhoven, Netherlands",
-  "url": "https://euraxess.ec.europa.eu/jobs/472056",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "PhD Candidate in AI and Hardware Security",
-  "company": "University of Amsterdam (UvA) via AcademicTransfer",
-  "location": "Amsterdam, Netherlands",
-  "url": "https://euraxess.ec.europa.eu/jobs/472059",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "PhD position in AI and multimodal digital liver pathology",
-  "company": "KU Leuven",
-  "location": "Leuven, Belgium",
-  "url": "https://euraxess.ec.europa.eu/jobs/472060",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "PhD Position (M/F) in Glycochemistry: Synthesis of N-Acetyl-glucosamine Analogues as Therapeutic Agents*",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "GIF SUR YVETTE, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471983",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Postdoctoral Researcher in Radiochemistry – Radiolysis of Water and Biomolecules under Accelerated Ion Beams (M/F)F",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "STRASBOURG, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471985",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Post-doctoral assistant Department of Materials, Textiles and Chemical Engineering (30380)",
-  "company": "Academic Positions",
-  "location": "Ghent, Belgium",
-  "url": "https://euraxess.ec.europa.eu/jobs/471991",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Doctoral fellow - Department of Civil Engineering",
-  "company": "Academic Positions",
-  "location": "Ghent, Belgium",
-  "url": "https://euraxess.ec.europa.eu/jobs/471993",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "UCD Post-Doc Lvl 1, Biosystems and Food Engineering, 12 Months",
-  "company": "University College Dublin",
-  "location": "Dublin, Ireland",
-  "url": "https://euraxess.ec.europa.eu/jobs/472002",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "OUTREACH - Hospital -University -Community Network for the Early Identification of Frailty in Older Adults",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472003",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Development and Experimental Validation of AI-Based Solutions for Managing and Querying Occupational Health and Safety Documentati",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472012",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Comparative evaluation procedure for n. 1 post-doc research contract - Department of Architecture",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472025",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Development of algorithms, logic, and models for processing drone-acquired data to quantify asbestos-containing materials (ACMs) and remotely map surfaces.",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472026",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Research activity concerning the development of models and algorithms for estimating geophysical parameters using remotely sensed measurements from bistatic radar",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472032",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Novel Photocatalytic Strategies for Organoboron Chemistry - 2026_IDR_DCMC_22",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472034",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Development of algorithms for radiative transfer and scene classification.",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472043",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Conversational-AI in organizations: Perceptions, decision-making processes, and implications for branding",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472044",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Research engineer with technical tesponsibility for AI-Based ultrasound diagnostics",
-  "company": "Karolinska Institutet via Varbi",
-  "location": "Stockholm, Sweden",
-  "url": "https://euraxess.ec.europa.eu/jobs/471938",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Research engineer [F/M] for AI-driven molecular and spatial analysis of tumor cell plasticity",
-  "company": "inria",
-  "location": "Villeurbanne, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471939",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Postdoctoral position in electrical engineering, specialisation in intelligent control of solar power systems",
-  "company": "Karlstad University",
-  "location": "Karlstad, Sweden",
-  "url": "https://euraxess.ec.europa.eu/jobs/471950",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Stajyer Öğrenci",
-  "company": "Öner Hukuk ve Danışmanlık Bürosu",
-  "location": "Kağıthane",
-  "url": "https://www.linkedin.com/jobs/view/4475643558",
-  "reason": "Genel başlık, ilan metni alınamadı (tam metinden)"
- },
- {
-  "title": "PhD on LINE-1 with application of FWO fellowship",
-  "company": "KU Leuven",
-  "location": "Leuven, Belgium",
-  "url": "https://euraxess.ec.europa.eu/jobs/471941",
-  "reason": "Genel başlık, ilan metni alınamadı (tam metinden)"
- },
- {
-  "title": "PhD position in health effects from the exposure to pesticides",
-  "company": "Utrecht University via AcademicTransfer",
-  "location": "Utrecht, Netherlands",
-  "url": "https://euraxess.ec.europa.eu/jobs/472054",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoctoral research position in the sociology of work, employment and/or social policy (M/F)",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "NANTERRE, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/472062",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoctoral Researcher in Neutrino Physics - DUNE (M/F)",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "GRENOBLE, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471973",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoctoral Researcher (M/F) in Climate-Related Health Risk Assessment and Urban Adaptation Tools",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "GRENOBLE, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471974",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoctoral Researcher in Music Research and Acoustics in France: An Oral History (M/F)",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "Représentations, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471976",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoctoral Researcher in Particle Physics (M/F)",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "STRASBOURG, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471979",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoctoral Position (M/F) in Membrane Technology for CO₂ Capture",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "NANCY, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471981",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoctoral Researcher (M/F)",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "SACLAY, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471982",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Doctoral Position in Risk-Based Inspection and Maintenance Planning of Tunnels",
-  "company": "Academic Positions",
-  "location": "Zurich, Switzerland",
-  "url": "https://euraxess.ec.europa.eu/jobs/471988",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Doctoral Position in Uncertainty-Aware Condition Assessment of Tunnels",
-  "company": "Academic Positions",
-  "location": "Zurich, Switzerland",
-  "url": "https://euraxess.ec.europa.eu/jobs/471989",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Researcher in focused ultrasound neuromodulation of peripheral nerves - Informatietechnologie (30379)",
-  "company": "Academic Positions",
-  "location": "Ghent, Belgium",
-  "url": "https://euraxess.ec.europa.eu/jobs/471990",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Doctoral student in fabrication and design of superconducting quantum processors",
-  "company": "Academic Positions",
-  "location": "Gothenburg, Sweden",
-  "url": "https://euraxess.ec.europa.eu/jobs/471995",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoc Research Fellow Level 1, School of Music, 18 months",
-  "company": "University College Dublin",
-  "location": "Dublin, Ireland",
-  "url": "https://euraxess.ec.europa.eu/jobs/472000",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Research Assistant, School of Earth Sciences, 2 years",
-  "company": "University College Dublin",
-  "location": "Dublin, Ireland",
-  "url": "https://euraxess.ec.europa.eu/jobs/472001",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Dynamics of Diversity in Complex Systems: Entropy, Extinction and Innovation",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472013",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Molecular mechanisms of nephroprotection by SGLT2 inhibitors: interaction between SIRT1 and hypoxia signaling in diabetic nephropathy",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472021",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Comparative evaluation procedure for n. 3 research contracts - Department of Statistical Sciences “Paolo Fortunati”",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472023",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Study and development of optical and photonic characterization methodologies for the functional assessment of particulate systems intended for endovascular applications.",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472039",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Post-Doctoral Fellowship in Rural Development",
-  "company": "FAPESP, SAO PAULO RESEARCH FOUNDATION",
-  "location": "Outro estado, Brazil",
-  "url": "https://euraxess.ec.europa.eu/jobs/471942",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "n.1 RESEARCHER according to art. 24, L. 240/2010 Department DMMT ad BIOS-07/A",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Brescia, Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/471946",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "n.1 RESEARCHER according to art. 24, L. 240/2010 Department DSMC, ad IINF-05/A reserved as indicated in the description",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Brescia, Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/471947",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "n.1 RESEARCHER according to art. 24, L. 240/2010 Department DSMC, ad MEDS-26/A reserved as indicated in the description",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Brescia, Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/471948",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoctoral researcher",
-  "company": "Talentech",
-  "location": "Sweden",
-  "url": "https://euraxess.ec.europa.eu/jobs/471901",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "PhD student in laser spectroscopy",
-  "company": "Uppsala Universitet via MyNetwork",
-  "location": "Uppsala, Sweden",
-  "url": "https://euraxess.ec.europa.eu/jobs/471902",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "PhD Position Quantum Physics - Rare-earth Ion single Photon Emitter",
-  "company": "Delft University of Technology via AcademicTransfer",
-  "location": "Delft, Netherlands",
-  "url": "https://euraxess.ec.europa.eu/jobs/471904",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Postdoc Sustainability and Responsible Innovation for Climate-Resilient Water Systems",
-  "company": "Delft University of Technology via AcademicTransfer",
-  "location": "Delft, Netherlands",
-  "url": "https://euraxess.ec.europa.eu/jobs/471906",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "PhD Position Optimizing Multi-actor Transport and Logistics Systems",
-  "company": "Delft University of Technology via AcademicTransfer",
-  "location": "Delft, Netherlands",
-  "url": "https://euraxess.ec.europa.eu/jobs/471907",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
- },
- {
-  "title": "Satış Destek Temsilcisi",
-  "company": "Göksu Trade Ltd. Şti.",
-  "location": "Yenimahalle",
-  "url": "https://tr.linkedin.com/jobs/view/sat%C4%B1%C5%9F-destek-temsilcisi-at-g%C3%B6ksu-trade-ltd-%C5%9Fti-4475624204",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Digital Operations & Central Dispatch Long-Term Intern",
-  "company": "AKÇANSA",
-  "location": "Büyükçekmece",
-  "url": "https://tr.linkedin.com/jobs/view/digital-operations-central-dispatch-long-term-%C4%B1ntern-at-ak%C3%A7ansa-4475618503",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Sales Leader, Strategic Key Accounts",
-  "company": "Philips",
-  "location": "Greater Istanbul",
-  "url": "https://tr.linkedin.com/jobs/view/sales-leader-strategic-key-accounts-at-philips-4440777439",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Artist Assistant Intern",
-  "company": "Tune-L Events / Production & Management",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/artist-assistant-%C4%B1ntern-at-tune-l-events-production-management-4475635187",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Satış Operasyon Stajeri",
-  "company": "Webtymize Academy™",
+  "company": "DeepAdapt",
   "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/sat%C4%B1%C5%9F-operasyon-stajeri-at-webtymize-academy%E2%84%A2-4463998158",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+  "url": "https://tr.linkedin.com/jobs/view/artificial-%C4%B1ntelligence-engineer-at-deepadapt-4477269675",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "Customer Support Specialist",
-  "company": "HiredBuddy",
+  "title": "Donanım Üretim Mühendisi",
+  "company": "Gizli",
   "location": "Ankara, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/customer-support-specialist-at-hiredbuddy-4477241789",
+  "url": "https://tr.linkedin.com/jobs/view/donan%C4%B1m-%C3%BCretim-m%C3%BChendisi-at-gizli-4476017059",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Gıda Mühendisi",
+  "company": "Coffee Lab",
+  "location": "Sincan",
+  "url": "https://tr.linkedin.com/jobs/view/g%C4%B1da-m%C3%BChendisi-at-coffee-lab-4476012065",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Çevre Mühendisi",
+  "company": "ASÇEV",
+  "location": "Selçuklu",
+  "url": "https://www.linkedin.com/jobs/view/4475698484",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Çevre Mühendisi",
+  "company": "Next Çevre Danışmanlık",
+  "location": "İzmit",
+  "url": "https://www.linkedin.com/jobs/view/4471297098",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Software Engineer",
+  "company": "Dream Games",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/software-engineer-at-dream-games-3630450075",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "inşaat mühendisi",
+  "company": "Vadi inşaat",
+  "location": "Meram",
+  "url": "https://www.linkedin.com/jobs/view/4475660597",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Backend Engineer",
+  "company": "BGTS International",
+  "location": "Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/backend-engineer-at-bgts-%C4%B1nternational-4475695424",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Network & Güvenlik Kıdemli Uzmanı/Mimarı",
+  "company": "Dünya Katılım",
+  "location": "Ümraniye",
+  "url": "https://tr.linkedin.com/jobs/view/network-g%C3%BCvenlik-k%C4%B1demli-uzman%C4%B1-mimar%C4%B1-at-d%C3%BCnya-kat%C4%B1l%C4%B1m-4475696502",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Game Developer",
+  "company": "Dream Games",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/game-developer-at-dream-games-3625900628",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Yazılım Destek Mühendisi",
+  "company": "Likrom Analytical Solutions Marketing Corp..",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/yaz%C4%B1l%C4%B1m-destek-m%C3%BChendisi-at-likrom-analytical-solutions-marketing-corp-4475696074",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Yazılım Uzmanı",
+  "company": "IstanbulVita Clinic",
+  "location": "Şişli",
+  "url": "https://tr.linkedin.com/jobs/view/yaz%C4%B1l%C4%B1m-uzman%C4%B1-at-%C4%B1stanbulvita-clinic-4475697495",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Backend ve Entegrasyon Geliştirici",
+  "company": "ICterra Bilgi ve İletişim Teknolojileri",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/backend-ve-entegrasyon-geli%C5%9Ftirici-at-%C4%B1cterra-%C4%B1nformation-and-communication-technologies-4476013169",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Pre-Sales Engineer Gönüllü Stajyer",
+  "company": "Cylana",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/pre-sales-engineer-g%C3%B6n%C3%BCll%C3%BC-stajyer-at-cylana-4476015290",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Software Engineer (Part-time)",
+  "company": "Dream Games",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/software-engineer-part-time-at-dream-games-4468538317",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "KİMYAGER/KİMYA MÜHENDİSİ",
+  "company": "BMT TEKNOLOJİ",
+  "location": "Gebze",
+  "url": "https://tr.linkedin.com/jobs/view/kimyager-kimya-m%C3%BChendisi-at-bmt-teknoloji-4476024144",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Experienced Electronics Engineer for Manufacturing Engineering",
+  "company": "Trackman",
+  "location": "Hørsholm, Danimarka Başkent Bölgesi, Danimarka",
+  "url": "https://dk.linkedin.com/jobs/view/experienced-electronics-engineer-for-manufacturing-engineering-at-trackman-4383773701",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Hardware Engineer – Kommende Projekter",
+  "company": "Etteplan",
+  "location": "Herlev, Danimarka Başkent Bölgesi, Danimarka",
+  "url": "https://dk.linkedin.com/jobs/view/hardware-engineer-%E2%80%93-kommende-projekter-at-etteplan-4433084791",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Assistant - environmental protection",
+  "company": "Warsaw University of Life Sciences",
+  "location": "Environmental Engineering and Architecture, Poland",
+  "url": "https://euraxess.ec.europa.eu/jobs/472052",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "PhD Fellowship in Gender Studies",
+  "company": "University of Stavanger",
+  "location": "Faculty of Social Studies, Norway",
+  "url": "https://euraxess.ec.europa.eu/jobs/472105",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "Call Opening Notice Master Students Research Grant under the project AI4SMARTAUDIT - IMS_BOLSA_AI4SMARTAUDIT_2026_02",
+  "company": "NOVA Information Management School (NOVA IMS)",
+  "location": "Lisbon, Portugal",
+  "url": "https://euraxess.ec.europa.eu/jobs/472104",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "Research assistant",
+  "company": "University of Zagreb School of Dental Medicine",
+  "location": "Croatia",
+  "url": "https://euraxess.ec.europa.eu/jobs/472100",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "Senior research assistant",
+  "company": "University of Zagreb School of Dental Medicine",
+  "location": "Croatia",
+  "url": "https://euraxess.ec.europa.eu/jobs/472098",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "Call for Expressions of Interest for Guest Researcher Announcement | Reference: BIIC-EC-CBMA/04/2026 – RIVER2OCEAN 2.0",
+  "company": "Universidade do Minho",
+  "location": "Braga, Portugal",
+  "url": "https://euraxess.ec.europa.eu/jobs/472099",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "RESEARCH MANAGER/DATA MANAGER 3 years",
+  "company": "Université Libre de Bruxelles (ULB)",
+  "location": "Brussels, Belgium",
+  "url": "https://euraxess.ec.europa.eu/jobs/472102",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "PhD Candidate in psychology",
+  "company": "NTNU Norwegian University of Science and Technology",
+  "location": "Trondheim, Norway",
+  "url": "https://euraxess.ec.europa.eu/jobs/472095",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "Lecturer in Screen Storytelling and Media Production (ATS1386)",
+  "company": "Jobs.ac.cn",
+  "location": "China",
+  "url": "https://euraxess.ec.europa.eu/jobs/472050",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "Sales Career Sprint, İzmir",
+  "company": "Coca-Cola İçecek",
+  "location": "İzmir, Türkiye",
+  "url": "https://www.youthall.com/en/cocacolaicecek/sales-career-sprint-izmir_20/",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "Sales Career Sprint, Antalya",
+  "company": "Coca-Cola İçecek",
+  "location": "Antalya, Türkiye",
+  "url": "https://www.youthall.com/en/cocacolaicecek/sales-career-sprint-antalya_19/",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı"
+ },
+ {
+  "title": "Mühendis (Engelli Kadro)",
+  "company": "GİZLİ",
+  "location": "Ankara, Türkiye",
+  "url": "https://www.linkedin.com/jobs/view/4426839422",
   "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
  },
  {
-  "title": "Medical Production Operator",
+  "title": "Bina Bakım Sorumlusu",
+  "company": "Kazancı Holding A.Ş.",
+  "location": "Beykoz",
+  "url": "https://tr.linkedin.com/jobs/view/bina-bak%C4%B1m-sorumlusu-at-kazanc%C4%B1-holding-a-%C5%9F-4475694632",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Teknik Değerlendirme ve Fizibilite Mühendisi",
+  "company": "Kalkınma Yatırım Bankası",
+  "location": "Ankara, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/teknik-de%C4%9Ferlendirme-ve-fizibilite-m%C3%BChendisi-at-kalk%C4%B1nma-yat%C4%B1r%C4%B1m-bankas%C4%B1-4467495594",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Satış Mühendisi",
+  "company": "IŞIK ENDÜSTRİYEL",
+  "location": "Ataşehir",
+  "url": "https://tr.linkedin.com/jobs/view/sat%C4%B1%C5%9F-m%C3%BChendisi-at-%C4%B1%C5%9F%C4%B1k-end%C3%BCstriyel-4475207988",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Sistem Mühendisi (Sualtı)",
+  "company": "Gizli",
+  "location": "Ankara, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/sistem-m%C3%BChendisi-sualt%C4%B1-at-gizli-4476001634",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Ar Ge Mühendisi",
+  "company": "Easy Mix",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/ar-ge-m%C3%BChendisi-at-easy-mix-4475691310",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "R&D Specialist",
+  "company": "RTA Laboratories",
+  "location": "Kocaeli, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/r-d-specialist-at-rta-laboratories-4472902172",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Junior Production Technologist",
+  "company": "La Lorraine Bakery Group",
+  "location": "Yunusemre",
+  "url": "https://tr.linkedin.com/jobs/view/junior-production-technologist-at-la-lorraine-bakery-group-4477511962",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Commissioning Lead",
+  "company": "TIMS GLOBAL",
+  "location": "İzmit",
+  "url": "https://tr.linkedin.com/jobs/view/commissioning-lead-at-t%C4%B1ms-global-4476002928",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "MLOps / Platform Mühendisi (Kubernetes & LLM)",
+  "company": "CloudFlex",
+  "location": "İstanbul",
+  "url": "https://tr.linkedin.com/jobs/view/mlops-platform-m%C3%BChendisi-kubernetes-llm-at-cloudflex-4475201959",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Quality Assurance Specialist",
+  "company": "RTA Laboratories",
+  "location": "Kocaeli, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/quality-assurance-specialist-at-rta-laboratories-4475695255",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Satış Sorumlusu",
+  "company": "Revotek",
+  "location": "İstanbul",
+  "url": "https://tr.linkedin.com/jobs/view/sat%C4%B1%C5%9F-sorumlusu-at-revotek-4475687703",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "R&D Projects Specialist",
+  "company": "DataBoss Security & Analytics A. Ş.",
+  "location": "Greater Ankara",
+  "url": "https://tr.linkedin.com/jobs/view/r-d-projects-specialist-at-databoss-security-analytics-a-%C5%9F-4475685617",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Saha Mühendisi",
+  "company": "AKKUYU ENERJİ A.Ş.",
+  "location": "Sivas, Türkiye",
+  "url": "https://www.linkedin.com/jobs/view/4345924622",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Dağıtım Teknolojileri Mühendisi",
+  "company": "Endoks Energy",
+  "location": "Ankara, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/da%C4%9F%C4%B1t%C4%B1m-teknolojileri-m%C3%BChendisi-at-endoks-energy-4451236227",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Stajyer Mühendis",
+  "company": "GES Plast",
+  "location": "Yunusemre",
+  "url": "https://tr.linkedin.com/jobs/view/stajyer-m%C3%BChendis-at-ges-plast-4476004803",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Aimhigher Long Term Internship Program 2027_Audit & Assurance",
+  "company": "Deloitte",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/aimhigher-long-term-%C4%B1nternship-program-2027-audit-assurance-at-deloitte-4476018265",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Compliance Project Assistant & Long Term Internship",
+  "company": "Token Finansal Teknolojiler",
+  "location": "Sarıyer",
+  "url": "https://tr.linkedin.com/jobs/view/compliance-project-assistant-long-term-%C4%B1nternship-at-token-finansal-teknolojiler-4475695106",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Internal Control Intern",
+  "company": "Vodafone",
+  "location": "Greater Istanbul",
+  "url": "https://tr.linkedin.com/jobs/view/%C4%B1nternal-control-%C4%B1ntern-at-vodafone-4475660754",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Kurumsal İletişim Uzun Dönem Stajyer",
+  "company": "AXA Türkiye",
+  "location": "Greater Istanbul",
+  "url": "https://tr.linkedin.com/jobs/view/kurumsal-ileti%C5%9Fim-uzun-d%C3%B6nem-stajyer-at-axa-t%C3%BCrkiye-4469844990",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Market Research Consultant",
+  "company": "Twentify",
+  "location": "Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/market-research-consultant-at-twentify-4462210574",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "Researcher in mathematical modelling of hub molecules",
+  "company": "UiT Norges arktiske universitet",
+  "location": "Of",
+  "url": "https://tr.linkedin.com/jobs/view/researcher-in-mathematical-modelling-of-hub-molecules-at-uit-the-arctic-university-of-norway-4475688771",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "PhD - Physics of Human-Made Molecular Machines",
+  "company": "Vrije Universiteit Amsterdam (VU Amsterdam)",
+  "location": "Amsterdam, Kuzey Hollanda, Hollanda",
+  "url": "https://nl.linkedin.com/jobs/view/phd-physics-of-human-made-molecular-machines-at-vrije-universiteit-amsterdam-vu-amsterdam-4478515149",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "HR Generalist (Business Partnering & HR Analytics)",
+  "company": "Çimentaş",
+  "location": "İzmir, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/hr-generalist-business-partnering-hr-analytics-at-%C3%A7imenta%C5%9F-4478396238",
+  "reason": "Mühendislik dışı pozisyon"
+ },
+ {
+  "title": "International Markets Medical & Marketing Manager",
+  "company": "DEVA Holding A.Ş.",
+  "location": "İstanbul",
+  "url": "https://tr.linkedin.com/jobs/view/%C4%B1nternational-markets-medical-marketing-manager-at-deva-holding-a-%C5%9F-4475674806",
+  "reason": "Mühendislik dışı pozisyon"
+ },
+ {
+  "title": "AI Engineer, Performance Marketing",
+  "company": "Dream Games",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/a%C4%B1-engineer-performance-marketing-at-dream-games-4440107602",
+  "reason": "Mühendislik dışı pozisyon"
+ },
+ {
+  "title": "Overseas Customer Service Engineer- Turkey",
+  "company": "CATL",
+  "location": "Bursa, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/overseas-customer-service-engineer-turkey-at-catl-4477280499",
+  "reason": "Mühendislik dışı pozisyon"
+ },
+ {
+  "title": "Marketing & Growth Manager in Education Industry",
+  "company": "StudentHub",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/marketing-growth-manager-in-education-%C4%B1ndustry-at-studenthub-4474838357",
+  "reason": "Mühendislik dışı pozisyon"
+ },
+ {
+  "title": "Software Engineer, Performance Marketing",
+  "company": "Dream Games",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/software-engineer-performance-marketing-at-dream-games-4452569017",
+  "reason": "Mühendislik dışı pozisyon"
+ },
+ {
+  "title": "Long Term Intern | Accounting / Controlling",
+  "company": "ALPLA Group",
+  "location": "Gebze",
+  "url": "https://tr.linkedin.com/jobs/view/long-term-%C4%B1ntern-accounting-controlling-at-alpla-group-4478506602",
+  "reason": "Mühendislik dışı pozisyon"
+ },
+ {
+  "title": "Genel",
+  "company": "ATP Savunma A.Ş.",
+  "location": "Sakarya, Türkiye",
+  "url": "https://www.linkedin.com/jobs/view/4475694525",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Technical Manager",
+  "company": "Marsa",
+  "location": "Adana, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/technical-manager-at-marsa-4465206818",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Teknik Müdür",
+  "company": "WAM Turkey",
+  "location": "Şişli",
+  "url": "https://tr.linkedin.com/jobs/view/teknik-m%C3%BCd%C3%BCr-at-wam-turkey-4475685537",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Technical Supervisor - Porta Chiara Hotel Istanbul Karakoy, Curio Collection by Hilton",
+  "company": "Hilton",
+  "location": "Greater Istanbul",
+  "url": "https://tr.linkedin.com/jobs/view/technical-supervisor-porta-chiara-hotel-%C4%B1stanbul-karakoy-curio-collection-by-hilton-at-hilton-4441621178",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Kıdemli Veri Analitiği & İş Zekası Uzmanı",
+  "company": "ARY HOLDING",
+  "location": "Gemlik",
+  "url": "https://tr.linkedin.com/jobs/view/k%C4%B1demli-veri-analiti%C4%9Fi-i%C5%9F-zekas%C4%B1-uzman%C4%B1-at-ary-hold%C4%B1ng-4475681996",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Veri Bilimi Uzmanı",
+  "company": "Yapı Kredi",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/veri-bilimi-uzman%C4%B1-at-yap%C4%B1-kredi-4477561897",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Sektörel ve Ekonomik Fizibilite – Yönetici / Yönetici Yardımcısı",
+  "company": "Kalkınma Yatırım Bankası",
+  "location": "Ankara, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/sekt%C3%B6rel-ve-ekonomik-fizibilite-%E2%80%93-y%C3%B6netici-y%C3%B6netici-yard%C4%B1mc%C4%B1s%C4%B1-at-kalk%C4%B1nma-yat%C4%B1r%C4%B1m-bankas%C4%B1-4467494647",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Karlılık Sistem Yönetimi ve Analiz Yönetici Yardımcısı / Yöneticisi",
+  "company": "TEB",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/karl%C4%B1l%C4%B1k-sistem-y%C3%B6netimi-ve-analiz-y%C3%B6netici-yard%C4%B1mc%C4%B1s%C4%B1-y%C3%B6neticisi-at-teb-4476000522",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Remuneration and Budget Management Midlevel / Competent / Senior",
+  "company": "Enpara.com",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/remuneration-and-budget-management-midlevel-competent-senior-at-enpara-com-4477288958",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Financial Analysis and Budget Planning Department Assistant Manager",
+  "company": "TEB",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/financial-analysis-and-budget-planning-department-assistant-manager-at-teb-4464794658",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Planlama",
+  "company": "Konpet Plastik",
+  "location": "Konya, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/planlama-at-konpet-plastik-4476004805",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Product Manager",
+  "company": "Routex BioSys",
+  "location": "Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/product-manager-at-routex-biosys-4476003953",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "EHS & Sustainability MT",
+  "company": "PHINIA",
+  "location": "İzmir",
+  "url": "https://tr.linkedin.com/jobs/view/ehs-sustainability-mt-at-ph%C4%B1n%C4%B1a-4477563797",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Mobile Growth Lead — App Studio",
+  "company": "Bold Yazılım",
+  "location": "Kadıköy",
+  "url": "https://tr.linkedin.com/jobs/view/mobile-growth-lead-%E2%80%94-app-studio-at-bold-yaz%C4%B1l%C4%B1m-4475692823",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Growth Manager",
+  "company": "Good Job Games",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/growth-manager-at-good-job-games-4336577304",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Creative Strategist (E-commerce)",
+  "company": "Anka Global Inc",
+  "location": "Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/creative-strategist-e-commerce-at-anka-global-%C4%B1nc-4478506303",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Erfaren rådgiver til anlægstekniske opgaver",
+  "company": "Artelia Denmark",
+  "location": "Kopenhag, Danimarka Başkent Bölgesi, Danimarka",
+  "url": "https://dk.linkedin.com/jobs/view/erfaren-r%C3%A5dgiver-til-anl%C3%A6gstekniske-opgaver-at-artelia-denmark-4450325792",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Senior Manager – Next-Gen Pre-Pack Counting Lead",
+  "company": "the LEGO Group",
+  "location": "Billund, Güney Danimarka Bölgesi, Danimarka",
+  "url": "https://dk.linkedin.com/jobs/view/senior-manager-%E2%80%93-next-gen-pre-pack-counting-lead-at-the-lego-group-4475692702",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Material Science & Structural Mechanics - Lecturer",
+  "company": "Griffith College Dublin",
+  "location": "Dublin, County Dublin, İrlanda",
+  "url": "https://ie.linkedin.com/jobs/view/material-science-structural-mechanics-lecturer-at-griffith-college-dublin-4475688468",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Medical Device Development Manager",
   "company": "Materialise",
   "location": "Leuven, Flaman Bölgesi, Belçika",
-  "url": "https://be.linkedin.com/jobs/view/medical-production-operator-at-materialise-4458638215",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+  "url": "https://be.linkedin.com/jobs/view/medical-device-development-manager-at-materialise-4450327833",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
  },
  {
-  "title": "ERP Muhasebe & Finans Danışmanı",
-  "company": "Koloğlu Holding",
-  "location": "Ankara, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/erp-muhasebe-finans-dan%C4%B1%C5%9Fman%C4%B1-at-kolo%C4%9Flu-holding-4472930987",
-  "reason": "Mühendislik dışı pozisyon"
+  "title": "Senior Flow Cytometry Specialist",
+  "company": "Champalimaud Foundation",
+  "location": "Portugal",
+  "url": "https://euraxess.ec.europa.eu/jobs/472106",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
  },
  {
-  "title": "Bilişim Teknolojileri Öğretmeni",
-  "company": "RoboGen Teknoloji Akademisi",
-  "location": "Atakum",
-  "url": "https://tr.linkedin.com/jobs/view/bili%C5%9Fim-teknolojileri-%C3%B6%C4%9Fretmeni-at-robogen-teknoloji-akademisi-4475626473",
-  "reason": "Mühendislik dışı pozisyon"
+  "title": "Assistant, Department of Intervention Dentistry",
+  "company": "Nicolaus Copernicus University",
+  "location": "Faculty of Medicine, Poland",
+  "url": "https://euraxess.ec.europa.eu/jobs/472103",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
  },
  {
-  "title": "Robotik Kodlama Öğretmeni",
-  "company": "Mindio Academy",
-  "location": "İstanbul",
-  "url": "https://tr.linkedin.com/jobs/view/robotik-kodlama-%C3%B6%C4%9Fretmeni-at-mindio-academy-4475629084",
-  "reason": "Mühendislik dışı pozisyon"
+  "title": "Lecturer (f/m/d) with tenure-track to Senior Lecturer Reference number LK 319/26",
+  "company": "University of Bremen",
+  "location": "Bremen, Germany",
+  "url": "https://euraxess.ec.europa.eu/jobs/472097",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
  },
  {
-  "title": "Growth Marketing Manager",
-  "company": "Gobito Digital Solutions",
+  "title": "Lecturer in Computing Science and Creative Technologies (ATS1384)",
+  "company": "Jobs.ac.cn",
+  "location": "China",
+  "url": "https://euraxess.ec.europa.eu/jobs/472051",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Lecturer in Global Digital Media Industries (ATS1385)",
+  "company": "Jobs.ac.cn",
+  "location": "United Kingdom",
+  "url": "https://euraxess.ec.europa.eu/jobs/472049",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Lecturer in Filmmaking (ATS1387)",
+  "company": "Jobs.ac.cn",
+  "location": "China",
+  "url": "https://euraxess.ec.europa.eu/jobs/472048",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Brand Manager",
+  "company": "Bosch Group",
+  "location": "İstanbul, Turkey (Hybrid)",
+  "url": "https://jobs.smartrecruiters.com/BoschGroup/744000155007949",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "UP CLUB",
+  "company": "QNB Türkiye",
+  "location": "Adana, Adıyaman, Afyonkarahisar, Ağrı, Aksaray, Amasya, Ankara, Antalya, Ardahan, Artvin, Aydın, Balıkesir, Bartın, Batman, Bayburt, Bilecik, Bingöl, Bitlis, Bolu, Burdur, Bursa, Çanakkale, Çankırı, Çerkezköy, Çorum, Denizli, Diyarbakır, Düzce, Edirne, Elazığ, Erzincan, Erzurum, Eskişehir, Gaziantep, Giresun, Gümüşhane, Hakkari, Hatay, Iğdır, Isparta, İstanbul, İzmir, Kahramanmaraş, Karabük, Karaman, Kars, Kastamonu, Kayseri, Kırıkkale, Kırıklareli, Kırklareli, Kırşehir, Kilis, Kocaeli, Konya, Kütahya, Malatya, Manisa, Mardin, Mersin, Muğla, Muş, Nevşehir, Niğde, Ordu, Osmaniye, Rize, Sakarya, Samsun, Siirt, Sinop, Sivas, Şanlıurfa, Şırnak, Tekirdağ, Tokat, Trabzon, Tunceli, Uşak, Van, Yalova, Yozgat, Zonguldak, Online, Türkiye",
+  "url": "https://www.youthall.com/tr/qnbturkiye/up-club_3/",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Mechanical & Aerospace Engineer | $20/hr Remote",
+  "company": "Crossing Hurdles",
   "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/growth-marketing-manager-at-gobito-digital-solutions-4477231105",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Hukuk Stajyeri",
-  "company": "Ongur & Partners Uluslararası Hukuk Bürosu",
-  "location": "Şişli",
-  "url": "https://tr.linkedin.com/jobs/view/hukuk-stajyeri-at-ongur-partners-%C4%B1nternational-law-firm-4475637082",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Sales representative BBIO France& Benelux (m/f/d)",
-  "company": "Bruker",
-  "location": "Belçika",
-  "url": "https://be.linkedin.com/jobs/view/sales-representative-bb%C4%B1o-france-benelux-m-f-d-at-bruker-4432811540",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Contribution des facteurs pédologiques, agronomiques et microbiologiques sur la dynamique de l'inoculum primaire de F. graminearum, principal agent causal de la fusariose",
-  "company": "ABG - Association Bernard Gregory",
-  "location": "Lempdes, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/472061",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Postdoctoral Researcher in Eco-Evolutionary Microbiome and Thermal Biology",
-  "company": "Lund University via MyNetwork",
-  "location": "Lund, Sweden",
-  "url": "https://euraxess.ec.europa.eu/jobs/471971",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "PhD in Computational Systems Biology / Bioinformatics (M/F)",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "cellulaire et du développement, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471980",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Evaluation of the effects of exposure to environmental contaminants in complex biological systems",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472004",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Comparative evaluation procedure for n. 1 post-doc research contract - Department of Biological, Geological, and Environmental Sciences",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472011",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Biologia cellulare e molecolare, con un focus specifico e comprovato sulle modificazioni dell’RNA.",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472020",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Mobile Equipment & Workshop Specialist",
-  "company": "DP World",
-  "location": "İzmit",
-  "url": "https://tr.linkedin.com/jobs/view/mobile-equipment-workshop-specialist-at-dp-world-4469204208",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Teknik İşler Departmanı",
-  "company": "DACA SES IŞIK LTD.xn--ti-eta21o.",
-  "location": "Gölbaşı",
-  "url": "https://www.linkedin.com/jobs/view/4475649249",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Sr. Proposal Specialist",
-  "company": "YEO",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/sr-proposal-specialist-at-yeo-4478082490",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Safety Expert",
-  "company": "EZSV TURKEY",
-  "location": "İstanbul, Türkiye",
-  "url": "https://www.linkedin.com/jobs/view/4478097570",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Hasar Uzmanı",
-  "company": "CarGarage Otomotiv",
-  "location": "İstanbul",
-  "url": "https://www.linkedin.com/jobs/view/4475269219",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Senior Product Manager (Consumer Lending Analytics)",
-  "company": "ING Hubs Türkiye",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/senior-product-manager-consumer-lending-analytics-at-%C4%B1ng-hubs-t%C3%BCrkiye-4475629237",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "BPO Performance Specialist (EU/TR)",
-  "company": "Yemeksepeti",
-  "location": "İstanbul",
-  "url": "https://tr.linkedin.com/jobs/view/bpo-performance-specialist-eu-tr-at-yemeksepeti-4414456517",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Business Analytics Consultant",
-  "company": "EPAM Systems",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/business-analytics-consultant-at-epam-systems-4477243534",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Senior Project Controls Manager (Turkey)",
-  "company": "Hill International, Inc.",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/senior-project-controls-manager-turkey-at-hill-%C4%B1nternational-%C4%B1nc-4453894684",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Senior Technical Account Manager - Turkey (Istanbul), Unified Operations",
-  "company": "Amazon Web Services (AWS)",
-  "location": "Greater Istanbul",
-  "url": "https://tr.linkedin.com/jobs/view/senior-technical-account-manager-turkey-%C4%B1stanbul-unified-operations-at-amazon-web-services-aws-4469190997",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Territory Manager - Eskişehir",
-  "company": "Align Technology",
-  "location": "Eskişehir",
-  "url": "https://tr.linkedin.com/jobs/view/territory-manager-eski%C5%9Fehir-at-align-technology-4465768654",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Territory Manager",
-  "company": "Bausch + Lomb",
-  "location": "Şişli",
-  "url": "https://tr.linkedin.com/jobs/view/territory-manager-at-bausch-%2B-lomb-4469875713",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "License Owner, Istanbul",
-  "company": "Stranger Soccer",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/license-owner-%C4%B1stanbul-at-stranger-soccer-4478062573",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Senior Growth Manager - Turkey",
-  "company": "RZR",
-  "location": "İstanbul",
-  "url": "https://tr.linkedin.com/jobs/view/senior-growth-manager-turkey-at-rzr-4414540103",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Søg uopfordret",
-  "company": "OBH Rådgivende Ingeniører",
-  "location": "Odense, Güney Danimarka Bölgesi, Danimarka",
-  "url": "https://dk.linkedin.com/jobs/view/s%C3%B8g-uopfordret-at-obh-r%C3%A5dgivende-%C4%B1ngeni%C3%B8rer-4282918235",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Staalconstructeur Bruggen",
-  "company": "Haskoning",
-  "location": "Nijmegen, Gelderland, Hollanda",
-  "url": "https://nl.linkedin.com/jobs/view/staalconstructeur-bruggen-at-haskoning-4460513937",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "技术开发管培生",
-  "company": "高景网络技术(上海)有限公司",
-  "location": "Maarssen, Utrecht, Hollanda",
-  "url": "https://nl.linkedin.com/jobs/view/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E7%AE%A1%E5%9F%B9%E7%94%9F-at-%E9%AB%98%E6%99%AF%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF-%E4%B8%8A%E6%B5%B7-%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-4475632571",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Technical Director - (Mine Waste)",
-  "company": "WSP in the UK & Ireland",
-  "location": "Naas, Kildare Kontluğu, İrlanda",
-  "url": "https://ie.linkedin.com/jobs/view/technical-director-mine-waste-at-wsp-in-the-uk-%C4%B1reland-4469198043",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "(H/F) Technicien Industrialisation Robotique",
-  "company": "Wandercraft",
-  "location": "Paris, Île-de-France, Fransa",
-  "url": "https://fr.linkedin.com/jobs/view/h-f-technicien-%C4%B1ndustrialisation-robotique-at-wandercraft-4468653966",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Group Leader Materials Generation for Energy Self-Driving Labs",
-  "company": "DIFFER",
-  "location": "Eindhoven, Kuzey Brabant, Hollanda",
-  "url": "https://nl.linkedin.com/jobs/view/group-leader-materials-generation-for-energy-self-driving-labs-at-d%C4%B1ffer-4438719826",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Hoofd Celtherapie Faciliteit",
-  "company": "UMC Utrecht",
-  "location": "Utrecht, Utrecht, Hollanda",
-  "url": "https://nl.linkedin.com/jobs/view/hoofd-celtherapie-faciliteit-at-umc-utrecht-4467888206",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Assistant/Associate Professor In III-V Photonic Integration",
-  "company": "AcademicTransfer",
-  "location": "Eindhoven, Netherlands",
-  "url": "https://euraxess.ec.europa.eu/jobs/472058",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Assistant at the LFP UK Dental Clinic",
-  "company": "Univerzita Karlova (Charles University)",
-  "location": "Faculty of Medicine in Pilsen, Czech Republic",
-  "url": "https://euraxess.ec.europa.eu/jobs/472063",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Coupled physical modeling of subglacial hydrology and ice flow dynamics in Greenland, from seasonal to long-term scales (M/F)",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "ST MARTIN D HERES, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471975",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "POST-DOC Data-driven discovery of constitutive models for granular materials from physics and in-operando intruder experiments (M/F)",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "solides, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471978",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "PostDoc (M/F) in Counting, Complexity, and Neurosymbolic Reasoning",
-  "company": "CNRS - National Center for Scientific Research",
-  "location": "LENS, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471984",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Director, Onsala Space Observatory",
-  "company": "Academic Positions",
-  "location": "Gothenburg, Sweden",
-  "url": "https://euraxess.ec.europa.eu/jobs/471996",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Advisor International Office",
-  "company": "Academic Positions",
-  "location": "Oslo, Norway",
-  "url": "https://euraxess.ec.europa.eu/jobs/471997",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "ACTION (Advancing Counterspeech Against Toxic Interactions Online)",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472005",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Integrating Participatory Approaches and Hydrological Modelling for Water Resources Management",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472007",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "RESCHAPE-IT - Dynamic & Resilient Supply Chains",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472008",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "DTA.AD004.770 AUTOFINANZIATO SPEACH - CUP B53C26001230006",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472009",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Porcine organs to bring hope to patients on the transplant waiting list",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472010",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Departmental Development Project of Neuroscience",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472015",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Mineralogical characterization of naturally occurring asbestos in Calabria and Basilicata",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472016",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Reinforcement learning and bioinspired computing for adaptive neuromodulation",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472018",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Project M.I.A.: Movement, Inclusion, Nutrition",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472028",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Hamiltonian analysis of the Einstein’s equations in General Relativity",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472029",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Instability and pattern selection in confined active nematic fluids",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472030",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Theory of infinite groups, groups of large cardinality",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472031",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "NEW COMPOSITIONAL AND PERFORMATIVE PRACTICES",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472037",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Analysis and modeling of neural activity for the identification of cognitive skill loss in elderly subjects",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472038",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Multi-source data and non-probability samples",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472040",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Can you learn the topology of a random algebraic variety?",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472041",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Control of Anthropomorphic Robotic Hands",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/472042",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Public selection procedure for n. 3 first level professor, art. 18, c. 1 - PICA Code: 26PO003",
-  "company": "Italian Ministry of Education, University and Research",
-  "location": "Bergamo, Italy",
-  "url": "https://euraxess.ec.europa.eu/jobs/471949",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Elastoverre",
-  "company": "Université Sorbonne Paris Nord (Paris 13)",
-  "location": "Villetaneuse, France",
-  "url": "https://euraxess.ec.europa.eu/jobs/471900",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Assistant Professor in Predictive Brain Processes",
-  "company": "Maastricht University via AcademicTransfer",
-  "location": "Maastricht, Netherlands",
-  "url": "https://euraxess.ec.europa.eu/jobs/471903",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+  "url": "https://tr.linkedin.com/jobs/view/mechanical-aerospace-engineer-%2420-hr-remote-at-crossing-hurdles-4477578200",
+  "reason": "Yapay zekâ eğitim / freelance platformu"
  }
 ]
