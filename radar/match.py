@@ -153,7 +153,14 @@ EXCLUDE_TITLE = (r"\bbank|banka|\bfinans|finance|accountant|accounting|muhasebe|
                  r"biolog|oncolog|clinical|\bmodel\b|fashion|\bmoda\b|driver|sofor|cashier|kasiyer|waiter|garson|\bcook\b|asci|"
                  r"teacher|ogretmen|lawyer|avukat|\blegal\b|hukuk|translator|tercuman|customer service|musteri hizmet|call center|"
                  r"cagri merkezi|\bturing\b|annotat|ai trainer|freelance expert|\bchef\b|receptionist|resepsiyon|security guard|guvenlik gorevlisi|"
-                 r"sales (manager|representative|executive|specialist|associate)|satis (temsilci|uzmani|muduru|danisman)|store|magaza")
+                 r"sales (manager|representative|executive|specialist|associate)|satis (temsilci|uzmani|muduru|danisman)|store|magaza|"
+                 # creative "design" jobs that only share the word with mechanical design
+                 r"graphic|grafik|\bgames?\b|\bgaming\b|\boyun\b|motion (graphic|design)|\bui\b|\bux\b|web (design|tasarim)|"
+                 r"illustrat|animator|animasyon|animation|social media|sosyal medya|visual design|gorsel tasarim|video edit|copywrit|"
+                 r"jewel|mucevher")
+# Faculty posts (professor, lecturer, tenure track, postdoc) need a PhD: never a fit for a BSc / MSc student
+FACULTY_TITLE = (r"\bprofessor|\bprofesor|\bprof\b|lecturer|\bdocent\b|\bdozent|ogretim uyesi|tenure|faculty (open )?position|"
+                 r"\bpostdoc|post doc|postdoctoral|doktora sonrasi")
 # Other engineering disciplines: kept only if the ad accepts mechanical engineers
 OTHER_DISCIPLINE = (r"electrical|elektrik|electronic|elektronik|embedded|gomulu|antenna|\banten|\brf\b|civil|insaat|construction|"
                     r"hardware|donanim|test automation|software test|\bsdet\b|presales|pre sales|"
@@ -162,7 +169,7 @@ OTHER_DISCIPLINE = (r"electrical|elektrik|electronic|elektronik|embedded|gomulu|
                     r"environmental|cevre|\bfood|\bgida|textile|tekstil|mining|maden|geolog|petroleum|architect|mimar|interior|harita|survey|"
                     r"chemistry|chemist\b|biochem|biotech|pharma|python|visuali[sz]|cloud|algoritma|algorithm|signal processing|"
                     r"sinyal isleme|image processing|goruntu isleme|\bfpga\b|siber|orbit|yorunge|yapay zeka|"
-                    r"artificial intelligence|\brf\b|aviyonik|avionics")
+                    r"artificial intelligence|\brf\b|aviyonik|avionics|neurosci|linguist")
 MECH_TITLE = r"mechanical|makine|makina|mekanik|mechanik|maschinenbau|mecanique|\bfea\b|simulat|structural|additive|eklemeli|mechatron|mekatronik"
 
 # Research / PhD / generic titles must show a mechanical-engineering domain somewhere in the ad
@@ -611,6 +618,8 @@ def relevance(job: Job, profile: Profile | None = None, allow_pending: bool = Fa
         return False, "Yapay zekâ eğitim / freelance platformu"
     if _any(EXCLUDE_TITLE, title) and not _any(MECH_TITLE, title):
         return False, "Mühendislik dışı pozisyon"
+    if _any(FACULTY_TITLE, title):
+        return False, "Öğretim üyesi / postdoc kadrosu (doktora derecesi gerekir)"
     if _any(OTHER_DISCIPLINE, title) and not _any(MECH_TITLE, title):
         # e.g. "Electrical Design Engineer": keep only if mechanical engineers are explicitly accepted
         if _degree_field(_lite(job.description)) == "makine":

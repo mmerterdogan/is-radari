@@ -220,6 +220,13 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .85em; 
 .checks li.bad::before { content: "✕"; color: #c0392b; }
 .checks .linkbtn { color: var(--accent); margin-left: 4px; text-decoration: underline; }
 .cvfile { font-size: .9rem; line-height: 1.6; }
+.qhead { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; }
+.qhead .skill-bar { max-width: 360px; margin-top: 6px; }
+.qrow { display: flex; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+.qnum { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--chip); display: grid; place-items: center; font-weight: 700; }
+.qmain { flex: 1; min-width: 0; }
+.qmain .company { font-size: .9rem; margin: 2px 0 4px; }
+.qmain .badge { font-size: .75rem; padding: 1px 6px; }
 .cvfile .linkbtn { color: var(--accent); margin-left: 4px; text-decoration: underline; }
 .applicant { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; }
 .applicant .wide { grid-column: 1 / -1; }

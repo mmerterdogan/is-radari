@@ -59,7 +59,7 @@ const ls = {
 let DATA = { jobs: [], runs: [] };
 let S = ls.get(LS_STATE, EMPTY());
 let F = { ...DEFAULT_FILTERS(), ...ls.get(LS_FILTERS, {}) };
-let view = "jobs";
+let view = "today";
 let lastDay = "";
 let openNotes = new Set();
 let expanded = new Set();
@@ -269,6 +269,9 @@ function render() {
   if (view === "stats") {
     $("#count").textContent = "";
     list.innerHTML = statsView(pool);
+  } else if (view === "today") {
+    $("#count").textContent = "";
+    list.innerHTML = queueView(pool);
   } else if (view === "apps" || view === "followup") {
     $("#count").textContent = `${jobs.length} kayıt${view === "followup" ? " · takip zamanı gelenler" : " · kartları sütunlar arasında sürükleyebilirsin"}`;
     list.innerHTML = jobs.length ? kanban(jobs)
@@ -325,6 +328,69 @@ document.addEventListener("drop", (ev) => {
   saveEntry(id, patch);
   render();
 });
+
+// ------------------------------------------------------------------ today's applications (queue)
+// The best fresh ads not applied to yet, worked through one by one: open -> fill -> "Gönderdim" -> next.
+const LS_DAILY = "radar-daily";
+const QUEUE_DAYS = 7;   // only ads first seen in the last week
+const dailyTarget = () => Number(ls.get(LS_DAILY, 10)) || 10;
+const appliedToday = (j) => ["basvuruldu", "mulakat", "teklif"].includes(stageOf(j)) && entry(j.id).applied_at === today();
+
+function todayQueue(pool, extra = 0) {
+  const cand = pool.filter((j) => j.source !== "manual" && ["dogrudan", "uygun"].includes(j.category) && !j.closed
+    && ["", "kaydedildi"].includes(stageOf(j)) && !hiddenCompany(j) && (entry(j.id).skip_until || "") <= today()
+    && daysAgo((j.first_seen || "").slice(0, 10)) <= QUEUE_DAYS && passesSearch(j));
+  cand.sort((a, b) => (b.target_priority - a.target_priority) || (Boolean(b.target) - Boolean(a.target))
+    || (stageOf(b) === "kaydedildi") - (stageOf(a) === "kaydedildi") || CAT_ORDER[a.category] - CAT_ORDER[b.category]
+    || (b.first_seen || "").localeCompare(a.first_seen || "") || (b.score || 0) - (a.score || 0));
+  const done = pool.filter(appliedToday);
+  return { todo: cand.slice(0, Math.max(0, dailyTarget() - done.length) + extra), done, more: cand.length };
+}
+
+const APPLY_LABEL = { easy: "⚡ Kolay Başvuru", offsite: "↗ Şirket sitesi (LinkedIn yönlendiriyor)", site: "🏢 Şirket sitesi" };
+let queueExtra = 0;
+
+function queueRow(j, i) {
+  const ap = j.apply || (j.source === "linkedin" ? "" : "site");
+  const open = ap === "easy"
+    ? `<a class="btn primary" href="${esc(j.url)}" target="_blank" rel="noopener">Aç (Kolay Başvuru)</a>`
+    : canAutofill(j) ? `<button class="btn primary" data-act="fill">🤖 Aç ve doldurt</button>`
+    : `<a class="btn primary" href="${esc(j.url)}" target="_blank" rel="noopener">İlana git</a>`;
+  return `<article class="qrow" data-id="${esc(j.id)}">
+    <div class="qnum">${i + 1}</div>
+    <div class="qmain">
+      <a class="title" href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.title)}</a>
+      <div class="company">${esc(j.company)}${j.target ? ` · ⭐ ${esc(j.target)}` : ""} · <span class="badge ${esc(j.category)}">${esc(CAT[j.category])}</span>
+        · ${esc(APPLY_LABEL[ap] || "Başvuru türü bilinmiyor")} · 📍 ${esc(j.location || j.loc_label || "")} · 🗓 ${esc(freshness(j))}</div>
+      ${cvFile(j)}
+      <div class="actions">${open}
+        <button class="btn" data-fill-done="${esc(j.id)}">📨 Gönderdim</button>
+        <button class="btn" data-act="skip" title="Bugünlük listeden çıkar, yarın tekrar gelir">Atla</button>
+        <button class="btn" data-act="notinterested">İlgilenmiyorum</button></div>
+    </div></article>`;
+}
+
+function queueView(pool) {
+  const { todo, done, more } = todayQueue(pool, queueExtra);
+  const forClaude = todo.filter((j) => j.apply !== "easy" && j.url);
+  const head = `<div class="qhead">
+    <div><b>Bugün ${done.length} / ${dailyTarget()} başvuru</b> <span class="hint">(günlük hedef Ayarlar'da)</span>
+      <div class="skill-bar"><span style="width:${Math.min(100, Math.round(100 * done.length / dailyTarget()))}%"></span></div></div>
+    <div class="actions">${forClaude.length ? `<button class="btn primary" data-queue-claude>🤖 Şirket sitesi olanları Claude Code'a doldurt (${forClaude.length})</button>` : ""}</div>
+    <p class="hint">Sıra: ⭐ hedef şirketler, kaydettiklerin, doğrudan uygunlar, en yeniler. Kolay Başvuru'yu kendin yaparsın (CV yolu hazır); şirket sitesi olanları
+      Claude doldurur, <b>son kontrolü yapıp gönderen sensin</b>. Gönderince "Gönderdim"e bas, sıradaki gelir.</p></div>`;
+  const rows = todo.map(queueRow).join("") || `<div class="empty">${done.length ? "Bugünkü hedef tamam 🎉" : "Son bir haftada başvurmadığın doğrudan/uygun ilan kalmadı."}</div>`;
+  const left = more - todo.length;
+  const moreBtn = left > 0 ? `<div class="actions"><button class="btn" data-queue-more>+5 ilan daha (${left} aday var)</button></div>` : "";
+  const doneList = done.length ? `<h3>Bugün gönderilenler</h3><ul class="why">${done.map((j) => `<li class="p">✓ ${esc(j.title)} - ${esc(j.company)}</li>`).join("")}</ul>` : "";
+  return head + rows + moreBtn + doneList;
+}
+
+// Text the user pastes into Claude Code: the basvuru-doldur skill fills these forms in its browser.
+function claudeQueueText(jobs) {
+  return ["/basvuru-doldur", "Aşağıdaki ilanların başvuru formlarını doldur, göndermeden önce dur:",
+    ...jobs.map((j, i) => `${i + 1}. ${j.title} - ${j.company} | id: ${j.id} | ${j.url}`)].join("\n");
+}
 
 // ------------------------------------------------------------------ kanban
 const BOARD = ["kaydedildi", "basvuruldu", "mulakat", "teklif", "red"];
@@ -623,12 +689,15 @@ const APPLICANT_FIELDS = [
   ["permit", "Çalışma izni / vize", "text", "T.C. vatandaşı; AB için çalışma izni gerekir"],
   ["relocate", "Taşınma / seyahat", "text", "Taşınmaya açığım; seyahat engelim yok"],
   ["extra", "Diğer form bilgileri", "textarea", "Dil seviyeleri, referans, cinsiyet/medeni hal (soran formlar için)…"],
+  ["answers", "Hazır cevaplar (formdaki benzer sorularda aynen kullanılır)", "textarea",
+    "Kendini kısaca tanıt: …\nNeden bu alan / bu şirket: …\nGüçlü yönler: …\nYüksek lisansla birlikte çalışma: …"],
 ];
+const PROMPT_SKIP = new Set(["cv_root", "answers"]);   // not personal form data
 const applicant = () => ls.get(LS_APPLICANT, {});
 const canAutofill = (j) => Boolean(j.url) && j.apply !== "easy" && !j.closed;
 
 function fillPrompt(j, info, A, letter) {
-  const personal = APPLICANT_FIELDS.filter(([k]) => A[k] && k !== "cv_root").map(([k, l]) => `- ${l}: ${A[k]}`).join("\n");
+  const personal = APPLICANT_FIELDS.filter(([k]) => A[k] && !PROMPT_SKIP.has(k)).map(([k, l]) => `- ${l}: ${A[k]}`).join("\n");
   const via = j.apply === "offsite" || j.source === "linkedin"
     ? "Bu sekme bir LinkedIn ilanı. \"Başvur / Apply\" butonuna bas ve şirketin başvuru sayfasına geç (yeni sekmede açılırsa oradan devam et). \"Kolay Başvuru / Easy Apply\" formu açılırsa hiçbir şey doldurma, dur ve bana söyle - onu ben yapacağım."
     : "Bu sekme şirketin kariyer sayfasındaki ilan. \"Başvur / Apply\" butonuna basıp başvuru formuna geç.";
@@ -636,7 +705,7 @@ function fillPrompt(j, info, A, letter) {
     "Bu sekmedeki iş ilanına benim adıma başvuru formunu doldur. Kurallar:",
     `1. ${via}`,
     "2. Formu GÖNDERME. Son \"Gönder / Submit / Başvuruyu tamamla\" adımına gelince dur; neyi nasıl doldurduğunu kısa bir liste halinde özetle, boş kalan ya da emin olmadığın alanları ayrıca yaz.",
-    "3. Giriş yapma, hesap oluşturma, şifre yazma, CAPTCHA, e-posta doğrulama ve KVKK / açık rıza / şartlar kutuları: bunlara gelince dur ve bana söyle; ben yapınca devam edersin.",
+    "3. Şirketin başvuru sitesinde oturum açıksa devam et; hesap gerekiyorsa aşağıdaki bilgilerle kayıt formunu doldur. Şifre, CAPTCHA, e-posta doğrulama ve KVKK / açık rıza / şartlar kutuları bana kalır: bunlara gelince dur ve söyle, ben yapınca devam edersin.",
     `4. CV / özgeçmiş dosyası yükleme alanını boş bırak ve sonunda hatırlat (dosyayı ben yükleyeceğim${j.cv ? `: ${cvLabel(j)} CV` : ""}). Bilgileri aşağıdan elle doldur.`,
     "5. Sadece aşağıdaki bilgileri kullan. Listede olmayan bir bilgiyi (not ortalaması, eski maaş, referans vb.) uydurma; boş bırak ve bana sor.",
     "6. Açık uçlu sorulara (neden bu şirket, kendinden bahset, motivasyon, ilgili deneyim) CV'ye ve varsa ön yazıya dayanarak, formun dilinde, kısa ve somut cevap yaz. İlanda geçen anahtar kelimeleri doğal şekilde kullan ama CV'de olmayan beceriyi varmış gibi yazma.",
@@ -644,6 +713,7 @@ function fillPrompt(j, info, A, letter) {
     "",
     "## Kişisel bilgiler",
     personal || "(girilmemiş - bu alanlar gelince bana sor)",
+    A.answers ? `\n## Hazır cevaplarım (formda benzer bir soru varsa bunu kullan, formun diline çevir)\n${A.answers}` : "",
     "",
     "## CV ve tercihler",
     info.profile,
@@ -891,6 +961,7 @@ function openSettings() {
     ${settingsApplicant()}
     <h3>Haftalık hedef</h3>
     <label class="form">Haftada kaç başvuru?<input type="number" min="1" max="50" value="${Number(ls.get("radar-goal", 5)) || 5}" data-goal></label>
+    <label class="form">Günde kaç başvuru? ("Bugün" listesinin uzunluğu)<input type="number" min="1" max="50" value="${dailyTarget()}" data-daily></label>
     <h3>Yedek</h3>
     <div class="actions">
       <button class="btn" data-export>Yedeği indir (.json)</button>
@@ -959,6 +1030,13 @@ document.addEventListener("click", async (ev) => {
     dlg().close();
     return generateLetter(j);
   }
+  if (t.hasAttribute?.("data-queue-more")) { queueExtra += 5; render(); return; }
+  if (t.hasAttribute?.("data-queue-claude")) {
+    const jobs = todayQueue(allJobs(), queueExtra).todo.filter((j) => j.apply !== "easy" && j.url);
+    try { await navigator.clipboard.writeText(claudeQueueText(jobs)); toast(`${jobs.length} ilan kopyalandı ✓ - Claude Code'a yapıştır`); }
+    catch { toast("Kopyalanamadı - tarayıcı izin vermedi"); }
+    return;
+  }
   if (t.dataset?.fillDone) {
     const id = t.dataset.fillDone;
     saveEntry(id, { stage: "basvuruldu", ...(entry(id).applied_at ? {} : { applied_at: today(), followup_at: nextFollowup() }) });
@@ -1010,6 +1088,8 @@ document.addEventListener("click", async (ev) => {
   }
   if (act === "followup-msg") return openPromptTool("followup", j);
   if (act === "fill") return openFill(j);
+  if (act === "skip") { saveEntry(id, { skip_until: addDays(today(), 1) }); render(); toast("Bugünlük atlandı, yarın tekrar gelir"); return; }
+  if (act === "notinterested") { saveEntry(id, { stage: "gizli" }); render(); askRejectReason(id); return; }
   if (act === "cv") {
     return openDialog(`<h2>📄 Bu ilan için CV</h2><div class="meta">${esc(j.title)} · ${esc(j.company)}</div>
       ${cvFile(j)}
@@ -1056,6 +1136,9 @@ document.addEventListener("change", async (ev) => {
     render();
     if (t.value === "basvuruldu") toast(`Başvurularım'a taşındı - ${FOLLOWUP_BDAYS} iş günü sonra takip hatırlatması`);
     if (t.value === "gizli") askRejectReason(id);
+  } else if (t.hasAttribute?.("data-daily")) {
+    ls.set(LS_DAILY, Math.max(1, Number(t.value) || 10));
+    render();
   } else if (t.hasAttribute?.("data-goal")) {
     ls.set("radar-goal", Math.max(1, Number(t.value) || 5));
     render();

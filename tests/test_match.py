@@ -166,6 +166,15 @@ def test_all_target_roles_are_recognised_and_relevant(title):
     ("Software Developer", "React, Node.js"),
     ("Remote Engineering Expert", "Turing is hiring experts for AI training, $50/hr"),
     ("PhD Position: Cellular Oncology", "Cancer markers and cell biology"),
+    # creative "design" jobs and faculty posts that used to slip through (2026-10-24)
+    ("Grafik Tasarım Stajyeri", "Adobe Illustrator ve Photoshop ile sosyal medya tasarımları. Üretim süreçlerine destek."),
+    ("Game Designer – PC & Console", "Design gameplay systems and prototype levels for our next title."),
+    ("Motion Graphic Designer", "After Effects animations for campaigns."),
+    ("Junior Game Tester - Unreal Engine", "Test builds and report bugs."),
+    ("Professor in Mechanical Engineering, especially Laser Processing and Additive Manufacturing", FEA_BODY),
+    ("Assistant Professor（Division of Mechanical and Aerospace Engineering）", FEA_BODY),
+    ("Tenure Track (TT) Associate Professor, Field of Electronic information", "Teaching and research."),
+    ("Postdoctoral Researcher in Structural Mechanics", FEA_BODY),
 ])
 def test_irrelevant_jobs_are_dropped(title, desc):
     assert not match.is_relevant(J(title, desc))
@@ -352,3 +361,10 @@ def test_boost_companies_become_priority_targets():
     pipeline.tag_companies(jobs, cfg)
     assert [j.target for j in jobs] == ["Kordsa", "Bosch", ""]
     assert {c["name"] for c in pipeline.company_rules(cfg) if c.get("priority")} == {"Kordsa"}
+
+
+@pytest.mark.parametrize("title", ["Motion Control Engineer", "Mechanical Design Engineer", "Ürün Tasarım Mühendisi",
+                                   "Research Assistant in Composite Structures", "PhD Position in Fatigue of Welded Joints",
+                                   "Araştırma Görevlisi - Makine Mühendisliği"])
+def test_design_and_research_titles_still_kept(title):
+    assert match.is_relevant(J(title, FEA_BODY))
