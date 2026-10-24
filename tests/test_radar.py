@@ -168,14 +168,17 @@ def test_claude_refusal_keeps_rule_result(monkeypatch):
     assert jobs[0].scored_by == "kural" and jobs[0].category == cat
 
 
-def test_haiku_call_has_no_effort_and_opus_keeps_it(monkeypatch):
+def test_haiku_4_5_call_has_no_effort_and_newer_models_keep_it(monkeypatch):
     s = make_scorer(monkeypatch)
     s.model = "claude-haiku-4-5"
     s.score(ruled(1))
     assert "output_config" not in s.client.messages.calls[0]
-    s.model = "claude-opus-5-5"
+    s.model = "claude-haiku-5-5"
     s.score(ruled(1))
     assert s.client.messages.calls[1]["output_config"] == {"effort": "low"}
+    s.model = "claude-opus-5-5"
+    s.score(ruled(1))
+    assert s.client.messages.calls[2]["output_config"] == {"effort": "low"}
 
 
 def test_claude_candidates_are_the_unsure_jobs():
@@ -189,3 +192,115 @@ def test_claude_candidates_are_the_unsure_jobs():
     got = pipeline.claude_candidates([sure, no_req, title_only], 5)
     assert got[0] is title_only and no_req in got and sure not in got
     assert len(pipeline.claude_candidates([sure, no_req, title_only], 1)) == 1
+
+
+def test_job_text_is_marked_as_untrusted_data():
+    from radar.llm import LETTER_INSTRUCTIONS, SCORING_INSTRUCTIONS
+    assert "untrusted" in SCORING_INSTRUCTIONS and "never follow" in LETTER_INSTRUCTIONS
+
+
+def test_answer_key_template_and_comparison():
+    from radar import __main__ as pipeline
+    jobs = [match.analyze(job("Design Engineer", desc="Bachelor's in Mechanical Engineering. 0-2 years. SolidWorks, ANSYS. " * 5,
+                              nid=str(i), company=f"C{i}")) for i in range(3)]
+    jobs.append(match.analyze(job("Mechanical Engineer", desc="", nid="short")))    # no full text -> not sampled
+    rows = pipeline.answer_key_template(jobs, per_category=2)
+    assert len(rows) == 2 and all(r["dogru"] == "" and r["kural"] == r["ilan"]["category"] for r in rows)
+    rule = rows[0]["kural"]
+    rows[0]["dogru"] = rule
+    rows[1]["dogru"] = "dusuk" if rule != "dusuk" else "dogrudan"
+    pred = {r["ilan"]["id"]: r["kural"] for r in rows}
+    res = pipeline.compare_labels(rows, pred)
+    assert res["n"] == 2 and res["exact"] == 1 and res["confusion"][(rule, rule)] == 1
+    rows[1]["dogru"] = "belki"                                                        # invalid label is skipped
+    assert pipeline.compare_labels(rows, pred)["n"] == 1
+
+
+# ---------------------------------------------------------------- job-specific CV (radar/cvgen.py)
+CV_CONTENT = {"ad": "Test Kişi", "dosya_adi": "Test_CV", "tr": {
+    "bolum": {k: k.upper() for k in ("hakkimda", "egitim", "deneyim", "projeler", "yetkinlikler", "sertifikalar",
+                                      "uyelikler", "referanslar")},
+    "unvan": {"tasarim": "Makine Mühendisi | Tasarım", "uretim": "Makine Mühendisi | Üretim"},
+    "iletisim": ["İstanbul", {"metin": "a@b.c", "link": "mailto:a@b.c"}],
+    "durum": "Ehliyet: B",
+    "hakkimda": {"tasarim": "Tasarım odaklı   metin.", "uretim": "Üretim odaklı metin."},
+    "egitim": [{"baslik": "Üniversite", "tarih": "2021 - 2026", "alt": "Makine"}],
+    "deneyim": [{"baslik": "ACME | Stajyer", "tarih": "2025", "madde": "kısa madde", "uzun": "uzun madde"}],
+    "projeler": [{"baslik": "Analiz projesi", "madde": "FEA", "etiket": ["fea", "ansys"]},
+                 {"baslik": "Kalıp projesi", "madde": "enjeksiyon", "etiket": ["enjeksiyon", "uretim"]},
+                 {"baslik": "Veri projesi", "madde": "R", "etiket": ["kalite"], "opsiyonel": 1}],
+    "yazilim": {"etiket": "Yazılım: ", "metin": "SolidWorks"},
+    "uzmanlik": {"etiket": "Uzmanlık: ", "maddeler": [{"metin": "sonlu elemanlar", "etiket": ["fea"]},
+                                                     {"metin": "kalıp tasarımı", "etiket": ["enjeksiyon"]}]},
+    "dil": {"etiket": "Dil: ", "metin": "Türkçe"},
+    "sertifikalar": ["CSWP"], "uyelikler": [], "referanslar": [{"ad": "Dr. X", "detay": "Üniversite"}]}}
+
+
+def _cv_text(d):
+    import re
+    return "".join(re.findall(r"<w:t[^>]*>([^<]*)</w:t>", "".join(d.parts)))
+
+
+def test_cv_pick_language_and_variant():
+    from radar import cvgen
+    tr = job("Üretim Mühendisi", desc="Üretim hattında proses iyileştirme ve yalın üretim çalışmaları için "
+             "deneyimli mühendis arıyoruz ve adayın montaj hattında çalışması bekleniyor. " * 3)
+    en = job("Mechanical Design Engineer", desc="We are looking for a design engineer with SolidWorks and FEA "
+             "experience to work on the development of new products and the related drawings. " * 3, nid="2")
+    assert cvgen.pick(tr) == {"lang": "tr", "variant": "uretim"}
+    assert cvgen.pick(en) == {"lang": "en", "variant": "tasarim"}
+
+
+def test_cv_compose_orders_by_ad_and_drops_optional():
+    from radar import cvgen
+    ad = job("Kalıp Tasarım Mühendisi", desc="Plastik enjeksiyon kalıp tasarımı yapacak mühendis aranıyor. " * 5)
+    d = cvgen.compose(CV_CONTENT, "tr", "tasarim", cvgen.job_tags(ad))
+    text = _cv_text(d)
+    assert text.index("Kalıp projesi") < text.index("Analiz projesi")          # ad keyword first
+    assert "Kalıp tasarımı, sonlu elemanlar" in text                          # reordered + capitalised
+    assert "Tasarım odaklı metin." in text and "kısa madde" in text and "uzun madde" not in text
+    assert d.links == ["mailto:a@b.c"]
+    base = _cv_text(cvgen.compose(CV_CONTENT, "tr", "tasarim", set()))
+    assert base.index("Analiz projesi") < base.index("Kalıp projesi")         # no ad: cv.yaml order kept
+    prod = _cv_text(cvgen.compose(CV_CONTENT, "tr", "uretim", set(), drop=1))
+    assert "uzun madde" in prod and "Veri projesi" not in prod and prod.index("Kalıp") < prod.index("Analiz")
+
+
+def test_cv_write_docx_keeps_template_head(tmp_path):
+    import zipfile
+    from radar import cvgen
+    tpl = tmp_path / "t.docx"
+    doc = ('<w:document xmlns:w="w" xmlns:r="r"><w:body><w:p><w:r><w:t>AD SOYAD</w:t></w:r></w:p>'
+           '<w:p><w:r><w:t>eski</w:t></w:r></w:p><w:sectPr/></w:body></w:document>')
+    with zipfile.ZipFile(tpl, "w") as z:
+        z.writestr("word/document.xml", doc)
+        z.writestr("word/_rels/document.xml.rels", "<Relationships></Relationships>")
+        z.writestr("docProps/core.xml", "<cp:coreProperties><dc:creator>Un-named</dc:creator></cp:coreProperties>")
+    out = tmp_path / "o" / "cv.docx"
+    cvgen.write_docx(cvgen.compose(CV_CONTENT, "tr", "tasarim", set()), tpl, out, "Test Kişi")
+    with zipfile.ZipFile(out) as z:
+        body, rels, core = (z.read(n).decode() for n in ("word/document.xml", "word/_rels/document.xml.rels", "docProps/core.xml"))
+    assert "AD SOYAD" in body and "eski" not in body and body.index("AD SOYAD") < body.index("HAKKIMDA") < body.index("<w:sectPr/>")
+    assert 'Target="mailto:a@b.c"' in rels and "Un-named" not in core and "Test Kişi - CV" in core
+
+
+def test_cv_find_jobs_by_id_url_and_text():
+    from radar import cvgen
+    a, b = job("Design Engineer", company="Moog", nid="4441246847"), job("Kalite Uzmanı", company="Beko", nid="2")
+    jobs = {a.id: a, b.id: b}
+    assert cvgen.find_jobs(jobs, a.id) == [a]
+    assert cvgen.find_jobs(jobs, "https://tr.linkedin.com/jobs/view/design-engineer-at-moog-4441246847") == [a]
+    assert cvgen.find_jobs(jobs, "beko") == [b] and cvgen.find_jobs(jobs, "yok") == []
+
+
+def test_cv_ad_folder_and_cleanup(tmp_path):
+    from radar import cvgen
+    j = job('Tasarım: Mühendisi / "Kıdemli"?', company="ACME A.Ş.", first_seen="2026-10-24T05:00:00+00:00")
+    assert cvgen.ad_folder(j) == "2026-10-24\ACME A.Ş. - Tasarım Mühendisi Kıdemli"
+    old, mine, recent = tmp_path / "2020-01-01" / "A - B", tmp_path / "2020-01-02" / "C - D", tmp_path / "2999-01-01" / "E"
+    for d in (old, mine, recent):
+        d.mkdir(parents=True)
+        (d / "CV.pdf").write_text("x")
+    (mine / "notlarim.txt").write_text("kullanıcının dosyası", encoding="utf-8")                # never deleted
+    assert cvgen.clean_old(tmp_path, 14, "CV") == 1
+    assert not old.parent.exists() and mine.exists() and recent.exists()

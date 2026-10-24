@@ -5,3 +5,6 @@ __pycache__/
 .playwright-mcp/
 node_modules/
 .wrangler/
+
+# private CV source for `python -m radar cv` (contact details, references, photo)
+cv/ozel/

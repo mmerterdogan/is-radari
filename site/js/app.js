@@ -176,6 +176,7 @@ function card(j) {
     j.apply === "offsite" ? `<span title="LinkedIn şirketin kendi başvuru sayfasına yönlendiriyor">↗ Şirket sitesinden başvuru</span>` : "",
     j.deadline && !j.closed ? `<span title="Son başvuru tarihi" class="${j.deadline <= addDays(today(), 3) ? "soon" : ""}">⏳ son başvuru ${esc(fmtDate(j.deadline))}</span>` : "",
     j.role_label ? `<span title="Pozisyon alanı">🧭 ${esc(j.role_label)}</span>` : "",
+    j.cv && j.source !== "manual" ? `<button class="btn link" data-act="cv" title="Bu ilana gönderilecek CV ve onu hazırlayan komut">📄 CV: ${esc(cvLabel(j))}</button>` : "",
     `<span>${esc(SRC[j.source] || "Şirket sitesi")}</span>`,
   ].filter(Boolean).join("");
   const reasons = j.category_reasons || [];
@@ -538,6 +539,29 @@ function parsePasted(text) {
   return { subject, cover_letter: body, cv_highlights };
 }
 
+// Which CV to send (chosen by radar/cvgen.py) and the local command that builds it from the private cv/ozel/.
+const CV_LANG = { tr: "Türkçe", en: "İngilizce" };
+const CV_VARIANT = { tasarim: "Tasarım", uretim: "Üretim" };
+const cvLabel = (j) => j.cv ? `${CV_LANG[j.cv.lang] || j.cv.lang} · ${CV_VARIANT[j.cv.variant] || j.cv.variant}` : "";
+const CV_FILE = "Muhammet_Mert_Erdogan_CV.pdf";
+function cvFile(j, asItem = false) {
+  if (!j.cv || j.source === "manual") return "";
+  const id = `cv-path-${String(j.id).replace(/[^\w-]/g, "_")}`;
+  let body;
+  if (j.cv.folder) {   // built automatically every morning on the user's computer (python -m radar cv --yeni)
+    const root = (applicant().cv_root || "").replace(/[\\/]+$/, "");
+    const path = `${root ? root + "\\" : "CV\\ilanlar\\"}${j.cv.folder}\\${CV_FILE}`;
+    body = `📄 CV hazır (<b>${esc(cvLabel(j))}</b>, bu ilana göre sıralı): <code id="${id}">${esc(path)}</code>
+      <button class="linkbtn" data-copy="${id}">yolu kopyala</button>
+      <span class="hint">Yükleme penceresinde dosya adı kutusuna yapıştırıp Enter'a bas. Her sabah otomatik hazırlanır; ilan bugün eklendiyse biraz sonra düşer.</span>`;
+  } else {
+    body = `📄 Gönderilecek CV: <b>${esc(cvLabel(j))}</b>. Bu ilan otomatik CV listesinde değil (sadece doğrudan/uygun ilanlar);
+      hazırlamak için <button class="linkbtn" data-copy="${id}">kopyala</button>, sonra CV klasöründeki <b>Ilana_CV_hazirla</b>'ya çift tıkla.
+      <span class="hint">Terminalden: <code id="${id}">python -m radar cv ${esc(j.id)}</code></span>`;
+  }
+  return asItem ? `<li class="ok">${body}</li>` : `<p class="cvfile">${body}</p>`;
+}
+
 // Generic "copy prompt -> claude.ai -> paste the answer back" dialog (the user's own subscription, no API).
 function cvCheck(j) {
   const miss = j.cv_missing || [];
@@ -590,6 +614,7 @@ const APPLICANT_FIELDS = [
   ["birth", "Doğum tarihi (soran formlar için)", "text", "gg.aa.yyyy"],
   ["linkedin", "LinkedIn profil adresi", "url", "https://www.linkedin.com/in/…"],
   ["portfolio", "GitHub / portfolyo (varsa)", "url", ""],
+  ["cv_root", "Bilgisayarda ilana özel CV klasörü (yolu kopyalamak için)", "text", "C:\\Users\\…\\Desktop\\CV\\ilanlar"],
   ["military", "Askerlik durumu", "text", "Tamamlandı / Tecilli (tarih) / Muaf"],
   ["license", "Ehliyet", "text", "B sınıfı / yok"],
   ["start", "Ne zaman başlayabilirsin?", "text", "Hemen / 2 hafta içinde"],
@@ -603,7 +628,7 @@ const applicant = () => ls.get(LS_APPLICANT, {});
 const canAutofill = (j) => Boolean(j.url) && j.apply !== "easy" && !j.closed;
 
 function fillPrompt(j, info, A, letter) {
-  const personal = APPLICANT_FIELDS.filter(([k]) => A[k]).map(([k, l]) => `- ${l}: ${A[k]}`).join("\n");
+  const personal = APPLICANT_FIELDS.filter(([k]) => A[k] && k !== "cv_root").map(([k, l]) => `- ${l}: ${A[k]}`).join("\n");
   const via = j.apply === "offsite" || j.source === "linkedin"
     ? "Bu sekme bir LinkedIn ilanı. \"Başvur / Apply\" butonuna bas ve şirketin başvuru sayfasına geç (yeni sekmede açılırsa oradan devam et). \"Kolay Başvuru / Easy Apply\" formu açılırsa hiçbir şey doldurma, dur ve bana söyle - onu ben yapacağım."
     : "Bu sekme şirketin kariyer sayfasındaki ilan. \"Başvur / Apply\" butonuna basıp başvuru formuna geç.";
@@ -612,7 +637,7 @@ function fillPrompt(j, info, A, letter) {
     `1. ${via}`,
     "2. Formu GÖNDERME. Son \"Gönder / Submit / Başvuruyu tamamla\" adımına gelince dur; neyi nasıl doldurduğunu kısa bir liste halinde özetle, boş kalan ya da emin olmadığın alanları ayrıca yaz.",
     "3. Giriş yapma, hesap oluşturma, şifre yazma, CAPTCHA, e-posta doğrulama ve KVKK / açık rıza / şartlar kutuları: bunlara gelince dur ve bana söyle; ben yapınca devam edersin.",
-    "4. CV / özgeçmiş dosyası yükleme alanını boş bırak ve sonunda hatırlat (dosyayı ben yükleyeceğim). Bilgileri aşağıdan elle doldur.",
+    `4. CV / özgeçmiş dosyası yükleme alanını boş bırak ve sonunda hatırlat (dosyayı ben yükleyeceğim${j.cv ? `: ${cvLabel(j)} CV` : ""}). Bilgileri aşağıdan elle doldur.`,
     "5. Sadece aşağıdaki bilgileri kullan. Listede olmayan bir bilgiyi (not ortalaması, eski maaş, referans vb.) uydurma; boş bırak ve bana sor.",
     "6. Açık uçlu sorulara (neden bu şirket, kendinden bahset, motivasyon, ilgili deneyim) CV'ye ve varsa ön yazıya dayanarak, formun dilinde, kısa ve somut cevap yaz. İlanda geçen anahtar kelimeleri doğal şekilde kullan ama CV'de olmayan beceriyi varmış gibi yazma.",
     "7. Açılır listelerde en doğru seçeneği seç (eğitim: Lisans - Makine Mühendisliği, mezun; yüksek lisans devam ediyor). Deneyim yılı sorulursa stajları ayrıca belirt, toplam tam zamanlı deneyimi 0 yaz.",
@@ -648,6 +673,7 @@ async function openFill(j) {
       <li class="${missing.length ? "bad" : "ok"}">${missing.length ? `Başvuru bilgilerin eksik (${missing.map((k) => APPLICANT_FIELDS.find((f) => f[0] === k)[1]).join(", ")}). <button class="linkbtn" data-open-settings>Ayarlar'da gir</button>` : "Başvuru bilgilerin hazır"}</li>
       <li class="${letter ? "ok" : "warn"}">${letter ? "Bu ilanın ön yazısı istemde" : `Ön yazı yok; form isterse Claude CV'den kısa bir tane yazar. <button class="linkbtn" data-fill-letter="${esc(j.id)}">Önce ön yazı oluştur</button>`}</li>
       <li class="ok">${esc(via)}</li>
+      ${cvFile(j, true)}
     </ul>
     <h3>1. Kopyala ve ilanı aç</h3>
     <div class="actions"><button class="btn primary" data-fill-go="${esc(j.id)}">İstemi kopyala ve ilanı aç</button></div>
@@ -984,6 +1010,12 @@ document.addEventListener("click", async (ev) => {
   }
   if (act === "followup-msg") return openPromptTool("followup", j);
   if (act === "fill") return openFill(j);
+  if (act === "cv") {
+    return openDialog(`<h2>📄 Bu ilan için CV</h2><div class="meta">${esc(j.title)} · ${esc(j.company)}</div>
+      ${cvFile(j)}
+      <p class="hint">İlanın diline göre Türkçe ya da İngilizce, pozisyona göre tasarım ya da üretim versiyonu seçilir; maddeler ilanın anahtar kelimelerine göre sıralanır. Hiçbir bilgi eklenmez ya da uydurulmaz. Doğrudan/uygun ilanların CV'leri her sabah bilgisayarında kendiliğinden hazırlanır.</p>
+      <div class="actions"><button class="btn" data-close>Kapat</button></div>`);
+  }
   if (act === "ics-interview" || act === "ics-followup") {
     const e = entry(id);
     const interview = act === "ics-interview";

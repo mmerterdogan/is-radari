@@ -56,6 +56,7 @@ Lokasyon kategoriyi değiştirmez, sadece gösterilir ve sıralamada kullanılı
 | Bağlantı kur | Her kartta LinkedIn'de o şirketteki İÜC mezunlarını, mühendisleri ve İK'yı arayan hazır linkler. Yönlendirmeli başvuru için. |
 | Beceri yol haritası | Sayfanın altında: son 30 günde uygun ilanların en çok istediği, profilinde görünmeyen araçlar (yüzdeyle) ve ücretsiz öğrenme kaynakları. Kaynaklar `config.yaml > learning`'de. |
 | CV uyum kontrolü | Ön yazı ekranında ilanda geçen ama CV'nde geçmeyen anahtar kelimeler (ATS filtreleri birebir kelime arar). **CV'yi bu ilana uyarla**: hangi maddeyi nasıl yeniden ifade edeceğine dair istem; olmayan beceriyi uydurmaz, açıkça söyler. |
+| İlana özel CV | **Kendiliğinden:** bilgisayarda her sabah 09:30'da (kapalıysa açılınca) Görev Zamanlayıcı'daki "Is Radari - gunluk CV" görevi son 3 günün doğrudan/uygun ilanları için tek sayfalık CV hazırlar: `Masaüstü\CV\ilanlar\<tarih>\<şirket - pozisyon>\Muhammet_Mert_Erdogan_CV.pdf`. İlanın diline göre TR/EN, pozisyona göre tasarım/üretim versiyonu; maddeler ilanın anahtar kelimelerine göre sıralanır, hiçbir bilgi uydurulmaz. 14 günden eski klasörler silinir. Kartta **📄 CV** ve Otomatik doldur penceresinde dosyanın yolu görünür: **yolu kopyala** → yükleme penceresinde dosya adı kutusuna yapıştır → Enter. (Tam yol için ⚙ Ayarlar → Başvuru bilgilerim → CV klasörü.) Stretch ilanlar için `Masaüstü\CV\Ilana_CV_hazirla.bat` (kartta "kopyala"dan sonra çift tıkla). Kaynak `cv/ozel/cv.yaml` (repoya girmez); CV'de bir şeyi değiştirmek için orayı düzenle. Günlük kayıt: `cv/ozel/gunluk_cv.log`. PDF için Microsoft Word gerekir. Görevi kapatmak: Görev Zamanlayıcı'da görevi devre dışı bırak. |
 | Hedef şirketler | ⭐ etiketli ilanlar hedef listendeki şirketlerden; öncelikli olanlar kategorisinin içinde üste çıkar. Filtrelerde "⭐ Sadece hedef şirketler" var. Sayfa altındaki panel her şirketin sitedeki ilan sayısını ve kariyer sayfasını gösterir. |
 | Ön yazı | **Ön yazı oluştur**: CV'n, ilan ve uygunluk analiziyle hazır bir istem kopyalar ve claude.ai'yi açar; cevabı siteye yapıştırıp kaydedersin. API ekliysen sabah hazırlanan ön yazılar da "Ön yazı" butonunda görünür. |
 | Başka sitelerden ilan | **+ İlan ekle**: Kariyer.net, şirket sitesi, e-posta… Elle eklenen ilanlar otomatik sınıflandırılmaz; deneyim, eğitim, lokasyon ve çalışma şeklini formda seçebilirsin. |
@@ -74,7 +75,7 @@ Lokasyon kategoriyi değiştirmez, sadece gösterilir ve sıralamada kullanılı
 - `filters`: `block_companies` (bu şirketlerin ilanları hiç alınmaz), `block_title_words` (başlığında bu kelime geçen ilanlar alınmaz), `boost_companies` (hedef listende olmayan ama öne çıkmasını istediğin şirketler). Tam kelime eşleşir; elenenler `data/dropped_last.json`'da "Kara liste" sebebiyle görünür.
 - `companies`: hedef şirket listesi (`name`, şirket adını yakalayan `match` regex'i, `careers_url`, `priority`). Taranmayan şirketler de burada durur; paneldeki linkten haftada bir bakarsın.
 - `match.enrich_limit`: günde tam metni çekilecek LinkedIn ilanı sayısı. Eğitim ve deneyim şartını okuyabilmek için gerekiyor; artırırsan tarama uzar.
-- `scoring.model` / `max_llm_jobs` / `letters_per_day`: Claude modeli (varsayılan `claude-haiku-4-5`), günlük değerlendireceği ilan sayısı ve sabah otomatik yazılacak ön yazı sayısı (varsayılan 0: ön yazıları sitedeki claude.ai istemiyle yazıyorsun).
+- `scoring.model` / `max_llm_jobs` / `letters_per_day`: Claude modeli (varsayılan `claude-haiku-5-5`), günlük değerlendireceği ilan sayısı ve sabah otomatik yazılacak ön yazı sayısı (varsayılan 0: ön yazıları sitedeki claude.ai istemiyle yazıyorsun).
 - `notify.top_direct` / `top_fit` / `top_stretch`: Telegram mesajında kategori başına gösterilecek ilan sayısı.
 
 Kuralları veya profili değiştirdikten sonra mevcut ilanları yeniden sınıflandırmak için: `python -m radar rebuild`.
@@ -85,6 +86,8 @@ Kuralları veya profili değiştirdikten sonra mevcut ilanları yeniden sınıfl
 
 **Kaynaklar sağlıklı mı:** bir kaynak üst üste 2 taramada boş dönerse ya da ilanlarının çoğunun metni okunamazsa (site yapısı değişmiş demektir) Telegram mesajında ve sitenin üstünde ⚠️ uyarısı çıkar. Elle kontrol için `python -m radar health`: her kaynağı birkaç istekle dener, ilan / metin sayısını ve örnek bir ilanı yazar, hiçbir dosyaya dokunmaz.
 
+**Eşleştirme ne kadar doğru:** `python -m radar eval` ilk çalıştırmada `data/cevap_anahtari.json`'a her kategoriden 10 ilan koyar. Her satırın `"dogru"` alanına senin kararını yaz (`dogrudan` / `uygun` / `stretch` / `dusuk`, emin olmadıklarını boş bırak) ve komutu tekrar çalıştır. Kuralların doğruluğunu, karışıklık tablosunu ve yanlış sınıflanan ilanları yazar. `--llm` eklersen sabah taramasındaki gibi belirsiz ilanları Claude'a da sorar ve maliyetiyle karşılaştırır. Kural değiştirince tekrar çalıştırıp doğruluğun düşmediğini görürsün. API anahtarını eklemeye değip değmeyeceğine de buna bakarak karar verirsin.
+
 CV'n değişince `cv/cv.md` dosyasını da güncelle. Bir sonraki taramada Claude ve ön yazılar yeni CV'yi kullanır.
 
 ## Maliyet
@@ -92,9 +95,9 @@ CV'n değişince `cv/cv.md` dosyasını da güncelle. Bir sonraki taramada Claud
 | Kalem | Tahmini |
 |---|---|
 | GitHub Actions + GitHub Pages (açık repo) | Ücretsiz |
-| Claude API (isteğe bağlı): sabah taraması (`claude-haiku-4-5`, ≤ 40 belirsiz ilan) | Günde ~$0.05-0.10 |
+| Claude API (isteğe bağlı): sabah taraması (`claude-haiku-5-5`, ≤ 40 belirsiz ilan) | Günde ~1 sent |
 
-API'siz toplam maliyet: **$0**. API ile aylık ~$2-3. Gerçek sabah harcaması sitenin altındaki "Tarama geçmişi"nde görünür. Daha dikkatli değerlendirme istersen `config.yaml` → `scoring.model` değerini `claude-sonnet-5` yap ve `price_input: 3`, `price_output: 15` gir (maliyet ~3 katı).
+API'siz toplam maliyet: **$0**. API ile aylık birkaç on sent (Haiku 4.5'in onda biri). Gerçek sabah harcaması sitenin altındaki "Tarama geçmişi"nde görünür. Daha dikkatli değerlendirme istersen `config.yaml` → `scoring.model` değerini `claude-sonnet-5-5` yap ve `price_input: 2`, `price_output: 10` gir (Haiku 5.5'in ~20 katı).
 
 ## Kaynaklar ve sınırlar
 
@@ -119,6 +122,7 @@ API'siz toplam maliyet: **$0**. API ile aylık ~$2-3. Gerçek sabah harcaması s
 pip install -r requirements.txt
 python -m radar run --no-notify          # tarama (ANTHROPIC_API_KEY .env'de ise Claude ile)
 python -m radar health                   # kaynaklar hâlâ okunabiliyor mu (dosya yazmaz)
+python -m radar eval                     # elle etiketlenmiş ilanlara göre doğruluk (--llm: Claude ile de)
 npm run dev                              # site: http://127.0.0.1:8788
 python -m pytest tests -q; npm test      # testler
 ```

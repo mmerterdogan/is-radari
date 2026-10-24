@@ -8,6 +8,8 @@
     python -m radar profile             # regenerate site/profile.json from cv/cv.md + config.yaml
     python -m radar recheck             # only look for closed ads among older promising ones
     python -m radar health              # try every source on a small live sample (parser check, writes nothing)
+    python -m radar eval [--llm]        # accuracy against the hand-labelled ads in data/cevap_anahtari.json
+    python -m radar cv <ilan> | --yeni | --temel   # one-page CV for an ad from the private cv/ozel/ (radar/cvgen.py)
 """
 from __future__ import annotations
 
@@ -24,7 +26,7 @@ from pathlib import Path
 
 import yaml
 
-from . import match, notify
+from . import cvgen, match, notify
 from .http import Fetcher
 from .models import Job, _norm, now_iso
 from .sources import SOURCES, linkedin
@@ -178,6 +180,9 @@ def export_site(store: Store, out: Path, keep_days: int, stats: dict, cfg: dict 
         d["target_priority"] = j.target in priority
         if cv_text and j.category in ("dogrudan", "uygun", "stretch", "belirsiz"):
             d["cv_missing"] = match.cv_missing_keywords(j, cv_text, profile.skills)
+        if j.category in ("dogrudan", "uygun", "stretch", "belirsiz"):
+            # which CV to send (language + design/production variant); "folder" = where the daily job puts it
+            d["cv"] = {**cvgen.pick(j), **({"folder": cvgen.ad_folder(j)} if j.category in cvgen.AUTO_CATEGORIES else {})}
         d["description"] = (j.description or "")[: DESC_LEN.get(j.category, 300)]
         jobs.append(d)
     jobs.sort(key=lambda d: (d["first_seen"][:10], -match.CATEGORY_ORDER.get(d["category"], 9), d["score"] or 0), reverse=True)
@@ -236,6 +241,80 @@ def refine_with_claude(jobs: list[Job], cfg: dict, stats: dict, args) -> None:
     stats["letters"] = sum(1 for j in best if j.letter)
     stats["cost_usd"] = round(scorer.cost_usd(), 4)
     stats["tokens"] = scorer.usage
+
+
+ANSWER_KEY = ROOT / "data" / "cevap_anahtari.json"
+LABELS = ("dogrudan", "uygun", "stretch", "dusuk")
+
+
+def answer_key_template(jobs, per_category: int = 10) -> list[dict]:
+    """A stratified sample of stored ads with full text for hand labelling; `dogru` is left for the user.
+    The whole ad is kept so the key still works after the ad is pruned from data/jobs.json."""
+    rows = []
+    for cat in LABELS:
+        pool = sorted((j for j in jobs if j.category == cat and len(j.description) >= match.SHORT_TEXT), key=lambda j: j.id)
+        step = max(1, len(pool) // per_category)
+        rows += [{"dogru": "", "kural": cat, "ilan": j.to_dict()} for j in pool[::step][:per_category]]
+    return rows
+
+
+def compare_labels(labels: list[dict], predicted: dict[str, str]) -> dict:
+    """Predicted categories against the hand labels (rows without a valid label are skipped)."""
+    pairs = [(r["dogru"], predicted[r["ilan"]["id"]]) for r in labels
+             if r.get("dogru") in LABELS and r["ilan"]["id"] in predicted]
+    confusion = Counter(pairs)
+    exact = sum(n for (a, b), n in confusion.items() if a == b)
+    near = sum(n for (a, b), n in confusion.items() if abs(match.CATEGORY_ORDER[a] - match.CATEGORY_ORDER[b]) <= 1)
+    return {"n": len(pairs), "exact": exact, "near": near, "confusion": confusion}
+
+
+def _print_result(name: str, res: dict) -> None:
+    n = res["n"]
+    print(f"\n{name}: {res['exact']}/{n} doğru (%{100 * res['exact'] / n:.0f}), "
+          f"bir kategori kayıklar dahil %{100 * res['near'] / n:.0f}")
+    cols = LABELS + ("belirsiz",)
+    print("  doğru \\ tahmin " + "".join(f"{c[:8]:>9}" for c in cols))
+    for a in LABELS:
+        print(f"  {a:15s}" + "".join(f"{res['confusion'].get((a, b), 0):>9}" for b in cols))
+
+
+def evaluate(args) -> int:
+    """Measure the rules (with --llm also rules + Claude, as in the daily run) against the hand-labelled ads."""
+    cfg = load_config()
+    if not ANSWER_KEY.exists():
+        rows = answer_key_template(Store(ROOT / "data").jobs.values())
+        ANSWER_KEY.write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"{len(rows)} ilanlık şablon yazıldı: {ANSWER_KEY.relative_to(ROOT)}\n"
+              f"Her satırın \"dogru\" alanına {' / '.join(LABELS)} yaz (emin olmadıklarını boş bırak), "
+              "sonra komutu tekrar çalıştır.")
+        return 0
+    labels = json.loads(ANSWER_KEY.read_text(encoding="utf-8"))
+    profile = match.Profile.from_config(cfg.get("profile"), cfg.get("filters"))
+    jobs = [match.analyze(Job.from_dict(r["ilan"]), profile) for r in labels if r.get("dogru") in LABELS]
+    if not jobs:
+        print(f"{ANSWER_KEY.relative_to(ROOT)} içinde etiketli satır yok: \"dogru\" alanlarını doldur.")
+        return 1
+    _print_result("Kural", compare_labels(labels, {j.id: j.category for j in jobs}))
+    if args.llm:
+        if not os.environ.get("ANTHROPIC_API_KEY"):
+            print("\n--llm için ANTHROPIC_API_KEY gerekli (.env ya da ortam değişkeni).")
+            return 1
+        from .llm import Scorer
+        sc = cfg["scoring"]
+        cv_text = (ROOT / cfg["profile"]["cv_file"]).read_text(encoding="utf-8")
+        scorer = Scorer(sc, cv_text, cfg["profile"].get("preferences", ""))
+        unsure = claude_candidates(jobs, len(jobs))
+        scorer.score(unsure)
+        _print_result(f"Kural + {scorer.model} ({len(unsure)} belirsiz ilan Claude'a gitti)",
+                      compare_labels(labels, {j.id: j.category for j in jobs}))
+        print(f"  maliyet: ${scorer.cost_usd():.4f}")
+    by_id = {r["ilan"]["id"]: r["dogru"] for r in labels}
+    wrong = [j for j in jobs if j.category != by_id[j.id]]
+    if wrong:
+        print("\nYanlış sınıflananlar:")
+        for j in wrong[:20]:
+            print(f"  {by_id[j.id]:>8} -> {j.category:8s} [{j.scored_by}] {j.title[:50]} - {j.company[:25]}")
+    return 0
 
 
 RATE_LIMIT_STOP = 3  # consecutive 429 answers from LinkedIn -> stop fetching details for today
@@ -503,6 +582,18 @@ def main(argv=None) -> int:
     sub.add_parser("profile", help="regenerate site/profile.json from cv/cv.md + config.yaml")
     sub.add_parser("recheck", help="only check older promising LinkedIn ads for 'no longer accepting applications'")
     sub.add_parser("health", help="try every enabled source on a small live sample; writes nothing")
+    e = sub.add_parser("eval", help="measure the matcher against data/cevap_anahtari.json (writes a template first)")
+    e.add_argument("--llm", action="store_true", help="also run Claude on the unsure ads, as the daily run does (API cost)")
+    c = sub.add_parser("cv", help="one-page CV (Word + PDF) tailored to an ad, from the private cv/ozel/cv.yaml")
+    c.add_argument("ilan", nargs="?", help="ad id (linkedin:123), LinkedIn URL or a word from the title/company")
+    c.add_argument("--yeni", action="store_true", help="every new 'doğrudan/uygun' ad of the last --gun days")
+    c.add_argument("--gun", type=int, default=1, help="look-back for --yeni (days, default 1)")
+    c.add_argument("--sakla", type=int, default=14, help="with --yeni: delete generated date folders older than this (days)")
+    c.add_argument("--temel", action="store_true", help="the four base CVs (tr/en x tasarim/uretim), not tied to an ad")
+    c.add_argument("--dil", choices=["tr", "en"], help="override the CV language")
+    c.add_argument("--tur", choices=["tasarim", "uretim"], help="override the CV variant")
+    c.add_argument("--no-pdf", action="store_true", help="Word file only (no PDF export)")
+    c.add_argument("--ac", action="store_true", help="open the output folder in Explorer afterwards")
     args = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S")
     if hasattr(sys.stdout, "reconfigure"):
@@ -515,6 +606,10 @@ def main(argv=None) -> int:
         return rebuild(args)
     if args.cmd == "health":
         return health(args)
+    if args.cmd == "eval":
+        return evaluate(args)
+    if args.cmd == "cv":
+        return cvgen.run_cli(args, Store(ROOT / "data").jobs)
     if args.cmd == "recheck":
         cfg = load_config()
         store = Store(ROOT / "data")

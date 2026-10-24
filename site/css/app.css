@@ -219,6 +219,8 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .85em; 
 .checks li.warn::before { content: "!"; color: var(--c-stretch); font-weight: 700; }
 .checks li.bad::before { content: "✕"; color: #c0392b; }
 .checks .linkbtn { color: var(--accent); margin-left: 4px; text-decoration: underline; }
+.cvfile { font-size: .9rem; line-height: 1.6; }
+.cvfile .linkbtn { color: var(--accent); margin-left: 4px; text-decoration: underline; }
 .applicant { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; }
 .applicant .wide { grid-column: 1 / -1; }
 @media (max-width: 600px) { .applicant { grid-template-columns: minmax(0, 1fr); } }
