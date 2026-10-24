@@ -272,6 +272,9 @@ function render() {
   } else if (view === "today") {
     $("#count").textContent = "";
     list.innerHTML = queueView(pool);
+  } else if (view === "akademik") {
+    $("#count").textContent = "";
+    list.innerHTML = academicView();
   } else if (view === "apps" || view === "followup") {
     $("#count").textContent = `${jobs.length} kayıt${view === "followup" ? " · takip zamanı gelenler" : " · kartları sütunlar arasında sürükleyebilirsin"}`;
     list.innerHTML = jobs.length ? kanban(jobs)
@@ -390,6 +393,57 @@ function queueView(pool) {
 function claudeQueueText(jobs) {
   return ["/basvuru-doldur", "Aşağıdaki ilanların başvuru formlarını doldur, göndermeden önce dur:",
     ...jobs.map((j, i) => `${i + 1}. ${j.title} - ${j.company} | id: ${j.id} | ${j.url}`)].join("\n");
+}
+
+// ------------------------------------------------------------------ academic opportunities
+// akademik.json is written weekly by the "Akademik fırsat takibi" cloud routine (research internships,
+// summer schools, MSc-period grants, conferences, early PhD tracking). Status lives in S.entries as "akademik:<id>".
+let ACAD = null;            // null = not loaded yet
+let acadShowPast = false;
+const ACAD_STAGES = [["", "Durum…"], ["kaydedildi", "⭐ Kaydedildi"], ["basvuruldu", "📨 Başvuruldu"], ["gizli", "🙈 İlgilenmiyorum"]];
+const ACAD_FIT = { "Çok uygun": "dogrudan", "Uygun": "uygun", "Stretch": "stretch" };
+
+async function loadAcademic() {
+  try { ACAD = await (await fetch("akademik.json", { cache: "no-store" })).json(); }
+  catch { ACAD = { items: [], error: true }; }
+  if (view === "akademik") render();
+}
+
+function acadCard(o) {
+  const key = `akademik:${o.id}`;
+  const st = entry(key).stage || "";
+  const left = o.son_basvuru ? daysAgo(o.son_basvuru) * -1 : null;
+  const due = o.son_basvuru ? `<span class="${left !== null && left <= 14 ? "soon" : ""}">⏳ ${esc(fmtDate(o.son_basvuru))}${left !== null && left >= 0 ? ` (${left} gün)` : ""}</span>`
+    : `<span>⏳ ${esc(o.son_basvuru_metin || "Tarih belirtilmemiş")}</span>`;
+  return `<article class="qrow ${st === "gizli" ? "hidden-job" : ""}" data-acad="${esc(key)}">
+    <div class="qmain">
+      <a class="title" href="${esc(o.link)}" target="_blank" rel="noopener">${esc(o.baslik)}</a>
+      <div class="company">${esc(o.kurum || "")}${o.ulke ? " · " + esc(o.ulke) : ""} · <span class="badge ${ACAD_FIT[o.uygunluk] || ""}">${esc(o.uygunluk || "")}</span>
+        · ${esc(o.tur || "")}${o.alan ? " · " + esc(o.alan) : ""} · ${due}</div>
+      ${o.sartlar ? `<div class="hint">📋 ${esc(o.sartlar)}</div>` : ""}
+      ${o.gerekce ? `<div class="hint">💡 ${esc(o.gerekce)}</div>` : ""}
+      <div class="actions"><a class="btn primary" href="${esc(o.link)}" target="_blank" rel="noopener">Sayfayı aç</a>
+        <select data-acad-stage="${esc(key)}" aria-label="Durum">${ACAD_STAGES.map(([v, l]) => `<option value="${v}" ${v === st ? "selected" : ""}>${l}</option>`).join("")}</select></div>
+    </div></article>`;
+}
+
+function academicView() {
+  if (!ACAD) { loadAcademic(); return `<div class="empty">Yükleniyor…</div>`; }
+  if (ACAD.error) return `<div class="empty">Akademik fırsatlar yüklenemedi (akademik.json).</div>`;
+  const q = $("#q").value.trim().toLocaleLowerCase("tr");
+  const t = today();
+  const items = (ACAD.items || []).filter((o) => (acadShowPast || !o.son_basvuru || o.son_basvuru >= t)
+    && (!q || [o.baslik, o.kurum, o.ulke, o.tur, o.alan, o.sartlar].join(" ").toLocaleLowerCase("tr").includes(q)));
+  const byDeadline = (a, b) => (a.son_basvuru || "9999").localeCompare(b.son_basvuru || "9999");
+  const groups = [["Şimdi (YL sırasında)", items.filter((o) => !String(o.zamanlama || "").includes("2028"))],
+                  ["YL sonrası (2028+) - erken takip", items.filter((o) => String(o.zamanlama || "").includes("2028"))]];
+  const past = (ACAD.items || []).filter((o) => o.son_basvuru && o.son_basvuru < t).length;
+  const head = `<div class="qhead"><b>Akademik fırsatlar</b> <span class="hint">· araştırma stajı, yaz okulu, YL bursu, konferans, erken PhD takibi.
+    Her perşembe güncellenir${ACAD.updated ? ` (son: ${esc(fmtDate(ACAD.updated))})` : ""}.</span>
+    ${past ? `<div class="actions"><button class="btn link" data-acad-past>${acadShowPast ? "Süresi geçenleri gizle" : `Süresi geçen ${past} fırsatı göster`}</button></div>` : ""}</div>`;
+  const body = groups.filter(([, g]) => g.length).map(([title, g]) =>
+    `<div class="group">${esc(title)} (${g.length})</div>${g.sort(byDeadline).map(acadCard).join("")}`).join("");
+  return head + (body || `<div class="empty">Şu an listelenecek akademik fırsat yok.</div>`);
 }
 
 // ------------------------------------------------------------------ kanban
@@ -1031,6 +1085,7 @@ document.addEventListener("click", async (ev) => {
     return generateLetter(j);
   }
   if (t.hasAttribute?.("data-queue-more")) { queueExtra += 5; render(); return; }
+  if (t.hasAttribute?.("data-acad-past")) { acadShowPast = !acadShowPast; render(); return; }
   if (t.hasAttribute?.("data-queue-claude")) {
     const jobs = todayQueue(allJobs(), queueExtra).todo.filter((j) => j.apply !== "easy" && j.url);
     try { await navigator.clipboard.writeText(claudeQueueText(jobs)); toast(`${jobs.length} ilan kopyalandı ✓ - Claude Code'a yapıştır`); }
@@ -1136,6 +1191,9 @@ document.addEventListener("change", async (ev) => {
     render();
     if (t.value === "basvuruldu") toast(`Başvurularım'a taşındı - ${FOLLOWUP_BDAYS} iş günü sonra takip hatırlatması`);
     if (t.value === "gizli") askRejectReason(id);
+  } else if (t.dataset?.acadStage !== undefined) {
+    saveEntry(t.dataset.acadStage, { stage: t.value });
+    render();
   } else if (t.hasAttribute?.("data-daily")) {
     ls.set(LS_DAILY, Math.max(1, Number(t.value) || 10));
     render();
