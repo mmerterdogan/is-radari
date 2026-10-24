@@ -1102,5 +1102,45 @@
   "rechecked": 40,
   "closed_found": 10,
   "seconds": 2092
+ },
+ {
+  "date": "2026-10-24",
+  "fetched": 409,
+  "new": 140,
+  "relevant": 78,
+  "dropped": 62,
+  "enriched": 29,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 3,
+   "uygun": 3,
+   "stretch": 7,
+   "belirsiz": 34,
+   "dusuk": 31
+  },
+  "sources": {
+   "linkedin": 211,
+   "euraxess": 0,
+   "greenhouse": 50,
+   "smartrecruiters": 43,
+   "workday": 12,
+   "hrpeak": 17,
+   "baykar": 48,
+   "youthall": 28,
+   "kariyerkapisi": 0
+  },
+  "failed_sources": [
+   "euraxess"
+  ],
+  "cost_usd": 0.0,
+  "health": [
+   "euraxess kaynağı üst üste 2 taramadır boş (site yapısı değişmiş olabilir)"
+  ],
+  "enrich_blocked": true,
+  "backfilled": 0,
+  "rechecked": 40,
+  "closed_found": 0,
+  "seconds": 2440
  }
 ]

@@ -1,7 +1,7 @@
 {
  "makine mühendisi @ Turkey": {
-  "total": 736,
-  "good": 214,
+  "total": 764,
+  "good": 218,
   "yield": 0.29
  },
  "graduate mechanical engineer @ European Union": {
@@ -9,45 +9,45 @@
   "good": 64,
   "yield": 0.22
  },
+ "mechanical design engineer @ Denmark": {
+  "total": 220,
+  "good": 60,
+  "yield": 0.27
+ },
  "mechanical design engineer @ Sweden": {
-  "total": 212,
-  "good": 40,
+  "total": 217,
+  "good": 41,
   "yield": 0.19
  },
- "mechanical design engineer @ Denmark": {
-  "total": 212,
-  "good": 60,
-  "yield": 0.28
- },
  "yeni mezun mühendis @ Turkey": {
-  "total": 197,
+  "total": 203,
   "good": 16,
   "yield": 0.08
  },
  "mechanical design engineer @ Ireland": {
-  "total": 196,
+  "total": 201,
   "good": 84,
-  "yield": 0.43
+  "yield": 0.42
  },
  "Ar-Ge mühendisi @ Turkey": {
-  "total": 182,
+  "total": 190,
   "good": 8,
   "yield": 0.04
  },
  "Smart Start @ Turkey": {
-  "total": 179,
-  "good": 7,
+  "total": 187,
+  "good": 8,
   "yield": 0.04
  },
- "mechanical design engineer @ United Kingdom": {
-  "total": 177,
-  "good": 92,
-  "yield": 0.52
- },
  "FEA engineer @ United Kingdom": {
-  "total": 176,
-  "good": 69,
-  "yield": 0.39
+  "total": 183,
+  "good": 73,
+  "yield": 0.4
+ },
+ "mechanical design engineer @ United Kingdom": {
+  "total": 182,
+  "good": 92,
+  "yield": 0.51
  },
  "additive manufacturing engineer @ European Union": {
   "total": 175,
@@ -55,57 +55,57 @@
   "yield": 0.19
  },
  "tasarım mühendisi @ Turkey": {
-  "total": 149,
-  "good": 19,
+  "total": 153,
+  "good": 20,
   "yield": 0.13
  },
  "PhD finite element @ European Union": {
-  "total": 147,
-  "good": 24,
+  "total": 153,
+  "good": 25,
   "yield": 0.16
  },
  "R&D mechanical engineer @ European Union": {
-  "total": 147,
+  "total": 152,
   "good": 32,
-  "yield": 0.22
+  "yield": 0.21
+ },
+ "additive manufacturing @ Turkey": {
+  "total": 148,
+  "good": 1,
+  "yield": 0.01
  },
  "bursiyer @ Turkey": {
   "total": 141,
   "good": 7,
   "yield": 0.05
  },
- "additive manufacturing @ Turkey": {
-  "total": 140,
-  "good": 1,
-  "yield": 0.01
- },
  "FEA engineer @ Ireland": {
-  "total": 131,
+  "total": 134,
   "good": 24,
   "yield": 0.18
  },
  "mechanical design engineer @ Netherlands": {
-  "total": 131,
+  "total": 133,
   "good": 19,
-  "yield": 0.15
- },
- "FEA engineer @ Netherlands": {
-  "total": 123,
-  "good": 27,
-  "yield": 0.22
+  "yield": 0.14
  },
  "PhD additive manufacturing @ European Union": {
-  "total": 119,
+  "total": 127,
   "good": 11,
   "yield": 0.09
  },
+ "FEA engineer @ Netherlands": {
+  "total": 125,
+  "good": 27,
+  "yield": 0.22
+ },
  "FEA @ Turkey": {
-  "total": 113,
+  "total": 117,
   "good": 1,
   "yield": 0.01
  },
  "analiz mühendisi @ Turkey": {
-  "total": 100,
+  "total": 102,
   "good": 10,
   "yield": 0.1
  },
@@ -115,7 +115,7 @@
   "yield": 0.15
  },
  "proses mühendisi @ Turkey": {
-  "total": 76,
+  "total": 78,
   "good": 4,
   "yield": 0.05
  },
@@ -125,12 +125,12 @@
   "yield": 0.08
  },
  "mühendis adayı @ Turkey": {
-  "total": 63,
+  "total": 66,
   "good": 1,
   "yield": 0.02
  },
  "araştırma görevlisi makine @ Turkey": {
-  "total": 62,
+  "total": 64,
   "good": 1,
   "yield": 0.02
  },
@@ -140,17 +140,17 @@
   "yield": 0.17
  },
  "otomotiv mühendis @ Turkey": {
-  "total": 37,
+  "total": 41,
   "good": 4,
-  "yield": 0.11
+  "yield": 0.1
  },
  "üretim mühendisi yeni mezun @ Turkey": {
-  "total": 33,
-  "good": 11,
-  "yield": 0.33
+  "total": 34,
+  "good": 12,
+  "yield": 0.35
  },
  "Ar-Ge mühendisi yeni mezun @ Turkey": {
-  "total": 33,
+  "total": 34,
   "good": 5,
   "yield": 0.15
  },
@@ -175,9 +175,9 @@
   "yield": 0.07
  },
  "tasarım mühendisi SolidWorks @ Turkey": {
-  "total": 13,
+  "total": 14,
   "good": 4,
-  "yield": 0.31
+  "yield": 0.29
  },
  "R&D engineer @ Turkey": {
   "total": 8,
@@ -185,9 +185,9 @@
   "yield": 0.0
  },
  "simulation engineer @ Turkey": {
-  "total": 7,
+  "total": 8,
   "good": 2,
-  "yield": 0.29
+  "yield": 0.25
  },
  "mechanical engineer @ Turkey": {
   "total": 7,
