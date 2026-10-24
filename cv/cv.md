@@ -20,12 +20,12 @@ I am interested not in one corner of mechanical engineering but in the whole pat
 - Design Project - Mercedes-Benz Türk (NDA), Oct 2025 - Jul 2026: Ergonomic luggage loading system; validated with static and modal FEA.
 - İÜC Racing - Formula Student, Powertrain Team, Sep 2023 - Jul 2026: Designed the chain guard in SolidWorks, verified with static analysis in ANSYS; 15% weight reduction by revising the bracket design.
 - TEKNOFEST - UAV Landing Gear, Aug 2024 - Aug 2025: Parametric SolidWorks model, optimised with static FEA in ANSYS; FDM-printed parts (PLA, ABS, ASA) 50% below the weight target.
-- Nuclear Reactor Pressure Vessel - Stress Analysis, Oct 2024 - Feb 2025: Analytical stress calculations verified against an ANSYS FEA model with < 3.2% deviation; study including elastic-plastic analysis (Ramberg-Osgood) being prepared for journal publication.
-- Defect Prediction in Steel Production with Machine Learning, Feb 2025 - Jun 2025: Random Forest and Gradient Boosting classification in R; 91.3% accuracy.
+- Nuclear Reactor Pressure Vessel - Stress Analysis, Oct 2025 - Jan 2026: Membrane stresses calculated with thin-shell theory and compared with an ANSYS model of the vessel and bolted head; head and flange discontinuities govern the design (safety factor 3.05 locally vs 11.2 in the shell). Extended to stored energy, TNT equivalent and blast safety distance (article in preparation with the advisor).
+- Defect Prediction in Steel Production with Machine Learning, Feb 2025 - Jun 2025: UCI Steel Plates Faults data in R, 7 classifiers compared, random forest + SVM + XGBoost majority-vote ensemble with 91.3% accuracy.
 
 ## Skills
 - Software: SolidWorks (CSWP), ANSYS Mechanical, AutoCAD, MS Excel, R, MATLAB/Simulink, Fusion 360, Siemens NX, CATIA
-- Expertise: finite element analysis (static, modal, elastic-plastic), topology optimisation, solid modelling and parametric design, sheet metal design, design for injection moulding, technical drawing and tolerancing (GD&T), design for manufacturability (DFM), root cause analysis (RCA), lean manufacturing, pneumatic systems troubleshooting, machining processes, additive manufacturing / FDM 3D printing
+- Expertise: finite element analysis (static, modal), topology optimisation, solid modelling and parametric design, sheet metal design, design for injection moulding, technical drawing and tolerancing (GD&T), design for manufacturability (DFM), root cause analysis (RCA), lean manufacturing, pneumatic systems troubleshooting, machining processes, additive manufacturing / FDM 3D printing
 - Languages: Turkish (native), English (C1)
 
 ## Certificates and training
