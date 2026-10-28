@@ -1227,7 +1227,7 @@
   "not": "Claude etiketi (2026-10-28): akıcı İsveççe şart"
  },
  {
-  "dogru": "uygun",
+  "dogru": "dusuk",
   "kural": "uygun",
   "ilan": {
    "source": "linkedin",
@@ -1296,7 +1296,7 @@
    "letter": null,
    "id": "linkedin:4470123325"
   },
-  "not": "Claude etiketi (2026-10-28): mezun programı, bina tesisatı (HVAC) alanı kısmen uzak"
+  "not": "Claude etiketi (2026-10-28, düzeltildi): İrlanda'da çalışma izni şart, sponsorluk yok (kural yakaladı, ilk etikette atlanmıştı)"
  },
  {
   "dogru": "dusuk",

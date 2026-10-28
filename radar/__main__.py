@@ -294,6 +294,10 @@ def evaluate(args) -> int:
     if not jobs:
         print(f"{ANSWER_KEY.relative_to(ROOT)} içinde etiketli satır yok: \"dogru\" alanlarını doldur.")
         return 1
+    # as in the daily run: an ad the relevance gate drops is never shown, which counts as "dusuk"
+    for j in jobs:
+        if not match.is_relevant(j, profile):
+            j.category = "dusuk"
     _print_result("Kural", compare_labels(labels, {j.id: j.category for j in jobs}))
     if args.llm:
         if not os.environ.get("ANTHROPIC_API_KEY"):

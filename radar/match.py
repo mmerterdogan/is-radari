@@ -89,8 +89,47 @@ SKILLS: dict[str, tuple[str, str]] = {
 LANG_REQ = {
     "almanca": ("Almanca", r"deutschkenntnisse|fliessend(e)? deutsch|sehr gute deutsch|german (c1|b2|fluent|native)|fluent (in )?german|business fluent german|german language (skills|proficiency)|almanca (bilen|bilgisi)|verhandlungssicher"),
     "fransizca": ("Fransızca", r"french (c1|b2|fluent|native)|fluent (in )?french|francais courant|fransizca (bilen|bilgisi)"),
+    "isvecce": ("İsveççe", r"svenska (i tal och skrift|och engelska)|kunskaper i svenska"),
 }
+# "Fluency in Swedish and English", "business-fluent ... in German", "German speaking": a required language
+# within one sentence; skipped when the same sentence calls it a plus
+OTHER_LANGS = {"german": "Almanca", "french": "Fransızca", "swedish": "İsveççe", "dutch": "Felemenkçe", "danish": "Danca",
+               "norwegian": "Norveççe", "finnish": "Fince", "italian": "İtalyanca", "spanish": "İspanyolca",
+               "portuguese": "Portekizce", "polish": "Lehçe", "czech": "Çekçe"}
+_LANGS = "(?:" + "|".join(OTHER_LANGS) + ")"
+LANG_FLUENCY = (rf"(?:fluen(?:t|cy)|proficien(?:t|cy)|business[- ]fluent|native|mother tongue|written and spoken|spoken and written)"
+                rf"[^.;\n]{{0,45}}\b{_LANGS}\b|"
+                rf"(?:excellent|very good|good|strong) (?:written and spoken |spoken and written )?(?:knowledge of |command of |skills in )?{_LANGS}\b|"
+                rf"\b{_LANGS}[- ](?:speaking|speaker|c1|b2|native|fluent|language skills|language proficiency)")
+LANG_OPTIONAL = (r"plus|advantage|desirable|preferred|preferabl|ideally|bonus|beneficial|nice to have|asset|merit|\bvalued?\b|appreciated|"
+                 r"\bnot\b|courses?\b")   # "if Swedish is not your native language, we offer Swedish courses"
 PROFILE_LANGS = {"tr", "en"}
+
+
+def language_gaps(text: str) -> list[str]:
+    """Required languages the profile lacks (text is _lite()-ed)."""
+    gaps = [lbl for lbl, rx in LANG_REQ.values() if _any(rx, text)]
+    for m in re.finditer(LANG_FLUENCY, text):
+        start = text.rfind(".", 0, m.start()) + 1
+        end = text.find(".", m.end())
+        sentence = text[start: end if end != -1 else len(text)]
+        if _any(LANG_OPTIONAL, sentence):
+            continue
+        lbl = next(v for k, v in OTHER_LANGS.items() if re.search(rf"\b{k}\b", m.group(0)))
+        if lbl not in gaps:
+            gaps.append(lbl)
+    return gaps
+
+
+# Explicit "you must already be allowed to work here" statements: a Turkish citizen cannot meet them
+WORK_AUTH = (r"(unable|not able) to (provide|offer|sponsor)[^.;\n]{0,30}(sponsor|visa)|no (visa )?sponsorship|"
+             r"sponsorship (is )?not (available|provided|offered)|(cannot|can not|will not|do not|does not) (provide |offer )?(visa )?sponsor|"
+             r"british (/ ?dual )?(passport|citizen|national)|dual passport|(uk|us|eu) citizen(ship)? (is )?(required|only)|"
+             r"must be an? (uk|us|eu|british|american) citizen|\bclearable\b|(eligible|able) (to obtain|for) (sc|dv|security) clearance|"
+             r"security clearance (is )?required|(sc|dv) cleared")
+# Special-quota postings (disabled-persons recruitment etc.) the profile is not eligible for
+SPECIAL_QUOTA = r"\(engelli\)|engelli kadro|engel durumunuzun|engelli personel alim|disabled persons only"
+DRAFTER = r"teknik ressam|draughts?man|draftsman|drafter|cad operator|cad teknisyen"
 
 
 @dataclass
@@ -169,7 +208,11 @@ OTHER_DISCIPLINE = (r"electrical|elektrik|electronic|elektronik|embedded|gomulu|
                     r"environmental|cevre|\bfood|\bgida|textile|tekstil|mining|maden|geolog|petroleum|architect|mimar|interior|harita|survey|"
                     r"chemistry|chemist\b|biochem|biotech|pharma|python|visuali[sz]|cloud|algoritma|algorithm|signal processing|"
                     r"sinyal isleme|image processing|goruntu isleme|\bfpga\b|siber|orbit|yorunge|yapay zeka|"
-                    r"artificial intelligence|\brf\b|aviyonik|avionics|neurosci|linguist")
+                    r"artificial intelligence|\brf\b|aviyonik|avionics|neurosci|linguist|"
+                    r"back end|front end|bioinformat|bio informat|\bbridges?\b")
+# "Product Designer" in a software company: digital product / UX design, not mechanical design
+DIGITAL_DESIGN = (r"wireframe|figma|user research|usability|user flows?|user experience|\bui ?/ ?ux\b|\bux\b|"
+                  r"mobile (and|&) web app|web and mobile app|digital (product|experience)|design system")
 MECH_TITLE = r"mechanical|makine|makina|mekanik|mechanik|maschinenbau|mecanique|\bfea\b|simulat|structural|additive|eklemeli|mechatron|mekatronik"
 
 # Research / PhD / generic titles must show a mechanical-engineering domain somewhere in the ad
@@ -238,7 +281,10 @@ ENTRY = (r"new grad|newly graduated|recent(ly)? grad|fresh grad|graduate (engine
          r"recien titulado|neolaureat|early career|0 ?- ?[12] (years?|yil)|no prior experience|no experience (is )?required|"
          r"without (prior )?experience|erste (berufs)?erfahrung|premiere experience|recently graduated")
 # Body phrases that point to an experienced hire when no year count is given
-MID_TEXT = r"significant experience|extensive experience|substantial experience|solid years of experience|proven track record"
+MID_TEXT = (r"significant experience|extensive experience|substantial experience|solid years of experience|proven track record|"
+            r"proven (\w+ ){0,3}experience")
+# "three to five years' experience": spelled-out counts are turned into digits before the year parser runs
+NUMBER_WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10}
 INTERN = (r"\bintern\b|internship|stajyer|\bstaj\b|praktikum|praktikant|\bstage\b|stagiaire|becario|tirocin|"
           r"working student|werkstudent|student assistant|ogrenci (asistan|calisan)|part[- ]time student|master thesis|masterarbeit|tez ogrencisi")
 MID_TITLE = r"deneyimli|experienced|experimente|\bmid\b|intermediate|erfahren"
@@ -299,7 +345,7 @@ def parse_experience(job: Job) -> dict:
     else:
         level = "belirtilmemis"
 
-    years = _year_mentions(text)
+    years = _year_mentions(re.sub(r"\b(" + "|".join(NUMBER_WORDS) + r")\b", lambda m: str(NUMBER_WORDS[m.group(1)]), text))
     ymin = min((a for a, _ in years), default=None)
     ymax = None
     if years:
@@ -373,7 +419,7 @@ LEVEL_LABEL = {"lisans": "Lisans", "lisans_veya_yl": "Lisans veya YL", "yl_terci
 FIELD_LABEL = {"makine": "Makine Müh.", "ilgili": "İlgili müh. bölümleri", "ilgisiz": "Farklı bölüm", "belirtilmemis": ""}
 
 
-DIRECT_FIELD = (r"(?:degree|bachelor'?s?|master'?s?|b\.? ?sc|m\.? ?sc|phd|diploma|studies|studium)\s+(?:degree\s+)?(?:in|of)\s+"
+DIRECT_FIELD = (r"(?:degree|bachelor'?s?|master'?s?|b\.? ?sc|m\.? ?sc|phd|diploma|studies|studium|graduating|graduated)\s+(?:degree\s+)?(?:in|of)\s+"
                 r"([a-z &/,-]{3,70})")
 TR_FIELD = r"([a-z ]{3,40}?)\s+(?:muhendisligi|mühendisliği|bolum)"
 
@@ -627,6 +673,9 @@ def relevance(job: Job, profile: Profile | None = None, allow_pending: bool = Fa
         return False, "Başka mühendislik disiplini (makine kabul edilmiyor)"
     fams = role_families(job)
     prim = primary_family(fams)
+    if prim in ("tasarim", "urun") and not _any(MECH_TITLE, title) and \
+            sum(1 for _ in re.finditer(DIGITAL_DESIGN, _norm(job.description[:5000]))) >= 2 and not _mech_domain(job):
+        return False, "Dijital ürün / UX tasarımı (mekanik tasarım değil)"
     research = "doktora" in fams or prim == "arge"
     accepts_me = _degree_field(_lite(job.description)) == "makine"   # "Makine Mühendisliği mezunu" etc.
     if (prim in WEAK_FAMILIES or research) and not accepts_me and not _mech_domain(job, strict=research):
@@ -678,6 +727,8 @@ def analyze(job: Job, profile: Profile | None = None) -> Job:
         fam_w = 8  # research outside the mechanical domain (unless the ad asks for mechanical engineers)
     if "teknisyen" in fams:        # technician roles are below an engineering degree
         fam_w, role_label = min(fam_w, 8), FAMILY_LABEL["teknisyen"]
+    elif _any(DRAFTER, _norm(job.title)):   # drafting jobs use the skills but are not engineer posts: "uygun" at most
+        fam_w, role_label = min(fam_w, 14), "Teknik ressam"
     elif "satis" in fams or "destek" in fams:   # technical sales / support: possible, not a core engineering role
         key = "satis" if "satis" in fams else "destek"
         fam_w, role_label = min(fam_w, 14), FAMILY_LABEL[key]
@@ -693,10 +744,14 @@ def analyze(job: Job, profile: Profile | None = None) -> Job:
     core = [s for s in have if s in CORE_SKILLS]
     other = [s for s in have if s not in CORE_SKILLS and s != "ingilizce"]
 
+    full = _lite(f"{job.title}\n{job.description}")
     lang = ad_language(job)
-    lang_gaps = [lbl for key, (lbl, rx) in LANG_REQ.items() if _any(rx, _lite(f"{job.title}\n{job.description}"))]
+    lang_gaps = language_gaps(full)
     if lang in LANG_NAME and lang not in profile.languages and LANG_NAME[lang] not in lang_gaps:
         lang_gaps.append(LANG_NAME[lang])
+    # eligibility the profile cannot meet whatever the skills: work permit / citizenship / clearance, special quotas
+    eligibility = ("Çalışma izni / vatandaşlık şartı (vize sponsorluğu yok)" if _any(WORK_AUTH, full) else
+                   "Özel kontenjan ilanı (engelli kadrosu)" if _any(SPECIAL_QUOTA, full) else "")
 
     # ---- score (for ordering; the category is decided by explicit rules below)
     score = fam_w
@@ -714,7 +769,10 @@ def analyze(job: Job, profile: Profile | None = None) -> Job:
     edu_ok = edu["level"] not in ("yl_zorunlu", "doktora_zorunlu")
     reasons: list[str] = []
 
-    if exp["fit"] == "uzak" or edu["level"] == "doktora_zorunlu" or edu["field"] == "ilgisiz" or lang_gaps or fam_w < 10:
+    # a master's degree AND an experienced hire: two gaps at once
+    two_gaps = edu["level"] == "yl_zorunlu" and exp["fit"] == "zor"
+    if exp["fit"] == "uzak" or edu["level"] == "doktora_zorunlu" or edu["field"] == "ilgisiz" or lang_gaps or fam_w < 10 \
+            or eligibility or two_gaps:
         cat = "dusuk"
     elif exp_ok and edu_ok and score >= 68 and ((fam_w >= 22 and (core or title_core)) or (fam_w >= 20 and len(core) >= 2)):
         cat = "dogrudan"
@@ -732,7 +790,7 @@ def analyze(job: Job, profile: Profile | None = None) -> Job:
         "iyi": f"Deneyim: {exp['label']} - yeni mezun olarak uygun",
         "belirtilmemis": "Deneyim şartı belirtilmemiş",
         "yakin": f"{exp['label']} deneyim isteniyor - staj ve projelerinle stretch",
-        "zor": f"{exp['label']} deneyim isteniyor",
+        "zor": "Deneyimli aday isteniyor" if exp["min"] is None else f"{exp['label']} deneyim isteniyor",
         "uzak": f"{exp['label']} - kıdemli / uzun deneyim isteyen pozisyon",
     }[exp["fit"]]
     if edu.get("phd_position") and edu["level"] != "doktora_zorunlu":
@@ -751,8 +809,10 @@ def analyze(job: Job, profile: Profile | None = None) -> Job:
                     "ilgisiz": "Farklı bir bölüm isteniyor", "belirtilmemis": ""}[edu["field"]]
     skill_reason = ("Örtüşen: " + ", ".join(SKILLS[s][0] for s in (core + other)[:4])) if (core or other) else ""
     if cat == "dusuk":
-        decisive = [lang_gaps and f"Dil şartı: {', '.join(lang_gaps)}",
+        decisive = [eligibility,
+                    lang_gaps and f"Dil şartı: {', '.join(lang_gaps)}",
                     exp["fit"] == "uzak" and exp_reason,
+                    two_gaps and f"YL derecesi ve {exp['label']} deneyim birlikte isteniyor",
                     edu["level"] == "doktora_zorunlu" and edu_reason,
                     edu["field"] == "ilgisiz" and field_reason,
                     fam_w < 10 and "Pozisyon alanı profille zayıf örtüşüyor"]

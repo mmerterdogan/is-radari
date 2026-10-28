@@ -368,3 +368,77 @@ def test_boost_companies_become_priority_targets():
                                    "Araştırma Görevlisi - Makine Mühendisliği"])
 def test_design_and_research_titles_still_kept(title):
     assert match.is_relevant(J(title, FEA_BODY))
+
+
+# ---------------------------------------------------------------- answer-key findings (2026-10-28)
+@pytest.mark.parametrize("sentence", [
+    "Applicants must have the legal right to work in the UK. We are unable to provide sponsorship for this role.",
+    "Must have right to work in Ireland, we do not provide sponsorship for this role.",
+    "Due to the nature of work must hold British / Dual passport or citizenship as a minimum.",
+    "Location: Loughborough. Clearance: Clearable.",
+])
+def test_work_authorization_requirement_is_low(sentence):
+    j = match.analyze(J("Mechanical Design Engineer", "Bachelor's degree in Mechanical Engineering. " + sentence + FEA_BODY,
+                        location="London, UK"))
+    assert j.category == "dusuk" and j.category_reasons[0].startswith("Çalışma izni")
+
+
+def test_right_to_work_boilerplate_alone_is_not_low():
+    j = match.analyze(J("Mechanical Design Engineer", "Bachelor's degree in Mechanical Engineering. "
+                        "Applicants must have the right to work in the UK." + FEA_BODY, location="London, UK"))
+    assert j.category != "dusuk"
+
+
+@pytest.mark.parametrize("text, lang", [
+    ("Fluency in Swedish and English (including training and communication skills).", "İsveççe"),
+    ("You are business-fluent in written and spoken in German and English.", "Almanca"),
+    ("Technical Support Specialist - German speaking", "Almanca"),
+])
+def test_required_foreign_language_is_a_gap(text, lang):
+    assert lang in match.language_gaps(match._lite(text))
+
+
+@pytest.mark.parametrize("text", ["Excellent English; German is a plus.", "Experience with the German market.",
+                                  "Good knowledge of English. Our German office supports you.",
+                                  "We also value fluency in Danish or other Scandinavian language.",
+                                  "If Swedish is not your native language, Chalmers offers Swedish courses."])
+def test_optional_or_unrelated_language_mentions_are_not_gaps(text):
+    assert match.language_gaps(match._lite(text)) == []
+
+
+def test_spelled_out_years_are_parsed():
+    exp = match.parse_experience(J(desc="The role suits someone with around three to five years' experience in design."))
+    assert (exp["min"], exp["max"]) == (3, 5)
+
+
+def test_masters_plus_proven_experience_is_low():
+    j = match.analyze(J("Fatigue Stress Engineer", "Master's degree required in Mechanical Engineering. "
+                        "Proven experience in fatigue and damage tolerance analysis." + FEA_BODY))
+    assert j.category == "dusuk"
+
+
+@pytest.mark.parametrize("title, desc", [
+    ("Product Designer", "We build mobile and web applications. Conduct user research and usability testing, "
+                         "create user flows, wireframes and prototypes in Figma."),
+    ("Back-End Engineer", "Design scalable cloud services in Go." + FEA_BODY),
+    ("Bio-informatic engineer W/M", "Genomics pipelines." + FEA_BODY),
+    ("Graduate Engineer (Bridge & Structures)", "Are you graduating in Civil/Structural Engineering this summer?"),
+])
+def test_other_fields_are_dropped(title, desc):
+    assert not match.is_relevant(J(title, desc))
+
+
+def test_mechanical_product_designer_is_kept():
+    assert match.is_relevant(J("Product Designer", "Design plastic and sheet metal parts in SolidWorks, run FEA, "
+                                                   "support injection mould tooling and prototype testing."))
+
+
+def test_drafting_job_is_at_most_uygun():
+    j = match.analyze(J("Teknik Ressam", "SolidWorks ile üretim çizimleri, talaşlı imalat, ölçülendirme ve tolerans. "
+                        "Yeni mezun adaylar değerlendirilir." + FEA_BODY))
+    assert j.category == "uygun"
+
+
+def test_special_quota_posting_is_low():
+    j = match.analyze(J("Makine Mühendisi (Engelli)", "Makine Mühendisliği mezunu. Engel durumunuzun %40'ın üzerinde olması gerekmektedir." + FEA_BODY))
+    assert j.category == "dusuk"
