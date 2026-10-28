@@ -125,9 +125,14 @@ def compose(content: dict, lang: str, variant: str, tags: set[str], drop: int = 
     boost = VARIANT_BOOST[variant]
     sep = "  |  "
     d.p([d.r(c["unvan"][variant], color="444444", sz=20)])
+    # contact items on one line; an item {satir: true} starts a second line
     contact = []
-    for k, it in enumerate(c["iletisim"]):
-        contact.append(d.r(sep) if k else "")
+    for it in c["iletisim"]:
+        if isinstance(it, dict) and it.get("satir"):
+            d.p(contact, after=0)
+            contact = []
+            continue
+        contact.append(d.r(sep) if contact else "")
         contact.append(d.link(it["metin"], it["link"]) if isinstance(it, dict) else d.r(it))
     d.p(contact)
     d.p([d.r(c["durum"])], after=40)
