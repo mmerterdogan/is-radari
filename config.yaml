@@ -39,23 +39,23 @@ search:
     max_pages: 1              # varsayılan sayfa sayısı (sayfa başı ~10 ilan); sorgu bazında "pages" ile değişir
     queries:
       # Sorgu verimi her taramada data/query_stats.json'a yazılır (toplam / ilgili ilan). Verimsizleri buradan ayıkla.
+      # 2026-10-28: verimi %5 ve altındaki 8 sorgu (Ar-Ge mühendisi, FEA, Smart Start, bursiyer, mühendis adayı,
+      # junior engineer, araştırma görevlisi, AM @ Turkey) ve AM sorguları çıkarıldı (iş hedefi: FEA + tasarım + üretim).
       # ---- Türkiye: geniş başlıklar
       - { keywords: "makine mühendisi", location: "Turkey", pages: 4 }
       - { keywords: "mechanical engineer", location: "Turkey", pages: 2 }
       - { keywords: "tasarım mühendisi", location: "Turkey", pages: 2 }
       - { keywords: "tasarım mühendisi SolidWorks", location: "Turkey" }
       - { keywords: "mechanical design engineer", location: "Turkey" }
-      - { keywords: "Ar-Ge mühendisi", location: "Turkey", pages: 2 }
       - { keywords: "Ar-Ge mühendisi yeni mezun", location: "Turkey" }
       - { keywords: "R&D engineer", location: "Turkey" }
       - { keywords: "ürün geliştirme mühendisi", location: "Turkey" }
       - { keywords: "product development engineer", location: "Turkey" }
       # ---- Türkiye: analiz / simülasyon
       - { keywords: "analiz mühendisi", location: "Turkey" }
-      - { keywords: "FEA", location: "Turkey" }
       - { keywords: "CAE engineer", location: "Turkey" }
       - { keywords: "simulation engineer", location: "Turkey" }
-      # ---- Türkiye: üretim / test / otomotiv / eklemeli
+      # ---- Türkiye: üretim / test / otomotiv
       - { keywords: "üretim mühendisi", location: "Turkey" }
       - { keywords: "üretim mühendisi yeni mezun", location: "Turkey" }
       - { keywords: "manufacturing engineer", location: "Turkey" }
@@ -63,15 +63,9 @@ search:
       - { keywords: "test mühendisi", location: "Turkey" }
       - { keywords: "validation engineer", location: "Turkey" }
       - { keywords: "otomotiv mühendis", location: "Turkey" }
-      - { keywords: "additive manufacturing", location: "Turkey" }
       # ---- Türkiye: yeni mezun / junior / staj / araştırma
       - { keywords: "yeni mezun mühendis", location: "Turkey", pages: 3 }
-      - { keywords: "mühendis adayı", location: "Turkey" }
-      - { keywords: "Smart Start", location: "Turkey" }
-      - { keywords: "junior engineer", location: "Istanbul" }
       - { keywords: "stajyer mühendis", location: "Turkey" }
-      - { keywords: "bursiyer", location: "Turkey" }
-      - { keywords: "araştırma görevlisi makine", location: "Turkey" }
       # ---- Yurt dışı: İngilizce ilan veren ülkeler (deneyim filtresi: 1=staj, 2=giriş, 3=associate)
       #      (AB genelindeki tasarım/FEA aramaları çoğunlukla Fransızca/Almanca ilan getiriyordu)
       - { keywords: "mechanical design engineer", location: "Netherlands", experience: "1,2,3" }
@@ -82,15 +76,17 @@ search:
       - { keywords: "FEA engineer", location: "Netherlands", experience: "1,2,3" }
       - { keywords: "FEA engineer", location: "United Kingdom", experience: "1,2,3" }
       - { keywords: "FEA engineer", location: "Ireland", experience: "1,2,3" }
+      - { keywords: "manufacturing engineer", location: "United Kingdom", experience: "1,2,3" }
+      - { keywords: "graduate design engineer", location: "United Kingdom" }
       # ---- Yurt dışı: AB geneli, verimli olanlar
-      - { keywords: "additive manufacturing engineer", location: "European Union", experience: "1,2,3" }
       - { keywords: "graduate mechanical engineer", location: "European Union", pages: 2 }
       - { keywords: "R&D mechanical engineer", location: "European Union", experience: "1,2,3" }
-      - { keywords: "PhD additive manufacturing", location: "European Union" }
       - { keywords: "PhD finite element", location: "European Union" }
 
+  # GitHub Actions'tan Euraxess 403, Kariyer Kapısı zaman aşımı veriyor (yurt dışı/veri merkezi IP'si engelli),
+  # yerelde ikisi de çalışıyor. CI'da her gün 0 ilan + ~10 dk boşa retry olduğu için kapalı (2026-10-28).
   euraxess:
-    enabled: true
+    enabled: false
     pages: 12                 # en yeni ilanlardan kaç sayfa taranacak (sayfa başı ~10)
 
   smartrecruiters:
@@ -129,7 +125,7 @@ search:
 
   # Kariyer Kapısı (kamu): sadece makine mühendisliğini kapsayan pozisyonlar alınır (çoğu KPSS ister)
   kariyerkapisi:
-    enabled: true
+    enabled: false            # CI'dan erişilemiyor, bkz. euraxess notu
     limit: 80
 
   # Lever / Ashby modülleri hazır; şu an Türkiye/Avrupa'da uygun ilanı olan şirket bulunamadı

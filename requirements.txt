@@ -1,4 +1,4 @@
-anthropic>=1.0
+anthropic>=1.0,<2
 beautifulsoup4>=4.12
 pydantic>=2.6
 pyyaml>=6.0
