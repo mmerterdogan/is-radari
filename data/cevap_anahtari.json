@@ -1,6 +1,6 @@
 [
  {
-  "dogru": "",
+  "dogru": "dogrudan",
   "kural": "dogrudan",
   "ilan": {
    "source": "baykar",
@@ -83,10 +83,11 @@
    "target": "Baykar",
    "letter": null,
    "id": "baykar:tasarim-gelistirme-ar-ge-muhendisi-2"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): UAV tasarım Ar-Ge, yetiştirilecek aday da aranıyor, CAD/ANSYS"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dogrudan",
   "ilan": {
    "source": "linkedin",
@@ -164,10 +165,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4439328470"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): UK, çalışma izni şart ve sponsorluk yok"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dogrudan",
   "ilan": {
    "source": "linkedin",
@@ -242,10 +244,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4454416698"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 3-5 yıl şart, boru hattı/gaz tesisatı tasarımı"
  },
  {
-  "dogru": "",
+  "dogru": "stretch",
   "kural": "dogrudan",
   "ilan": {
    "source": "linkedin",
@@ -359,10 +362,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4464340685"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): kanıtlı tasarım deneyimi ve kaynaklı konstrüksiyon isteniyor"
  },
  {
-  "dogru": "",
+  "dogru": "dogrudan",
   "kural": "dogrudan",
   "ilan": {
    "source": "linkedin",
@@ -475,10 +479,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4468926411"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): part-time, YL öğrencisi aranıyor, CAD+FEA+3D baskı, İstanbul"
  },
  {
-  "dogru": "",
+  "dogru": "uygun",
   "kural": "dogrudan",
   "ilan": {
    "source": "linkedin",
@@ -562,10 +567,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4471766348"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): SolidWorks+talaşlı imalat+tolerans tam örtüşüyor ama mühendis değil ressam pozisyonu"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dogrudan",
   "ilan": {
    "source": "linkedin",
@@ -626,10 +632,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4472692756"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): dijital ürün/UX tasarımcısı, makine değil"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dogrudan",
   "ilan": {
    "source": "linkedin",
@@ -692,10 +699,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4474227322"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): inşaat/yapı mühendisliği mezunu isteniyor"
  },
  {
-  "dogru": "",
+  "dogru": "dogrudan",
   "kural": "dogrudan",
   "ilan": {
    "source": "linkedin",
@@ -775,10 +783,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4475364985"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): lisans, mekanik tasarım + CAD + simülasyon, Almanca şartı yazmıyor"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dogrudan",
   "ilan": {
    "source": "linkedin",
@@ -837,10 +846,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4476581227"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): grafik tasarım stajı"
  },
  {
-  "dogru": "",
+  "dogru": "uygun",
   "kural": "uygun",
   "ilan": {
    "source": "baykar",
@@ -926,10 +936,11 @@
    "target": "Baykar",
    "letter": null,
    "id": "baykar:entegrasyon-ve-uretim-planlama-muhendisi"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): üretim planlama/entegrasyon, lisans yeterli, yalın üretim örtüşüyor"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "uygun",
   "ilan": {
    "source": "euraxess",
@@ -977,10 +988,11 @@
    "target": "",
    "letter": null,
    "id": "euraxess:470145"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): biyoinformatik"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "uygun",
   "ilan": {
    "source": "greenhouse",
@@ -1049,10 +1061,11 @@
    "target": "",
    "letter": null,
    "id": "greenhouse:formlabs-8220010"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): akıcı Almanca şart, teknik destek"
  },
  {
-  "dogru": "",
+  "dogru": "stretch",
   "kural": "uygun",
   "ilan": {
    "source": "linkedin",
@@ -1119,10 +1132,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4438231297"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): saha servisi ~3 yıl tercih, laboratuvar cihazı alanı"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "uygun",
   "ilan": {
    "source": "linkedin",
@@ -1209,10 +1223,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4464236003"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): akıcı İsveççe şart"
  },
  {
-  "dogru": "",
+  "dogru": "uygun",
   "kural": "uygun",
   "ilan": {
    "source": "linkedin",
@@ -1280,10 +1295,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4470123325"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): mezun programı, bina tesisatı (HVAC) alanı kısmen uzak"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "uygun",
   "ilan": {
    "source": "linkedin",
@@ -1342,10 +1358,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4471854468"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): yazılım (Go) back-end"
  },
  {
-  "dogru": "",
+  "dogru": "uygun",
   "kural": "uygun",
   "ilan": {
    "source": "linkedin",
@@ -1416,10 +1433,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4473343872"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 0-3 yıl, BSc mech, yapısal hesap; offshore kurulum alanı yeni"
  },
  {
-  "dogru": "",
+  "dogru": "uygun",
   "kural": "uygun",
   "ilan": {
    "source": "linkedin",
@@ -1502,10 +1520,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4474596965"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): FEA/CAE doğrudan örtüşüyor ama CAE deneyimi şart"
  },
  {
-  "dogru": "",
+  "dogru": "stretch",
   "kural": "uygun",
   "ilan": {
    "source": "linkedin",
@@ -1574,10 +1593,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4476554704"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): şantiye/saha deneyimi isteniyor"
  },
  {
-  "dogru": "",
+  "dogru": "stretch",
   "kural": "stretch",
   "ilan": {
    "source": "baykar",
@@ -1673,10 +1693,11 @@
    "target": "Baykar",
    "letter": null,
    "id": "baykar:mekanik-tasarimanaliz-muhendisi"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 1+ yıl ve hidrolik deneyimi"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "stretch",
   "ilan": {
    "source": "linkedin",
@@ -1760,10 +1781,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4423187498"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): deneyimli F&DT mühendisi + YL şart"
  },
  {
-  "dogru": "",
+  "dogru": "stretch",
   "kural": "stretch",
   "ilan": {
    "source": "linkedin",
@@ -1821,10 +1843,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4459334015"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): yeni mezun da olur ama YL bekleniyor, İtalya"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "stretch",
   "ilan": {
    "source": "linkedin",
@@ -1884,10 +1907,11 @@
    "target": "ASELSAN",
    "letter": null,
    "id": "linkedin:4467370714"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): %40+ engel durumu şartı"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "stretch",
   "ilan": {
    "source": "linkedin",
@@ -1995,10 +2019,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4470141334"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 3-4+ yıl deneyim"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "stretch",
   "ilan": {
    "source": "linkedin",
@@ -2091,10 +2116,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4471733306"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 2-4 yıl + UK güvenlik izni (clearable)"
  },
  {
-  "dogru": "",
+  "dogru": "stretch",
   "kural": "stretch",
   "ilan": {
    "source": "linkedin",
@@ -2166,10 +2192,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4472565123"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): yapısal/patlama mühendisliği, deneyim tercih, hesaplamalı mekanik örtüşüyor"
  },
  {
-  "dogru": "",
+  "dogru": "stretch",
   "kural": "stretch",
   "ilan": {
    "source": "linkedin",
@@ -2252,10 +2279,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4473684691"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): en az 2 yıl, HVAC/chiller"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "stretch",
   "ilan": {
    "source": "linkedin",
@@ -2343,10 +2371,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4474438767"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): İngiliz vatandaşlığı şart"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "stretch",
   "ilan": {
    "source": "linkedin",
@@ -2416,10 +2445,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4475789395"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): YL + 2 yıl, lazer/yarı iletken proses"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "baykar",
@@ -2469,10 +2499,11 @@
    "target": "Baykar",
    "letter": null,
    "id": "baykar:boya-teknisyeni"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): boya teknisyeni, 5+ yıl"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "linkedin",
@@ -2543,10 +2574,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4413344537"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): kıdemli lead"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "linkedin",
@@ -2633,10 +2665,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4448750683"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): operatör, meslek lisesi"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "linkedin",
@@ -2714,10 +2747,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4464088625"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): deneyimli + Fransızca"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "linkedin",
@@ -2783,10 +2817,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4469816704"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): PhD için YL tamamlanmış olmalı"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "linkedin",
@@ -2884,10 +2919,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4471355193"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 10+ yıl"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "linkedin",
@@ -3001,10 +3037,11 @@
    "target": "BMC",
    "letter": null,
    "id": "linkedin:4472694648"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 5+ yıl"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "linkedin",
@@ -3073,10 +3110,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4473629387"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 7+ yıl"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "linkedin",
@@ -3164,10 +3202,11 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4474767514"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 5+ yıl + İsveççe"
  },
  {
-  "dogru": "",
+  "dogru": "dusuk",
   "kural": "dusuk",
   "ilan": {
    "source": "linkedin",
@@ -3257,6 +3296,7 @@
    "target": "",
    "letter": null,
    "id": "linkedin:4475926750"
-  }
+  },
+  "not": "Claude etiketi (2026-10-28): 3+ yıl + İsveççe"
  }
 ]
