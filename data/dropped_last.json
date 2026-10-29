@@ -1,527 +1,198 @@
 [
  {
-  "title": "Electrical Design Engineer",
-  "company": "ENKA İnşaat ve Sanayi A.Ş.",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/electrical-design-engineer-at-enka-in%C5%9Faat-ve-sanayi-a-%C5%9F-4482279473",
+  "title": "Mimar – Saha Kurulum ve Proje Uzmanı",
+  "company": "Neocar",
+  "location": "Küçükçekmece",
+  "url": "https://tr.linkedin.com/jobs/view/mimar-%E2%80%93-saha-kurulum-ve-proje-uzman%C4%B1-at-neocar-4480630760",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "Algoritma Tasarım Mühendisi",
-  "company": "ARMELSAN",
-  "location": "Ankara, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/algoritma-tasar%C4%B1m-m%C3%BChendisi-at-armelsan-4481871847",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Elektrik Mühendisi",
-  "company": "Gürbağ Group",
-  "location": "Eskişehir, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/elektrik-m%C3%BChendisi-at-g%C3%BCrba%C4%9F-group-4482200337",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Electrical Engineer",
-  "company": "Dr. Abidi Pharmaceuticals",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/electrical-engineer-at-dr-abidi-pharmaceuticals-4482510214",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Elektrik Proje Mühendisi",
-  "company": "ALPKON YAPI TASARIM AŞ",
+  "title": "Elektrik-Elektronik Mühendisi",
+  "company": "TÜV SÜD Turkey",
   "location": "Ankara",
-  "url": "https://tr.linkedin.com/jobs/view/elektrik-proje-m%C3%BChendisi-at-alpkon-yap%C4%B1-tasar%C4%B1m-a%C5%9F-4481878695",
+  "url": "https://tr.linkedin.com/jobs/view/elektrik-elektronik-m%C3%BChendisi-at-t%C3%BCv-s%C3%BCd-4482517930",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "Teknik Lider / Teknik Sistem Mimarı",
+  "title": "Chemical Engineering Intern – Business Development",
+  "company": "VULCAZUL Consultancy Chemistry International Trade Ltd.",
+  "location": "Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/chemical-engineering-%C4%B1ntern-%E2%80%93-business-development-at-vulcazul-consultancy-chemistry-%C4%B1nternational-trade-ltd-4481882155",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Kimya Metalurji Ziraat",
+  "company": "Metal-Kim",
+  "location": "Kartepe",
+  "url": "https://tr.linkedin.com/jobs/view/kimya-metalurji-ziraat-at-metal-kim-4476690091",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Electronic Warfare FPGA Engineer",
+  "company": "Calico Teknoloji",
+  "location": "Ankara, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/electronic-warfare-fpga-engineer-at-calico-teknoloji-4482508403",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Gömülü Sistem Mühendisi",
   "company": "D&C Defence",
   "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/teknik-lider-teknik-sistem-mimar%C4%B1-at-d-c-defence-4482220730",
+  "url": "https://tr.linkedin.com/jobs/view/g%C3%B6m%C3%BCl%C3%BC-sistem-m%C3%BChendisi-at-d-c-defence-4482539665",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "AI Product Engineer",
-  "company": "Curiosity Technology",
+  "title": "Network Technology Technical Architect (Hybrid)",
+  "company": "Amaris Consulting | Part of Mantu",
+  "location": "Greater Istanbul",
+  "url": "https://tr.linkedin.com/jobs/view/network-technology-technical-architect-hybrid-at-amaris-consulting-part-of-mantu-4466545516",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Senior Network Engineer (f/m/x)",
+  "company": "Sii Poland",
+  "location": "Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/senior-network-engineer-f-m-x-at-sii-poland-4482526561",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Backend Engineer, AI Interview Engine (Python)",
+  "company": "Surgo Health",
+  "location": "Greater Istanbul",
+  "url": "https://tr.linkedin.com/jobs/view/backend-engineer-a%C4%B1-%C4%B1nterview-engine-python-at-surgo-health-4484734589",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Full-Stack Engineer",
+  "company": "Surgo Health",
+  "location": "Greater Istanbul",
+  "url": "https://tr.linkedin.com/jobs/view/full-stack-engineer-at-surgo-health-4484727657",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Full Stack Engineer - EMEA",
+  "company": "Deel",
+  "location": "Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/full-stack-engineer-emea-at-deel-4455891960",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Cyber Security Solution Engineer",
+  "company": "QUASYS",
+  "location": "İstanbul",
+  "url": "https://tr.linkedin.com/jobs/view/cyber-security-solution-engineer-at-quasys-4482518362",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Data Engineer",
+  "company": "Surgo Health",
+  "location": "Greater Istanbul",
+  "url": "https://tr.linkedin.com/jobs/view/data-engineer-at-surgo-health-4484718981",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Electrical Test Engineer",
+  "company": "Wocen Power",
   "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/a%C4%B1-product-engineer-at-curiosity-technology-4481882545",
+  "url": "https://tr.linkedin.com/jobs/view/electrical-test-engineer-at-wocen-power-4484934181",
   "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
  },
  {
-  "title": "Senior Backend Engineer",
-  "company": "Dataroid",
+  "title": "Yazılım Geliştirici",
+  "company": "Bored",
+  "location": "Bursa",
+  "url": "https://tr.linkedin.com/jobs/view/yaz%C4%B1l%C4%B1m-geli%C5%9Ftirici-at-bored-4482516330",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Graduate Electrical Design Engineer",
+  "company": "True Engineers",
+  "location": "Plymouth, İngiltere, Birleşik Krallık",
+  "url": "https://uk.linkedin.com/jobs/view/graduate-electrical-design-engineer-at-true-engineers-4484475201",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Graduate Electrical Engineer (Energy - WP&D) - Edinburgh - 2027",
+  "company": "Stantec",
+  "location": "Edinburgh, Iskoçya, Birleşik Krallık",
+  "url": "https://uk.linkedin.com/jobs/view/graduate-electrical-engineer-energy-wp-d-edinburgh-2027-at-stantec-4448213184",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Graduate Electrical Engineer - Buildings - 2027 (Birmingham)",
+  "company": "Stantec",
+  "location": "Birmingham, İngiltere, Birleşik Krallık",
+  "url": "https://uk.linkedin.com/jobs/view/graduate-electrical-engineer-buildings-2027-birmingham-at-stantec-4447914440",
+  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+ },
+ {
+  "title": "Teknik Ofis Mühendisi",
+  "company": "YP İNŞAAT A.Ş.",
+  "location": "Gölbaşı",
+  "url": "https://tr.linkedin.com/jobs/view/teknik-ofis-m%C3%BChendisi-at-yp-in%C5%9Faat-a-%C5%9F-4482511675",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
+ },
+ {
+  "title": "IDC IT Ops Technician",
+  "company": "EZSVS",
   "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/senior-backend-engineer-at-dataroid-4472172713",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+  "url": "https://tr.linkedin.com/jobs/view/%C4%B1dc-%C4%B1t-ops-technician-at-ezsvs-4484716068",
+  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
  },
  {
-  "title": "Golang Backend Engineer (Mid/Senior)",
-  "company": "Scrape.do",
-  "location": "Ankara, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/golang-backend-engineer-mid-senior-at-scrape-do-4482285156",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
+  "title": "Mağaza Tasarım ve Proje Uygulama Yöneticisi",
+  "company": "LETA",
+  "location": "İstanbul, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/ma%C4%9Faza-tasar%C4%B1m-ve-proje-uygulama-y%C3%B6neticisi-at-leta-4482527070",
+  "reason": "Mühendislik dışı pozisyon"
  },
  {
-  "title": "Senior Engineer, Backend - Protection",
+  "title": "FeyCrow Games - Gönüllü Oyun Testçisi (Volunteer Game Tester)",
+  "company": "FeyCrow Games",
+  "location": "Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/feycrow-games-g%C3%B6n%C3%BCll%C3%BC-oyun-test%C3%A7isi-volunteer-game-tester-at-feycrow-games-4482520141",
+  "reason": "Mühendislik dışı pozisyon"
+ },
+ {
+  "title": "Saha Koordinatörü",
+  "company": "LG+PARTNERS",
+  "location": "Adana, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/saha-koordinat%C3%B6r%C3%BC-at-lg%2Bpartners-4483020757",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Satınalma Uzmanı",
+  "company": "Gizli Şirket",
+  "location": "Bursa, Türkiye",
+  "url": "https://tr.linkedin.com/jobs/view/sat%C4%B1nalma-uzman%C4%B1-at-gizli-%C5%9Firket-4482536022",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "SAP ABAP / FIORI Consultant",
+  "company": "Deloitte",
+  "location": "Greater Istanbul",
+  "url": "https://tr.linkedin.com/jobs/view/sap-abap-f%C4%B1or%C4%B1-consultant-at-deloitte-4476346259",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "HVAC-specialist til industriprojekter og teknisk rådgivning",
+  "company": "Sweco",
+  "location": "Silkeborg, Orta Danimarka, Danimarka",
+  "url": "https://dk.linkedin.com/jobs/view/hvac-specialist-til-industriprojekter-og-teknisk-r%C3%A5dgivning-at-sweco-4484495069",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Inginer mecanic",
+  "company": "CERATIZIT",
+  "location": "Yaş ili, Romanya",
+  "url": "https://ro.linkedin.com/jobs/view/%C4%B1nginer-mecanic-at-cerat%C4%B1z%C4%B1t-4482514575",
+  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
+ },
+ {
+  "title": "Mechanical Engineering Expert (MSc or PhD)",
   "company": "Jobgether",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/senior-engineer-backend-protection-at-jobgether-4483872115",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Data & AI Solutions Engineer (Analytics, BI & MarTech)",
-  "company": "Turna.com",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/data-a%C4%B1-solutions-engineer-analytics-b%C4%B1-martech-at-turna-com-4481896433",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Senior BI Developer (MicroStrategy)",
-  "company": "Avenga",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/senior-b%C4%B1-developer-microstrategy-at-avenga-4481888711",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "NTI Hardware Manufacturing Engineer - Hybrid",
-  "company": "GE Aerospace",
-  "location": "Kocaeli",
-  "url": "https://tr.linkedin.com/jobs/view/nt%C4%B1-hardware-manufacturing-engineer-hybrid-at-ge-aerospace-4484435647",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Test Automation Engineer",
-  "company": "OBSS",
-  "location": "Ankara, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/test-automation-engineer-at-obss-4481895111",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "DevOps Engineer",
-  "company": "Apilex",
-  "location": "Şişli",
-  "url": "https://tr.linkedin.com/jobs/view/devops-engineer-at-apilex-4482282403",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "İNŞAAT MÜHENDİSİ / İNŞAAT TEKNİKERİ - YENİ MEZUN",
-  "company": "Metreküp Holding",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/in%C5%9Faat-m%C3%BChendisi-in%C5%9Faat-teknikeri-yeni-mezun-at-metrek%C3%BCp-holding-4482284283",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Harita Mühendisi",
-  "company": "Ark Bilim Harita Mühendislik ve İnş. San. Ltd. Şti",
-  "location": "Maltepe",
-  "url": "https://www.linkedin.com/jobs/view/4481423839",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "🚀 Full Stack Developer / Yazılım Geliştirici Arıyoruz!",
-  "company": "MarkaForce",
-  "location": "Çankaya",
-  "url": "https://tr.linkedin.com/jobs/view/%F0%9F%9A%80-full-stack-developer-yaz%C4%B1l%C4%B1m-geli%C5%9Ftirici-ar%C4%B1yoruz%21-at-markaforce-4477063125",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Carbon Project Developer",
-  "company": "ST Climate",
-  "location": "İstanbul",
-  "url": "https://tr.linkedin.com/jobs/view/carbon-project-developer-at-st-climate-4482288509",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "inşaat mühendisi",
-  "company": "SUR CEPHE",
-  "location": "Sakarya",
-  "url": "https://tr.linkedin.com/jobs/view/in%C5%9Faat-m%C3%BChendisi-at-sur-cephe-4482290499",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "İnşaat Mühendisi / ERP Uzmanı",
-  "company": "WeHRacademy",
-  "location": "Mersin, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/in%C5%9Faat-m%C3%BChendisi-erp-uzman%C4%B1-at-wehracademy-4482273960",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Part-Time Working Student (Software Developer)",
-  "company": "Siemens",
-  "location": "İstanbul",
-  "url": "https://tr.linkedin.com/jobs/view/part-time-working-student-software-developer-at-siemens-4483664932",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "AI Software Engineer Intern",
-  "company": "Playable Factory",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/a%C4%B1-software-engineer-%C4%B1ntern-at-playable-factory-4481890558",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Data Scientist",
-  "company": "Bigger Games",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/data-scientist-at-bigger-games-4484442224",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "RF Engineer",
-  "company": "QuantWare",
-  "location": "Delft, Güney Hollanda, Hollanda",
-  "url": "https://nl.linkedin.com/jobs/view/rf-engineer-at-quantware-4464342165",
-  "reason": "Başka mühendislik disiplini (makine kabul edilmiyor)"
- },
- {
-  "title": "Associate Data Analytics Consultant - New Graduate (Entry Level)",
-  "company": "SnA Consulting",
-  "location": "İstanbul",
-  "url": "https://tr.linkedin.com/jobs/view/associate-data-analytics-consultant-new-graduate-entry-level-at-sna-consulting-4481878902",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Lojistlik PlanlamaMühendisi /Uzmanı",
-  "company": "Hega Logistics",
-  "location": "Tuzla",
-  "url": "https://tr.linkedin.com/jobs/view/lojistlik-planlamam%C3%BChendisi-uzman%C4%B1-at-hega-logistics-4482505031",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "AbdiBio Drug Substance Upstream Production Specialist/ Senior Specialist",
-  "company": "Abdi Ibrahim Pharmaceuticals",
-  "location": "Esenyurt",
-  "url": "https://tr.linkedin.com/jobs/view/abdibio-drug-substance-upstream-production-specialist-senior-specialist-at-abdi-%C4%B1brahim-pharmaceuticals-4482298241",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Founding Sales & Growth Automation Lead",
-  "company": "Bookimed",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/founding-sales-growth-automation-lead-at-bookimed-4484429722",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Servis Mühendisi",
-  "company": "Altium Türkiye",
-  "location": "Greater Izmir",
-  "url": "https://tr.linkedin.com/jobs/view/servis-m%C3%BChendisi-at-altium-t%C3%BCrkiye-4481883949",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Stajyer / Intern",
-  "company": "eyewa",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/stajyer-%C4%B1ntern-at-eyewa-4483828813",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Stajyer",
-  "company": "neutus",
-  "location": "İzmir, Türkiye",
-  "url": "https://www.linkedin.com/jobs/view/4482205069",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Ingeniero/a de Testing - Maquinaria industrial",
-  "company": "BETWEEN Group",
-  "location": "Sant Cugat del Vallès, Katalonya, İspanya",
-  "url": "https://es.linkedin.com/jobs/view/%C4%B1ngeniero-a-de-testing-maquinaria-industrial-at-between-group-4484096980",
-  "reason": "Makine mühendisliği alanıyla bağlantı bulunamadı (tam metinden)"
- },
- {
-  "title": "Game Engine/3D Developer (Godot)",
-  "company": "Rapsodo",
-  "location": "İzmir",
-  "url": "https://tr.linkedin.com/jobs/view/game-engine-3d-developer-godot-at-rapsodo-4484424369",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Rusça Bilen Uluslararası Çağrı Merkezi Satış Temsilcisi",
-  "company": "Lema Dental Clinic",
-  "location": "Bakırköy",
-  "url": "https://tr.linkedin.com/jobs/view/rus%C3%A7a-bilen-uluslararas%C4%B1-%C3%A7a%C4%9Fr%C4%B1-merkezi-sat%C4%B1%C5%9F-temsilcisi-at-lema-dental-clinic-4482293755",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Dijital Pazarlama ve Yapay Zeka Uzmanı",
-  "company": "Faturalog",
-  "location": "Bağcılar",
-  "url": "https://tr.linkedin.com/jobs/view/dijital-pazarlama-ve-yapay-zeka-uzman%C4%B1-at-faturalog-4481075794",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Uluslararası Satış Temsilcisi – Rusya / Afrika / Uzak Doğu",
-  "company": "Orinlog Logistics",
-  "location": "İstanbul",
-  "url": "https://tr.linkedin.com/jobs/view/uluslararas%C4%B1-sat%C4%B1%C5%9F-temsilcisi-%E2%80%93-rusya-afrika-uzak-do%C4%9Fu-at-orinlog-logistics-4482218357",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Senior Growth Manager Apps & Games",
-  "company": "Admiral Media - Digital Marketing & Growth",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/senior-growth-manager-apps-games-at-admiral-media-digital-marketing-growth-4483640806",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Social Media, Community & AI Content Manager",
-  "company": "97",
-  "location": "Sarıyer",
-  "url": "https://tr.linkedin.com/jobs/view/social-media-community-a%C4%B1-content-manager-at-97-4482213856",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Influencer Marketing & Creative Production Specialist",
-  "company": "97",
-  "location": "Sarıyer",
-  "url": "https://tr.linkedin.com/jobs/view/%C4%B1nfluencer-marketing-creative-production-specialist-at-97-4482223230",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Enpara International Banking Intern",
-  "company": "Enpara.com",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/enpara-%C4%B1nternational-banking-%C4%B1ntern-at-enpara-com-4483655208",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Lilly StarT Marketing Intern - Specialty Business Unit",
-  "company": "Eli Lilly and Company",
-  "location": "Greater Istanbul",
-  "url": "https://tr.linkedin.com/jobs/view/lilly-start-marketing-%C4%B1ntern-specialty-business-unit-at-eli-lilly-and-company-4484201306",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "İnsan Kaynakları Stajyeri",
-  "company": "TNC Group Şirketleri",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/insan-kaynaklar%C4%B1-stajyeri-at-tnc-group-%C5%9Firketleri-4484072756",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Sales Executive (France & Suisse Romande)",
-  "company": "PIX4D",
-  "location": "Fransa",
-  "url": "https://fr.linkedin.com/jobs/view/sales-executive-france-suisse-romande-at-p%C4%B1x4d-4474695513",
-  "reason": "Mühendislik dışı pozisyon"
- },
- {
-  "title": "Technical Specialist",
-  "company": "Damen",
-  "location": "Antalya",
-  "url": "https://tr.linkedin.com/jobs/view/technical-specialist-at-damen-4484210057",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Teknik Servis Uzmanı/Kocaeli",
-  "company": "Medikoset Tıbbi Ürünler San. Ltd. Şti.",
-  "location": "Kocaeli",
-  "url": "https://tr.linkedin.com/jobs/view/teknik-servis-uzman%C4%B1-kocaeli-at-medikoset-t%C4%B1bbi-%C3%BCr%C3%BCnler-san-ltd-%C5%9Fti-4481446040",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "BIM Uzmanı",
-  "company": "N22 Mühendislik",
-  "location": "Ankara",
-  "url": "https://tr.linkedin.com/jobs/view/b%C4%B1m-uzman%C4%B1-at-n22-m%C3%BChendislik-taahh%C3%BCt-sanayi-ve-ticaret-a-%C5%9F-4482501553",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Valuation Modelling & Analytics – Manager (JP00369)",
-  "company": "PwC Türkiye",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/valuation-modelling-analytics-%E2%80%93-manager-jp00369-at-pwc-t%C3%BCrkiye-4481880765",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Financial Analyst",
-  "company": "Saint-Gobain Türkiye",
-  "location": "Maltepe",
-  "url": "https://tr.linkedin.com/jobs/view/financial-analyst-at-saint-gobain-t%C3%BCrkiye-4483656792",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Valuation Modelling & Analytics - Senior Associate (JP00370)",
-  "company": "PwC Türkiye",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/valuation-modelling-analytics-senior-associate-jp00370-at-pwc-t%C3%BCrkiye-4481879813",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Investments and Strategy Specialist",
-  "company": "Fiba Group",
-  "location": "Şişli",
-  "url": "https://tr.linkedin.com/jobs/view/%C4%B1nvestments-and-strategy-specialist-at-fiba-group-4483860554",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Specification Manager",
-  "company": "Michael Page",
-  "location": "İstanbul, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/specification-manager-at-michael-page-4482290639",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "QA Tester",
-  "company": "Apilex",
-  "location": "Şişli",
-  "url": "https://tr.linkedin.com/jobs/view/qa-tester-at-apilex-4482271991",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Account Executive（Cleaning Equipment）",
-  "company": "Pudu Robotics",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/account-executive%EF%BC%88cleaning-equipment%EF%BC%89-at-pudu-robotics-4477804356",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Reformer Pilates Eğitmeni (Fizyoterapist)",
-  "company": "DFlow Studio",
-  "location": "Greater Ankara",
-  "url": "https://tr.linkedin.com/jobs/view/reformer-pilates-e%C4%9Fitmeni-fizyoterapist-at-dflow-studio-4482501467",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Senior Account Manager - Rhythm Management",
-  "company": "Boston Scientific",
-  "location": "Greater Istanbul",
-  "url": "https://tr.linkedin.com/jobs/view/senior-account-manager-rhythm-management-at-boston-scientific-4484053634",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Founding Account Executive",
-  "company": "Uplico",
-  "location": "İstanbul",
-  "url": "https://tr.linkedin.com/jobs/view/founding-account-executive-at-uplico-4482284139",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Kaynak Uzmanı",
-  "company": "Kendi işim",
-  "location": "Ankara",
-  "url": "https://www.linkedin.com/jobs/view/4482229465",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Team Leader Shipbuilding",
-  "company": "Damen",
-  "location": "Antalya",
-  "url": "https://tr.linkedin.com/jobs/view/team-leader-shipbuilding-at-damen-4484205319",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Strategy & Operations Lead",
-  "company": "Shipday",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/strategy-operations-lead-at-shipday-4483833975",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Kurum Müdürü",
-  "company": "İM Anaokulu",
-  "location": "İzmir, Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/kurum-m%C3%BCd%C3%BCr%C3%BC-at-im-anaokulu-4481885660",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Chief of Staff (Strategy and Operations)",
-  "company": "Codeway",
-  "location": "Şişli",
-  "url": "https://tr.linkedin.com/jobs/view/chief-of-staff-strategy-and-operations-at-codeway-4484212034",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "MODELİST",
-  "company": "KARAMANS TEXTİL DIŞ TİCARET ANONİM ŞİRKETİ",
-  "location": "Güngören",
-  "url": "https://tr.linkedin.com/jobs/view/modelist-at-karamans-textil-d%C4%B1%C5%9F-ticaret-anonim-%C5%9Firketi-4482297348",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Produktutvecklare till spännande uppdrag i Nyköping",
-  "company": "Combitech",
-  "location": "Linköping, Östergötland ili, İsveç",
-  "url": "https://se.linkedin.com/jobs/view/produktutvecklare-till-sp%C3%A4nnande-uppdrag-i-nyk%C3%B6ping-at-combitech-4483664503",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Constructeur Betonconstructies",
-  "company": "Unihorn",
-  "location": "Breda, Kuzey Brabant, Hollanda",
-  "url": "https://nl.linkedin.com/jobs/view/constructeur-betonconstructies-at-unihorn-4465519728",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Technisch adviseur",
-  "company": "Waterschap Scheldestromen",
-  "location": "Middelburg, Zelanda, Hollanda",
-  "url": "https://nl.linkedin.com/jobs/view/technisch-adviseur-at-waterschap-scheldestromen-4483646868",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Technical Project Manager (m/w/d)",
-  "company": "EOS",
-  "location": "Krailling, Bavyera, Almanya",
-  "url": "https://de.linkedin.com/jobs/view/technical-project-manager-m-w-d-at-eos-4484060162",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Power Tools Field Supervisor",
-  "company": "Bosch Group",
-  "location": "İstanbul, Turkey (Hybrid)",
-  "url": "https://jobs.smartrecruiters.com/BoschGroup/744000157987214",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Smart Experience 2026 - Online Event",
-  "company": "Bosch Group",
-  "location": "İstanbul, Turkey",
-  "url": "https://jobs.smartrecruiters.com/BoschGroup/744000157814219",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Sosyal Duygusal Öğrenme Uzmanlık Programı",
-  "company": "Learneco",
-  "location": "Adana, Adıyaman, Afyonkarahisar, Ağrı, Aksaray, Amasya, Ankara, Antalya, Ardahan, Artvin, Aydın, Balıkesir, Bartın, Batman, Bayburt, Bilecik, Bingöl, Bitlis, Bolu, Burdur, Bursa, Çanakkale, Çankırı, Çerkezköy, Çorum, Denizli, Diyarbakır, Düzce, Edirne, Elazığ, Erzincan, Erzurum, Eskişehir, Gaziantep, Giresun, Gümüşhane, Hakkari, Hatay, Iğdır, Isparta, İstanbul, İzmir, Kahramanmaraş, Karabük, Karaman, Kars, Kastamonu, Kayseri, Kırıkkale, Kırıklareli, Kırklareli, Kırşehir, Kilis, Kocaeli, Konya, Kütahya, Malatya, Manisa, Mardin, Mersin, Muğla, Muş, Nevşehir, Niğde, Ordu, Osmaniye, Rize, Sakarya, Samsun, Siirt, Sinop, Sivas, Şanlıurfa, Şırnak, Tekirdağ, Tokat, Trabzon, Tunceli, Uşak, Van, Yalova, Yozgat, Zonguldak, Online, Türkiye",
-  "url": "https://www.youthall.com/tr/learneco/sosyal-duygusal-ogrenme-uzmanlik-programi_5/",
-  "reason": "Pozisyon alanı tanınmadı, profil becerisi geçmiyor"
- },
- {
-  "title": "Freelance Mechanical CAD&Simulation Engineer - AI Trainer",
-  "company": "Mindrift",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/freelance-mechanical-cad-simulation-engineer-a%C4%B1-trainer-at-mindrift-4484429221",
-  "reason": "Yapay zekâ eğitim / freelance platformu"
- },
- {
-  "title": "Remote Pod Lead - Civil and structural Engineering",
-  "company": "Turing",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/remote-pod-lead-civil-and-structural-engineering-at-turing-4483861181",
-  "reason": "Yapay zekâ eğitim / freelance platformu"
- },
- {
-  "title": "CFD Engineer - AI Trainer",
-  "company": "Mindrift",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/cfd-engineer-a%C4%B1-trainer-at-mindrift-4484079027",
-  "reason": "Yapay zekâ eğitim / freelance platformu"
- },
- {
-  "title": "Remote Pod Lead - Mechanical & Aerospace Engineering",
-  "company": "Turing",
-  "location": "Türkiye",
-  "url": "https://tr.linkedin.com/jobs/view/remote-pod-lead-mechanical-aerospace-engineering-at-turing-4483851488",
-  "reason": "Yapay zekâ eğitim / freelance platformu"
- },
- {
-  "title": "Postdoctoral Researcher in Polymer Chemistry for Biomedical Applications",
-  "company": "IQS Barcelona",
-  "location": "Barselona, Katalonya, İspanya",
-  "url": "https://es.linkedin.com/jobs/view/postdoctoral-researcher-in-polymer-chemistry-for-biomedical-applications-at-%C4%B1qs-barcelona-4482503284",
-  "reason": "Öğretim üyesi / postdoc kadrosu (doktora derecesi gerekir)"
+  "location": "İrlanda",
+  "url": "https://ie.linkedin.com/jobs/view/mechanical-engineering-expert-msc-or-phd-at-jobgether-4483896480",
+  "reason": "Yapay zekâ eğitim / freelance platformu (tam metinden)"
  }
 ]
