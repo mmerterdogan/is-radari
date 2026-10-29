@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24",
+  "updated": "2026-10-29",
   "items": [
     {
       "id": "b5dfac90ac56",
@@ -96,6 +96,54 @@
       "uygunluk": "Çok uygun",
       "gerekce": "Topoloji optimizasyonuna doğrudan odaklanan kurs. Ücretli olduğu için burs veya destek kaynağı araştırılmalı.",
       "eklendi": "2026-10-24"
+    },
+    {
+      "baslik": "RIG Internship Program 2027",
+      "kurum": "Robotics Institute Germany (Max Planck Intelligent Systems koordinasyonunda)",
+      "ulke": "Almanya",
+      "tur": "Araştırma stajı",
+      "zamanlama": "Şimdi (YL sırasında)",
+      "alan": "Robotik, robot öğrenmesi",
+      "son_basvuru": "",
+      "son_basvuru_metin": "Başvurular 2026-11-11'de açılıyor, kapanış tarihi sayfada yok",
+      "link": "https://robotics-institute-germany.de/rig-internship-program-2027-applications-opening-soon/",
+      "sartlar": "Lisans ve yüksek lisans öğrencileri, dünyanın her yerinden. Ücretli staj, en fazla 90 gün. Ayrıntılar rig-internships.de sayfasında.",
+      "uygunluk": "Çok uygun",
+      "gerekce": "YL öğrencisi olarak doğrudan başvurulabilir ve Almanya'daki robotik laboratuvarlarıyla tanışma fırsatı veriyor. Kontrol, robotik ve ML ilgisiyle örtüşüyor.",
+      "id": "0ab9737ed5cc",
+      "eklendi": "2026-10-29"
+    },
+    {
+      "baslik": "ETH Robotics Summer School 2027",
+      "kurum": "ETH Zürih RobotX",
+      "ulke": "İsviçre",
+      "tur": "Yaz okulu",
+      "zamanlama": "Şimdi (YL sırasında)",
+      "alan": "Robotik",
+      "son_basvuru": "2027-03-19",
+      "son_basvuru_metin": "",
+      "link": "https://robotx.ethz.ch/education/summer-school.html",
+      "sartlar": "Sayfada başvuru penceresi 8 Şubat - 19 Mart 2027 ve etkinlik 12-16 Temmuz 2027 olarak geçiyor. Katılım şartı, ücret ve burs bilgisi sayfada yok. Sayfada yıl tutarsızlıkları var, başvurmadan önce teyit et.",
+      "uygunluk": "Uygun",
+      "gerekce": "Robotik odaklı, YL öğrencisine uygun görünüyor ama ücret ve burs durumu belirsiz.",
+      "id": "86aa6ab6c82a",
+      "eklendi": "2026-10-29"
+    },
+    {
+      "baslik": "IEEE ICRA 2027 Travel Support",
+      "kurum": "IEEE Robotics and Automation Society",
+      "ulke": "Güney Kore",
+      "tur": "Konferans/Kurs",
+      "zamanlama": "Şimdi (YL sırasında)",
+      "alan": "Robotik, otomasyon",
+      "son_basvuru": "",
+      "son_basvuru_metin": "Başvuru takvimi henüz açıklanmadı",
+      "link": "https://2027.ieee-icra.org/attend/travel-support/",
+      "sartlar": "Kabul edilmiş bildirisi olan IEEE RAS öğrenci üyeleri veya gelişmekte olan ülke listesindeki RAS üyeleri başvurabilir. Destek ağırlıklı olarak konaklama şeklinde.",
+      "uygunluk": "Stretch",
+      "gerekce": "Bildiri kabulü gerektiriyor, bu yüzden YL araştırmasından çıkacak bir bildiriyle hedeflenebilir. RAS öğrenci üyeliği şimdiden açılabilir.",
+      "id": "166642b7efed",
+      "eklendi": "2026-10-29"
     }
   ]
 }
