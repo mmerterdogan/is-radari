@@ -24,6 +24,13 @@ h1 .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accen
 .sync { font-size: .76rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; white-space: nowrap; }
 .sync.ok { color: var(--good); border-color: color-mix(in srgb, var(--good) 40%, transparent); }
 .sync.err { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
+/* top-level split: jobs on one side, academic opportunities on the other */
+.modes { display: flex; gap: 6px; margin-top: 14px; border-bottom: 1px solid var(--line); }
+.modes button { font: inherit; font-weight: 600; font-size: .95rem; border: 0; border-bottom: 3px solid transparent; background: none; color: var(--muted); padding: 8px 14px 9px; cursor: pointer; margin-bottom: -1px; }
+.modes button[aria-pressed=true] { color: var(--ink); border-bottom-color: var(--accent); }
+.modes button span { font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
+.modes button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+body.mode-firsat .stats, body.mode-firsat .seg, body.mode-firsat #companies-panel, body.mode-firsat #skills-panel { display: none; }
 .stats { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; margin: 16px 0; }
 .stat { font: inherit; text-align: left; cursor: pointer; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow); }
 .stat:hover { border-color: var(--accent); }

@@ -240,7 +240,7 @@ scoring:
   price_output: 0.50
 
 notify:
-  telegram: true
+  telegram: false             # günlük Telegram özeti kapalı (2026-10-30, kullanıcı isteği); ilanlar sitede ve sabah özeti bildiriminde
   top_direct: 6               # mesajda gösterilecek "Doğrudan uygun" ilan sayısı
   top_fit: 4                  # "Uygun"
   top_stretch: 2              # "Stretch"

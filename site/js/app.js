@@ -60,6 +60,7 @@ let DATA = { jobs: [], runs: [] };
 let S = ls.get(LS_STATE, EMPTY());
 let F = { ...DEFAULT_FILTERS(), ...ls.get(LS_FILTERS, {}) };
 let view = "today";
+let jobView = "today";      // the jobs-side view to return to when leaving "Akademik fırsatlar"
 let lastDay = "";
 let openNotes = new Set();
 let expanded = new Set();
@@ -301,6 +302,16 @@ function render() {
   $("#st-active").textContent = pool.filter((j) => ["basvuruldu", "mulakat"].includes(stageOf(j))).length;
   $("#st-follow").textContent = pool.filter(followDue).length;
   document.querySelectorAll(".seg button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.view === view));
+  const acad = view === "akademik";
+  if (!acad) jobView = view;
+  document.body.classList.toggle("mode-firsat", acad);
+  document.querySelectorAll(".modes button").forEach((b) => b.setAttribute("aria-pressed", (b.dataset.mode === "firsatlar") === acad));
+  $("#q").placeholder = acad ? "Ara: program, kurum, ülke, alan…" : "Ara: şirket, pozisyon, şehir, beceri…";
+  $("#mode-isler").textContent = `(${scan.filter((j) => ["dogrudan", "uygun"].includes(j.category)).length})`;
+  if (ACAD && !ACAD.error) {
+    const t = today();
+    $("#mode-firsatlar").textContent = `(${(ACAD.items || []).filter((o) => !o.son_basvuru || o.son_basvuru >= t).length})`;
+  }
   $("#filters").hidden = $("#sort").hidden = view !== "jobs";   // tracker views only use the search box
   if (openCardId && dlg().open && $("#dlg-body .card2")) {
     const j = pool.find((x) => x.id === openCardId);
@@ -406,7 +417,7 @@ const ACAD_FIT = { "Çok uygun": "dogrudan", "Uygun": "uygun", "Stretch": "stret
 async function loadAcademic() {
   try { ACAD = await (await fetch("akademik.json", { cache: "no-store" })).json(); }
   catch { ACAD = { items: [], error: true }; }
-  if (view === "akademik") render();
+  render();   // also fills the opportunity count on the "Akademik fırsatlar" tab
 }
 
 function acadCard(o) {
@@ -1031,6 +1042,7 @@ function openSettings() {
 document.addEventListener("click", async (ev) => {
   const t = ev.target.closest("button, [data-go], .stat") || ev.target;
   if (t.matches?.(".seg button")) { view = t.dataset.view; render(); return; }
+  if (t.matches?.(".modes button")) { view = t.dataset.mode === "firsatlar" ? "akademik" : jobView; render(); return; }
   if (t.dataset?.go) { view = t.dataset.go; render(); window.scrollTo({ top: $(".bar").offsetTop, behavior: "smooth" }); return; }
   if (t.dataset?.catOnly) {
     const only = F.cats.length === 1 && F.cats[0] === t.dataset.catOnly;
@@ -1278,5 +1290,6 @@ async function boot() {
   renderSkills();
   renderCompanies();
   render();
+  loadAcademic();
 }
 boot();
