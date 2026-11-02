@@ -1,43 +1,43 @@
 {
  "makine mühendisi @ Turkey": {
-  "total": 934,
-  "good": 259,
+  "total": 960,
+  "good": 265,
   "yield": 0.28
  },
  "graduate mechanical engineer @ European Union": {
-  "total": 353,
-  "good": 76,
+  "total": 365,
+  "good": 82,
   "yield": 0.22
  },
  "mechanical design engineer @ Denmark": {
-  "total": 260,
+  "total": 267,
   "good": 69,
-  "yield": 0.27
+  "yield": 0.26
  },
  "mechanical design engineer @ Sweden": {
-  "total": 254,
+  "total": 257,
   "good": 48,
   "yield": 0.19
  },
  "yeni mezun mühendis @ Turkey": {
-  "total": 241,
-  "good": 18,
-  "yield": 0.07
+  "total": 250,
+  "good": 19,
+  "yield": 0.08
  },
  "mechanical design engineer @ Ireland": {
-  "total": 234,
-  "good": 100,
+  "total": 238,
+  "good": 102,
   "yield": 0.43
  },
  "FEA engineer @ United Kingdom": {
-  "total": 224,
-  "good": 88,
+  "total": 228,
+  "good": 90,
   "yield": 0.39
  },
  "mechanical design engineer @ United Kingdom": {
-  "total": 221,
-  "good": 116,
-  "yield": 0.52
+  "total": 225,
+  "good": 119,
+  "yield": 0.53
  },
  "Ar-Ge mühendisi @ Turkey": {
   "total": 213,
@@ -55,18 +55,18 @@
   "yield": 0.2
  },
  "tasarım mühendisi @ Turkey": {
-  "total": 189,
-  "good": 21,
+  "total": 194,
+  "good": 22,
   "yield": 0.11
  },
  "PhD finite element @ European Union": {
-  "total": 184,
+  "total": 189,
   "good": 30,
   "yield": 0.16
  },
  "R&D mechanical engineer @ European Union": {
-  "total": 182,
-  "good": 40,
+  "total": 188,
+  "good": 41,
   "yield": 0.22
  },
  "additive manufacturing @ Turkey": {
@@ -80,12 +80,12 @@
   "yield": 0.05
  },
  "mechanical design engineer @ Netherlands": {
-  "total": 156,
+  "total": 157,
   "good": 22,
   "yield": 0.14
  },
  "FEA engineer @ Netherlands": {
-  "total": 151,
+  "total": 154,
   "good": 35,
   "yield": 0.23
  },
@@ -105,24 +105,24 @@
   "yield": 0.01
  },
  "analiz mühendisi @ Turkey": {
-  "total": 118,
+  "total": 120,
   "good": 10,
   "yield": 0.08
  },
  "proses mühendisi @ Turkey": {
-  "total": 97,
+  "total": 101,
   "good": 5,
   "yield": 0.05
  },
  "stajyer mühendis @ Turkey": {
-  "total": 86,
-  "good": 14,
-  "yield": 0.16
+  "total": 89,
+  "good": 15,
+  "yield": 0.17
  },
  "test mühendisi @ Turkey": {
-  "total": 85,
-  "good": 7,
-  "yield": 0.08
+  "total": 89,
+  "good": 8,
+  "yield": 0.09
  },
  "mühendis adayı @ Turkey": {
   "total": 82,
@@ -135,47 +135,47 @@
   "yield": 0.01
  },
  "üretim mühendisi @ Turkey": {
-  "total": 51,
-  "good": 8,
-  "yield": 0.16
+  "total": 53,
+  "good": 9,
+  "yield": 0.17
  },
  "otomotiv mühendis @ Turkey": {
-  "total": 49,
+  "total": 53,
   "good": 4,
   "yield": 0.08
  },
  "üretim mühendisi yeni mezun @ Turkey": {
-  "total": 44,
+  "total": 45,
   "good": 14,
-  "yield": 0.32
- },
- "Ar-Ge mühendisi yeni mezun @ Turkey": {
-  "total": 38,
-  "good": 6,
-  "yield": 0.16
+  "yield": 0.31
  },
  "manufacturing engineer @ United Kingdom": {
-  "total": 35,
-  "good": 21,
-  "yield": 0.6
+  "total": 44,
+  "good": 26,
+  "yield": 0.59
+ },
+ "Ar-Ge mühendisi yeni mezun @ Turkey": {
+  "total": 42,
+  "good": 7,
+  "yield": 0.17
+ },
+ "graduate design engineer @ United Kingdom": {
+  "total": 37,
+  "good": 15,
+  "yield": 0.41
  },
  "junior engineer @ Istanbul": {
   "total": 31,
   "good": 0,
   "yield": 0.0
  },
- "graduate design engineer @ United Kingdom": {
-  "total": 31,
-  "good": 13,
-  "yield": 0.42
- },
  "ürün geliştirme mühendisi @ Turkey": {
-  "total": 26,
+  "total": 30,
   "good": 5,
-  "yield": 0.19
+  "yield": 0.17
  },
  "R&D engineer @ Turkey": {
-  "total": 22,
+  "total": 26,
   "good": 0,
   "yield": 0.0
  },
@@ -185,14 +185,14 @@
   "yield": 0.05
  },
  "validation engineer @ Turkey": {
-  "total": 17,
+  "total": 18,
   "good": 1,
   "yield": 0.06
  },
  "tasarım mühendisi SolidWorks @ Turkey": {
-  "total": 16,
-  "good": 4,
-  "yield": 0.25
+  "total": 17,
+  "good": 5,
+  "yield": 0.29
  },
  "simulation engineer @ Turkey": {
   "total": 12,
@@ -210,7 +210,7 @@
   "yield": 0.0
  },
  "product development engineer @ Turkey": {
-  "total": 1,
+  "total": 2,
   "good": 0,
   "yield": 0.0
  }
