@@ -16,25 +16,27 @@ I am interested not in one corner of mechanical engineering but in the whole pat
 - YILMAZ REDÜKTÖR - Workshop Intern (Jul 2024): Observed CNC turning, milling, heat treatment and grinding on the gearbox production line; reviewed gear tolerances and quality control protocols.
 
 ## Projects
-- Capstone Project - Beko (NDA), Oct 2025 - Jul 2026: Converted a metal component into an injection-moulded engineering plastic part; validated with topology optimisation and static FEA.
-- Design Project - Mercedes-Benz Türk (NDA), Oct 2025 - Jul 2026: Ergonomic luggage loading system; validated with static and modal FEA.
-- İÜC Racing - Formula Student, Powertrain Team, Sep 2023 - Jul 2026: Designed the chain guard in SolidWorks, verified with static analysis in ANSYS; 15% weight reduction by revising the bracket design.
+- Capstone Project - Beko (NDA), Oct 2025 - Jul 2026
+- Design Project - Mercedes-Benz Türk (NDA), Oct 2025 - Jul 2026
+- İÜC Racing - Formula Student, Powertrain Team (Vice President 2025-2026), Oct 2022 - Jul 2026: Designed the chain guard in SolidWorks, verified with static analysis in ANSYS; 15% weight reduction by revising the bracket design.
 - TEKNOFEST - UAV Landing Gear, Aug 2024 - Aug 2025: Parametric SolidWorks model, optimised with static FEA in ANSYS; FDM-printed parts (PLA, ABS, ASA) 50% below the weight target.
-- Nuclear Reactor Pressure Vessel - Stress Analysis, Oct 2025 - Jan 2026: Membrane stresses calculated with thin-shell theory and compared with an ANSYS model of the vessel and bolted head; head and flange discontinuities govern the design (safety factor 3.05 locally vs 11.2 in the shell). Extended to stored energy, TNT equivalent and blast safety distance (article in preparation with the advisor).
+- Nuclear Reactor Pressure Vessel - Stress Analysis, Oct 2025 - Jul 2026: Membrane stresses calculated with thin-shell theory and compared with an ANSYS model of the vessel and bolted head; head and flange discontinuities govern the design (safety factor 3.05 locally vs 11.2 in the shell). Extended to stored energy, TNT equivalent and blast safety distance (article in preparation with the advisor).
 - Defect Prediction in Steel Production with Machine Learning, Feb 2025 - Jun 2025: UCI Steel Plates Faults data in R, 7 classifiers compared, random forest + SVM + XGBoost majority-vote ensemble with 91.3% accuracy.
 
 ## Skills
-- Software: SolidWorks (CSWP), ANSYS Mechanical (WB/APDL), AutoCAD, MS Excel, R, MATLAB/Simulink, Fusion 360, Siemens NX, CATIA
+- Software: SolidWorks (CSWA), ANSYS Mechanical (WB/APDL), AutoCAD, MS Excel, R, MATLAB/Simulink, Fusion 360, Siemens NX, CATIA
 - Expertise: finite element analysis (static, modal), topology optimisation, solid modelling and parametric design, sheet metal design, design for injection moulding, technical drawing and tolerancing (GD&T), design for manufacturability (DFM), root cause analysis (RCA), lean manufacturing, pneumatic systems troubleshooting, machining processes, additive manufacturing / FDM 3D printing
 - Languages: Turkish (native), English (C1)
 
 ## Certificates and training
-- CSWP - Certified SOLIDWORKS Professional (Dassault Systèmes), Oct 2026
-- UAV Design and Build Training - TEİ Aviation Engine Schools
+- SOLIDWORKS Design Associate (CSWA) - Dassault Systèmes, Oct 2026
+- MECH 101: Introduction to ANSYS Mechanical and WB101: Introduction to ANSYS SpaceClaim - Numesys, Jul 2026
+- Aviation Engine School - TEİ
+- UAV Construction and Training - Udemy
 - McKinsey & Company Forward Program
 
 ## Leadership
-- İÜC Career Club - Chair of the Board (Aug 2024 - Aug 2025): Annual plan of a 300+ member club, 8+ events delivered.
+- İÜC Career Club - Chair of the Board (Oct 2023 - Sep 2024): Annual plan of a 300+ member club, 8+ events delivered. Previously Board Member (Oct 2022 - Sep 2023), then Chair of the Audit Committee (Oct 2024 - Sep 2025).
 - İÜC Machinery and Technologies Club - Member (Sep 2023 - Jul 2026)
 
 Interests: 3D printing and prototyping, woodcarving, hiking

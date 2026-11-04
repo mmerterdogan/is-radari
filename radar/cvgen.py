@@ -153,7 +153,8 @@ def compose(content: dict, lang: str, variant: str, tags: set[str], drop: int = 
     d.section(c["bolum"]["projeler"])
     for e in rank([e for e in c["projeler"] if _keep(e, drop)], tags, boost):
         d.entry(e["baslik"], e.get("tarih", ""))
-        d.bullet(e["madde"])
+        if e.get("madde"):                       # NDA projects carry only a title and date
+            d.bullet(e["madde"])
 
     d.section(c["bolum"]["yetkinlikler"])
     d.p([d.r(c["yazilim"]["etiket"], b=True), d.r(c["yazilim"]["metin"])])
