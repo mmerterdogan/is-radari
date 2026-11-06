@@ -1,48 +1,48 @@
 {
  "makine mühendisi @ Turkey": {
-  "total": 1044,
-  "good": 287,
+  "total": 1070,
+  "good": 292,
   "yield": 0.27
  },
  "graduate mechanical engineer @ European Union": {
-  "total": 392,
-  "good": 88,
-  "yield": 0.22
+  "total": 397,
+  "good": 90,
+  "yield": 0.23
  },
  "mechanical design engineer @ Denmark": {
-  "total": 288,
-  "good": 75,
+  "total": 295,
+  "good": 76,
   "yield": 0.26
  },
  "mechanical design engineer @ Sweden": {
-  "total": 277,
-  "good": 54,
-  "yield": 0.19
+  "total": 285,
+  "good": 57,
+  "yield": 0.2
  },
  "yeni mezun mühendis @ Turkey": {
-  "total": 269,
+  "total": 274,
   "good": 21,
   "yield": 0.08
  },
  "mechanical design engineer @ Ireland": {
-  "total": 255,
-  "good": 106,
-  "yield": 0.42
+  "total": 261,
+  "good": 108,
+  "yield": 0.41
  },
  "FEA engineer @ United Kingdom": {
-  "total": 238,
-  "good": 95,
-  "yield": 0.4
+  "total": 245,
+  "good": 96,
+  "yield": 0.39
  },
  "mechanical design engineer @ United Kingdom": {
-  "total": 232,
-  "good": 121,
-  "yield": 0.52
+  "total": 237,
+  "good": 125,
+  "yield": 0.53
  },
  "tasarım mühendisi @ Turkey": {
-  "total": 214,
+  "total": 218,
   "good": 25,
-  "yield": 0.12
+  "yield": 0.11
  },
  "Ar-Ge mühendisi @ Turkey": {
   "total": 213,
@@ -55,14 +55,14 @@
   "yield": 0.04
  },
  "PhD finite element @ European Union": {
-  "total": 206,
+  "total": 211,
   "good": 31,
   "yield": 0.15
  },
  "R&D mechanical engineer @ European Union": {
-  "total": 202,
+  "total": 208,
   "good": 42,
-  "yield": 0.21
+  "yield": 0.2
  },
  "additive manufacturing engineer @ European Union": {
   "total": 199,
@@ -74,25 +74,25 @@
   "good": 1,
   "yield": 0.01
  },
+ "mechanical design engineer @ Netherlands": {
+  "total": 171,
+  "good": 24,
+  "yield": 0.14
+ },
+ "FEA engineer @ Netherlands": {
+  "total": 171,
+  "good": 40,
+  "yield": 0.23
+ },
  "bursiyer @ Turkey": {
   "total": 168,
   "good": 9,
   "yield": 0.05
  },
- "mechanical design engineer @ Netherlands": {
-  "total": 168,
-  "good": 23,
-  "yield": 0.14
- },
- "FEA engineer @ Netherlands": {
-  "total": 167,
-  "good": 40,
-  "yield": 0.24
- },
  "FEA engineer @ Ireland": {
-  "total": 161,
-  "good": 28,
-  "yield": 0.17
+  "total": 162,
+  "good": 29,
+  "yield": 0.18
  },
  "PhD additive manufacturing @ European Union": {
   "total": 146,
@@ -100,7 +100,7 @@
   "yield": 0.09
  },
  "analiz mühendisi @ Turkey": {
-  "total": 130,
+  "total": 137,
   "good": 11,
   "yield": 0.08
  },
@@ -110,19 +110,19 @@
   "yield": 0.01
  },
  "proses mühendisi @ Turkey": {
-  "total": 110,
+  "total": 112,
   "good": 5,
-  "yield": 0.05
+  "yield": 0.04
  },
  "stajyer mühendis @ Turkey": {
-  "total": 102,
+  "total": 103,
   "good": 16,
   "yield": 0.16
  },
  "test mühendisi @ Turkey": {
-  "total": 98,
-  "good": 8,
-  "yield": 0.08
+  "total": 100,
+  "good": 9,
+  "yield": 0.09
  },
  "mühendis adayı @ Turkey": {
   "total": 82,
@@ -130,24 +130,24 @@
   "yield": 0.01
  },
  "manufacturing engineer @ United Kingdom": {
-  "total": 71,
-  "good": 43,
-  "yield": 0.61
+  "total": 79,
+  "good": 47,
+  "yield": 0.59
  },
  "araştırma görevlisi makine @ Turkey": {
   "total": 69,
   "good": 1,
   "yield": 0.01
  },
+ "graduate design engineer @ United Kingdom": {
+  "total": 63,
+  "good": 24,
+  "yield": 0.38
+ },
  "otomotiv mühendis @ Turkey": {
-  "total": 59,
+  "total": 61,
   "good": 4,
   "yield": 0.07
- },
- "graduate design engineer @ United Kingdom": {
-  "total": 58,
-  "good": 23,
-  "yield": 0.4
  },
  "üretim mühendisi @ Turkey": {
   "total": 56,
@@ -155,19 +155,19 @@
   "yield": 0.2
  },
  "Ar-Ge mühendisi yeni mezun @ Turkey": {
-  "total": 53,
+  "total": 55,
   "good": 8,
   "yield": 0.15
  },
  "üretim mühendisi yeni mezun @ Turkey": {
-  "total": 48,
+  "total": 49,
   "good": 16,
   "yield": 0.33
  },
  "R&D engineer @ Turkey": {
-  "total": 36,
-  "good": 0,
-  "yield": 0.0
+  "total": 38,
+  "good": 1,
+  "yield": 0.03
  },
  "ürün geliştirme mühendisi @ Turkey": {
   "total": 32,
@@ -180,9 +180,9 @@
   "yield": 0.0
  },
  "CAE engineer @ Turkey": {
-  "total": 22,
+  "total": 23,
   "good": 1,
-  "yield": 0.05
+  "yield": 0.04
  },
  "tasarım mühendisi SolidWorks @ Turkey": {
   "total": 21,
@@ -190,9 +190,9 @@
   "yield": 0.33
  },
  "validation engineer @ Turkey": {
-  "total": 19,
+  "total": 21,
   "good": 2,
-  "yield": 0.11
+  "yield": 0.1
  },
  "simulation engineer @ Turkey": {
   "total": 15,
