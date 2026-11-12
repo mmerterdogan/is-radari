@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29",
+  "updated": "2026-11-12",
   "items": [
     {
       "id": "b5dfac90ac56",
@@ -105,9 +105,9 @@
       "zamanlama": "Şimdi (YL sırasında)",
       "alan": "Robotik, robot öğrenmesi",
       "son_basvuru": "",
-      "son_basvuru_metin": "Başvurular 2026-11-11'de açılıyor, kapanış tarihi sayfada yok",
+      "son_basvuru_metin": "Başvurular 2026-11-11'de açıldı, kapanış Kasım/Aralık (kesin tarih yok), mülakatlar Aralık-Ocak",
       "link": "https://robotics-institute-germany.de/rig-internship-program-2027-applications-opening-soon/",
-      "sartlar": "Lisans ve yüksek lisans öğrencileri, dünyanın her yerinden. Ücretli staj, en fazla 90 gün. Ayrıntılar rig-internships.de sayfasında.",
+      "sartlar": "Lisans ve yüksek lisans öğrencileri, başvuru ücretsiz ve RIGI portalından, CV ve transkript gerekli, İngilizce, staj ücretli ve temmuzda yerinde bulunmak şart, 90 güne kadar (rig-internships.de)",
       "uygunluk": "Çok uygun",
       "gerekce": "YL öğrencisi olarak doğrudan başvurulabilir ve Almanya'daki robotik laboratuvarlarıyla tanışma fırsatı veriyor. Kontrol, robotik ve ML ilgisiyle örtüşüyor.",
       "id": "0ab9737ed5cc",
@@ -144,6 +144,22 @@
       "gerekce": "Bildiri kabulü gerektiriyor, bu yüzden YL araştırmasından çıkacak bir bildiriyle hedeflenebilir. RAS öğrenci üyeliği şimdiden açılabilir.",
       "id": "166642b7efed",
       "eklendi": "2026-10-29"
+    },
+    {
+      "id": "690a47f90005",
+      "baslik": "CISM Advanced Course C2701: Experimental Vibration Testing for Nonlinear System Identification",
+      "kurum": "CISM (International Centre for Mechanical Sciences)",
+      "ulke": "İtalya",
+      "tur": "Konferans/Kurs",
+      "zamanlama": "Şimdi (YL sırasında)",
+      "alan": "Dinamik ve titreşim",
+      "son_basvuru": "2027-02-26",
+      "son_basvuru_metin": "",
+      "link": "https://www.cism.it/event/experimental-vibration-testing-for-nonlinear-system-identification-8446",
+      "sartlar": "26-30 Nisan 2027, Udine, hibrit. Erken kayıt 650 euro (26 Şubat), online 250 euro (14 Nisan). Ücretten muaf hibe için 26 Şubat'a kadar CV ve danışman referans mektubu ile başvuru gerekir. Kurs doktora öğrencilerine yönelik.",
+      "uygunluk": "Stretch",
+      "gerekce": "Doğrusal olmayan sistemlerin deneysel tanımlanması ve model güncelleme, yapısal dinamik ve FEA ilgisiyle örtüşüyor. Doktora seviyesi olduğundan zor ama online katılım ve hibe mümkün.",
+      "eklendi": "2026-11-12"
     }
   ]
 }
