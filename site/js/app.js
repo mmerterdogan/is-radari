@@ -162,6 +162,10 @@ function card(j) {
     isNew ? `<span class="tag new">Yeni</span>` : "",
     j.target ? `<span class="tag target" title="Hedef şirket listende">⭐ ${esc(j.target)}</span>` : "",
     j.is_internship ? `<span class="tag">Staj / öğrenci</span>` : "",
+    j.apply_kind === "kolay" ? `<span class="tag" title="Hesap gerekmez, Claude formu doldurup gönderebilir">⚡ Kolay başvuru</span>` : "",
+    j.apply_kind === "hesap" ? `<span class="tag" title="Önce hesap açılır, sonra Claude devam eder">🔑 Hesap gerekir</span>` : "",
+    j.permit === "sponsor" ? `<span class="tag" title="İlan vize / taşınma desteğinden söz ediyor">🛂 Vize desteği</span>` : "",
+    j.permit === "gerekli" ? `<span class="tag" title="Yurt dışı ilan, vize desteğinden söz etmiyor: çalışma izni gerekecek">🛂 İzin gerekli</span>` : "",
     j.closed ? `<span class="tag closed" title="İlan artık başvuru kabul etmiyor">Kapandı</span>` : "",
     j.scored_by === "claude" ? `<span class="tag" title="Claude ile değerlendirildi">Claude</span>` : "",
   ].join("");
@@ -354,7 +358,9 @@ function todayQueue(pool, extra = 0) {
   const cand = pool.filter((j) => j.source !== "manual" && ["dogrudan", "uygun"].includes(j.category) && !j.closed
     && ["", "kaydedildi"].includes(stageOf(j)) && !hiddenCompany(j) && (entry(j.id).skip_until || "") <= today()
     && daysAgo((j.first_seen || "").slice(0, 10)) <= QUEUE_DAYS && passesSearch(j));
-  cand.sort((a, b) => (b.target_priority - a.target_priority) || (Boolean(b.target) - Boolean(a.target))
+  // ads that need a work permit without offering help go last: they rarely get past the first screen
+  cand.sort((a, b) => ((a.permit === "gerekli") - (b.permit === "gerekli"))
+    || (b.target_priority - a.target_priority) || (Boolean(b.target) - Boolean(a.target))
     || (stageOf(b) === "kaydedildi") - (stageOf(a) === "kaydedildi") || CAT_ORDER[a.category] - CAT_ORDER[b.category]
     || (b.first_seen || "").localeCompare(a.first_seen || "") || (b.score || 0) - (a.score || 0));
   const done = pool.filter(appliedToday);

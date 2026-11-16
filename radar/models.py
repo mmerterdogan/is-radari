@@ -47,6 +47,7 @@ class Job:
     sectors: list[str] = field(default_factory=list)
     loc_tier: int = 5
     loc_label: str = ""
+    permit: str = ""                    # abroad only: "sponsor" (ad offers visa/relocation help) | "gerekli" (work permit needed, no help mentioned)
     is_internship: bool = False
     closed: bool = False                # "no longer accepting applications"
     target: str = ""                    # name of the matching target company from config.yaml > companies

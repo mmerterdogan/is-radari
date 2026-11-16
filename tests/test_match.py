@@ -442,3 +442,17 @@ def test_drafting_job_is_at_most_uygun():
 def test_special_quota_posting_is_low():
     j = match.analyze(J("Makine Mühendisi (Engelli)", "Makine Mühendisliği mezunu. Engel durumunuzun %40'ın üzerinde olması gerekmektedir." + FEA_BODY))
     assert j.category == "dusuk"
+
+
+def test_work_permit_tag_abroad_only():
+    assert match.analyze(J("Mechanical Design Engineer", FEA_BODY, "Istanbul, Türkiye")).permit == ""
+    assert match.analyze(J("Mechanical Design Engineer", FEA_BODY, "Manchester, United Kingdom")).permit == "gerekli"
+    help_ = FEA_BODY + " We offer relocation support and visa sponsorship is available."
+    assert match.analyze(J("Mechanical Design Engineer", help_, "Munich, Germany")).permit == "sponsor"
+
+
+def test_apply_kind_from_url():
+    assert match.apply_kind("https://jobs.smartrecruiters.com/BoschGroup/744000160816178") == "kolay"
+    assert match.apply_kind("https://armstrongfluidtechnology.bamboohr.com/careers/1114") == "kolay"
+    assert match.apply_kind("https://globalhr.wd5.myworkdayjobs.com/en-US/x/job/y") == "hesap"
+    assert match.apply_kind("https://www.linkedin.com/jobs/view/1/") == ""

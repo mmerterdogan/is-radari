@@ -175,6 +175,8 @@ def export_site(store: Store, out: Path, keep_days: int, stats: dict, cfg: dict 
         if d["deadline"] and d["deadline"] < today:
             d["closed"] = True             # application deadline passed
         d["applicants"] = j.extra.get("applicants", "")
+        d["permit"] = j.permit or match.permit_status(j)   # ads stored before the field existed
+        d["apply_kind"] = match.apply_kind(j.url) if j.source != "linkedin" else ""
         # how to apply: "easy" (LinkedIn Easy Apply), "offsite" (LinkedIn -> company site), "site" (company site)
         d["apply"] = j.extra.get("apply", "") if j.source == "linkedin" else ("" if j.source == "manual" else "site")
         d["target_priority"] = j.target in priority
@@ -614,6 +616,21 @@ def health(args) -> int:
     return 1 if bad else 0
 
 
+def record_applied(path: Path, ids: list[str], when: datetime, followup_days: int = 7) -> int:
+    """Append submitted applications to a tracker file in the site's backup format (site/js/merge.js),
+    so one "Yedek yükle" marks them all as "Başvuruldu". The file is private (cv/ozel/)."""
+    state = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"entries": {}, "manual": {}, "companies": {}}
+    day = when.date().isoformat()
+    stamp = when.replace(microsecond=0).isoformat()
+    for jid in ids:
+        state["entries"][jid] = {"stage": "basvuruldu", "applied_at": day,
+                                 "followup_at": (when + timedelta(days=followup_days)).date().isoformat(),
+                                 "history": [{"stage": "basvuruldu", "at": day}], "updated": stamp}
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
+    return len(ids)
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="radar", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -640,6 +657,9 @@ def main(argv=None) -> int:
     c.add_argument("--tur", choices=["tasarim", "uretim"], help="override the CV variant")
     c.add_argument("--no-pdf", action="store_true", help="Word file only (no PDF export)")
     c.add_argument("--ac", action="store_true", help="open the output folder in Explorer afterwards")
+    a = sub.add_parser("basvurdum", help="record submitted applications in cv/ozel/basvuru_kaydi.json "
+                                          "(import it on the site: Settings > Yedek yükle)")
+    a.add_argument("ids", nargs="+", help="ad ids, e.g. linkedin:123 smartrecruiters:Bosch-1")
     args = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S")
     if hasattr(sys.stdout, "reconfigure"):
@@ -656,6 +676,11 @@ def main(argv=None) -> int:
         return evaluate(args)
     if args.cmd == "cv":
         return cvgen.run_cli(args, Store(ROOT / "data").jobs)
+    if args.cmd == "basvurdum":
+        path = ROOT / "cv" / "ozel" / "basvuru_kaydi.json"
+        n = record_applied(path, args.ids, datetime.now(timezone.utc))
+        print(f"{n} başvuru kaydedildi: {path}\nSitede Ayarlar > Yedek yükle ile bu dosyayı seç.")
+        return 0
     if args.cmd == "recheck":
         cfg = load_config()
         store = Store(ROOT / "data")

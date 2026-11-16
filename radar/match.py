@@ -122,6 +122,35 @@ def language_gaps(text: str) -> list[str]:
 
 
 # Explicit "you must already be allowed to work here" statements: a Turkish citizen cannot meet them
+VISA_OK = (r"(visa|work permit|immigration) (sponsorship|support|assistance)( is)? (available|provided|offered)|"
+           r"(we|company) (will|can|is able to) (sponsor|support)[^.\n]{0,20}(visa|work permit)|"
+           r"sponsorship (is )?(available|possible|provided)|relocation (support|package|assistance|allowance)|"
+           r"blue card|support (with|for) (your )?(visa|work permit|relocation)|vize (destegi|sponsorlugu)")
+def permit_status(job: Job) -> str:
+    """A Turkish citizen needs a work permit anywhere abroad: "sponsor" if the ad offers visa or
+    relocation help, "gerekli" if it does not, "" for jobs in Türkiye / remote."""
+    if job.loc_tier != 5:
+        return ""
+    return "sponsor" if _any(VISA_OK, _lite(f"{job.title}\n{job.description}")) else "gerekli"
+
+
+# How hard the application form is to automate, from the apply URL. Only known for ads whose URL is the
+# company's own page: LinkedIn hides the real target behind a login-only redirect ("" = resolved at apply time).
+APPLY_KIND = (
+    ("kolay", r"smartrecruiters\.com|greenhouse\.io|lever\.co|ashbyhq\.com|bamboohr\.com|workable\.com|hrpeak|recruitee\.com|personio\.|teamtailor"),
+    ("hesap", r"myworkdayjobs\.com|oraclecloud\.com|successfactors|jobs\.siemens|icims\.com|taleo|careers\.[a-z-]+\.com/.*apply|baykar|kariyer"),
+)
+
+
+def apply_kind(url: str) -> str:
+    """"kolay" (no account, form only), "hesap" (account needed first) or "" (unknown)."""
+    u = (url or "").lower()
+    for kind, pat in APPLY_KIND:
+        if re.search(pat, u):
+            return kind
+    return ""
+
+
 WORK_AUTH = (r"(unable|not able) to (provide|offer|sponsor)[^.;\n]{0,30}(sponsor|visa)|no (visa )?sponsorship|"
              r"sponsorship (is )?not (available|provided|offered)|(cannot|can not|will not|do not|does not) (provide |offer )?(visa )?sponsor|"
              r"british (/ ?dual )?(passport|citizen|national)|dual passport|(uk|us|eu) citizen(ship)? (is )?(required|only)|"
@@ -839,6 +868,7 @@ def analyze(job: Job, profile: Profile | None = None) -> Job:
     job.work_mode = mode
     job.loc_tier = tier
     job.loc_label = LOC_LABEL[tier]
+    job.permit = permit_status(job)
     job.role_family = prim
     job.role_label = role_label
     job.sectors = sectors(job)

@@ -357,3 +357,16 @@ def test_cv_ad_folder_and_cleanup(tmp_path):
     (mine / "notlarim.txt").write_text("kullanıcının dosyası", encoding="utf-8")                # never deleted
     assert cvgen.clean_old(tmp_path, 14, "CV") == 1
     assert not old.parent.exists() and mine.exists() and recent.exists()
+
+
+def test_record_applied_writes_site_backup_format(tmp_path):
+    from radar.__main__ import record_applied
+    p = tmp_path / "kayit.json"
+    when = datetime(2026, 11, 16, 12, 0, tzinfo=timezone.utc)
+    assert record_applied(p, ["smartrecruiters:a", "linkedin:b"], when) == 2
+    record_applied(p, ["linkedin:c"], when)
+    import json
+    s = json.loads(p.read_text(encoding="utf-8"))
+    assert set(s) == {"entries", "manual", "companies"} and len(s["entries"]) == 3
+    e = s["entries"]["linkedin:b"]
+    assert e["stage"] == "basvuruldu" and e["applied_at"] == "2026-11-16" and e["followup_at"] == "2026-11-23"
