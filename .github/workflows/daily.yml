@@ -2,7 +2,7 @@ name: Günlük tarama
 
 on:
   schedule:
-    - cron: "0 5 * * *"      # her gün 08:00 (Türkiye saati, UTC+3)
+    - cron: "17 3 * * *"     # her gün 06:17 TR (UTC+3). Tam saatte GitHub kuyruğu 7 saate kadar geciktiriyordu
   workflow_dispatch:          # Actions sekmesinden elle çalıştırma
     inputs:
       hours:

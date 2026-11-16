@@ -1,6 +1,7 @@
 """Offline tests: parsers on saved real pages, store, notification, Claude refinement with a fake client.
 Run: python -m pytest tests -q"""
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -73,6 +74,41 @@ def test_store_dedupe_and_prune(tmp_path):
     st.save()
     st2 = Store(tmp_path)
     assert not st2.is_new(job(nid="1"))  # expired jobs are still remembered
+
+
+def test_prune_keeps_ads_still_listed(tmp_path):
+    st = Store(tmp_path)
+    old = "2020-01-01T00:00:00+00:00"
+    st.add(job(nid="1", first_seen=old, last_seen=datetime.now(timezone.utc).isoformat()))
+    st.add(job(nid="2", title="Other role", first_seen=old))
+    st.prune(keep_days=30)
+    assert "linkedin:1" in st.jobs and "linkedin:2" not in st.jobs
+
+
+def test_split_new_brings_back_pruned_company_ads(tmp_path):
+    from radar.__main__ import split_new
+    st = Store(tmp_path)
+    old = "2020-01-01T00:00:00+00:00"
+    st.add(job(nid="on-site", title="On site", first_seen=datetime.now(timezone.utc).isoformat()))
+    pruned_company = Job(source="greenhouse", native_id="g1", title="Structural Test Engineer", company="Baykar",
+                         location="Istanbul", url="u", first_seen=old)
+    pruned_linkedin = job(nid="li-old", title="Old LinkedIn", first_seen=old)
+    st.add(pruned_company); st.add(pruned_linkedin)
+    st.prune(keep_days=30)
+    # same role as an ad still on the site, from another source: must not duplicate it
+    st.add(job(nid="li-live", title="Design Engineer", company="Bosch", first_seen=datetime.now(timezone.utc).isoformat()))
+    twin = Job(source="smartrecruiters", native_id="s1", title="Design Engineer", company="Bosch", location="L", url="u")
+
+    fresh = [
+        job(nid="on-site", title="On site"),
+        Job(source="greenhouse", native_id="g1", title="Structural Test Engineer", company="Baykar", location="Istanbul", url="u"),
+        job(nid="li-old", title="Old LinkedIn"),
+        twin,
+    ]
+    new, returning = split_new(st, fresh, "2026-11-16T00:00:00+00:00")
+    assert [j.id for j in new] == ["greenhouse:g1"]
+    assert returning == {"greenhouse:g1"}
+    assert st.jobs["linkedin:on-site"].last_seen == "2026-11-16T00:00:00+00:00"
 
 
 def test_old_jobs_json_still_loads(tmp_path):

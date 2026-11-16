@@ -33,9 +33,13 @@ class Store:
         self.dedupe.add(job.dedupe_key)
 
     def prune(self, keep_days: int) -> None:
-        """Drop old jobs from the site list; their ids/keys stay in the dedupe set."""
+        """Drop jobs not seen in the sources for keep_days; their ids/keys stay in the dedupe set.
+
+        Company career sites keep an ad listed for months, so age is counted from the last run that
+        still saw the ad (last_seen), not from first_seen. LinkedIn searches only the last 24 hours,
+        so for LinkedIn ads last_seen stays close to first_seen and nothing changes."""
         cutoff = (datetime.now(timezone.utc) - timedelta(days=keep_days)).isoformat()
-        for k in [k for k, j in self.jobs.items() if j.first_seen and j.first_seen < cutoff]:
+        for k in [k for k, j in self.jobs.items() if (j.last_seen or j.first_seen) and (j.last_seen or j.first_seen) < cutoff]:
             self.dedupe.add(k)
             del self.jobs[k]
 

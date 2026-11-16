@@ -371,6 +371,34 @@ def update_query_stats(path: Path, new_jobs: list[Job], kept: list[Job]) -> None
                     encoding="utf-8")
 
 
+def split_new(store: Store, fresh: list[Job], now: str) -> tuple[list[Job], set[str]]:
+    """Return (jobs to process, ids of company ads that came back).
+
+    An ad already on the site gets last_seen refreshed so it is not pruned while still listed.
+    Company career sources (everything except LinkedIn) list all open ads every day, so an ad
+    that is no longer on the site but still listed was pruned by age earlier: it is processed
+    again instead of being skipped as "seen". Re-checking is cheap (the text comes with the
+    listing) and the relevance gate drops the irrelevant ones again."""
+    new_jobs: list[Job] = []
+    returning: set[str] = set()
+    batch_keys: set[str] = set()
+    live_keys = {x.dedupe_key for x in store.jobs.values()}  # same role already on the site via another source
+    for j in fresh:
+        old = store.jobs.get(j.id)
+        if old is not None:
+            old.last_seen = now
+            continue
+        is_new = store.is_new(j)
+        comes_back = not is_new and j.source != "linkedin" and j.dedupe_key not in live_keys
+        if (is_new or comes_back) and j.dedupe_key not in batch_keys:
+            batch_keys.add(j.dedupe_key)
+            j.first_seen = j.last_seen = now
+            new_jobs.append(j)
+            if comes_back:
+                returning.add(j.id)
+    return new_jobs, returning
+
+
 def run(args) -> int:
     cfg = load_config()
     profile = match.Profile.from_config(cfg.get("profile"), cfg.get("filters"))
@@ -404,14 +432,9 @@ def run(args) -> int:
     stats["health"] = source_health(stats["sources"], short, store.runs)
 
     # 2. dedupe -------------------------------------------------------------------------
-    new_jobs: list[Job] = []
-    batch_keys = set()
-    for j in fresh:
-        if store.is_new(j) and j.dedupe_key not in batch_keys:
-            batch_keys.add(j.dedupe_key)
-            j.first_seen = now_iso()
-            new_jobs.append(j)
-    stats["new"] = len(new_jobs)
+    new_jobs, returning = split_new(store, fresh, now_iso())
+    stats["new"] = len(new_jobs) - len(returning)
+    stats["returned"] = len(returning)
 
     # 3. relevance gate: drop only jobs that are clearly not for a mechanical engineer ---------
     # Generic titles without a domain signal and without text yet are "pending": decided after step 4.
@@ -424,8 +447,9 @@ def run(args) -> int:
                 pending.add(j.id)
         else:
             store.dedupe.update((j.dedupe_key, j.id))
-            dropped_log.append({"title": j.title, "company": j.company, "location": j.location, "url": j.url, "reason": why})
-    stats["dropped"] = len(new_jobs) - len(relevant)
+            if j.id not in returning:  # a re-checked company ad dropped again is not news
+                dropped_log.append({"title": j.title, "company": j.company, "location": j.location, "url": j.url, "reason": why})
+    stats["dropped"] = len(dropped_log)
     log.info("%d fetched, %d new, %d relevant (%d pending full text)", len(fresh), len(new_jobs), len(relevant), len(pending))
 
     # 4. fetch full text for LinkedIn ads: pending decisions first, then the most promising titles,

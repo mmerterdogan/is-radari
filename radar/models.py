@@ -31,6 +31,7 @@ class Job:
 
     # ---- filled by the matcher (radar/match.py), optionally refined by Claude (radar/llm.py)
     first_seen: str = ""
+    last_seen: str = ""                 # last run in which the source still listed the ad (keeps open company ads alive)
     category: str = ""                  # dogrudan | uygun | stretch | dusuk
     category_reasons: list[str] = field(default_factory=list)
     score: int | None = None            # 0-100, for sorting inside a category

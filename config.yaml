@@ -229,6 +229,8 @@ match:
 
 scoring:
   # Claude API (isteğe bağlı). ANTHROPIC_API_KEY yoksa kural tabanlı eşleştirme kullanılır.
+  # KARAR 2026-11-16: bilerek KAPALI (GitHub'a anahtar eklenmedi). Kurallar etiketli sette %88 tutuyor,
+  # belirsiz ilan günde 0-1. Belirsizler günde 10'u geçerse ya da eval düşerse yeniden değerlendir.
   # Sadece kuralların emin olamadığı ilanlara bakar: metni okunamayanlar ("Değerlendirilemedi") ve
   # deneyim / eğitim şartı bulunamayanlar. Haiku ucuz ve bu iş için yeterli (Haiku 5.5: günde ~1 sent).
   model: claude-haiku-5-5
