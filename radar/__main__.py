@@ -399,6 +399,23 @@ def split_new(store: Store, fresh: list[Job], now: str) -> tuple[list[Job], set[
     return new_jobs, returning
 
 
+# Sources that list every open ad of the company each day: an ad missing from today's list is closed.
+# (LinkedIn, Euraxess and job boards return search results, so a missing ad proves nothing there.)
+FULL_LIST_SOURCES = {"greenhouse", "smartrecruiters", "workday", "lever", "ashby", "hrpeak", "baykar"}
+
+
+def close_unlisted(store: Store, fresh: list[Job], fetched: dict[str, int]) -> int:
+    """Mark ads of full-list sources closed when the source worked today but no longer lists them."""
+    listed = {j.id for j in fresh}
+    worked = {s for s in FULL_LIST_SOURCES if fetched.get(s, 0) > 0}
+    n = 0
+    for j in store.jobs.values():
+        if j.source in worked and not j.closed and j.id not in listed:
+            j.closed = True
+            n += 1
+    return n
+
+
 def run(args) -> int:
     cfg = load_config()
     profile = match.Profile.from_config(cfg.get("profile"), cfg.get("filters"))
@@ -435,6 +452,7 @@ def run(args) -> int:
     new_jobs, returning = split_new(store, fresh, now_iso())
     stats["new"] = len(new_jobs) - len(returning)
     stats["returned"] = len(returning)
+    stats["closed_unlisted"] = close_unlisted(store, fresh, stats["sources"])
 
     # 3. relevance gate: drop only jobs that are clearly not for a mechanical engineer ---------
     # Generic titles without a domain signal and without text yet are "pending": decided after step 4.

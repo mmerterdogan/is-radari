@@ -224,8 +224,11 @@ match:
   # Açıklaması eksik LinkedIn ilanlarından en umut vericilerin tam metni çekilir (eğitim/deneyim şartı için)
   enrich_limit: 250
   backfill_days: 7            # önceki günlerden metni hâlâ eksik olan ilanlar da bu kadar gün geriye kadar tekrar denenir
-  recheck_limit: 40           # her gün kapanıp kapanmadığı kontrol edilen eski ilan sayısı
-  recheck_after_days: 5
+  recheck_limit: 120          # her gün kapanıp kapanmadığı kontrol edilen eski LinkedIn ilanı sayısı
+                              # (40'ta kontrol edilenlerin %20-55'i kapalı çıkıyordu, sitede kapanmış ilan birikiyordu)
+  recheck_after_days: 3
+  # Şirket kaynaklarındaki (Greenhouse, SmartRecruiters, Workday, Baykar, HRPeak...) ilanlar kontrol gerektirmez:
+  # kaynak o gün çalıştıysa ve ilan listede yoksa kapanmış sayılır.
 
 scoring:
   # Claude API (isteğe bağlı). ANTHROPIC_API_KEY yoksa kural tabanlı eşleştirme kullanılır.

@@ -111,6 +111,23 @@ def test_split_new_brings_back_pruned_company_ads(tmp_path):
     assert st.jobs["linkedin:on-site"].last_seen == "2026-11-16T00:00:00+00:00"
 
 
+def test_close_unlisted_only_for_full_list_sources_that_worked(tmp_path):
+    from radar.__main__ import close_unlisted
+    st = Store(tmp_path)
+    gone = Job(source="greenhouse", native_id="g1", title="A", company="X", location="L", url="u")
+    still = Job(source="greenhouse", native_id="g2", title="B", company="X", location="L", url="u")
+    broken_src = Job(source="workday", native_id="w1", title="C", company="Y", location="L", url="u")
+    li = job(nid="li", title="D")
+    for j in (gone, still, broken_src, li):
+        st.add(j)
+    fresh = [Job(source="greenhouse", native_id="g2", title="B", company="X", location="L", url="u")]
+    n = close_unlisted(st, fresh, {"greenhouse": 1, "workday": 0, "linkedin": 5})
+    assert n == 1 and st.jobs["greenhouse:g1"].closed
+    assert not st.jobs["greenhouse:g2"].closed      # still listed
+    assert not st.jobs["workday:w1"].closed         # source failed today: no conclusion
+    assert not st.jobs["linkedin:li"].closed        # search source: missing proves nothing
+
+
 def test_old_jobs_json_still_loads(tmp_path):
     (tmp_path / "jobs.json").write_text('[{"source":"linkedin","native_id":"9","title":"T","company":"C","location":"L",'
                                         '"url":"u","verdict":"basvur","prefilter_score":7,"msc_compatible":true,"first_seen":"x"}]')
