@@ -9,8 +9,8 @@ profile:
     - "Yüksek lisans: Makine Mühendisliği (tezli), İstanbul Üniversitesi-Cerrahpaşa (2026-devam ediyor)"
   # Profilinde olan beceriler (radar/match.py > SKILLS içindeki anahtarlar). İlanlarda bunlar "✓ var" görünür,
   # listede olmayan araçlar "profilinde görünmüyor" olarak gösterilir. Yeni bir şey öğrendiğinde ekle.
-  skills: [solidworks, ansys, fea, statik, modal, topoloji, cad, teknik_resim, tolerans, autocad, fusion, nx,
-           matlab, excel, eklemeli, dfm, rca, cnc, uretim, prototip, ingilizce, catia, sac, hidrolik, enjeksiyon, lean]
+  skills: [solidworks, ansys, fea, statik, modal, topoloji, cad, teknik_resim, tolerans, autocad, fusion,
+           matlab, excel, eklemeli, dfm, rca, cnc, uretim, prototip, ingilizce, hidrolik, enjeksiyon, lean]
   languages: [tr, en]
   # Claude'un (API varsa) değerlendirmede ve ön yazıda kullandığı tercihler
   preferences: |

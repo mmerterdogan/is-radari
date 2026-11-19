@@ -24,8 +24,8 @@ I am interested not in one corner of mechanical engineering but in the whole pat
 - Defect Prediction in Steel Production with Machine Learning, Feb 2025 - Jun 2025: UCI Steel Plates Faults data in R, 7 classifiers compared, random forest + SVM + XGBoost majority-vote ensemble with 91.3% accuracy.
 
 ## Skills
-- Software: SolidWorks (CSWA), ANSYS Mechanical (WB/APDL), MS Excel, R, MATLAB/Simulink, Siemens NX, CATIA
-- Expertise: finite element analysis (static, modal), topology optimisation, solid modelling and parametric design, sheet metal design, design for injection moulding, technical drawing and tolerancing (GD&T), design for manufacturability (DFM), root cause analysis (RCA), lean manufacturing, pneumatic systems troubleshooting, machining processes, additive manufacturing / FDM 3D printing
+- Software: SolidWorks (CSWA), ANSYS Mechanical (WB/APDL), MS Excel, R, MATLAB/Simulink
+- Expertise: finite element analysis (static, modal), topology optimisation, solid modelling and parametric design, design for injection moulding, technical drawing and tolerancing (GD&T), design for manufacturability (DFM), root cause analysis (RCA), lean manufacturing, pneumatic systems troubleshooting, machining processes, additive manufacturing / FDM 3D printing
 - Languages: Turkish (native), English (C1)
 
 ## Certificates and training
