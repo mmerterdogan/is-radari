@@ -315,7 +315,8 @@ function render() {
   document.querySelectorAll(".modes button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === mode));
   $("#q").placeholder = { firsatlar: "Ara: program, kurum, ülke, alan…", isealimci: "Ara: şirket, kişi, unvan…" }[mode]
     || "Ara: şirket, pozisyon, şehir, beceri…";
-  if (REC && !REC.error) $("#mode-isealimci").textContent = `(${(REC.companies || []).length})`;
+  if (REC && !REC.error) $("#mode-isealimci").textContent =
+    `(${(REC.companies || []).length + (REC.mentorlar || []).length + (REC.hocalar || []).length})`;
   $("#mode-isler").textContent = `(${scan.filter((j) => ["dogrudan", "uygun"].includes(j.category)).length})`;
   if (ACAD && !ACAD.error) {
     const t = today();
@@ -480,7 +481,8 @@ async function loadRecruiters() {
   render();   // also fills the company count on the "İşe alımcılar" tab
 }
 
-const kisiKey = (p) => "kisi:" + String(p.linkedin || p.ad).replace(/^https?:\/\/[^/]+\/in\//, "").replace(/\/$/, "");
+const kisiKey = (p) => "kisi:" + String(p.linkedin || p.link || p.ad).replace(/^https?:\/\/[^/]+\/in\//, "").replace(/\/$/, "");
+let recSub = "sirketler";   // sub-section of the tab: sirketler | startuplar | mentorlar | hocalar
 
 function openJobsOf(c) {   // fitting, still-open scanned jobs of this company
   let re;
@@ -512,18 +514,55 @@ function recCard(c) {
     </div></article>`;
 }
 
+// a mentor or an academic: one card per person (no company grouping)
+function guideCard(p) {
+  const key = kisiKey(p);
+  const st = entry(key).stage || "";
+  const url = p.linkedin || p.link;
+  return `<article class="qrow ${st === "gizli" ? "hidden-job" : ""}"><div class="qmain">
+      <div class="title"><a href="${esc(url)}" target="_blank" rel="noopener">${esc(p.ad)}</a>
+        ${p.dogrulandi === false ? `<span class="badge belirsiz" title="Web aramasından eklendi; unvan ve kurum eski olabilir">doğrulanmadı</span>` : ""}</div>
+      <div class="company">${esc([p.unvan, p.kurum, p.sehir].filter(Boolean).join(" · "))}</div>
+      ${p.alan ? `<div class="hint">Alan: ${esc(p.alan)}</div>` : ""}
+      <div class="krow"><span class="hint">${esc(p.neden || "")}</span>
+        <select data-kisi-stage="${esc(key)}" aria-label="İletişim durumu">${REC_STAGES.map(([v, l]) => `<option value="${v}" ${v === st ? "selected" : ""}>${l}</option>`).join("")}</select></div>
+    </div></article>`;
+}
+
+const REC_SUBS = [["sirketler", "Şirketler"], ["startuplar", "Startuplar"], ["mentorlar", "Mentorlar"], ["hocalar", "Hocalar"]];
+
 function recruiterView() {
   if (!REC) { loadRecruiters(); return `<div class="empty">Yükleniyor…</div>`; }
   if (REC.error) return `<div class="empty">İşe alımcı listesi yüklenemedi (isealimci.json).</div>`;
   const q = $("#q").value.trim().toLocaleLowerCase("tr");
-  const companies = (REC.companies || []).filter((c) => !q || [c.sirket, c.neden, c.not, ...(c.kisiler || []).flatMap((p) => [p.ad, p.unvan])]
-    .join(" ").toLocaleLowerCase("tr").includes(q));
-  const people = (REC.companies || []).flatMap((c) => c.kisiler || []);
+  const hit = (parts) => !q || parts.filter(Boolean).join(" ").toLocaleLowerCase("tr").includes(q);
+  const all = REC.companies || [];
+  const groups = {
+    sirketler: all.filter((c) => c.tur !== "startup"),
+    startuplar: all.filter((c) => c.tur === "startup"),
+    mentorlar: REC.mentorlar || [],
+    hocalar: REC.hocalar || [],
+  };
+  const people = [...all.flatMap((c) => c.kisiler || []), ...groups.mentorlar, ...groups.hocalar];
   const sent = people.filter((p) => ["istek", "baglandi", "yazistik"].includes(entry(kisiKey(p)).stage)).length;
-  const head = `<div class="qhead"><b>İşe alımcılar ve mühendisler</b> <span class="hint">· ${(REC.companies || []).length} şirket, ${people.length} kişi, ${sent} kişiyle temas.
+  const nav = `<div class="chips recsub">${REC_SUBS.map(([k, l]) =>
+    `<button class="chip" data-recsub="${k}" aria-pressed="${k === recSub}">${l} (${groups[k].length})</button>`).join("")}</div>`;
+  const head = `<div class="qhead"><b>İşe alımcılar, mühendisler, mentorlar ve hocalar</b> <span class="hint">· ${people.length} kişi, ${sent} kişiyle temas.
     Haftada en fazla 5 bağlantı isteği; istekten önce profili açıp kişinin hâlâ orada çalıştığını kontrol et.${REC.updated ? ` Son güncelleme: ${esc(fmtDate(REC.updated))}.` : ""}
-    ${(REC.kuyruk || []).length ? ` Sırada (her salı otomatik aranır): ${esc(REC.kuyruk.map((k) => k.sirket).join(", "))}.` : ""}</span></div>`;
-  return head + (companies.map(recCard).join("") || `<div class="empty">Bu aramayla şirket yok.</div>`);
+    ${(REC.kuyruk || []).length ? ` Sırada (her salı otomatik aranır): ${esc(REC.kuyruk.map((k) => k.sirket).join(", "))}.` : ""}</span>${nav}</div>`;
+  let body;
+  if (recSub === "mentorlar" || recSub === "hocalar") {
+    const list = groups[recSub].filter((p) => hit([p.ad, p.unvan, p.kurum, p.alan, p.neden]));
+    const blocks = recSub === "hocalar"
+      ? [["Türkiye", list.filter((p) => p.ulke !== "Yurt dışı")], ["Yurt dışı", list.filter((p) => p.ulke === "Yurt dışı")]]
+          .filter(([, l]) => l.length).map(([t, l]) => `<div class="hint" style="margin:12px 0 4px"><b>${t}</b></div>` + l.map(guideCard).join("")).join("")
+      : list.map(guideCard).join("");
+    body = blocks || `<div class="empty">Bu aramayla kişi yok.</div>`;
+  } else {
+    const list = groups[recSub].filter((c) => hit([c.sirket, c.neden, c.not, ...(c.kisiler || []).flatMap((p) => [p.ad, p.unvan])]));
+    body = list.map(recCard).join("") || `<div class="empty">Bu aramayla şirket yok.</div>`;
+  }
+  return head + body;
 }
 
 // ------------------------------------------------------------------ kanban
@@ -741,7 +780,7 @@ function parsePasted(text) {
 
 // Which CV to send (chosen by radar/cvgen.py) and the local command that builds it from the private cv/ozel/.
 const CV_LANG = { tr: "Türkçe", en: "İngilizce" };
-const CV_VARIANT = { tasarim: "Tasarım", uretim: "Üretim" };
+const CV_VARIANT = { tasarim: "Tasarım", uretim: "Üretim", cae: "CAE / analiz", arge: "Ar-Ge" };
 const cvLabel = (j) => j.cv ? `${CV_LANG[j.cv.lang] || j.cv.lang} · ${CV_VARIANT[j.cv.variant] || j.cv.variant}` : "";
 const CV_FILE = "Muhammet_Mert_Erdogan_CV.pdf";
 function cvFile(j, asItem = false) {
@@ -1112,6 +1151,7 @@ document.addEventListener("click", async (ev) => {
   const t = ev.target.closest("button, [data-go], .stat") || ev.target;
   if (t.matches?.(".seg button")) { view = t.dataset.view; render(); return; }
   if (t.matches?.(".modes button")) { view = { firsatlar: "akademik", isealimci: "isealimci" }[t.dataset.mode] || jobView; render(); return; }
+  if (t.dataset?.recsub) { recSub = t.dataset.recsub; render(); return; }
   if (t.dataset?.go) { view = t.dataset.go; render(); window.scrollTo({ top: $(".bar").offsetTop, behavior: "smooth" }); return; }
   if (t.dataset?.catOnly) {
     const only = F.cats.length === 1 && F.cats[0] === t.dataset.catOnly;

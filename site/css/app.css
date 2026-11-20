@@ -244,3 +244,4 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .85em; 
 .applicant .wide { grid-column: 1 / -1; }
 @media (max-width: 600px) { .applicant { grid-template-columns: minmax(0, 1fr); } }
 #fill-prompt { max-height: 260px; overflow: auto; font-size: .78rem; }
+.recsub { margin-top: 10px; }

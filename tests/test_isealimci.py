@@ -49,8 +49,21 @@ def test_people():
             seen.add(slug)
             assert p.get("dogrulandi", True) in (True, False)
             # public repo: names, titles and public profile URLs only
-            text = json.dumps({k: v for k, v in p.items() if k != "linkedin"}, ensure_ascii=False)
+            text = json.dumps({k: v for k, v in p.items() if k not in ("linkedin", "eklendi")}, ensure_ascii=False)
             assert not re.search(r"@|\+?\d[\d ()-]{9,}", text), p["ad"]
+
+
+def test_mentors_and_academics():
+    d = load()
+    for p in d.get("mentorlar", []):
+        assert p["ad"].strip() and p.get("kurum"), p
+        assert PROFILE.match(p["linkedin"]), p["linkedin"]
+    for p in d.get("hocalar", []):
+        assert p["ad"].strip() and p.get("kurum"), p
+        assert p["link"].startswith("https://"), p["link"]   # official university / group page
+        assert p.get("ulke", "Türkiye") in ("Türkiye", "Yurt dışı")
+    for c in d["companies"]:
+        assert c.get("tur", "sirket") in ("sirket", "startup"), c["sirket"]
 
 
 def test_queue_not_already_listed():
