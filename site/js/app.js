@@ -494,6 +494,7 @@ function personRow(p) {
   return `<div class="krow ${st === "gizli" ? "hidden-job" : ""}">
     <a href="${esc(p.linkedin)}" target="_blank" rel="noopener">${esc(p.ad)}</a>
     <span class="badge">${esc(p.rol || "")}</span>
+    ${p.dogrulandi === false ? `<span class="badge belirsiz" title="Web aramasından otomatik eklendi; unvan ve şirket eski olabilir">doğrulanmadı</span>` : ""}
     <span class="hint">${esc(p.unvan || "")}${p.derece ? ` · ${esc(p.derece)}. derece` : ""}${p.not ? ` · ${esc(p.not)}` : ""}</span>
     <select data-kisi-stage="${esc(key)}" aria-label="İletişim durumu">${REC_STAGES.map(([v, l]) => `<option value="${v}" ${v === st ? "selected" : ""}>${l}</option>`).join("")}</select>
   </div>`;
@@ -520,7 +521,8 @@ function recruiterView() {
   const people = (REC.companies || []).flatMap((c) => c.kisiler || []);
   const sent = people.filter((p) => ["istek", "baglandi", "yazistik"].includes(entry(kisiKey(p)).stage)).length;
   const head = `<div class="qhead"><b>İşe alımcılar ve mühendisler</b> <span class="hint">· ${(REC.companies || []).length} şirket, ${people.length} kişi, ${sent} kişiyle temas.
-    Haftada en fazla 5 bağlantı isteği; istekten önce profili açıp kişinin hâlâ orada çalıştığını kontrol et.${REC.updated ? ` Son güncelleme: ${esc(fmtDate(REC.updated))}.` : ""}</span></div>`;
+    Haftada en fazla 5 bağlantı isteği; istekten önce profili açıp kişinin hâlâ orada çalıştığını kontrol et.${REC.updated ? ` Son güncelleme: ${esc(fmtDate(REC.updated))}.` : ""}
+    ${(REC.kuyruk || []).length ? ` Sırada (her salı otomatik aranır): ${esc(REC.kuyruk.map((k) => k.sirket).join(", "))}.` : ""}</span></div>`;
   return head + (companies.map(recCard).join("") || `<div class="empty">Bu aramayla şirket yok.</div>`);
 }
 

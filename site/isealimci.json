@@ -1,5 +1,17 @@
 {
   "updated": "2026-11-20",
+  "kuyruk": [
+    {"sirket": "Anadolu Isuzu", "neden": "Ticari araç Ar-Ge", "sehir": "Kocaeli"},
+    {"sirket": "STM", "neden": "Savunma sistemleri mühendisliği", "sehir": "Ankara"},
+    {"sirket": "FEV Türkiye", "neden": "Powertrain ve araç mühendisliği hizmetleri", "sehir": "İstanbul"},
+    {"sirket": "BMC", "neden": "Ticari ve askerî araç tasarımı", "sehir": "İzmir, Sakarya"},
+    {"sirket": "Hyundai Assan", "neden": "Otomotiv üretimi", "sehir": "Kocaeli"},
+    {"sirket": "Yazaki", "neden": "Otomotiv yan sanayi, taramada ilanı çıkıyor", "sehir": ""},
+    {"sirket": "GE Aerospace Türkiye", "neden": "Havacılık motoru tasarım ve analiz", "sehir": ""},
+    {"sirket": "Kale Pratt & Whitney", "neden": "Uçak motoru parça üretimi", "sehir": ""},
+    {"sirket": "Hitachi Energy Türkiye", "neden": "Enerji ekipmanı tasarımı", "sehir": ""},
+    {"sirket": "Nurol Teknoloji", "neden": "Savunma malzemeleri", "sehir": "Ankara"}
+  ],
   "companies": [
     {
       "id": "beko", "sirket": "Beko", "ara": "Beko", "match": "^Beko( |$)|Arçelik",
