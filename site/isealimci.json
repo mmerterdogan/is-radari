@@ -1,10 +1,6 @@
 {
   "updated": "2026-11-20",
   "kuyruk": [
-    {"sirket": "Anadolu Isuzu", "neden": "Ticari araç Ar-Ge", "sehir": "Kocaeli"},
-    {"sirket": "STM", "neden": "Savunma sistemleri mühendisliği", "sehir": "Ankara"},
-    {"sirket": "FEV Türkiye", "neden": "Powertrain ve araç mühendisliği hizmetleri", "sehir": "İstanbul"},
-    {"sirket": "BMC", "neden": "Ticari ve askerî araç tasarımı", "sehir": "İzmir, Sakarya"},
     {"sirket": "Hyundai Assan", "neden": "Otomotiv üretimi", "sehir": "Kocaeli"},
     {"sirket": "Yazaki", "neden": "Otomotiv yan sanayi, taramada ilanı çıkıyor", "sehir": ""},
     {"sirket": "GE Aerospace Türkiye", "neden": "Havacılık motoru tasarım ve analiz", "sehir": ""},
@@ -190,6 +186,39 @@
       "kisiler": [
         {"ad": "Candan Karaca", "unvan": "Head of HR Turkey", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/candankaraca/", "not": ""},
         {"ad": "Taylan Öğüt", "unvan": "Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/taylan-%C3%B6%C4%9F%C3%BCt-a39007246/", "not": ""}
+      ]
+    },
+    {
+      "id": "anadolu-isuzu", "sirket": "Anadolu Isuzu", "ara": "Isuzu", "match": "Isuzu",
+      "neden": "Ticari araç Ar-Ge", "sehir": "Kocaeli",
+      "not": "",
+      "kisiler": [
+        {"ad": "Ahmet Salih Yılmaz", "unvan": "Mechanical Engineer", "rol": "Mühendis", "derece": "", "linkedin": "https://www.linkedin.com/in/ahmet-salih-y%C4%B1lmaz-408993144/", "not": "", "dogrulandi": false, "kaynak": "web"}
+      ]
+    },
+    {
+      "id": "stm", "sirket": "STM", "ara": "STM", "match": "^STM( |$)",
+      "neden": "Savunma sistemleri mühendisliği", "sehir": "Ankara",
+      "not": "",
+      "kisiler": [
+        {"ad": "Mustafa Çağlayan Durmaz", "unvan": "Lead Mechanical Design Engineer", "rol": "Mühendis", "derece": "", "linkedin": "https://www.linkedin.com/in/mustafa-%C3%A7a%C4%9Flayan-durmaz-30652b65/", "not": "", "dogrulandi": false, "kaynak": "web"}
+      ]
+    },
+    {
+      "id": "fev", "sirket": "FEV Türkiye", "ara": "FEV", "match": "^FEV( |$)",
+      "neden": "Powertrain ve araç mühendisliği hizmetleri", "sehir": "İstanbul",
+      "not": "",
+      "kisiler": [
+        {"ad": "Güneş Kavafoğlu", "unvan": "Talent Acquisition Specialist", "rol": "İşe alım", "derece": "", "linkedin": "https://www.linkedin.com/in/g%C3%BCne%C5%9F-kavafo%C4%9Flu-a659b11a3/", "not": "", "dogrulandi": false, "kaynak": "web"},
+        {"ad": "Ferit Yıldız", "unvan": "Lead Design Engineer", "rol": "Mühendis", "derece": "", "linkedin": "https://www.linkedin.com/in/ferit-y%C4%B1ld%C4%B1z-9a48549b/", "not": "", "dogrulandi": false, "kaynak": "web"}
+      ]
+    },
+    {
+      "id": "bmc", "sirket": "BMC", "ara": "BMC", "match": "^BMC( |$)",
+      "neden": "Ticari ve askerî araç tasarımı", "sehir": "İzmir, Sakarya",
+      "not": "",
+      "kisiler": [
+        {"ad": "Alperen Sarıgül", "unvan": "Mechanical Design Engineer", "rol": "Mühendis", "derece": "", "linkedin": "https://www.linkedin.com/in/alperen-sarigul/", "not": "", "dogrulandi": false, "kaynak": "web"}
       ]
     }
   ]
