@@ -1,0 +1,184 @@
+{
+  "updated": "2026-11-20",
+  "companies": [
+    {
+      "id": "beko", "sirket": "Beko", "ara": "Beko", "match": "^Beko( |$)|Arçelik",
+      "neden": "Staj ve bitirme projesi yapılan şirket", "sehir": "",
+      "not": "Bitirme projesi hoca üzerinden yürüdü; istek atmadan önce düşün.",
+      "kisiler": [
+        {"ad": "Egemen Malgir", "unvan": "Senior Specialist - Tech Talent Acquisition", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/egemen-malgir-665178188/", "not": ""},
+        {"ad": "Rabia Eraslan", "unvan": "HR Business Partner", "rol": "İşe alım", "derece": "1", "linkedin": "https://www.linkedin.com/in/rabiaeraslan/", "not": ""},
+        {"ad": "Cahit Atagün", "unvan": "Head of Mechanical Engineering Oscillation Group R&D", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/cahit-atag%C3%BCn-600687a8/", "not": ""}
+      ]
+    },
+    {
+      "id": "mercedes", "sirket": "Mercedes-Benz Türk", "ara": "Mercedes-Benz Türk", "match": "Mercedes-Benz Türk",
+      "neden": "Bitirme projesi ortağı", "sehir": "İstanbul, Aksaray",
+      "not": "Bitirme projesi hoca üzerinden yürüdü; istek atmadan önce düşün.",
+      "kisiler": [
+        {"ad": "Başak Lise Özen", "unvan": "Talent Acquisition Specialist", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/basaklise/", "not": ""},
+        {"ad": "Onur Karakaş", "unvan": "External R&D Project Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/onur-karaka%C5%9F-704b351b9/", "not": ""}
+      ]
+    },
+    {
+      "id": "festo", "sirket": "Festo", "ara": "Festo", "match": "Festo",
+      "neden": "Staj yapılan şirket", "sehir": "İstanbul",
+      "not": "İşe alımcı bulunamadı; staj mentorun üzerinden sor.",
+      "kisiler": [
+        {"ad": "Ayhan Gürel Bağatır", "unvan": "", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/ayhangurelbagatir/", "not": "staj mentoru"}
+      ]
+    },
+    {
+      "id": "baykar", "sirket": "Baykar", "ara": "Baykar", "match": "Baykar",
+      "neden": "İHA tasarımı (TEKNOFEST) ile örtüşüyor, en çok ilan açan hedef", "sehir": "İstanbul",
+      "not": "",
+      "kisiler": [
+        {"ad": "Semanur Erden", "unvan": "HR Specialist", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/semanur-erden-a659b6274/", "not": ""},
+        {"ad": "Abdullah Demircan", "unvan": "Structural Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/abdullah-demircan-809464219/", "not": ""}
+      ]
+    },
+    {
+      "id": "kepler", "sirket": "Kepler Aviation", "ara": "Kepler", "match": "Kepler",
+      "neden": "İHA ve havacılık tasarımı", "sehir": "",
+      "not": "Küçük şirket; doğrudan kurucuya yazmak işe alımcı aramaktan hızlı olabilir.",
+      "kisiler": [
+        {"ad": "Kemal Aydık", "unvan": "CEO", "rol": "Yönetici", "derece": "2", "linkedin": "https://www.linkedin.com/in/kemal-ayd%C4%B1k-86255866/", "not": ""}
+      ]
+    },
+    {
+      "id": "aselsan", "sirket": "Aselsan", "ara": "Aselsan", "match": "Aselsan",
+      "neden": "Savunma mekanik tasarım, sık ilan açıyor", "sehir": "Ankara",
+      "not": "",
+      "kisiler": [
+        {"ad": "Arzu Çelik", "unvan": "Lead HR Specialist", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/arzucelikk/", "not": ""},
+        {"ad": "Yunus Fatih İriş", "unvan": "Mechanical Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/yunus-fatih-iri%C5%9F-06088b190/", "not": ""}
+      ]
+    },
+    {
+      "id": "tei", "sirket": "TEİ (TUSAŞ Motor Sanayii)", "ara": "TEI", "match": "^TEI\\b|TUSAŞ Motor",
+      "neden": "Havacılık motoru tasarım ve analiz", "sehir": "Eskişehir",
+      "not": "",
+      "kisiler": [
+        {"ad": "Hatice Günyol", "unvan": "İK İşe Alım Uzmanı", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/hatice-g%C3%BCnyol-811224173/", "not": ""},
+        {"ad": "Ceyhun Ceylan", "unvan": "Combustor Design Team Lead", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/ceyhun-ceylan-9525b530/", "not": ""}
+      ]
+    },
+    {
+      "id": "teitech", "sirket": "TEITECH", "ara": "TEITECH", "match": "TEITECH",
+      "neden": "TEİ'nin mühendislik şirketi, tasarım ilanları sık", "sehir": "",
+      "not": "",
+      "kisiler": [
+        {"ad": "Onur Tüfekçi", "unvan": "Lead HR Specialist", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/onur-t%C3%BCfek%C3%A7i-44aa36197/", "not": ""},
+        {"ad": "O. Furkan Çelik", "unvan": "Lead Mechanical Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/ofurkan-celik/", "not": ""}
+      ]
+    },
+    {
+      "id": "tusas", "sirket": "TUSAŞ (Türk Havacılık ve Uzay Sanayii)", "ara": "Türk Havacılık", "match": "Türk Havacılık|Turkish Aerospace",
+      "neden": "Havacılık yapısal tasarım ve analiz", "sehir": "Ankara",
+      "not": "",
+      "kisiler": [
+        {"ad": "Engin Samunahmetoğlu", "unvan": "HR Business Partner", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/enginsa/", "not": ""}
+      ]
+    },
+    {
+      "id": "roketsan", "sirket": "Roketsan", "ara": "Roketsan", "match": "Roketsan",
+      "neden": "Savunma mekanik ve yapısal tasarım", "sehir": "Ankara",
+      "not": "İşe alımcı bulunamadı; mühendis üzerinden ekip ve ilan sor.",
+      "kisiler": [
+        {"ad": "Mert Aktay", "unvan": "Mechanical and Structural Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/mertaktay/", "not": ""}
+      ]
+    },
+    {
+      "id": "ford-otosan", "sirket": "Ford Otosan", "ara": "Ford Otosan", "match": "Ford Otosan",
+      "neden": "Otomotiv Ar-Ge, CAD/CAE ve powertrain tasarımı (Formula Student ile örtüşüyor)", "sehir": "İstanbul, Kocaeli",
+      "not": "",
+      "kisiler": [
+        {"ad": "İsmail Öztürk", "unvan": "Talent Acquisition & Recruitment Senior Specialist", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/ismail-%C3%B6zt%C3%BCrk-6361a46/", "not": ""},
+        {"ad": "Alihan Küçükkaynarpınar", "unvan": "Talent Acquisition Specialist", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/alihan-kucukkaynarpinar/", "not": ""},
+        {"ad": "Aybüke Kızıl", "unvan": "Projects CAD/CAE Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/ayb%C3%BCke-k%C4%B1z%C4%B1l-514589225/", "not": ""},
+        {"ad": "Yusuf İslam Baran", "unvan": "HCV Powertrain Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/yusuf-islam-baran-4091591a4/", "not": ""}
+      ]
+    },
+    {
+      "id": "tofas", "sirket": "TOFAŞ", "ara": "TOFAŞ", "match": "TOFA[ŞS]",
+      "neden": "Otomotiv Ar-Ge mekanik tasarım", "sehir": "Bursa",
+      "not": "",
+      "kisiler": [
+        {"ad": "Tuğba Gençoğlu", "unvan": "Human Resources Specialist", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/tu%C4%9Fba-gen%C3%A7o%C4%9Flu/", "not": ""},
+        {"ad": "Mehmet Kağan Yorgancıoğlu", "unvan": "R&D Mechanical Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/kagan-yorgancioglu/", "not": ""}
+      ]
+    },
+    {
+      "id": "otokar", "sirket": "Otokar", "ara": "Otokar", "match": "Otokar",
+      "neden": "Ticari ve askerî araç mekanik tasarımı", "sehir": "Sakarya",
+      "not": "",
+      "kisiler": [
+        {"ad": "M. Esra İnan", "unvan": "Talent Acquisition & HR Business Partner", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/esra-inan/", "not": ""},
+        {"ad": "Onur Ateş", "unvan": "Mechanical Design Engineer (askerî araçlar)", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/onuratess/", "not": ""}
+      ]
+    },
+    {
+      "id": "fnss", "sirket": "FNSS Savunma Sistemleri", "ara": "FNSS", "match": "FNSS",
+      "neden": "Zırhlı araç mekanik tasarımı", "sehir": "Ankara",
+      "not": "",
+      "kisiler": [
+        {"ad": "Melis Akıncı Sazak", "unvan": "Lead HR Business Partner, R&D", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/melisakincisazak/", "not": ""},
+        {"ad": "Ataberk Eser", "unvan": "Mechanical Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/ataberk-eser/", "not": ""}
+      ]
+    },
+    {
+      "id": "vestel", "sirket": "Vestel", "ara": "Vestel", "match": "Vestel",
+      "neden": "Beyaz eşya ve elektronik Ar-Ge mekanik tasarımı (Beko deneyimine yakın)", "sehir": "Manisa",
+      "not": "",
+      "kisiler": [
+        {"ad": "Begüm Su Kazaz", "unvan": "Recruitment Specialist", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/beg%C3%BCm-su-kazaz-711087219/", "not": ""},
+        {"ad": "Gürkan Öznazlı", "unvan": "Mechanical Design Chief Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/g%C3%BCrkan-%C3%B6znazl%C4%B1-92b39269/", "not": ""}
+      ]
+    },
+    {
+      "id": "bosch", "sirket": "Bosch Türkiye", "ara": "Bosch", "match": "Bosch",
+      "neden": "Otomotiv ve ev aletleri Ar-Ge", "sehir": "Bursa, İstanbul",
+      "not": "",
+      "kisiler": [
+        {"ad": "Beyza İldam", "unvan": "Talent Acquisition", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/beyzaildam/", "not": ""},
+        {"ad": "Tuğçe Koç", "unvan": "Senior Product Development Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/tu%C4%9F%C3%A7e-ko%C3%A7-3119328b/", "not": ""}
+      ]
+    },
+    {
+      "id": "avl", "sirket": "AVL Türkiye", "ara": "AVL", "match": "^AVL",
+      "neden": "Powertrain mühendisliği (Formula Student powertrain ile örtüşüyor)", "sehir": "İstanbul",
+      "not": "",
+      "kisiler": [
+        {"ad": "Tuğba Gündoğdu Şahan", "unvan": "Senior HR Business Partner", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/tugbagundogdu/", "not": ""},
+        {"ad": "Burak Kıray", "unvan": "Design Department Manager", "rol": "Yönetici", "derece": "2", "linkedin": "https://www.linkedin.com/in/burak-k%C4%B1ray-955aa1b/", "not": ""}
+      ]
+    },
+    {
+      "id": "bsh", "sirket": "BSH Türkiye", "ara": "BSH", "match": "^BSH",
+      "neden": "Beyaz eşya Ar-Ge mekanik tasarımı (Beko deneyimine yakın)", "sehir": "İstanbul, Tekirdağ",
+      "not": "",
+      "kisiler": [
+        {"ad": "Ece Karaağaç", "unvan": "Talent Acquisition Team Executive", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/ece-karaa%C4%9Fa%C3%A7-88253767/", "not": ""},
+        {"ad": "Onur Avşaroğlu", "unvan": "R&D Mechanical Design Specialist", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/onuravsaroglu/", "not": ""}
+      ]
+    },
+    {
+      "id": "siemens", "sirket": "Siemens Türkiye", "ara": "Siemens", "match": "^Siemens( Türkiye)?$",
+      "neden": "Endüstriyel ürün ve sistem tasarımı", "sehir": "İstanbul",
+      "not": "",
+      "kisiler": [
+        {"ad": "Esra Çapraz", "unvan": "Head of Talent Acquisition Turkey", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/esra-%C3%A7apraz-1396219/", "not": ""},
+        {"ad": "Ece Akyol", "unvan": "Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/eceakyol/", "not": ""}
+      ]
+    },
+    {
+      "id": "mahle", "sirket": "MAHLE", "ara": "MAHLE", "match": "MAHLE",
+      "neden": "Otomotiv powertrain ve termal bileşen tasarımı", "sehir": "",
+      "not": "",
+      "kisiler": [
+        {"ad": "Candan Karaca", "unvan": "Head of HR Turkey", "rol": "İşe alım", "derece": "2", "linkedin": "https://www.linkedin.com/in/candankaraca/", "not": ""},
+        {"ad": "Taylan Öğüt", "unvan": "Design Engineer", "rol": "Mühendis", "derece": "2", "linkedin": "https://www.linkedin.com/in/taylan-%C3%B6%C4%9F%C3%BCt-a39007246/", "not": ""}
+      ]
+    }
+  ]
+}

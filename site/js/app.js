@@ -280,6 +280,9 @@ function render() {
   } else if (view === "akademik") {
     $("#count").textContent = "";
     list.innerHTML = academicView();
+  } else if (view === "isealimci") {
+    $("#count").textContent = "";
+    list.innerHTML = recruiterView();
   } else if (view === "apps" || view === "followup") {
     $("#count").textContent = `${jobs.length} kayıt${view === "followup" ? " · takip zamanı gelenler" : " · kartları sütunlar arasında sürükleyebilirsin"}`;
     list.innerHTML = jobs.length ? kanban(jobs)
@@ -306,11 +309,13 @@ function render() {
   $("#st-active").textContent = pool.filter((j) => ["basvuruldu", "mulakat"].includes(stageOf(j))).length;
   $("#st-follow").textContent = pool.filter(followDue).length;
   document.querySelectorAll(".seg button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.view === view));
-  const acad = view === "akademik";
-  if (!acad) jobView = view;
-  document.body.classList.toggle("mode-firsat", acad);
-  document.querySelectorAll(".modes button").forEach((b) => b.setAttribute("aria-pressed", (b.dataset.mode === "firsatlar") === acad));
-  $("#q").placeholder = acad ? "Ara: program, kurum, ülke, alan…" : "Ara: şirket, pozisyon, şehir, beceri…";
+  const mode = view === "akademik" ? "firsatlar" : view === "isealimci" ? "isealimci" : "isler";
+  if (mode === "isler") jobView = view;
+  document.body.classList.toggle("mode-firsat", mode !== "isler");   // hides the job-only stats and panels
+  document.querySelectorAll(".modes button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === mode));
+  $("#q").placeholder = { firsatlar: "Ara: program, kurum, ülke, alan…", isealimci: "Ara: şirket, kişi, unvan…" }[mode]
+    || "Ara: şirket, pozisyon, şehir, beceri…";
+  if (REC && !REC.error) $("#mode-isealimci").textContent = `(${(REC.companies || []).length})`;
   $("#mode-isler").textContent = `(${scan.filter((j) => ["dogrudan", "uygun"].includes(j.category)).length})`;
   if (ACAD && !ACAD.error) {
     const t = today();
@@ -461,6 +466,62 @@ function academicView() {
   const body = groups.filter(([, g]) => g.length).map(([title, g]) =>
     `<div class="group">${esc(title)} (${g.length})</div>${g.sort(byDeadline).map(acadCard).join("")}`).join("");
   return head + (body || `<div class="empty">Şu an listelenecek akademik fırsat yok.</div>`);
+}
+
+// ------------------------------------------------------------------ recruiters
+// isealimci.json is curated by hand in Claude sessions (LinkedIn people search with Mert's own account,
+// a few searches at a time; never automated). Contact status lives in S.entries as "kisi:<linkedin slug>".
+let REC = null;             // null = not loaded yet
+const REC_STAGES = [["", "Durum…"], ["istek", "📨 İstek gönderildi"], ["baglandi", "🤝 Bağlandı"], ["yazistik", "💬 Yazıştık"], ["gizli", "🙈 Gerek yok"]];
+
+async function loadRecruiters() {
+  try { REC = await (await fetch("isealimci.json", { cache: "no-store" })).json(); }
+  catch { REC = { companies: [], error: true }; }
+  render();   // also fills the company count on the "İşe alımcılar" tab
+}
+
+const kisiKey = (p) => "kisi:" + String(p.linkedin || p.ad).replace(/^https?:\/\/[^/]+\/in\//, "").replace(/\/$/, "");
+
+function openJobsOf(c) {   // fitting, still-open scanned jobs of this company
+  let re;
+  try { re = new RegExp(c.match || c.sirket, "i"); } catch { return []; }
+  return (DATA.jobs || []).filter((j) => !j.closed && ["dogrudan", "uygun", "stretch"].includes(j.category) && re.test(j.company || ""));
+}
+
+function personRow(p) {
+  const key = kisiKey(p);
+  const st = entry(key).stage || "";
+  return `<div class="krow ${st === "gizli" ? "hidden-job" : ""}">
+    <a href="${esc(p.linkedin)}" target="_blank" rel="noopener">${esc(p.ad)}</a>
+    <span class="badge">${esc(p.rol || "")}</span>
+    <span class="hint">${esc(p.unvan || "")}${p.derece ? ` · ${esc(p.derece)}. derece` : ""}${p.not ? ` · ${esc(p.not)}` : ""}</span>
+    <select data-kisi-stage="${esc(key)}" aria-label="İletişim durumu">${REC_STAGES.map(([v, l]) => `<option value="${v}" ${v === st ? "selected" : ""}>${l}</option>`).join("")}</select>
+  </div>`;
+}
+
+function recCard(c) {
+  const jobs = openJobsOf(c);
+  const open = jobs.length ? `<a href="#" data-company="${esc(c.ara || c.sirket)}">${jobs.length} açık uygun ilan</a>` : "şu an açık uygun ilan yok";
+  return `<article class="qrow">
+    <div class="qmain">
+      <div class="title">${esc(c.sirket)}</div>
+      <div class="company">${esc(c.neden || "")} · ${open}${c.sehir ? " · " + esc(c.sehir) : ""}</div>
+      ${(c.kisiler || []).map(personRow).join("")}
+      ${c.not ? `<div class="hint">💡 ${esc(c.not)}</div>` : ""}
+    </div></article>`;
+}
+
+function recruiterView() {
+  if (!REC) { loadRecruiters(); return `<div class="empty">Yükleniyor…</div>`; }
+  if (REC.error) return `<div class="empty">İşe alımcı listesi yüklenemedi (isealimci.json).</div>`;
+  const q = $("#q").value.trim().toLocaleLowerCase("tr");
+  const companies = (REC.companies || []).filter((c) => !q || [c.sirket, c.neden, c.not, ...(c.kisiler || []).flatMap((p) => [p.ad, p.unvan])]
+    .join(" ").toLocaleLowerCase("tr").includes(q));
+  const people = (REC.companies || []).flatMap((c) => c.kisiler || []);
+  const sent = people.filter((p) => ["istek", "baglandi", "yazistik"].includes(entry(kisiKey(p)).stage)).length;
+  const head = `<div class="qhead"><b>İşe alımcılar ve mühendisler</b> <span class="hint">· ${(REC.companies || []).length} şirket, ${people.length} kişi, ${sent} kişiyle temas.
+    Haftada en fazla 5 bağlantı isteği; istekten önce profili açıp kişinin hâlâ orada çalıştığını kontrol et.${REC.updated ? ` Son güncelleme: ${esc(fmtDate(REC.updated))}.` : ""}</span></div>`;
+  return head + (companies.map(recCard).join("") || `<div class="empty">Bu aramayla şirket yok.</div>`);
 }
 
 // ------------------------------------------------------------------ kanban
@@ -1048,7 +1109,7 @@ function openSettings() {
 document.addEventListener("click", async (ev) => {
   const t = ev.target.closest("button, [data-go], .stat") || ev.target;
   if (t.matches?.(".seg button")) { view = t.dataset.view; render(); return; }
-  if (t.matches?.(".modes button")) { view = t.dataset.mode === "firsatlar" ? "akademik" : jobView; render(); return; }
+  if (t.matches?.(".modes button")) { view = { firsatlar: "akademik", isealimci: "isealimci" }[t.dataset.mode] || jobView; render(); return; }
   if (t.dataset?.go) { view = t.dataset.go; render(); window.scrollTo({ top: $(".bar").offsetTop, behavior: "smooth" }); return; }
   if (t.dataset?.catOnly) {
     const only = F.cats.length === 1 && F.cats[0] === t.dataset.catOnly;
@@ -1212,6 +1273,9 @@ document.addEventListener("change", async (ev) => {
   } else if (t.dataset?.acadStage !== undefined) {
     saveEntry(t.dataset.acadStage, { stage: t.value });
     render();
+  } else if (t.dataset?.kisiStage !== undefined) {
+    saveEntry(t.dataset.kisiStage, { stage: t.value });
+    render();
   } else if (t.hasAttribute?.("data-daily")) {
     ls.set(LS_DAILY, Math.max(1, Number(t.value) || 10));
     render();
@@ -1297,5 +1361,6 @@ async function boot() {
   renderCompanies();
   render();
   loadAcademic();
+  loadRecruiters();
 }
 boot();
