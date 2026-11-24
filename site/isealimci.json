@@ -1,21 +1,6 @@
 {
-  "updated": "2026-11-20",
+  "updated": "2026-11-24",
   "kuyruk": [
-    {
-      "sirket": "Hyundai Assan",
-      "neden": "Otomotiv üretimi",
-      "sehir": "Kocaeli"
-    },
-    {
-      "sirket": "Yazaki",
-      "neden": "Otomotiv yan sanayi, taramada ilanı çıkıyor",
-      "sehir": ""
-    },
-    {
-      "sirket": "GE Aerospace Türkiye",
-      "neden": "Havacılık motoru tasarım ve analiz",
-      "sehir": ""
-    },
     {
       "sirket": "Kale Pratt & Whitney",
       "neden": "Uçak motoru parça üretimi",
@@ -794,6 +779,105 @@
           "dogrulandi": false,
           "kaynak": "web",
           "eklendi": "2026-11-20"
+        }
+      ]
+    },
+    {
+      "id": "hyundai-assan",
+      "sirket": "Hyundai Assan",
+      "ara": "Hyundai Assan",
+      "match": "^Hyundai Assan",
+      "neden": "Otomotiv üretimi",
+      "sehir": "Kocaeli",
+      "not": "",
+      "kisiler": [
+        {
+          "ad": "Mehmet Can",
+          "unvan": "Paint Shop Engineering Unit Lead",
+          "rol": "Yönetici",
+          "derece": "",
+          "linkedin": "https://www.linkedin.com/in/mehmet-can-10224961/",
+          "not": "",
+          "dogrulandi": false,
+          "kaynak": "web",
+          "eklendi": "2026-11-24"
+        }
+      ]
+    },
+    {
+      "id": "yazaki",
+      "sirket": "Yazaki",
+      "ara": "Yazaki",
+      "match": "^Yazaki",
+      "neden": "Otomotiv yan sanayi, taramada ilanı çıkıyor",
+      "sehir": "",
+      "not": "",
+      "kisiler": [
+        {
+          "ad": "Omer Caliskan",
+          "unvan": "CAD and R&P Team Manager (EDS)",
+          "rol": "Yönetici",
+          "derece": "",
+          "linkedin": "https://www.linkedin.com/in/omer-caliskan-9b551486/",
+          "not": "",
+          "dogrulandi": false,
+          "kaynak": "web",
+          "eklendi": "2026-11-24"
+        },
+        {
+          "ad": "Betül Ceyhan",
+          "unvan": "FORD Product Design Engineer",
+          "rol": "Mühendis",
+          "derece": "",
+          "linkedin": "https://www.linkedin.com/in/bet%C3%BCl-ceyhan-75846712b/",
+          "not": "",
+          "dogrulandi": false,
+          "kaynak": "web",
+          "eklendi": "2026-11-24"
+        }
+      ]
+    },
+    {
+      "id": "ge-aerospace",
+      "sirket": "GE Aerospace Türkiye",
+      "ara": "GE Aerospace",
+      "match": "^GE Aerospace",
+      "neden": "Havacılık motoru tasarım ve analiz",
+      "sehir": "İstanbul",
+      "not": "",
+      "kisiler": [
+        {
+          "ad": "Arda Türk",
+          "unvan": "Mechanical Design Engineer",
+          "rol": "Mühendis",
+          "derece": "",
+          "linkedin": "https://www.linkedin.com/in/turkarda/",
+          "not": "",
+          "dogrulandi": false,
+          "kaynak": "web",
+          "eklendi": "2026-11-24"
+        },
+        {
+          "ad": "Mehmet Can Meriç",
+          "unvan": "Advanced Mechanical Design Engineer",
+          "rol": "Mühendis",
+          "derece": "",
+          "linkedin": "https://www.linkedin.com/in/mehmet-can-meric/",
+          "not": "",
+          "dogrulandi": false,
+          "kaynak": "web",
+          "eklendi": "2026-11-24"
+        },
+        {
+          "ad": "Enver Çalışkan",
+          "unvan": "Lead Mechanical Design Engineer",
+          "rol": "Mühendis",
+          "derece": "",
+          "linkedin": "https://www.linkedin.com/in/enver-caliskan/",
+          "not": "",
+          "dogrulandi": false,
+          "kaynak": "web",
+          "eklendi": "2026-11-24"
         }
       ]
     }
