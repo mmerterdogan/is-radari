@@ -1,68 +1,68 @@
 {
  "makine mühendisi @ Turkey": {
-  "total": 1395,
-  "good": 397,
+  "total": 1417,
+  "good": 402,
   "yield": 0.28
  },
  "graduate mechanical engineer @ European Union": {
-  "total": 520,
-  "good": 127,
+  "total": 527,
+  "good": 128,
   "yield": 0.24
  },
  "mechanical design engineer @ Denmark": {
-  "total": 386,
-  "good": 92,
+  "total": 393,
+  "good": 93,
   "yield": 0.24
  },
  "mechanical design engineer @ Sweden": {
-  "total": 380,
+  "total": 384,
   "good": 70,
   "yield": 0.18
  },
  "yeni mezun mühendis @ Turkey": {
-  "total": 345,
-  "good": 26,
+  "total": 351,
+  "good": 28,
   "yield": 0.08
  },
- "mechanical design engineer @ Ireland": {
-  "total": 312,
-  "good": 125,
-  "yield": 0.4
- },
  "FEA engineer @ United Kingdom": {
-  "total": 310,
-  "good": 123,
+  "total": 316,
+  "good": 126,
   "yield": 0.4
  },
  "mechanical design engineer @ United Kingdom": {
-  "total": 310,
-  "good": 155,
+  "total": 316,
+  "good": 157,
   "yield": 0.5
  },
+ "mechanical design engineer @ Ireland": {
+  "total": 314,
+  "good": 126,
+  "yield": 0.4
+ },
  "tasarım mühendisi @ Turkey": {
-  "total": 294,
+  "total": 302,
   "good": 30,
   "yield": 0.1
  },
  "PhD finite element @ European Union": {
-  "total": 262,
+  "total": 267,
   "good": 35,
   "yield": 0.13
  },
  "R&D mechanical engineer @ European Union": {
-  "total": 253,
+  "total": 256,
   "good": 46,
   "yield": 0.18
  },
  "mechanical design engineer @ Netherlands": {
-  "total": 219,
-  "good": 28,
+  "total": 222,
+  "good": 29,
   "yield": 0.13
  },
  "FEA engineer @ Netherlands": {
-  "total": 218,
-  "good": 51,
-  "yield": 0.23
+  "total": 221,
+  "good": 52,
+  "yield": 0.24
  },
  "Ar-Ge mühendisi @ Turkey": {
   "total": 213,
@@ -74,25 +74,25 @@
   "good": 8,
   "yield": 0.04
  },
+ "manufacturing engineer @ United Kingdom": {
+  "total": 200,
+  "good": 117,
+  "yield": 0.58
+ },
  "additive manufacturing engineer @ European Union": {
   "total": 199,
   "good": 39,
   "yield": 0.2
  },
- "manufacturing engineer @ United Kingdom": {
-  "total": 195,
-  "good": 115,
-  "yield": 0.59
- },
  "analiz mühendisi @ Turkey": {
-  "total": 194,
+  "total": 196,
   "good": 13,
   "yield": 0.07
  },
  "FEA engineer @ Ireland": {
-  "total": 183,
-  "good": 33,
-  "yield": 0.18
+  "total": 186,
+  "good": 35,
+  "yield": 0.19
  },
  "additive manufacturing @ Turkey": {
   "total": 172,
@@ -105,13 +105,13 @@
   "yield": 0.05
  },
  "proses mühendisi @ Turkey": {
-  "total": 164,
+  "total": 167,
   "good": 9,
   "yield": 0.05
  },
  "graduate design engineer @ United Kingdom": {
-  "total": 153,
-  "good": 62,
+  "total": 157,
+  "good": 64,
   "yield": 0.41
  },
  "PhD additive manufacturing @ European Union": {
@@ -120,12 +120,12 @@
   "yield": 0.09
  },
  "stajyer mühendis @ Turkey": {
-  "total": 142,
-  "good": 22,
-  "yield": 0.15
+  "total": 145,
+  "good": 23,
+  "yield": 0.16
  },
  "test mühendisi @ Turkey": {
-  "total": 129,
+  "total": 134,
   "good": 13,
   "yield": 0.1
  },
@@ -135,9 +135,9 @@
   "yield": 0.01
  },
  "Ar-Ge mühendisi yeni mezun @ Turkey": {
-  "total": 103,
-  "good": 12,
-  "yield": 0.12
+  "total": 106,
+  "good": 14,
+  "yield": 0.13
  },
  "mühendis adayı @ Turkey": {
   "total": 82,
@@ -150,19 +150,19 @@
   "yield": 0.05
  },
  "üretim mühendisi @ Turkey": {
-  "total": 79,
+  "total": 82,
   "good": 13,
   "yield": 0.16
  },
  "R&D engineer @ Turkey": {
-  "total": 79,
+  "total": 82,
   "good": 2,
-  "yield": 0.03
+  "yield": 0.02
  },
  "üretim mühendisi yeni mezun @ Turkey": {
-  "total": 70,
+  "total": 73,
   "good": 26,
-  "yield": 0.37
+  "yield": 0.36
  },
  "araştırma görevlisi makine @ Turkey": {
   "total": 69,
@@ -170,7 +170,7 @@
   "yield": 0.01
  },
  "ürün geliştirme mühendisi @ Turkey": {
-  "total": 50,
+  "total": 52,
   "good": 6,
   "yield": 0.12
  },
@@ -190,9 +190,9 @@
   "yield": 0.1
  },
  "tasarım mühendisi SolidWorks @ Turkey": {
-  "total": 26,
+  "total": 27,
   "good": 10,
-  "yield": 0.38
+  "yield": 0.37
  },
  "simulation engineer @ Turkey": {
   "total": 21,
