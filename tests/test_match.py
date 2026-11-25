@@ -201,6 +201,16 @@ def test_empty_location_falls_back_to_search_location():
     assert match.location_tier(J(location="", query_location="Istanbul"), "belirtilmemis") == 1
 
 
+def test_bare_district_from_turkey_search_stays_in_turkey():
+    assert match.location_tier(J(location="Başiskele", query_location="Turkey"), "belirtilmemis") == 2
+    assert match.location_tier(J(location="Menderes", query_location="Turkey"), "ofiste") == 2
+    assert match.location_tier(J(location="Kazan", query_location="Turkey"), "belirtilmemis") == 3
+    assert match.location_tier(J(location="Eindhoven Area", query_location="Netherlands"), "ofiste") == 5
+    assert match.location_tier(J(location="Dublin", query_location="Ireland"), "ofiste") == 5
+    # "Van" the city must not match inside "Navan" (Ireland)
+    assert match.location_tier(J(location="Navan, Meath Kontluğu, İrlanda"), "ofiste") == 5
+
+
 def test_country_bound_remote_is_abroad():
     assert match.location_tier(J("Field Service Engineer - UK Remote", location="Remote"), "uzaktan") == 5
 

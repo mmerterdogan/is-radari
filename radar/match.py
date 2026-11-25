@@ -539,10 +539,14 @@ ISTANBUL = (r"istanbul|kagithane|umraniye|basaksehir|kadikoy|maslak|sariyer|besi
 INDUSTRIAL = (r"kocaeli|gebze|izmit|dilovasi|korfez|golcuk|kartepe|derince|cayirova|darica|bursa|nilufer|gemlik|inegol|orhangazi|"
               r"ankara|sincan|temelli|etimesgut|cankaya|yenimahalle|kahramankazan|akyurt|izmir|torbali|aliaga|kemalpasa|cigli|"
               r"bornova|menemen|sakarya|adapazari|eskisehir|konya|kayseri|manisa|tekirdag|corlu|cerkezkoy|duzce|bilecik|"
-              r"gaziantep|adana|mersin|denizli|yalova|balikesir|kirklareli|luleburgaz|bolu|osmaniye|hatay|samsun|kutahya")
+              r"gaziantep|adana|mersin|denizli|yalova|balikesir|kirklareli|luleburgaz|bolu|osmaniye|hatay|samsun|kutahya|"
+              # districts LinkedIn shows without the city (they were read as abroad)
+              r"basiskele|gumusova|arifiye|hendek|selcuklu|karatay|\bmeram\b|gaziemir|menderes|\bbuca\b|\burla\b|\btire\b|"
+              r"yuregir|seyhan|ceyhan|melikgazi|karacabey|mustafa ?kemal ?pasa|demirtas|ergene|muratli|bandirma|\bsoma\b|"
+              r"altinova|kahramankazan")
 TURKEY = (r"turkey|turkiye|turkei|turquie|aydin|mugla|antalya|diyarbakir|erzurum|malatya|elazig|sivas|tokat|ordu|rize|"
           r"zonguldak|karabuk|kastamonu|kirikkale|nevsehir|nigde|usak|isparta|burdur|edirne|canakkale|amasya|corum|trabzon|"
-          r"giresun|erzincan|van|batman|mardin|sanliurfa|kahramanmaras|karaman|aksaray|afyon|bartin|\bof\b")
+          r"giresun|erzincan|\bvan\b|batman|mardin|sanliurfa|kahramanmaras|karaman|aksaray|afyon|bartin|\bof\b")
 LOC_LABEL = {1: "İstanbul", 2: "Sanayi şehri", 3: "Türkiye", 4: "Uzaktan", 5: "Yurt dışı"}
 
 
@@ -563,6 +567,10 @@ def location_tier(job: Job, work_mode: str) -> int:
             return 1
         if _any(TURKEY, qloc):
             return 3
+    # a bare place name ("Kazan", "Bozkurt") from a Türkiye search is a district in Türkiye, not abroad
+    if loc and "," not in job.location and _any(TURKEY, _norm(str(job.extra.get("query_location", "")))) \
+            and not _any(r"\barea\b|bolgesi|metropol|region|irlanda|danimarka|isvec|yunanistan", loc):
+        return 3
     # remote only counts as "Uzaktan" when it is not tied to one foreign country ("UK Remote" stays abroad)
     if work_mode == "uzaktan" and _any(REMOTE_ANYWHERE, loc) and not _any(r"\buk\b|united kingdom|usa|united states|\bus\b", _norm(job.title)):
         return 4

@@ -652,9 +652,9 @@ def main(argv=None) -> int:
     c.add_argument("--yeni", action="store_true", help="every new 'doğrudan/uygun' ad of the last --gun days")
     c.add_argument("--gun", type=int, default=1, help="look-back for --yeni (days, default 1)")
     c.add_argument("--sakla", type=int, default=14, help="with --yeni: delete generated date folders older than this (days)")
-    c.add_argument("--temel", action="store_true", help="the four base CVs (tr/en x tasarim/uretim), not tied to an ad")
+    c.add_argument("--temel", action="store_true", help="the base CVs (tr/en x every variant), not tied to an ad")
     c.add_argument("--dil", choices=["tr", "en"], help="override the CV language")
-    c.add_argument("--tur", choices=["tasarim", "uretim"], help="override the CV variant")
+    c.add_argument("--tur", choices=["tasarim", "uretim", "cae", "arge"], help="override the CV variant")
     c.add_argument("--no-pdf", action="store_true", help="Word file only (no PDF export)")
     c.add_argument("--ac", action="store_true", help="open the output folder in Explorer afterwards")
     a = sub.add_parser("basvurdum", help="record submitted applications in cv/ozel/basvuru_kaydi.json "

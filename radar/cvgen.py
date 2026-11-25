@@ -25,13 +25,17 @@ from .models import Job, _norm
 
 PRIVATE = Path(__file__).resolve().parents[1] / "cv" / "ozel"
 LANG_LABEL = {"tr": "Türkçe", "en": "İngilizce"}
-VARIANT_LABEL = {"tasarim": "Tasarım", "uretim": "Üretim"}
+VARIANT_LABEL = {"tasarim": "Tasarım", "uretim": "Üretim", "cae": "CAE / analiz", "arge": "Ar-Ge"}
 # role families whose ads get the production-oriented CV
 PRODUCTION_FAMILIES = {"uretim", "kalite", "bakim", "proje", "destek", "teknisyen"}
+CAE_FAMILIES = {"cae"}
+RND_FAMILIES = {"arge", "urun", "doktora", "test"}
 # tags pulled forward by each variant when the ad itself does not decide
 # (cv.yaml is written in the design order, so the design variant keeps it as is)
 VARIANT_BOOST = {"tasarim": set(),
-                 "uretim": {"uretim", "rca", "lean", "dfm", "cnc", "kalite"}}
+                 "uretim": {"uretim", "rca", "lean", "dfm", "cnc", "kalite"},
+                 "cae": {"cae", "fea", "ansys", "statik", "modal", "topoloji"},
+                 "arge": {"arge", "urun", "prototip", "topoloji", "fea"}}
 MAX_DROP = 3   # highest "opsiyonel" level that may be dropped to keep one page
 
 
@@ -42,7 +46,9 @@ def pick(job: Job) -> dict:
     if lang == "unknown":
         lang = "tr" if re.search(r"[çğışöüÇĞİŞÖÜ]", job.title or "") else "en"
     fam = job.role_family or match.primary_family(match.role_families(job))
-    return {"lang": "tr" if lang == "tr" else "en", "variant": "uretim" if fam in PRODUCTION_FAMILIES else "tasarim"}
+    variant = ("uretim" if fam in PRODUCTION_FAMILIES else "cae" if fam in CAE_FAMILIES
+               else "arge" if fam in RND_FAMILIES else "tasarim")
+    return {"lang": "tr" if lang == "tr" else "en", "variant": variant}
 
 
 def label(choice: dict) -> str:
@@ -124,7 +130,7 @@ def compose(content: dict, lang: str, variant: str, tags: set[str], drop: int = 
     c, d = content[lang], _Doc(lang)
     boost = VARIANT_BOOST[variant]
     sep = "  |  "
-    d.p([d.r(c["unvan"][variant], color="444444", sz=20)])
+    d.p([d.r(c["unvan"].get(variant) or c["unvan"]["tasarim"], color="444444", sz=20)])
     # contact items on one line; an item {satir: true} starts a second line
     contact = []
     for it in c["iletisim"]:
@@ -138,7 +144,7 @@ def compose(content: dict, lang: str, variant: str, tags: set[str], drop: int = 
     d.p([d.r(c["durum"])], after=40)
 
     d.section(c["bolum"]["hakkimda"])
-    d.p([d.r(" ".join(c["hakkimda"][variant].split()))])
+    d.p([d.r(" ".join((c["hakkimda"].get(variant) or c["hakkimda"]["tasarim"]).split()))])
 
     d.section(c["bolum"]["egitim"])
     for e in c["egitim"]:
@@ -354,7 +360,7 @@ def run_cli(args, store_jobs: dict[str, Job]) -> int:
     targets: list[tuple[str, Job | None, dict]] = []
     if args.temel:
         for lang in ("tr", "en"):
-            for variant in ("tasarim", "uretim"):
+            for variant in VARIANT_LABEL:
                 targets.append((str(out_root / "_temel" / f"{lang}_{variant}"), None, {"lang": lang, "variant": variant}))
     elif args.yeni:
         removed = clean_old(out_root, args.sakla, content.get("dosya_adi", "CV"))

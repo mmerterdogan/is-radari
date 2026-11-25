@@ -302,6 +302,15 @@ def test_cv_pick_language_and_variant():
              "experience to work on the development of new products and the related drawings. " * 3, nid="2")
     assert cvgen.pick(tr) == {"lang": "tr", "variant": "uretim"}
     assert cvgen.pick(en) == {"lang": "en", "variant": "tasarim"}
+    cae = job("FEA Engineer", desc="Structural analysis engineer for finite element analysis with ANSYS and Abaqus, "
+              "static and fatigue simulations of new products and correlation with test results. " * 3, nid="3")
+    assert cvgen.pick(cae)["variant"] == "cae"
+
+
+def test_cv_compose_falls_back_to_design_texts():
+    from radar import cvgen
+    d = cvgen.compose(CV_CONTENT, "tr", "arge", set())   # fixture has no Ar-Ge texts
+    assert d is not None
 
 
 def test_cv_compose_orders_by_ad_and_drops_optional():
