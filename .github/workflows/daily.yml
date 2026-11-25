@@ -63,7 +63,7 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           [ -n "$TELEGRAM_TOKEN" ] || exit 0
-          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"             --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}"             --data-urlencode "text=⚠️ İş Radarı: ${{ github.workflow }} başarısız oldu. Ayrıntı: ${RUN_URL}"
+          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"             --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}"             --data-urlencode "text=⚠️ İş Radarı — Tarama (ilan toplama) adımı başarısız oldu. Bugünün ilanları toplanmadı. Ayrıntı: ${RUN_URL}"
 
   # Siteyi (site/ klasörü) taramanın hemen ardından yayınla
   deploy:
