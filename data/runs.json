@@ -2245,5 +2245,42 @@
   "rechecked": 120,
   "closed_found": 13,
   "seconds": 3746
+ },
+ {
+  "date": "2026-11-26",
+  "fetched": 448,
+  "new": 112,
+  "relevant": 82,
+  "dropped": 31,
+  "enriched": 83,
+  "scored": 0,
+  "letters": 0,
+  "by_category": {
+   "dogrudan": 4,
+   "uygun": 12,
+   "stretch": 12,
+   "belirsiz": 1,
+   "dusuk": 53
+  },
+  "sources": {
+   "linkedin": 227,
+   "greenhouse": 59,
+   "smartrecruiters": 39,
+   "workday": 5,
+   "hrpeak": 24,
+   "baykar": 42,
+   "youthall": 52
+  },
+  "failed_sources": [],
+  "cost_usd": 0.0,
+  "health": [
+   "workday: ilanların çoğunun metni okunamadı (detay sayfası yapısı değişmiş olabilir)"
+  ],
+  "returned": 120,
+  "closed_unlisted": 1,
+  "backfilled": 9,
+  "rechecked": 120,
+  "closed_found": 11,
+  "seconds": 3640
  }
 ]
