@@ -3,7 +3,7 @@ Mechanical Engineer | Design, Analysis and Manufacturing
 Istanbul, Türkiye
 
 ## About
-I am interested not in one corner of mechanical engineering but in the whole path a product takes from idea to field. In my internships I worked across design, machining, assembly lines and on-site troubleshooting. I want to contribute to any team as an engineer who designs with manufacturing in mind and approaches manufacturing with design logic.
+When I draw a part, I cannot stop thinking about how it will be made and where it might struggle in use. In my free time I make things with a 3D printer and with wood; seeing a result I can hold is what keeps me in this profession. I want to grow in a team where designs leave the screen and get built and tested.
 
 ## Education
 - Istanbul University-Cerrahpaşa, Institute of Graduate Studies - MSc in Mechanical Engineering (Thesis), Sep 2026 - present
