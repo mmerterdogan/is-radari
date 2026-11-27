@@ -128,6 +128,27 @@ def test_close_unlisted_only_for_full_list_sources_that_worked(tmp_path):
     assert not st.jobs["linkedin:li"].closed        # search source: missing proves nothing
 
 
+def test_close_unlisted_judges_each_company_and_reopens_listed_ads(tmp_path):
+    from radar.__main__ import close_unlisted
+    st = Store(tmp_path)
+
+    def wd(nid, company, closed=False):
+        j = Job(source="workday", native_id=nid, title=nid, company=company, location="L", url="u")
+        j.closed = closed
+        return j
+    gone, live, wrongly_closed = wd("a1", "GE"), wd("a2", "GE"), wd("a3", "GE", closed=True)
+    failed_tenant = wd("h1", "Hitachi")
+    for j in (gone, live, wrongly_closed, failed_tenant):
+        st.add(j)
+    # GE answered; Hitachi got a 429 and returned nothing, but the source total is > 0
+    fresh = [wd("a2", "GE"), wd("a3", "GE")]
+    n = close_unlisted(st, fresh, {"workday": 2})
+    assert n == 1 and st.jobs["workday:a1"].closed          # GE worked, a1 is really gone
+    assert not st.jobs["workday:a2"].closed
+    assert not st.jobs["workday:a3"].closed                 # listed again: reopened
+    assert not st.jobs["workday:h1"].closed                 # Hitachi failed today: no conclusion
+
+
 def test_old_jobs_json_still_loads(tmp_path):
     (tmp_path / "jobs.json").write_text('[{"source":"linkedin","native_id":"9","title":"T","company":"C","location":"L",'
                                         '"url":"u","verdict":"basvur","prefilter_score":7,"msc_compatible":true,"first_seen":"x"}]')

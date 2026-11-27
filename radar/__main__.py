@@ -407,14 +407,27 @@ FULL_LIST_SOURCES = {"greenhouse", "smartrecruiters", "workday", "lever", "ashby
 
 
 def close_unlisted(store: Store, fresh: list[Job], fetched: dict[str, int]) -> int:
-    """Mark ads of full-list sources closed when the source worked today but no longer lists them."""
+    """Mark ads of full-list sources closed when the source worked today but no longer lists them.
+
+    "Worked" is judged per (source, company): a multi-tenant source (Workday, Greenhouse...) can lose
+    one tenant to a 429 while the others answer, and that must not close the failed tenant's ads.
+    An ad that is listed again after being closed is reopened (only these sources set `closed` by listing)."""
     listed = {j.id for j in fresh}
     worked = {s for s in FULL_LIST_SOURCES if fetched.get(s, 0) > 0}
-    n = 0
+    worked_companies = {(j.source, j.company) for j in fresh if j.source in worked}
+    n = reopened = 0
     for j in store.jobs.values():
-        if j.source in worked and not j.closed and j.id not in listed:
+        if j.source not in worked:
+            continue
+        if j.id in listed:
+            if j.closed:
+                j.closed = False
+                reopened += 1
+        elif not j.closed and (j.source, j.company) in worked_companies:
             j.closed = True
             n += 1
+    if reopened:
+        log.info("reopened %d ads that are listed again", reopened)
     return n
 
 

@@ -22,7 +22,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 90       # kapanan ilan kontrolü 120 ilana çıktı (~12 dk ek)
+    timeout-minutes: 120      # tarama 50-80 dk sürüyor (LinkedIn 429 beklemeleri + 120 ilanlık kapanma kontrolü)
     steps:
       - uses: actions/checkout@v4
 
