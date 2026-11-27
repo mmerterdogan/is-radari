@@ -158,6 +158,15 @@ WORK_AUTH = (r"(unable|not able) to (provide|offer|sponsor)[^.;\n]{0,30}(sponsor
              r"security clearance (is )?required|(sc|dv) cleared")
 # Special-quota postings (disabled-persons recruitment etc.) the profile is not eligible for
 SPECIAL_QUOTA = r"\(engelli\)|engelli kadro|engel durumunuzun|engelli personel alim|disabled persons only"
+# Ads open only to undergraduates ("3. ve 4. sınıf öğrencisi", "3rd or 4th year of undergraduate studies"): a graduate / MSc
+# student is not eligible. Dropped from the radar unless the ad also accepts master's / graduate students.
+UNDERGRAD_ONLY = (r"\b[34]\.? ?(ve|veya|or|and|-|/)? ?[34]?\.? ?sinif|\bson sinif|\bsinif ogrenci|"
+                  r"\b(3rd|4th|third|fourth|final)[ -]?(or|and|/|-)? ?(3rd|4th|third|fourth)? ?year (of )?(your |their )?"
+                  r"(undergraduate|bachelor|university|degree|studies|study|student)|"
+                  r"final[- ]year (undergraduate|bachelor|student)|"
+                  r"currently (enrolled|studying) (in|for|at) an? (undergraduate|bachelor)|"
+                  r"(undergraduate|bachelor'?s?|lisans) (student|ogrencisi)")
+GRAD_ACCEPTED = r"yuksek lisans|lisansustu|graduate student|postgraduate|master'?s|\bmsc\b|\bm\.sc|master student|masters? (degree|program|student)"
 DRAFTER = r"teknik ressam|draughts?man|draftsman|drafter|cad operator|cad teknisyen"
 
 
@@ -701,6 +710,9 @@ def relevance(job: Job, profile: Profile | None = None, allow_pending: bool = Fa
         return False, "Yapay zekâ eğitim / freelance platformu"
     if _any(EXCLUDE_TITLE, title) and not _any(MECH_TITLE, title):
         return False, "Mühendislik dışı pozisyon"
+    ad_text = _lite(f"{job.title}\n{job.description}")
+    if _any(UNDERGRAD_ONLY, ad_text) and not _any(GRAD_ACCEPTED, ad_text):
+        return False, "Yalnızca lisans öğrencisi (3-4. sınıf), lisansüstü kabul edilmiyor"
     if _any(FACULTY_TITLE, title):
         return False, "Öğretim üyesi / postdoc kadrosu (doktora derecesi gerekir)"
     if _any(OTHER_DISCIPLINE, title) and not _any(MECH_TITLE, title):

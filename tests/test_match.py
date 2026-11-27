@@ -466,3 +466,14 @@ def test_apply_kind_from_url():
     assert match.apply_kind("https://armstrongfluidtechnology.bamboohr.com/careers/1114") == "kolay"
     assert match.apply_kind("https://globalhr.wd5.myworkdayjobs.com/en-US/x/job/y") == "hesap"
     assert match.apply_kind("https://www.linkedin.com/jobs/view/1/") == ""
+
+
+def test_undergrad_only_posting_is_dropped():
+    only_ug = J("Mechanical Design Intern", "We are looking for students in their 3rd or 4th year of undergraduate studies. " + FEA_BODY)
+    assert match.relevance(only_ug)[0] is False
+    tr = J("Makine Mühendisi Stajyeri", "3. ve 4. sınıf öğrencileri başvurabilir. " + FEA_BODY)
+    assert match.relevance(tr)[0] is False
+    msc_ok = J("Mechanical Design Intern", "Open to final year undergraduate or master's students. " + FEA_BODY)
+    assert match.relevance(msc_ok)[0] is True
+    experience = J("Mechanical Design Engineer", "3-4 yıl deneyim, 4 yıllık lisans mezunu. " + FEA_BODY)
+    assert match.relevance(experience)[0] is True
